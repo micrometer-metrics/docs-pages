@@ -1,0 +1,25 @@
+{
+  "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
+  "generated": "2023-09-14T11:10:42.150Z",
+  "url": "https://docs.micrometer.io/micrometer-docs-generator/reference",
+  "components": {
+    "micrometer-docs-generator": {
+      "title": "Micrometer Docs Generator",
+      "latest": "1.1.0",
+      "versions": {
+        "1.1.0": {
+          "prerelease": true,
+          "displayVersion": "1.1.0-SNAPSHOT",
+          "url": "/micrometer-docs-generator/index.html",
+          "pages": [
+            {
+              "path": "index.adoc",
+              "url": "/micrometer-docs-generator/index.html",
+              "title": "Overview"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
