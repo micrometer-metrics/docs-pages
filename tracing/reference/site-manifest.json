@@ -1,0 +1,49 @@
+{
+  "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
+  "generated": "2023-09-14T10:43:22.013Z",
+  "url": "https://docs.micrometer.io/tracing/reference",
+  "components": {
+    "tracing": {
+      "title": "Micrometer Tracing",
+      "latest": "1.2.0",
+      "versions": {
+        "1.2.0": {
+          "prerelease": true,
+          "displayVersion": "1.2.0-SNAPSHOT",
+          "url": "/index.html",
+          "pages": [
+            {
+              "path": "index.adoc",
+              "url": "/index.html",
+              "title": "Tracing support"
+            },
+            {
+              "path": "api.adoc",
+              "url": "/api.html"
+            },
+            {
+              "path": "configuring.adoc",
+              "url": "/configuring.html"
+            },
+            {
+              "path": "glossary.adoc",
+              "url": "/glossary.html"
+            },
+            {
+              "path": "reporters.adoc",
+              "url": "/reporters.html"
+            },
+            {
+              "path": "testing.adoc",
+              "url": "/testing.html"
+            },
+            {
+              "path": "tracers.adoc",
+              "url": "/tracers.html"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

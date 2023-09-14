@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Micrometer Tracing Propagation</title>
+    <link rel="prev" href="reporters.html">
+    <link rel="next" href="configuring.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.2">
+    <script>
+!function (theme, navWidth) {
+  if (theme === 'dark') document.documentElement.classList.add('dark-theme')
+  if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'),
+  localStorage && localStorage.getItem('nav-width'))
+    </script>
+    <link rel="stylesheet" href="./_/css/site.css">
+    <link rel="stylesheet" href="./_/css/vendor/search.css">
+    <link rel="stylesheet" href="./_/css/vendor/asciidoctor-tabs.css">
+
+    <meta name="version" content="1.2.0">
+    <meta name="component" content="tracing">
+    <link rel="icon" href="./_/img/favicon.ico" type="image/vnd.microsoft.icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://micrometer.io/">
+        <img
+          id="springlogo"
+          class="block light"
+          src="./_/img/micrometer-logo.svg"
+          alt="Spring"
+        />
+        <img
+          id="springlogo"
+          class="block dark"
+          src="./_/img/micrometer-logo-dark.svg"
+          alt="Spring"
+        />
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+    </div>
+    <label class="theme-toggler">
+      <input
+        type="checkbox"
+        type="checkbox"
+        id="switch-theme-checkbox"
+        name="switch-theme-checkbox"
+      />
+      <span class="icon"><svg
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="fas"
+          data-icon="moon"
+          class="svg-inline--fa fa-moon moon"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 384 512"
+        ><path
+            fill="currentColor"
+            d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="fas"
+          data-icon="sun"
+          class="svg-inline--fa fa-sun sun"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+        ><path
+            fill="currentColor"
+            d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"
+          ></path>
+        </svg></span>
+      <span class="text">light</span>
+    </label>
+  </nav>
+</header>
+<script>
+!function (theme) {
+  if (theme === 'dark') {
+    document.getElementById('switch-theme-checkbox').parentElement.classList.add('active')
+  }
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
+</script><div class="body">
+<div class="nav-container" data-component="tracing" data-version="1.2.0">
+  <aside class="nav">
+    <div class="panels">
+      <div class="nav-panel-menu is-active" data-panel="menu">
+        <nav class="nav-menu">
+<div class="context">
+  <span class="title">Micrometer Tracing</span>
+  <span class="version">1.2.0-SNAPSHOT</span>
+  <button class="browse-version" id="browse-version">
+    <svg
+      height="24px"
+      id="Layer_1"
+      style="enable-background:new 0 0 512 512;"
+      version="1.1"
+      viewBox="0 0 512 512"
+      width="24px"
+      xml:space="preserve"
+    ><g><path
+          d="M256,224c-17.7,0-32,14.3-32,32s14.3,32,32,32c17.7,0,32-14.3,32-32S273.7,224,256,224L256,224z"
+        ></path><path
+          d="M128.4,224c-17.7,0-32,14.3-32,32s14.3,32,32,32c17.7,0,32-14.3,32-32S146,224,128.4,224L128.4,224z"
+        ></path><path
+          d="M384,224c-17.7,0-32,14.3-32,32s14.3,32,32,32s32-14.3,32-32S401.7,224,384,224L384,224z"
+        ></path></g></svg>
+  </button>
+</div><div class="search">
+  <button class="DocSearch-Button search-button">
+    <svg enable-background="new 0 0 32 32" id="Glyph" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <path d="M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14  s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0  C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z" id="XMLID_223_"/>
+    </svg>
+    <span>Search</span>
+    <span class="search-key"></span>
+  </button>
+</div>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Micrometer Tracing</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="glossary.html">Glossary</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="tracers.html">Supported Tracers</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="reporters.html">Supported Reporters</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="api.html">Micrometer Tracing API</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="configuring.html">Micrometer Observation Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing.html">Testing</a>
+  </li>
+</ul>
+  </li>
+</ul>
+          <div class="toggle-sm">
+            <button id="nav-toggle-2" class="nav-toggle"></button>
+          </div>
+        </nav>
+      </div>
+      <div class="nav-collapse">
+        <button id="nav-collapse-toggle"><span></span></button>        
+      </div>
+    </div>
+    <div class="nav-resize"></div>
+  </aside>
+</div>
+<script>
+!function (sidebar) {
+  if (sidebar) {
+    document.body.classList.add('nav-sm')
+  }
+}(localStorage && localStorage.getItem('sidebar') === 'close')
+</script><main class="article">
+<div class="toolbar" role="navigation">
+  <button id="nav-toggle-1" class="nav-toggle"></button>
+<div class="search">
+  <button class="DocSearch-Button search-button">
+    <svg enable-background="new 0 0 32 32" id="Glyph" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <path d="M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14  s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0  C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z" id="XMLID_223_"/>
+    </svg>
+    <span>Search</span>
+    <span class="search-key"></span>
+  </button>
+</div>
+</div>
+  <div class="content">
+<aside class="sidebar">
+  <div class="content">
+    <div
+      class="toc"
+      data-title=""
+      data-levels="2"
+    >
+      <div class="toc-menu"></div>
+    </div>
+    <div class="sidebar-links">
+        <a href="https://github.com/micrometer-metrics/tracing/edit/main/docs/modules/ROOT/pages/api.adoc">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+          ><path
+              d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"
+            ></path></svg>
+          Edit this Page
+        </a>
+              <a href="https://github.com/micrometer-metrics/tracing" title="Github">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="512px"
+            id="Layer_1"
+            version="1.1"
+            viewBox="0 0 512 512"
+            width="512px"
+          ><style type="text/css"><![CDATA[
+              .st0{fill-rule:evenodd;clip-rule:evenodd;} ]]></style><g><path
+                class="st0"
+                d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"
+              ></path></g></svg>
+          Github Project
+        </a>
+        <a href="https://stackoverflow.com/tags/micrometer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path
+              d="M290.7 311L95 269.7 86.8 309l195.7 41zm51-87L188.2 95.7l-25.5 30.8 153.5 128.3zm-31.2 39.7L129.2 179l-16.7 36.5L293.7 300zM262 32l-32 24 119.3 160.3 32-24zm20.5 328h-200v39.7h200zm39.7 80H42.7V320h-40v160h359.5V320h-40z"
+            ></path></svg>
+          Stack Overflow
+        </a>
+    </div>
+  </div>
+</aside><div class="doc">
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Micrometer Tracing</a></li>
+    <li><a href="api.html">Micrometer Tracing API</a></li>
+  </ul>
+</nav>
+<article>
+<div class="sect1">
+<h2 id="_using_micrometer_tracing_directly"><a class="anchor" href="#_using_micrometer_tracing_directly"></a>Using Micrometer Tracing Directly</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section we will describe how to use the Micrometer Tracing API directly to create and report spans.</p>
+</div>
+<div class="sect2">
+<h3 id="_micrometer_tracing_examples"><a class="anchor" href="#_micrometer_tracing_examples"></a>Micrometer Tracing Examples</h3>
+<div class="paragraph">
+<p>Below you can see basic operations on a span. Please read the comments in the snippet for details.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Create a span. If there was a span present in this thread it will become
+// the `newSpan`'s parent.
+Span newSpan = this.tracer.nextSpan().name("calculateTax");
+// Start a span and put it in scope. Putting in scope means putting the span
+// in thread local
+// and, if configured, adjust the MDC to contain tracing information
+try (Tracer.SpanInScope ws = this.tracer.withSpan(newSpan.start())) {
+    // ...
+    // You can tag a span - put a key value pair on it for better debugging
+    newSpan.tag("taxValue", taxValue);
+    // ...
+    // You can log an event on a span - an event is an annotated timestamp
+    newSpan.event("taxCalculated");
+}
+finally {
+    // Once done remember to end the span. This will allow collecting
+    // the span to send it to a distributed tracing system e.g. Zipkin
+    newSpan.end();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Below you can see how to continue a span in a new thread, that was started in another thread.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Span spanFromThreadX = this.tracer.nextSpan().name("calculateTax");
+try (Tracer.SpanInScope ws = this.tracer.withSpan(spanFromThreadX.start())) {
+    executorService.submit(() -&gt; {
+        // Pass the span from thread X
+        Span continuedSpan = spanFromThreadX;
+        // ...
+        // You can tag a span
+        continuedSpan.tag("taxValue", taxValue);
+        // ...
+        // You can log an event on a span
+        continuedSpan.event("taxCalculated");
+    }).get();
+}
+finally {
+    spanFromThreadX.end();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Below you can see how to create a child span when explicitly knowing who the parent span is.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// let's assume that we're in a thread Y and we've received
+// the `initialSpan` from thread X. `initialSpan` will be the parent
+// of the `newSpan`
+Span newSpan = this.tracer.nextSpan(initialSpan).name("calculateCommission");
+// ...
+// You can tag a span
+newSpan.tag("commissionValue", commissionValue);
+// ...
+// You can log an event on a span
+newSpan.event("commissionCalculated");
+// Once done remember to end the span. This will allow collecting
+// the span to send it to e.g. Zipkin. The tags and events set on the
+// newSpan will not be present on the parent
+newSpan.end();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_micrometer_tracing_brave_setup"><a class="anchor" href="#_micrometer_tracing_brave_setup"></a>Micrometer Tracing Brave Setup</h3>
+<div class="paragraph">
+<p>In this subsection we will set up Micrometer Tracing with Brave.</p>
+</div>
+<div class="paragraph">
+<p>Below you can see how to create a Micrometer Tracing <code>Tracer</code> using Brave components that would send completed spans to Zipkin.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// [Brave component] Example of using a SpanHandler. SpanHandler is a component
+// that gets called when a span is finished. Here we have an example of setting it
+// up with sending spans
+// in a Zipkin format to the provided location via the UrlConnectionSender
+// (through the &lt;io.zipkin.reporter2:zipkin-sender-urlconnection&gt; dependency)
+// Another option could be to use a TestSpanHandler for testing purposes.
+SpanHandler spanHandler = ZipkinSpanHandler
+    .create(AsyncReporter.create(URLConnectionSender.create("http://localhost:9411/api/v2/spans")));
+
+// [Brave component] CurrentTraceContext is a Brave component that allows you to
+// retrieve the current TraceContext.
+ThreadLocalCurrentTraceContext braveCurrentTraceContext = ThreadLocalCurrentTraceContext.newBuilder()
+    .addScopeDecorator(MDCScopeDecorator.get()) // Example of Brave's
+                                                // automatic MDC setup
+    .build();
+
+// [Micrometer Tracing component] A Micrometer Tracing wrapper for Brave's
+// CurrentTraceContext
+CurrentTraceContext bridgeContext = new BraveCurrentTraceContext(this.braveCurrentTraceContext);
+
+// [Brave component] Tracing is the root component that allows to configure the
+// tracer, handlers, context propagation etc.
+Tracing tracing = Tracing.newBuilder()
+    .currentTraceContext(this.braveCurrentTraceContext)
+    .supportsJoin(false)
+    .traceId128Bit(true)
+    // For Baggage to work you need to provide a list of fields to propagate
+    .propagationFactory(BaggagePropagation.newFactoryBuilder(B3Propagation.FACTORY)
+        .add(BaggagePropagationConfig.SingleBaggageField.remote(BaggageField.create("from_span_in_scope 1")))
+        .add(BaggagePropagationConfig.SingleBaggageField.remote(BaggageField.create("from_span_in_scope 2")))
+        .add(BaggagePropagationConfig.SingleBaggageField.remote(BaggageField.create("from_span")))
+        .build())
+    .sampler(Sampler.ALWAYS_SAMPLE)
+    .addSpanHandler(this.spanHandler)
+    .build();
+
+
+// [Brave component] Tracer is a component that handles the life-cycle of a span
+brave.Tracer braveTracer = this.tracing.tracer();
+
+// [Micrometer Tracing component] A Micrometer Tracing wrapper for Brave's Tracer
+Tracer tracer = new BraveTracer(this.braveTracer, this.bridgeContext, new BraveBaggageManager());</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_micrometer_tracing_opentelemetry_setup"><a class="anchor" href="#_micrometer_tracing_opentelemetry_setup"></a>Micrometer Tracing OpenTelemetry Setup</h3>
+<div class="paragraph">
+<p>In this subsection we will set up Micrometer Tracing with OpenTelemetry (OTel).</p>
+</div>
+<div class="paragraph">
+<p>Below you can see how to create a Micrometer Tracing <code>Tracer</code> using OTel components that would send completed spans to Zipkin.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// [OTel component] Example of using a SpanExporter. SpanExporter is a component
+// that gets called when a span is finished. Here we have an example of setting it
+// up with sending spans
+// in a Zipkin format to the provided location via the UrlConnectionSender
+// (through the &lt;io.opentelemetry:opentelemetry-exporter-zipkin&gt; and
+// &lt;io.zipkin.reporter2:zipkin-sender-urlconnection&gt; dependencies)
+// Another option could be to use an ArrayListSpanProcessor for testing purposes
+SpanExporter spanExporter = new ZipkinSpanExporterBuilder()
+    .setSender(URLConnectionSender.create("http://localhost:9411/api/v2/spans"))
+    .build();
+
+// [OTel component] SdkTracerProvider is an SDK implementation for TracerProvider
+SdkTracerProvider sdkTracerProvider = SdkTracerProvider.builder()
+    .setSampler(alwaysOn())
+    .addSpanProcessor(BatchSpanProcessor.builder(spanExporter).build())
+    .build();
+
+// [OTel component] The SDK implementation of OpenTelemetry
+OpenTelemetrySdk openTelemetrySdk = OpenTelemetrySdk.builder()
+    .setTracerProvider(sdkTracerProvider)
+    .setPropagators(ContextPropagators.create(B3Propagator.injectingSingleHeader()))
+    .build();
+
+// [OTel component] Tracer is a component that handles the life-cycle of a span
+io.opentelemetry.api.trace.Tracer otelTracer = openTelemetrySdk.getTracerProvider()
+    .get("io.micrometer.micrometer-tracing");
+
+// [Micrometer Tracing component] A Micrometer Tracing wrapper for OTel
+OtelCurrentTraceContext otelCurrentTraceContext = new OtelCurrentTraceContext();
+
+// [Micrometer Tracing component] A Micrometer Tracing listener for setting up MDC
+Slf4JEventListener slf4JEventListener = new Slf4JEventListener();
+
+// [Micrometer Tracing component] A Micrometer Tracing listener for setting
+// Baggage in MDC. Customizable
+// with correlation fields (currently we're setting empty list)
+Slf4JBaggageEventListener slf4JBaggageEventListener = new Slf4JBaggageEventListener(Collections.emptyList());
+
+// [Micrometer Tracing component] A Micrometer Tracing wrapper for OTel's Tracer.
+// You can consider
+// customizing the baggage manager with correlation and remote fields (currently
+// we're setting empty lists)
+OtelTracer tracer = new OtelTracer(otelTracer, otelCurrentTraceContext, event -&gt; {
+    slf4JEventListener.onEvent(event);
+    slf4JBaggageEventListener.onEvent(event);
+}, new OtelBaggageManager(otelCurrentTraceContext, Collections.emptyList(), Collections.emptyList()));</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_micrometer_tracing_baggage_api"><a class="anchor" href="#_micrometer_tracing_baggage_api"></a>Micrometer Tracing Baggage API</h3>
+<div class="paragraph">
+<p>Traces connect from service to service using header propagation. Besides trace identifiers, other properties (called <code>Baggage</code>) can also be passed along with the request.</p>
+</div>
+<div class="paragraph">
+<p>Below you can find an example on how to use the Tracer API to create and extract baggage.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Span span = tracer.nextSpan().name("parent").start();
+
+// Assuming that there's a span in scope...
+try (Tracer.SpanInScope ws = tracer.withSpan(span)) {
+
+    try (BaggageInScope baggageForSpanInScopeOne = tracer.createBaggageInScope("from_span_in_scope 1",
+            "value 1")) {
+        then(baggageForSpanInScopeOne.get()).as("[In scope] Baggage 1").isEqualTo("value 1");
+        then(tracer.getBaggage("from_span_in_scope 1").get()).as("[In scope] Baggage 1").isEqualTo("value 1");
+    }
+
+    try (BaggageInScope baggageForSpanInScopeTwo = tracer.createBaggageInScope("from_span_in_scope 2",
+            "value 2");) {
+        then(baggageForSpanInScopeTwo.get()).as("[In scope] Baggage 2").isEqualTo("value 2");
+        then(tracer.getBaggage("from_span_in_scope 2").get()).as("[In scope] Baggage 2").isEqualTo("value 2");
+    }
+}
+
+// Assuming that you have a handle to the span
+try (BaggageInScope baggageForExplicitSpan = tracer.createBaggageInScope(span.context(), "from_span",
+        "value 3")) {
+    then(baggageForExplicitSpan.get(span.context())).as("[Span passed explicitly] Baggage 3")
+        .isEqualTo("value 3");
+    then(tracer.getBaggage("from_span").get(span.context())).as("[Span passed explicitly] Baggage 3")
+        .isEqualTo("value 3");
+}
+
+// Assuming that there's no span in scope
+// When there's no span in scope, there will never be any baggage - even if you
+// make it current
+try (BaggageInScope baggageFour = tracer.createBaggageInScope("from_span_in_scope 1", "value 1");) {
+    then(baggageFour.get()).as("[Out of span scope] Baggage 1").isNull();
+    then(tracer.getBaggage("from_span_in_scope 1").get()).as("[Out of span scope] Baggage 1").isNull();
+}
+then(tracer.getBaggage("from_span_in_scope 1").get()).as("[Out of scope] Baggage 1").isNull();
+then(tracer.getBaggage("from_span_in_scope 2").get()).as("[Out of scope] Baggage 2").isNull();
+then(tracer.getBaggage("from_span").get()).as("[Out of scope] Baggage 3").isNull();
+
+// Baggage is present only within the scope
+then(tracer.getBaggage("from_span").get(span.context())).as("[Out of scope - with context] Baggage 3").isNull();</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+For Brave, remember to set up the <code>PropagationFactory</code> so that it contains the baggage fields that you will be using in your code. Check the example below for details.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Tracing tracing = Tracing.newBuilder()
+    .currentTraceContext(this.braveCurrentTraceContext)
+    .supportsJoin(false)
+    .traceId128Bit(true)
+    // For Baggage to work you need to provide a list of fields to propagate
+    .propagationFactory(BaggagePropagation.newFactoryBuilder(B3Propagation.FACTORY)
+        .add(BaggagePropagationConfig.SingleBaggageField.remote(BaggageField.create("from_span_in_scope 1")))
+        .add(BaggagePropagationConfig.SingleBaggageField.remote(BaggageField.create("from_span_in_scope 2")))
+        .add(BaggagePropagationConfig.SingleBaggageField.remote(BaggageField.create("from_span")))
+        .build())
+    .sampler(Sampler.ALWAYS_SAMPLE)
+    .addSpanHandler(this.spanHandler)
+    .build();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_aspect_oriented_programming"><a class="anchor" href="#_aspect_oriented_programming"></a>Aspect Oriented Programming</h3>
+<div class="paragraph">
+<p>Micrometer Tracing contains a <code>@NewSpan</code>, <code>@ContinueSpan</code> and <code>@SpanTag</code> annotations that frameworks can use to create or customize spans for either specific types of methods such as those serving web request endpoints or, more generally, to all methods.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Micrometer&#8217;s Spring Boot configuration does <em>not</em> recognize these aspects on arbitrary methods.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>An incubating AspectJ aspect is included. You can use it in your application either through compile/load time AspectJ weaving or through framework facilities that interpret AspectJ aspects and proxy targeted methods in some other way, such as Spring AOP. Here is a sample Spring AOP configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Configuration
+public class SpanAspectConfiguration {
+
+    @Bean
+    NewSpanParser newSpanParser() {
+        return new DefaultNewSpanParser();
+    }
+
+    // You can provide your own resolvers - here we go with a noop example.
+    @Bean
+    ValueResolver valueResolver() {
+        return new NoOpValueResolver();
+    }
+
+    // Example of a SpEL resolver
+    @Bean
+    ValueExpressionResolver valueExpressionResolver() {
+        return new SpelTagValueExpressionResolver();
+    }
+
+    @Bean
+    MethodInvocationProcessor methodInvocationProcessor(NewSpanParser newSpanParser, Tracer tracer,
+            BeanFactory beanFactory) {
+        return new ImperativeMethodInvocationProcessor(newSpanParser, tracer, beanFactory::getBean,
+                beanFactory::getBean);
+    }
+
+    @Bean
+    SpanAspect spanAspect(MethodInvocationProcessor methodInvocationProcessor) {
+        return new SpanAspect(methodInvocationProcessor);
+    }
+
+}
+
+// Example of using SpEL to resolve expressions in @SpanTag
+static class SpelTagValueExpressionResolver implements ValueExpressionResolver {
+
+    private static final Log log = LogFactory.getLog(SpelTagValueExpressionResolver.class);
+
+    @Override
+    public String resolve(String expression, Object parameter) {
+        try {
+            SimpleEvaluationContext context = SimpleEvaluationContext.forReadOnlyDataBinding().build();
+            ExpressionParser expressionParser = new SpelExpressionParser();
+            Expression expressionToEvaluate = expressionParser.parseExpression(expression);
+            return expressionToEvaluate.getValue(context, parameter, String.class);
+        }
+        catch (Exception ex) {
+            log.error("Exception occurred while tying to evaluate the SpEL expression [" + expression + "]", ex);
+        }
+        return parameter.toString();
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Applying <code>SpanAspect</code> makes <code>@NewSpan</code> and <code>@ContinueSpan</code> usable on any arbitrary method in an AspectJ proxied instance, as the following example shows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// In Sleuth @NewSpan and @ContinueSpan annotations would be taken into
+// consideration. In Micrometer Tracing due to limitations of @Aspect
+// we can't do that. The @SpanTag annotation will work well though.
+protected interface TestBeanInterface {
+
+    void testMethod2();
+
+    void testMethod3();
+
+    void testMethod10(@SpanTag("testTag10") String param);
+
+    void testMethod10_v2(@SpanTag("testTag10") String param);
+
+}
+
+// Example of an implementation class
+protected static class TestBean implements TestBeanInterface {
+
+    @NewSpan
+    @Override
+    public void testMethod2() {
+    }
+
+    @NewSpan(name = "customNameOnTestMethod3")
+    @Override
+    public void testMethod3() {
+    }
+
+    @ContinueSpan(log = "customTest")
+    @Override
+    public void testMethod10(@SpanTag("customTestTag10") String param) {
+
+    }
+
+    @ContinueSpan(log = "customTest")
+    @Override
+    public void testMethod10_v2(String param) {
+
+    }
+
+}
+
+// --------------------------
+// ----- USAGE EXAMPLE ------
+// --------------------------
+
+
+// Creates a new span with
+testBean().testMethod2();
+then(createdSpanViaAspect()).isEqualTo("test-method2");
+
+// Uses the name from the annotation
+testBean().testMethod3();
+then(createdSpanViaAspect()).isEqualTo("custom-name-on-test-method3");
+
+// Continues the previous span
+Span span = this.tracer.nextSpan().name("foo");
+try (Tracer.SpanInScope ws = this.tracer.withSpan(span.start())) {
+
+    // Adds tags and events to an existing span
+    testBean().testMethod10("tagValue");
+    SimpleSpan continuedSpan = modifiedSpanViaAspect();
+    then(continuedSpan.getName()).isEqualTo("foo");
+    then(continuedSpan.getTags()).containsEntry("customTestTag10", "tagValue");
+    then(continuedSpan.getEvents()).extracting("value").contains("customTest.before", "customTest.after");
+}
+span.end();
+
+// Continues the previous span
+span = this.tracer.nextSpan().name("foo");
+try (Tracer.SpanInScope ws = this.tracer.withSpan(span.start())) {
+
+    // Adds tags and events to an existing span (reusing setup from the parent
+    // interface)
+    testBean().testMethod10_v2("tagValue");
+    SimpleSpan continuedSpan = modifiedSpanViaAspect();
+    then(continuedSpan.getName()).isEqualTo("foo");
+    then(continuedSpan.getTags()).containsEntry("testTag10", "tagValue");
+    then(continuedSpan.getEvents()).extracting("value").contains("customTest.before", "customTest.after");
+}
+span.end();</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="reporters.html">Supported Reporters</a></span>
+  <span class="next"><a href="configuring.html">Micrometer Observation Configuration</a></span>
+</nav>
+</article>
+</div>  </div>
+</main>
+<div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true">
+            <main class="modal__content" id="modal-versions-content">
+              <button data-micromodal-close class="modal-versions-close">
+                <svg width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title/><g id="cross"><line class="cls-1" x1="7" x2="25" y1="7" y2="25"/><line class="cls-1" x1="7" x2="25" y1="25" y2="7"/></g></svg>
+              </button>
+              <div class="colset">
+                <div class="col-left">
+                  <ul class="nav-versions">
+                    <li class="component is-current">
+                      <a class="title" href="index.html">Micrometer Tracing</a>
+                      <ul class="versions">
+                        <li class="version is-current is-latest">
+                          <a href="index.html">
+                            1.2.0-SNAPSHOT<span class="current">current</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-right">
+                  <ul>
+                    <li>
+                      Related Documentation
+                      <ul>
+                        <li><a href="https://micrometer.io/docs/context-popagation/">Context Propagation</a></li>
+                        <li><a href="https://micrometer.io/docs/micrometer/">Micrometer</a></li>
+                        <li><a href="https://micrometer.io/docs/tracing/">Tracing</a></li>
+                        <li><a href="https://micrometer.io/docs/docs-generator/">Docs Generator</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+</div>
+<footer class="footer flex">
+    <div id="spring-links">
+        <img class="light" id="springlogo" src="./_/img/micrometer-logo.svg" alt="Spring">
+        <img class="dark" id="springlogo" src="./_/img/micrometer-logo-dark.svg" alt="Spring">
+        <p class="smallest antialiased">© <script>var d = new Date();
+        document.write(d.getFullYear());</script> <a href="https://www.vmware.com/">VMware</a>, Inc. or its affiliates. <a href="https://www.vmware.com/help/legal.html">Terms of Use</a> • <a href="https://www.vmware.com/help/privacy.html" rel="noopener noreferrer">Privacy</a></p>
+    </div>
+    <div id="social-icons" class="flex jc-between">
+        <a href="https://github.com/micrometer-metrics/micrometer" title="Github"><svg id="github-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.93 75.93"><path class="cls-1" d="M38,0a38,38,0,1,0,38,38A38,38,0,0,0,38,0Z"/></g><path class="cls-2" d="M38,15.59A22.95,22.95,0,0,0,30.71,60.3c1.15.21,1.57-.5,1.57-1.11s0-2,0-3.9c-6.38,1.39-7.73-3.07-7.73-3.07A6.09,6.09,0,0,0,22,48.86c-2.09-1.42.15-1.39.15-1.39a4.81,4.81,0,0,1,3.52,2.36c2,3.5,5.37,2.49,6.67,1.91a4.87,4.87,0,0,1,1.46-3.07c-5.09-.58-10.45-2.55-10.45-11.34a8.84,8.84,0,0,1,2.36-6.15,8.29,8.29,0,0,1,.23-6.07s1.92-.62,6.3,2.35a21.82,21.82,0,0,1,11.49,0c4.38-3,6.3-2.35,6.3-2.35a8.29,8.29,0,0,1,.23,6.07,8.84,8.84,0,0,1,2.36,6.15c0,8.81-5.37,10.75-10.48,11.32a5.46,5.46,0,0,1,1.56,4.25c0,3.07,0,5.54,0,6.29s.42,1.33,1.58,1.1A22.94,22.94,0,0,0,38,15.59Z"/></svg></a>
+        <a href="https://twitter.com/micrometerio" title="Twitter"><svg id="twitter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.93 75.93"><circle class="cls-1" cx="37.97" cy="37.97" r="37.97"/><path id="Twitter-2" data-name="Twitter" class="cls-2" d="M55.2,22.73a15.43,15.43,0,0,1-4.88,1.91,7.56,7.56,0,0,0-5.61-2.49A7.78,7.78,0,0,0,37,30a7.56,7.56,0,0,0,.2,1.79,21.63,21.63,0,0,1-15.84-8.23,8,8,0,0,0,2.37,10.52,7.66,7.66,0,0,1-3.48-1v.09A7.84,7.84,0,0,0,26.45,41a7.54,7.54,0,0,1-2,.28A7.64,7.64,0,0,1,23,41.09a7.71,7.71,0,0,0,7.18,5.47,15.21,15.21,0,0,1-9.55,3.37,15.78,15.78,0,0,1-1.83-.11,21.41,21.41,0,0,0,11.78,3.54c14.13,0,21.86-12,21.86-22.42,0-.34,0-.68,0-1a15.67,15.67,0,0,0,3.83-4.08,14.9,14.9,0,0,1-4.41,1.24A7.8,7.8,0,0,0,55.2,22.73Z"/></svg></a>
+    </div>
+</footer>
+<script src="./_/js/vendor/import.js"></script>
+<script src="./_/js/site.js"></script>
+<script async src="./_/js/vendor/highlight.js"></script>
+<script async src="./_/js/vendor/asciidoctor-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
+
+<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <main class="modal__content" id="modal-1-content">
+                <div id="searchbox"></div>
+                <div id="counter"></div>
+                <div class="search-by">
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.algolia.com/" aria-label="Search by Algolia">
+                        <img class="light" width="140" src="./_/img/algolia-light.svg" />
+                        <img class="dark" width="140" src="./_/img/algolia-dark.svg" />
+                    </a>
+                </div>
+                <div id="hits"></div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
+<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="244V8V9FGG" data-api-key="82c7ead946afbac3cf98c32446154691" data-index-name="tracing" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.2.0"></script>
+
+  </body>
+</html>
