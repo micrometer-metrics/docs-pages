@@ -1,15 +1,15 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2023-09-14T10:42:58.058Z",
+  "generated": "2023-09-25T15:27:35.867Z",
   "url": "https://docs.micrometer.io/context-propagation/reference",
   "components": {
     "context-propagation": {
       "title": "Micrometer Context Propagation",
-      "latest": "1.1.0",
+      "latest": "0.1.0",
       "versions": {
-        "1.1.0": {
+        "0.1.0": {
           "prerelease": true,
-          "displayVersion": "1.1.0-SNAPSHOT",
+          "displayVersion": "0.1.0-SNAPSHOT",
           "url": "/index.html",
           "pages": [
             {
