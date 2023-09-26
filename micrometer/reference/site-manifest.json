@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2023-09-14T10:43:17.568Z",
+  "generated": "2023-09-26T23:41:30.003Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -259,7 +259,8 @@
             },
             {
               "path": "observation/projects.adoc",
-              "url": "/observation/projects.html"
+              "url": "/observation/projects.html",
+              "title": "Instrumentations"
             },
             {
               "path": "observation/testing.adoc",
