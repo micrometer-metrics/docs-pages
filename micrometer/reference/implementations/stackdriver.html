@@ -16,27 +16,23 @@
     </script>
     <link rel="stylesheet" href="../_/css/site.css">
     <link rel="stylesheet" href="../_/css/vendor/search.css">
+    <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="version" content="1.12.0">
     <meta name="component" content="micrometer">
+    <meta name="latest-version" content="false">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
   </head>
   <body class="article">
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://micrometer.io/">
+      <a class="navbar-item" href="https://spring.io">
         <img
           id="springlogo"
-          class="block light"
-          src="../_/img/micrometer-logo.svg"
-          alt="Spring"
-        />
-        <img
-          id="springlogo"
-          class="block dark"
-          src="../_/img/micrometer-logo-dark.svg"
+          class="block"
+          src="../_/img/spring-logo.svg"
           alt="Spring"
         />
       </a>
@@ -47,6 +43,9 @@
       </button>
     </div>
     <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+
+      </div>
     </div>
     <label class="theme-toggler">
       <input
@@ -93,7 +92,8 @@
     document.getElementById('switch-theme-checkbox').parentElement.classList.add('active')
   }
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
-</script><div class="body">
+</script>
+<div class="body">
 <div class="nav-container" data-component="micrometer" data-version="1.12.0">
   <aside class="nav">
     <div class="panels">
@@ -374,7 +374,7 @@
                 class="st0"
                 d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"
               ></path></g></svg>
-          Github Project
+          GitHub Project
         </a>
         <a href="https://stackoverflow.com/tags/micrometer">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path
@@ -605,7 +605,7 @@ management.metrics.tags.application=${spring.application.name}</code></pre>
         <div class="modal__container" role="dialog" aria-modal="true">
             <main class="modal__content" id="modal-versions-content">
               <button data-micromodal-close class="modal-versions-close">
-                <svg width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title/><g id="cross"><line class="cls-1" x1="7" x2="25" y1="7" y2="25"/><line class="cls-1" x1="7" x2="25" y1="25" y2="7"/></g></svg>
+                <svg width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1h{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title/><g id="cross"><line class="cls-1h" x1="7" x2="25" y1="7" y2="25"/><line class="cls-1h" x1="7" x2="25" y1="25" y2="7"/></g></svg>
               </button>
               <div class="colset">
                 <div class="col-left">
@@ -630,7 +630,7 @@ management.metrics.tags.application=${spring.application.name}</code></pre>
                         <li><a href="https://docs.micrometer.io/context-propagation/reference/">Context Propagation</a></li>
                         <li><a href="https://docs.micrometer.io/micrometer/reference/">Micrometer</a></li>
                         <li><a href="https://docs.micrometer.io/tracing/reference/">Tracing</a></li>
-                        <li><a href="https://docs.micrometer.io/docs-generator/reference/">Docs Generator</a></li>
+                        <li><a href="https://docs.micrometer.io/micrometer-docs-generator/reference/">Docs Generator</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -665,6 +665,9 @@ management.metrics.tags.application=${spring.application.name}</code></pre>
             <main class="modal__content" id="modal-1-content">
                 <div id="searchbox"></div>
                 <div id="counter"></div>
+                <div class="search-link-box">
+                    <a class="search-link" href="../search.html">Search in all Spring Docs</a>
+                </div>
                 <div class="search-by">
                     <a target="_blank" rel="noopener noreferrer" href="https://www.algolia.com/" aria-label="Search by Algolia">
                         <img class="light" width="140" src="../_/img/algolia-light.svg" />
@@ -680,7 +683,6 @@ management.metrics.tags.application=${spring.application.name}</code></pre>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.0"></script>
-
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.0" data-page-component="micrometer"></script>
   </body>
 </html>
