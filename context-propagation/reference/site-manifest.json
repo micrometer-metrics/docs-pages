@@ -1,35 +1,35 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2023-11-17T23:53:33.902Z",
+  "generated": "2023-11-17T23:56:25.657Z",
   "url": "https://docs.micrometer.io/context-propagation/reference",
   "components": {
     "context-propagation": {
       "title": "Micrometer Context Propagation",
-      "latest": "1.2.0",
+      "latest": "1.1.0",
       "versions": {
         "1.2.0": {
           "prerelease": true,
           "displayVersion": "1.2.0-SNAPSHOT",
-          "url": "/index.html",
+          "url": "/1.2-SNAPSHOT/index.html",
           "pages": [
             {
               "path": "index.adoc",
-              "url": "/index.html",
+              "url": "/1.2-SNAPSHOT/index.html",
               "title": "Context Propagation support"
             },
             {
               "path": "installing.adoc",
-              "url": "/installing.html",
+              "url": "/1.2-SNAPSHOT/installing.html",
               "title": "Installing"
             },
             {
               "path": "purpose.adoc",
-              "url": "/purpose.html",
+              "url": "/1.2-SNAPSHOT/purpose.html",
               "title": "Purpose"
             },
             {
               "path": "usage.adoc",
-              "url": "/usage.html",
+              "url": "/1.2-SNAPSHOT/usage.html",
               "title": "Examples"
             }
           ]
@@ -57,6 +57,31 @@
             {
               "path": "usage.adoc",
               "url": "/1.1-SNAPSHOT/usage.html",
+              "title": "Examples"
+            }
+          ]
+        },
+        "1.1.0": {
+          "url": "/index.html",
+          "pages": [
+            {
+              "path": "index.adoc",
+              "url": "/index.html",
+              "title": "Context Propagation support"
+            },
+            {
+              "path": "installing.adoc",
+              "url": "/installing.html",
+              "title": "Installing"
+            },
+            {
+              "path": "purpose.adoc",
+              "url": "/purpose.html",
+              "title": "Purpose"
+            },
+            {
+              "path": "usage.adoc",
+              "url": "/usage.html",
               "title": "Examples"
             }
           ]
