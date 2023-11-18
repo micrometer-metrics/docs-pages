@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2023-11-13T10:58:44.001Z",
+  "generated": "2023-11-18T00:22:31.476Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -299,6 +299,301 @@
             {
               "path": "support.adoc",
               "url": "/1.13-SNAPSHOT/support.html"
+            }
+          ]
+        },
+        "1.12.1": {
+          "prerelease": true,
+          "displayVersion": "1.12.1-SNAPSHOT",
+          "url": "/1.12-SNAPSHOT/index.html",
+          "pages": [
+            {
+              "path": "index.adoc",
+              "url": "/1.12-SNAPSHOT/index.html",
+              "title": "Micrometer Documentation"
+            },
+            {
+              "path": "concepts.adoc",
+              "url": "/1.12-SNAPSHOT/concepts.html",
+              "title": "Concepts"
+            },
+            {
+              "path": "concepts/counters.adoc",
+              "url": "/1.12-SNAPSHOT/concepts/counters.html",
+              "title": "Counters"
+            },
+            {
+              "path": "concepts/distribution-summaries.adoc",
+              "url": "/1.12-SNAPSHOT/concepts/distribution-summaries.html",
+              "title": "Distribution Summaries"
+            },
+            {
+              "path": "concepts/gauges.adoc",
+              "url": "/1.12-SNAPSHOT/concepts/gauges.html",
+              "title": "Gauges"
+            },
+            {
+              "path": "concepts/histogram-quantiles.adoc",
+              "url": "/1.12-SNAPSHOT/concepts/histogram-quantiles.html",
+              "title": "Histograms and Percentiles"
+            },
+            {
+              "path": "concepts/implementations.adoc",
+              "url": "/1.12-SNAPSHOT/concepts/implementations.html",
+              "title": "Supported Monitoring Systems"
+            },
+            {
+              "path": "concepts/long-task-timers.adoc",
+              "url": "/1.12-SNAPSHOT/concepts/long-task-timers.html",
+              "title": "Long Task Timers"
+            },
+            {
+              "path": "concepts/meter-filters.adoc",
+              "url": "/1.12-SNAPSHOT/concepts/meter-filters.html",
+              "title": "Meter Filters"
+            },
+            {
+              "path": "concepts/meters.adoc",
+              "url": "/1.12-SNAPSHOT/concepts/meters.html",
+              "title": "Meters"
+            },
+            {
+              "path": "concepts/naming.adoc",
+              "url": "/1.12-SNAPSHOT/concepts/naming.html",
+              "title": "Naming Meters"
+            },
+            {
+              "path": "concepts/rate-aggregation.adoc",
+              "url": "/1.12-SNAPSHOT/concepts/rate-aggregation.html",
+              "title": "Rate Aggregation"
+            },
+            {
+              "path": "concepts/registry.adoc",
+              "url": "/1.12-SNAPSHOT/concepts/registry.html",
+              "title": "Registry"
+            },
+            {
+              "path": "concepts/timers.adoc",
+              "url": "/1.12-SNAPSHOT/concepts/timers.html",
+              "title": "Timers"
+            },
+            {
+              "path": "contextpropagation.adoc",
+              "url": "/1.12-SNAPSHOT/contextpropagation.html",
+              "title": "Context Propagation support"
+            },
+            {
+              "path": "contextpropagation/installing.adoc",
+              "url": "/1.12-SNAPSHOT/contextpropagation/installing.html"
+            },
+            {
+              "path": "contextpropagation/purpose.adoc",
+              "url": "/1.12-SNAPSHOT/contextpropagation/purpose.html"
+            },
+            {
+              "path": "contextpropagation/usage.adoc",
+              "url": "/1.12-SNAPSHOT/contextpropagation/usage.html"
+            },
+            {
+              "path": "guides.adoc",
+              "url": "/1.12-SNAPSHOT/guides.html"
+            },
+            {
+              "path": "guides/console-reporter.adoc",
+              "url": "/1.12-SNAPSHOT/guides/console-reporter.html",
+              "title": "Passing through to Dropwizard&#8217;s Console Reporter"
+            },
+            {
+              "path": "guides/custom-meter-registry.adoc",
+              "url": "/1.12-SNAPSHOT/guides/custom-meter-registry.html",
+              "title": "Custom Meter Registry"
+            },
+            {
+              "path": "guides/http-sender-resilience4j-retry.adoc",
+              "url": "/1.12-SNAPSHOT/guides/http-sender-resilience4j-retry.html",
+              "title": "HttpSender with Resilience4j Retry"
+            },
+            {
+              "path": "implementations.adoc",
+              "url": "/1.12-SNAPSHOT/implementations.html"
+            },
+            {
+              "path": "implementations/appOptics.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/appOptics.html",
+              "title": "Micrometer AppOptics"
+            },
+            {
+              "path": "implementations/atlas.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/atlas.html",
+              "title": "Micrometer Atlas"
+            },
+            {
+              "path": "implementations/azure-monitor.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/azure-monitor.html",
+              "title": "Micrometer Azure Monitor"
+            },
+            {
+              "path": "implementations/cloudwatch.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/cloudwatch.html",
+              "title": "Micrometer CloudWatch"
+            },
+            {
+              "path": "implementations/datadog.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/datadog.html",
+              "title": "Micrometer Datadog"
+            },
+            {
+              "path": "implementations/dynatrace.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/dynatrace.html",
+              "title": "Micrometer Dynatrace"
+            },
+            {
+              "path": "implementations/elastic.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/elastic.html",
+              "title": "Micrometer Elastic"
+            },
+            {
+              "path": "implementations/ganglia.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/ganglia.html",
+              "title": "Micrometer Ganglia"
+            },
+            {
+              "path": "implementations/graphite.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/graphite.html",
+              "title": "Micrometer Graphite"
+            },
+            {
+              "path": "implementations/hierarchical-name-mapping.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/hierarchical-name-mapping.html"
+            },
+            {
+              "path": "implementations/humio.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/humio.html",
+              "title": "Micrometer Humio"
+            },
+            {
+              "path": "implementations/influx.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/influx.html",
+              "title": "Micrometer Influx"
+            },
+            {
+              "path": "implementations/instana.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/instana.html",
+              "title": "Micrometer Instana"
+            },
+            {
+              "path": "implementations/jmx.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/jmx.html",
+              "title": "Micrometer JMX"
+            },
+            {
+              "path": "implementations/kairos.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/kairos.html",
+              "title": "Micrometer KairosDB"
+            },
+            {
+              "path": "implementations/new-relic.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/new-relic.html",
+              "title": "Micrometer New Relic"
+            },
+            {
+              "path": "implementations/otlp.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/otlp.html",
+              "title": "Micrometer OTLP"
+            },
+            {
+              "path": "implementations/prometheus.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/prometheus.html",
+              "title": "Micrometer Prometheus"
+            },
+            {
+              "path": "implementations/signalFx.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/signalFx.html",
+              "title": "Micrometer SignalFx"
+            },
+            {
+              "path": "implementations/stackdriver.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/stackdriver.html",
+              "title": "Micrometer Stackdriver Monitoring"
+            },
+            {
+              "path": "implementations/statsD.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/statsD.html",
+              "title": "Micrometer StatsD"
+            },
+            {
+              "path": "implementations/wavefront.adoc",
+              "url": "/1.12-SNAPSHOT/implementations/wavefront.html",
+              "title": "Micrometer Wavefront"
+            },
+            {
+              "path": "installing.adoc",
+              "url": "/1.12-SNAPSHOT/installing.html",
+              "title": "Installing"
+            },
+            {
+              "path": "observation.adoc",
+              "url": "/1.12-SNAPSHOT/observation.html",
+              "title": "Micrometer Observation"
+            },
+            {
+              "path": "observation/handler.adoc",
+              "url": "/1.12-SNAPSHOT/observation/handler.html"
+            },
+            {
+              "path": "observation/installing.adoc",
+              "url": "/1.12-SNAPSHOT/observation/installing.html"
+            },
+            {
+              "path": "observation/instrumenting.adoc",
+              "url": "/1.12-SNAPSHOT/observation/instrumenting.html"
+            },
+            {
+              "path": "observation/introduction.adoc",
+              "url": "/1.12-SNAPSHOT/observation/introduction.html"
+            },
+            {
+              "path": "observation/projects.adoc",
+              "url": "/1.12-SNAPSHOT/observation/projects.html",
+              "title": "Instrumentations"
+            },
+            {
+              "path": "observation/testing.adoc",
+              "url": "/1.12-SNAPSHOT/observation/testing.html"
+            },
+            {
+              "path": "overview.adoc",
+              "url": "/1.12-SNAPSHOT/overview.html",
+              "title": "Micrometer Overview"
+            },
+            {
+              "path": "reference.adoc",
+              "url": "/1.12-SNAPSHOT/reference.html",
+              "title": "Micrometer Reference Instrumentations"
+            },
+            {
+              "path": "reference/cache.adoc",
+              "url": "/1.12-SNAPSHOT/reference/cache.html"
+            },
+            {
+              "path": "reference/jetty.adoc",
+              "url": "/1.12-SNAPSHOT/reference/jetty.html"
+            },
+            {
+              "path": "reference/jvm.adoc",
+              "url": "/1.12-SNAPSHOT/reference/jvm.html"
+            },
+            {
+              "path": "reference/netty.adoc",
+              "url": "/1.12-SNAPSHOT/reference/netty.html"
+            },
+            {
+              "path": "reference/okhttpclient.adoc",
+              "url": "/1.12-SNAPSHOT/reference/okhttpclient.html"
+            },
+            {
+              "path": "support.adoc",
+              "url": "/1.12-SNAPSHOT/support.html"
             }
           ]
         },
