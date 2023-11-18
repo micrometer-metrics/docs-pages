@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Untitled :: Micrometer Tracing</title>
-    <link rel="prev" href="index.html">
-    <link rel="next" href="tracers.html">
+    <link rel="prev" href="glossary.html">
+    <link rel="next" href="reporters.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -14,15 +14,15 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'),
   localStorage && localStorage.getItem('nav-width'))
     </script>
-    <link rel="stylesheet" href="./_/css/site.css">
-    <link rel="stylesheet" href="./_/css/vendor/search.css">
-    <link rel="stylesheet" href="./_/css/vendor/page-search.css">
-    <link rel="stylesheet" href="./_/css/vendor/asciidoctor-tabs.css">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="stylesheet" href="../_/css/vendor/search.css">
+    <link rel="stylesheet" href="../_/css/vendor/page-search.css">
+    <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.3.0">
+    <meta name="version" content="1.2.1">
     <meta name="component" content="tracing">
-    <meta name="latest-version" content="true">
-    <link rel="icon" href="./_/img/favicon.ico" type="image/vnd.microsoft.icon">
+    <meta name="latest-version" content="false">
+    <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
   </head>
   <body class="article">
 <header class="header">
@@ -32,7 +32,7 @@
         <img
           id="springlogo"
           class="block"
-          src="./_/img/spring-logo.svg"
+          src="../_/img/spring-logo.svg"
           alt="Spring"
         />
       </a>
@@ -94,14 +94,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.3.0">
+<div class="nav-container" data-component="tracing" data-version="1.2.1">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.3.0-SNAPSHOT</span>
+  <span class="version">1.2.1-SNAPSHOT</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -134,10 +134,10 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="index.html">Micrometer Tracing</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="glossary.html">Glossary</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="tracers.html">Supported Tracers</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -197,7 +197,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/edit/main/docs/modules/ROOT/pages/glossary.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/edit/1.2.x/docs/modules/ROOT/pages/tracers.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -235,105 +235,97 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Micrometer Tracing</a></li>
-    <li><a href="glossary.html">Glossary</a></li>
+    <li><a href="tracers.html">Supported Tracers</a></li>
   </ul>
 </nav>
 <article>
+<div class="admonitionblock important">
+  <table>
+    <tbody><tr>
+      <td class="icon">
+        <i class="fa icon-important" title="Important"></i>
+      </td>
+      <td class="content">
+        <div class="paragraph">
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../tracers.html">Micrometer Tracing 1.3.0-SNAPSHOT</a>!</p>
+        </div>
+      </td>
+    </tr></tbody>
+  </table>
+</div>
 <div class="sect1">
-<h2 id="_glossary"><a class="anchor" href="#_glossary"></a>Glossary</h2>
+<h2 id="_supported_tracers"><a class="anchor" href="#_supported_tracers"></a>Supported Tracers</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer Tracing contains a core module with an instrumentation <a href="https://en.wikipedia.org/wiki/Service_provider_interface">SPI</a>, a set of modules containing bridges to various tracers, a set of modules containing dedicated span reporting mechanisms, and a test kit.
-You need to understand the following definitions for distributed tracing:</p>
+<p>Micrometer Tracing supports the following Tracers.</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/openzipkin/brave"><strong>OpenZipkin Brave</strong></a></p>
+</li>
+<li>
+<p><a href="https://opentelemetry.io/"><strong>OpenTelemetry</strong></a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h3>
 <div class="paragraph">
-<p>Micrometer Tracing borrows <a href="https://research.google.com/pubs/pub36356.html">Dapper&#8217;s</a> terminology.</p>
-</div>
-<div class="paragraph">
-<p><strong>Span</strong>: The basic unit of work.
-For example, sending an RPC is a new span, as is sending a response to an RPC.
-Spans also have other data, such as descriptions, timestamped events, key-value annotations (tags), the ID of the span that caused them, and process IDs (normally IP addresses).</p>
-</div>
-<div class="paragraph">
-<p>Spans can be started and stopped, and they keep track of their timing information.
-Once you create a span, you must stop it at some point in the future.</p>
-</div>
-<div class="paragraph">
-<p><strong>Trace</strong>: A set of spans forming a tree-like structure.
-For example, if you run a distributed big-data store, a trace might be formed by a <code>PUT</code> request.</p>
-</div>
-<div class="paragraph">
-<p><strong>Annotation/Event</strong>: Used to record the existence of an event in time.</p>
-</div>
-<div class="paragraph">
-<p><strong>Tracer</strong>: A library that handles the lifecycle of a span.
-It can create, start, stop and report spans to an external system via reporters / exporters.</p>
-</div>
-<div class="paragraph">
-<p><strong>Tracing context</strong>: For distributed tracing to work the tracing context (trace identifier, span identifier, etc.) must be propagated through the process (e.g. over threads) and over the network.</p>
-</div>
-<div class="paragraph">
-<p><strong>Log correlation</strong>: Parts of the tracing context (e.g. trace identifier, span identifier) can be populated to the logs of a given application.
-One can then collect all logs in a single storage and group them via trace id.
-That way one can get all logs, for a single business operation (trace) from all services put in a chronological order.</p>
-</div>
-<div class="paragraph">
-<p><strong>Latency analysis tools</strong>: A tool that collects exported spans and visualizes the whole trace.
-Allows easy latency analysis.</p>
-</div>
-<div class="paragraph">
-<p>The following image shows how <strong>Span</strong> and <strong>Trace</strong> look in a system.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/tracing/trace-id.jpg" alt="Trace Info propagation">
-</div>
-</div>
-<div class="paragraph">
-<p>Each color of a note signifies a span (there are seven spans - from <strong>A</strong> to <strong>G</strong>).
-Consider the following note:</p>
+<p>The following example shows the required dependency in Gradle (assuming that Micrometer Tracing BOM has been added):</p>
 </div>
 <div class="listingblock">
+<div class="title">Brave Tracer</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">Trace Id = X
-Span Id = D
-Client Sent</code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-tracing-bridge-brave'</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>This note indicates that the current span has <strong>Trace Id</strong> set to <strong>X</strong> and <strong>Span Id</strong> set to <strong>D</strong>.
-Also, from the RPC perspective, the <code>Client Sent</code> event took place.</p>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s consider more notes:</p>
 </div>
 <div class="listingblock">
+<div class="title">OpenTelemetry Tracer</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">Trace Id = X
-Span Id = A
-(no custom span)
-
-Trace Id = X
-Span Id = C
-(custom span)</code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-tracing-bridge-otel'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can continue with a created span (example with <code>no custom span</code> indication) or you can create child spans manually (example with <code>custom span</code> indication).</p>
+<p>The following example shows the required dependency in Maven (assuming that Micrometer Tracing BOM has been added):</p>
 </div>
-<div class="paragraph">
-<p>The following image shows how parent-child relationships of spans look:</p>
-</div>
-<div class="imageblock">
+<div class="listingblock">
+<div class="title">Brave Tracer</div>
 <div class="content">
-<img src="_images/tracing/parents.jpg" alt="Parent child relationship">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
+    &lt;artifactId&gt;micrometer-tracing-bridge-brave&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">OpenTelemetry Tracer</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
+    &lt;artifactId&gt;micrometer-tracing-bridge-otel&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Remember to pick <strong>only one</strong> bridge.
+You <strong>shouldn&#8217;t have</strong> two bridges on the classpath.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="index.html">Micrometer Tracing</a></span>
-  <span class="next"><a href="tracers.html">Supported Tracers</a></span>
+  <span class="prev"><a href="glossary.html">Glossary</a></span>
+  <span class="next"><a href="reporters.html">Supported Reporters</a></span>
 </nav>
 </article>
 </div>  </div>
@@ -349,15 +341,15 @@ Span Id = C
                 <div class="col-left">
                   <ul class="nav-versions">
                     <li class="component is-current">
-                      <a class="title" href="index.html">Micrometer Tracing</a>
+                      <a class="title" href="../index.html">Micrometer Tracing</a>
                       <ul class="versions">
-                        <li class="version is-current is-latest">
-                          <a href="index.html">
+                        <li class="version is-latest">
+                          <a href="../index.html">
                             1.3.0-SNAPSHOT<span class="current">current</span>
                           </a>
                         </li>
-                        <li class="version">
-                          <a href="1.2-SNAPSHOT/index.html">
+                        <li class="version is-current">
+                          <a href="index.html">
                             1.2.1-SNAPSHOT
                           </a>
                         </li>
@@ -387,8 +379,8 @@ Span Id = C
 </div>
 <footer class="footer flex">
     <div id="spring-links">
-        <img class="light" id="springlogo" src="./_/img/micrometer-logo.svg" alt="Spring">
-        <img class="dark" id="springlogo" src="./_/img/micrometer-logo-dark.svg" alt="Spring">
+        <img class="light" id="springlogo" src="../_/img/micrometer-logo.svg" alt="Spring">
+        <img class="dark" id="springlogo" src="../_/img/micrometer-logo-dark.svg" alt="Spring">
         <p class="smallest antialiased">© <script>var d = new Date();
         document.write(d.getFullYear());</script> <a href="https://www.vmware.com/">VMware</a>, Inc. or its affiliates. <a href="https://www.vmware.com/help/legal.html">Terms of Use</a> • <a href="https://www.vmware.com/help/privacy.html" rel="noopener noreferrer">Privacy</a></p>
     </div>
@@ -397,10 +389,10 @@ Span Id = C
         <a href="https://twitter.com/micrometerio" title="Twitter"><svg id="twitter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.93 75.93"><circle class="cls-1" cx="37.97" cy="37.97" r="37.97"/><path id="Twitter-2" data-name="Twitter" class="cls-2" d="M55.2,22.73a15.43,15.43,0,0,1-4.88,1.91,7.56,7.56,0,0,0-5.61-2.49A7.78,7.78,0,0,0,37,30a7.56,7.56,0,0,0,.2,1.79,21.63,21.63,0,0,1-15.84-8.23,8,8,0,0,0,2.37,10.52,7.66,7.66,0,0,1-3.48-1v.09A7.84,7.84,0,0,0,26.45,41a7.54,7.54,0,0,1-2,.28A7.64,7.64,0,0,1,23,41.09a7.71,7.71,0,0,0,7.18,5.47,15.21,15.21,0,0,1-9.55,3.37,15.78,15.78,0,0,1-1.83-.11,21.41,21.41,0,0,0,11.78,3.54c14.13,0,21.86-12,21.86-22.42,0-.34,0-.68,0-1a15.67,15.67,0,0,0,3.83-4.08,14.9,14.9,0,0,1-4.41,1.24A7.8,7.8,0,0,0,55.2,22.73Z"/></svg></a>
     </div>
 </footer>
-<script src="./_/js/vendor/import.js"></script>
-<script src="./_/js/site.js"></script>
-<script async src="./_/js/vendor/highlight.js"></script>
-<script async src="./_/js/vendor/asciidoctor-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
+<script src="../_/js/vendor/import.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+<script async src="../_/js/vendor/asciidoctor-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
 
 <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -409,12 +401,12 @@ Span Id = C
                 <div id="searchbox"></div>
                 <div id="counter"></div>
                 <div class="search-link-box">
-                    <a class="search-link" href="search.html">Search in all Spring Docs</a>
+                    <a class="search-link" href="../search.html">Search in all Spring Docs</a>
                 </div>
                 <div class="search-by">
                     <a target="_blank" rel="noopener noreferrer" href="https://www.algolia.com/" aria-label="Search by Algolia">
-                        <img class="light" width="140" src="./_/img/algolia-light.svg" />
-                        <img class="dark" width="140" src="./_/img/algolia-dark.svg" />
+                        <img class="light" width="140" src="../_/img/algolia-light.svg" />
+                        <img class="dark" width="140" src="../_/img/algolia-dark.svg" />
                     </a>
                 </div>
                 <div id="hits"></div>
@@ -426,6 +418,6 @@ Span Id = C
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.3.0" data-page-component="tracing"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.2.1" data-page-component="tracing"></script>
   </body>
 </html>
