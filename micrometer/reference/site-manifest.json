@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2023-11-29T07:34:11.843Z",
+  "generated": "2023-11-29T07:40:26.167Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -295,10 +295,6 @@
             {
               "path": "reference/okhttpclient.adoc",
               "url": "/1.13-SNAPSHOT/reference/okhttpclient.html"
-            },
-            {
-              "path": "support.adoc",
-              "url": "/1.13-SNAPSHOT/support.html"
             }
           ]
         },
