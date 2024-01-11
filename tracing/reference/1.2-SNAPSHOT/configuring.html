@@ -372,7 +372,53 @@ The former can group handlers and the latter can be chosen to e.g. run only one 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContextRegistry.getInstance().registerThreadLocalAccessor(new ObservationAwareSpanThreadLocalAccessor(tracer));</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContextRegistry.getInstance().registerThreadLocalAccessor(new ObservationAwareSpanThreadLocalAccessor(tracer));
+ContextRegistry.getInstance()
+    .registerThreadLocalAccessor(new ObservationAwareBaggageThreadLocalAccessor(registry, tracer));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ObservationAwareSpanThreadLocalAccessor</code> is required to propagate manually created spans (not the ones that are governed by Observations). The <code>ObservationAwareBaggageThreadLocalAccessor</code> is required to propagate baggage created by the user.</p>
+</div>
+<div class="paragraph">
+<p>With Project Reactor one should set the values of <code>Observation</code>, <code>Span</code> or <code>BaggageToPropagate</code> in the Reactor Context as presented below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setup example
+ContextRegistry contextRegistry = ContextRegistry.getInstance();
+
+ObservationAwareSpanThreadLocalAccessor accessor;
+
+ObservationAwareBaggageThreadLocalAccessor observationAwareBaggageThreadLocalAccessor;
+
+
+accessor = new ObservationAwareSpanThreadLocalAccessor(observationRegistry, getTracer());
+observationAwareBaggageThreadLocalAccessor = new ObservationAwareBaggageThreadLocalAccessor(observationRegistry,
+        getTracer());
+contextRegistry.loadThreadLocalAccessors()
+    .registerThreadLocalAccessor(accessor)
+    .registerThreadLocalAccessor(observationAwareBaggageThreadLocalAccessor);
+Hooks.enableAutomaticContextPropagation();
+
+// Usage example
+Hooks.enableAutomaticContextPropagation();
+Observation observation = Observation.start("parent", observationRegistry);
+
+List&lt;String&gt; hello = Mono.just("hello")
+    .subscribeOn(Schedulers.single())
+    .flatMap(s -&gt; {
+        Mono&lt;List&lt;String&gt;&gt; mono = Mono.defer(() -&gt; Mono.just(Arrays.asList(
+            getTracer().getBaggage("tenant").get(),
+            getTracer().getBaggage("tenant2").get())
+        ));
+    return mono.subscribeOn(Schedulers.parallel())
+        .contextWrite(ReactorBaggage.append("tenant", s + ":baggage")); // Appends baggage to existing one (tenant2:baggage2)
+})
+    .contextWrite(Context.of(ObservationThreadLocalAccessor.KEY, observation, // Puts observation to Reactor Context
+            ObservationAwareBaggageThreadLocalAccessor.KEY, new BaggageToPropagate("tenant2", "baggage2") // Puts baggage to Reactor Context
+        ))
+    .block();</code></pre>
 </div>
 </div>
 </div>
