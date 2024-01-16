@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
+    <title>Micrometer Cache Instrumentations :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/reference/cache.html">
     <link rel="prev" href="jvm.html">
     <link rel="next" href="okhttpclient.html">
@@ -257,6 +257,9 @@
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="commons-pool.html">Apache Commons Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jvm.html">JVM</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
@@ -348,7 +351,7 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Micrometer Cache Instrumentations"
       data-levels="2"
     >
       <div class="toc-menu"></div>
@@ -411,9 +414,17 @@
     </tr></tbody>
   </table>
 </div>
+<h1 id="page-title" class="page">Micrometer Cache Instrumentations</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer supports binding metrics to a variety of different popular caching libraries. Each implementation supports basic features, such as cache hits versus misses, from which you can derive basic information about the cache hit ratio over a period of time. Micrometer uses a function tracking counter to monitor such things as hits and misses, giving you a notion not only of hits and misses over the total life of the cache (the basic metric exposed from Guava&#8217;s <code>CacheStats</code>, for example) but hits and misses inside a given interval.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cache-example"><a class="anchor" href="#cache-example"></a>Example</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>To demonstrate the features of cache monitoring, we start with a simple program that uses <code>reactor-netty</code> to read the entirety of Mary Shelley&#8217;s <em>Frankenstein</em> and put each word in the cache if it has not yet been seen:</p>
 </div>
@@ -473,6 +484,143 @@ The following image shows the miss ratio when it exceeds 10%:</p>
 <img src="../_images/reference/cache/grafana-guava-miss-ratio.png" alt="Miss ratio (alerted)" width="800">
 </div>
 <div class="title">Figure 3. Alerting when the miss ratio exceeds 10%</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cache_implementations"><a class="anchor" href="#_cache_implementations"></a>Cache implementations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Micrometer can instrument various cache implementations</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#cache-caffeine">Caffeine</a></p>
+</li>
+<li>
+<p><a href="#cache-ehcache">EhCache</a></p>
+</li>
+<li>
+<p><a href="#cache-guava">Guava</a></p>
+</li>
+<li>
+<p><a href="#cache-hazelcast">Hazelcast</a></p>
+</li>
+<li>
+<p><a href="#cache-jcache">JCache</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="cache-caffeine"><a class="anchor" href="#cache-caffeine"></a>Caffeine</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
+LoadingCache&lt;String, String&gt; cache = Caffeine.newBuilder().build(key -&gt; "");
+
+CaffeineCacheMetrics&lt;String, String, Cache&lt;String, String&gt;&gt; metrics = new CaffeineCacheMetrics&lt;&gt;(cache, "testCache",
+        expectedTag);
+
+
+// Binding manually
+MeterRegistry registry = new SimpleMeterRegistry();
+metrics.bindTo(registry);
+
+// Binding through a static method
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+CaffeineCacheMetrics.monitor(meterRegistry, cache, "testCache", expectedTag);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cache-ehcache"><a class="anchor" href="#cache-ehcache"></a>EhCache2</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
+static Cache cache;
+
+EhCache2Metrics metrics = new EhCache2Metrics(cache, expectedTag);
+
+
+// Binding manually
+MeterRegistry registry = new SimpleMeterRegistry();
+metrics.bindTo(registry);
+
+// Binding through a static method
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+EhCache2Metrics.monitor(meterRegistry, cache, expectedTag);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cache-guava"><a class="anchor" href="#cache-guava"></a>Guava</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
+LoadingCache&lt;String, String&gt; cache = CacheBuilder.newBuilder().build(new CacheLoader&lt;String, String&gt;() {
+    public String load(String key) throws Exception {
+        return "";
+    }
+});
+
+GuavaCacheMetrics&lt;String, String, Cache&lt;String, String&gt;&gt; metrics = new GuavaCacheMetrics&lt;&gt;(cache, "testCache",
+        expectedTag);
+
+
+// Binding manually
+MeterRegistry registry = new SimpleMeterRegistry();
+metrics.bindTo(registry);
+
+// Binding through a static method
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+GuavaCacheMetrics.monitor(meterRegistry, cache, "testCache", expectedTag);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cache-hazelcast"><a class="anchor" href="#cache-hazelcast"></a>Hazelcast</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
+static IMap&lt;String, String&gt; cache;
+
+HazelcastCacheMetrics metrics = new HazelcastCacheMetrics(cache, expectedTag);
+
+
+// Binding manually
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+metrics.bindTo(meterRegistry);
+
+// Binding through a static method
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+HazelcastCacheMetrics.monitor(meterRegistry, cache, expectedTag);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cache-jcache"><a class="anchor" href="#cache-jcache"></a>JCache</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
+Cache&lt;String, String&gt; cache;
+
+JCacheMetrics&lt;String, String, Cache&lt;String, String&gt;&gt; metrics;
+
+
+metrics = new JCacheMetrics&lt;&gt;(cache, expectedTag);
+
+// Binding manually
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+metrics.bindTo(meterRegistry);
+
+// Binding through a static method
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+JCacheMetrics.monitor(meterRegistry, cache, expectedTag);</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="jvm.html">JVM</a></span>

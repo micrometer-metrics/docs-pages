@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-01-16T02:57:56.104Z",
+  "generated": "2024-01-16T03:04:42.016Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -278,7 +278,13 @@
             },
             {
               "path": "reference/cache.adoc",
-              "url": "/1.13-SNAPSHOT/reference/cache.html"
+              "url": "/1.13-SNAPSHOT/reference/cache.html",
+              "title": "Micrometer Cache Instrumentations"
+            },
+            {
+              "path": "reference/commons-pool.adoc",
+              "url": "/1.13-SNAPSHOT/reference/commons-pool.html",
+              "title": "Apache Commons Pool Instrumentation"
             },
             {
               "path": "reference/jetty.adoc",
