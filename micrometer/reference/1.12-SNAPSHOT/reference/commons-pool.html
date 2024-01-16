@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
-    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/reference/cache.html">
-    <link rel="prev" href="jvm.html">
-    <link rel="next" href="okhttpclient.html">
+    <title>Apache Commons Pool Instrumentation :: Micrometer</title>
+    <link rel="prev" href="../reference.html">
+    <link rel="next" href="jvm.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -256,13 +255,13 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="commons-pool.html">Apache Commons Pool</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jvm.html">JVM</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -351,13 +350,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Apache Commons Pool Instrumentation"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/edit/1.12.x/docs/modules/ROOT/pages/reference/cache.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/edit/1.12.x/docs/modules/ROOT/pages/reference/commons-pool.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -396,7 +395,7 @@
   <ul>
     <li><a href="../index.html">Micrometer</a></li>
     <li><a href="../reference.html">Reference Instrumentations</a></li>
-    <li><a href="cache.html">Cache</a></li>
+    <li><a href="commons-pool.html">Apache Commons Pool</a></li>
   </ul>
 </nav>
 <article>
@@ -408,78 +407,69 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../reference/cache.html">Micrometer 1.12.2</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../index.html">Micrometer 1.12.2</a>!</p>
         </div>
       </td>
     </tr></tbody>
   </table>
 </div>
+<h1 id="page-title" class="page">Apache Commons Pool Instrumentation</h1>
 <div class="paragraph">
-<p>Micrometer supports binding metrics to a variety of different popular caching libraries. Each implementation supports basic features, such as cache hits versus misses, from which you can derive basic information about the cache hit ratio over a period of time. Micrometer uses a function tracking counter to monitor such things as hits and misses, giving you a notion not only of hits and misses over the total life of the cache (the basic metric exposed from Guava&#8217;s <code>CacheStats</code>, for example) but hits and misses inside a given interval.</p>
-</div>
-<div class="paragraph">
-<p>To demonstrate the features of cache monitoring, we start with a simple program that uses <code>reactor-netty</code> to read the entirety of Mary Shelley&#8217;s <em>Frankenstein</em> and put each word in the cache if it has not yet been seen:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// read all of Frankenstein
-HttpClient.create("www.gutenberg.org")
-    .get("/cache/epub/84/pg84.txt")
-    .flatMapMany(res -&gt; res.addHandler(wordDecoder()).receive().asString())
-    .delayElements(Duration.ofMillis(10)) // one word per 10 ms
-    .filter(word -&gt; !word.isEmpty())
-    .doOnNext(word -&gt; {
-        if (cache.getIfPresent(word) == null)
-            cache.put(word, 1);
-    })
-    .blockLast();</code></pre>
-</div>
-</div>
-</div>
+<p><a href="https://commons.apache.org/proper/commons-pool/">Apache Commons Pool</a> is an open source software library provides an object-pooling API and a number of object pool implementations.</p>
 </div>
 <div class="paragraph">
-<p>The following image shows the hits versus misses on a cache that has been tuned to hold a maximum of 10,000 entries:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/reference/cache/prometheus-guava-cache.png" alt="Hits vs. misses" width="800">
-</div>
-<div class="title">Figure 1. Hits vs. misses, viewed in Prometheus</div>
+<p>Below you can find an example of how to instrument Apache Commons Pool with Micrometer.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">rate(book_guava_requests_total[10s])</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
+private final CommonsObjectPool2Metrics commonsObjectPool2Metrics = new CommonsObjectPool2Metrics(tags);
+
+
+// Generic Pool instrumentation (with examples of created meters)
+try (GenericObjectPool&lt;Object&gt; p = createGenericObjectPool()) {
+    MeterRegistry registry = new SimpleMeterRegistry();
+    commonsObjectPool2Metrics.bindTo(registry);
+
+    registry.get("commons.pool2.num.idle").tags(tags).gauge();
+    registry.get("commons.pool2.num.waiters").tags(tags).gauge();
+
+    Arrays
+        .asList("commons.pool2.created", "commons.pool2.borrowed", "commons.pool2.returned",
+                "commons.pool2.destroyed", "commons.pool2.destroyed.by.evictor",
+                "commons.pool2.destroyed.by.borrow.validation")
+        .forEach(name -&gt; registry.get(name).tags(tags).functionCounter());
+
+    Arrays
+        .asList("commons.pool2.max.borrow.wait", "commons.pool2.mean.active", "commons.pool2.mean.idle",
+                "commons.pool2.mean.borrow.wait")
+        .forEach(name -&gt; registry.get(name).tags(tags).timeGauge());
+}
+
+// Generic Keyed Pool instrumentation (with examples of created meters)
+try (GenericKeyedObjectPool&lt;Object, Object&gt; p = createGenericKeyedObjectPool()) {
+    Tags tagsToMatch = tags.and("type", "GenericKeyedObjectPool");
+    commonsObjectPool2Metrics.bindTo(registry);
+
+    Arrays.asList("commons.pool2.num.idle", "commons.pool2.num.waiters")
+        .forEach(name -&gt; registry.get(name).tags(tagsToMatch).gauge());
+
+    Arrays
+        .asList("commons.pool2.created", "commons.pool2.borrowed", "commons.pool2.returned",
+                "commons.pool2.destroyed", "commons.pool2.destroyed.by.evictor",
+                "commons.pool2.destroyed.by.borrow.validation")
+        .forEach(name -&gt; registry.get(name).tags(tagsToMatch).functionCounter());
+
+    Arrays
+        .asList("commons.pool2.max.borrow.wait", "commons.pool2.mean.active", "commons.pool2.mean.idle",
+                "commons.pool2.mean.borrow.wait")
+        .forEach(name -&gt; registry.get(name).tags(tagsToMatch).timeGauge());
+}</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>By dividing the hits by the sum of all <code>get</code> operations (regardless of whether or not each one was a hit or a miss), we can arrive at a notion of the upper bound for the hit ratio for reading Frankenstein with only 10,000 words:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/reference/cache/prometheus-guava-cache-ratio.png" alt="Hit ratio" width="800">
-</div>
-<div class="title">Figure 2. Hit ratio, viewed by Prometheus</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">sum(rate(book_guava_requests_total{result="hit"}[1m])) / sum(rate(book_guava_requests_total[1m]))</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In a real-world scenario, we tune caches according to how we evaluate the tradeoff between storage and load efficiency. You could create an alert based on some upper bound for the rate at which misses occur or on a lower bound for the hit ratio. Setting an upper bound on miss ratio is better than a lower bound on hit ratio. For both ratios, an absence of any activity drops the value to 0.
-The following image shows the miss ratio when it exceeds 10%:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/reference/cache/grafana-guava-miss-ratio.png" alt="Miss ratio (alerted)" width="800">
-</div>
-<div class="title">Figure 3. Alerting when the miss ratio exceeds 10%</div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="jvm.html">JVM</a></span>
-  <span class="next"><a href="okhttpclient.html">OkHttpClient</a></span>
+  <span class="prev"><a href="../reference.html">Reference Instrumentations</a></span>
+  <span class="next"><a href="jvm.html">JVM</a></span>
 </nav>
 </article>
 </div>  </div>
