@@ -424,7 +424,7 @@
 <p><a href="https://grpc.io/">gRPC</a> is a modern open source high performance Remote Procedure Call (RPC) framework that can run in any environment.</p>
 </div>
 <div class="paragraph">
-<p>Below you can find an example of how to instrument gRPC with Micrometer.</p>
+<p>Below you can find an example of how to instrument gRPC with <a href="https://docs.micrometer.io/micrometer/reference/observation.html">Micrometer Observation</a>. That means that depending on your Observation Handler configuration you instrument once, and can have multiple benefits out of it (e.g. metrics, distributed tracing).</p>
 </div>
 <div class="paragraph">
 <p>First, client and server side interceptors need to be setup.</p>
