@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
-    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/implementations.html">
-    <link rel="prev" href="concepts/histogram-quantiles.html">
-    <link rel="next" href="implementations/appOptics.html">
+    <title>gRPC Instrumentation :: Micrometer</title>
+    <link rel="prev" href="cache.html">
+    <link rel="next" href="okhttpclient.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -15,15 +14,15 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'),
   localStorage && localStorage.getItem('nav-width'))
     </script>
-    <link rel="stylesheet" href="../_/css/site.css">
-    <link rel="stylesheet" href="../_/css/vendor/search.css">
-    <link rel="stylesheet" href="../_/css/vendor/page-search.css">
-    <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/vendor/search.css">
+    <link rel="stylesheet" href="../../_/css/vendor/page-search.css">
+    <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="version" content="1.13.0">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
-    <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
+    <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
   </head>
   <body class="article">
 <header class="header">
@@ -33,13 +32,13 @@
         <img
           id="springlogo"
           class="block light"
-          src="../_/img/micrometer-logo.svg"
+          src="../../_/img/micrometer-logo.svg"
           alt="Micrometer"
         />
         <img
           id="springlogo"
           class="block dark"
-          src="../_/img/micrometer-logo-dark.svg"
+          src="../../_/img/micrometer-logo-dark.svg"
           alt="Micrometer"
         />
       </a>
@@ -139,182 +138,182 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="overview.html">Overview</a>
+    <a class="nav-link" href="../overview.html">Overview</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="installing.html">Installing</a>
+    <a class="nav-link" href="../installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="concepts.html">Concepts</a>
+    <a class="nav-link" href="../concepts.html">Concepts</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/implementations.html">Supported Monitoring Systems</a>
+    <a class="nav-link" href="../concepts/implementations.html">Supported Monitoring Systems</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/registry.html">Registry</a>
+    <a class="nav-link" href="../concepts/registry.html">Registry</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/meters.html">Meters</a>
+    <a class="nav-link" href="../concepts/meters.html">Meters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/naming.html">Naming Meters</a>
+    <a class="nav-link" href="../concepts/naming.html">Naming Meters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/meter-filters.html">Meter Filters</a>
+    <a class="nav-link" href="../concepts/meter-filters.html">Meter Filters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/rate-aggregation.html">Rate Aggregation</a>
+    <a class="nav-link" href="../concepts/rate-aggregation.html">Rate Aggregation</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/counters.html">Counters</a>
+    <a class="nav-link" href="../concepts/counters.html">Counters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/gauges.html">Gauges</a>
+    <a class="nav-link" href="../concepts/gauges.html">Gauges</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/timers.html">Timers</a>
+    <a class="nav-link" href="../concepts/timers.html">Timers</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/distribution-summaries.html">Distribution Summaries</a>
+    <a class="nav-link" href="../concepts/distribution-summaries.html">Distribution Summaries</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/long-task-timers.html">Long Task Timers</a>
+    <a class="nav-link" href="../concepts/long-task-timers.html">Long Task Timers</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/histogram-quantiles.html">Histograms and Percentiles</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item is-current-page" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="implementations.html">Implementations</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/appOptics.html">AppOptics</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/atlas.html">Atlas</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/cloudwatch.html">CloudWatch</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/datadog.html">Datadog</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/dynatrace.html">Dynatrace</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/elastic.html">Elasticsearch</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/ganglia.html">Ganglia</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/graphite.html">Graphite</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/humio.html">Humio</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/influx.html">Influx</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/instana.html">Instana</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/jmx.html">JMX</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/kairos.html">KairosDB</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/new-relic.html">New Relic</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/otlp.html">OpenTelemetry Protocol (OTLP)</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/prometheus.html">Prometheus</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/signalFx.html">SignalFx</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/stackdriver.html">Stackdriver</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/statsD.html">statsD</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/wavefront.html">Wavefront</a>
+    <a class="nav-link" href="../concepts/histogram-quantiles.html">Histograms and Percentiles</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="reference.html">Reference Instrumentations</a>
+    <a class="nav-link" href="../implementations.html">Implementations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/commons-pool.html">Apache Commons Pool</a>
+    <a class="nav-link" href="../implementations/appOptics.html">AppOptics</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/httpcomponents.html">Apache HttpComponents Client</a>
+    <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/jvm.html">JVM</a>
+    <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/cache.html">Cache</a>
+    <a class="nav-link" href="../implementations/datadog.html">Datadog</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/grpc.html">gRPC</a>
+    <a class="nav-link" href="../implementations/dynatrace.html">Dynatrace</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="../implementations/elastic.html">Elasticsearch</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/jetty.html">Jetty and Jersey</a>
+    <a class="nav-link" href="../implementations/ganglia.html">Ganglia</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/netty.html">Netty</a>
+    <a class="nav-link" href="../implementations/graphite.html">Graphite</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/humio.html">Humio</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/influx.html">Influx</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/instana.html">Instana</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/jmx.html">JMX</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/kairos.html">KairosDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/new-relic.html">New Relic</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/otlp.html">OpenTelemetry Protocol (OTLP)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/prometheus.html">Prometheus</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/signalFx.html">SignalFx</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/stackdriver.html">Stackdriver</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/statsD.html">statsD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/wavefront.html">Wavefront</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="guides.html">Guides</a>
+    <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="guides/console-reporter.html">Passing through to Dropwizard&#8217;s console reporter</a>
+    <a class="nav-link" href="commons-pool.html">Apache Commons Pool</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="guides/http-sender-resilience4j-retry.html">HttpSender with Resilience4j retry</a>
+    <a class="nav-link" href="httpcomponents.html">Apache HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="guides/custom-meter-registry.html">Custom meter registry</a>
+    <a class="nav-link" href="jvm.html">JVM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cache.html">Cache</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="okhttpclient.html">OkHttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jetty.html">Jetty and Jersey</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="netty.html">Netty</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="observation.html">Micrometer Observation</a>
+    <a class="nav-link" href="../guides.html">Guides</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="observation/installing.html">Installing</a>
+    <a class="nav-link" href="../guides/console-reporter.html">Passing through to Dropwizard&#8217;s console reporter</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="observation/handler.html">Observation Handlers</a>
+    <a class="nav-link" href="../guides/http-sender-resilience4j-retry.html">HttpSender with Resilience4j retry</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="observation/instrumenting.html">Instrumenting</a>
+    <a class="nav-link" href="../guides/custom-meter-registry.html">Custom meter registry</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../observation.html">Micrometer Observation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="observation/testing.html">Testing</a>
+    <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="observation/projects.html">Instrumented Projects</a>
+    <a class="nav-link" href="../observation/instrumenting.html">Instrumenting</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/testing.html">Testing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/projects.html">Instrumented Projects</a>
   </li>
 </ul>
   </li>
@@ -357,13 +356,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="gRPC Instrumentation"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/edit/main/docs/modules/ROOT/pages/implementations.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/edit/main/docs/modules/ROOT/pages/reference/grpc.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -400,8 +399,9 @@
 </aside><div class="doc">
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Micrometer</a></li>
-    <li><a href="implementations.html">Implementations</a></li>
+    <li><a href="../index.html">Micrometer</a></li>
+    <li><a href="../reference.html">Reference Instrumentations</a></li>
+    <li><a href="grpc.html">gRPC</a></li>
   </ul>
 </nav>
 <article>
@@ -413,23 +413,74 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../implementations.html">Micrometer 1.12.2</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../index.html">Micrometer 1.12.2</a>!</p>
         </div>
       </td>
     </tr></tbody>
   </table>
 </div>
-<div class="sect1">
-<h2 id="implementations-setup"><a class="anchor" href="#implementations-setup"></a>Setup</h2>
-<div class="sectionbody">
+<h1 id="page-title" class="page">gRPC Instrumentation</h1>
 <div class="paragraph">
-<p>Instructions for how to configure Micrometer for use with different monitoring systems. As a facade over multiple monitoring systems, the point of Micrometer is to allow you to instrument your code in the same way and be able to visualize the results in your monitoring system of choice.</p>
+<p><a href="https://grpc.io/">gRPC</a> is a modern open source high performance Remote Procedure Call (RPC) framework that can run in any environment.</p>
 </div>
+<div class="paragraph">
+<p>Below you can find an example of how to instrument gRPC with Micrometer.</p>
+</div>
+<div class="paragraph">
+<p>First, client and server side interceptors need to be setup.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up interceptors
+ObservationGrpcServerInterceptor serverInterceptor;
+
+ObservationGrpcClientInterceptor clientInterceptor;
+
+
+this.serverInterceptor = new ObservationGrpcServerInterceptor(observationRegistry);
+this.clientInterceptor = new ObservationGrpcClientInterceptor(observationRegistry);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, server and channels need to have the interceptors added.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Adding them to the server and client side
+EchoService echoService = new EchoService();
+server = InProcessServerBuilder.forName("sample")
+    .addService(echoService)
+    .intercept(new ServerHeaderInterceptor())
+    .intercept(serverInterceptor)
+    .build();
+server.start();
+
+channel = InProcessChannelBuilder.forName("sample")
+    .intercept(new ClientHeaderInterceptor(), clientInterceptor)
+    .build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Below you have an example of usage with the result assertions.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Usage example
+SimpleServiceBlockingStub stub = SimpleServiceGrpc.newBlockingStub(channel);
+
+SimpleRequest request = SimpleRequest.newBuilder().setRequestMessage("Hello").build();
+SimpleResponse response = stub.unaryRpc(request);
+assertThat(response.getResponseMessage()).isEqualTo("Hello");
+
+// Observation outcome
+TestObservationRegistryAssert.assertThat(observationRegistry)
+    .hasAnObservation(observationContextAssert -&gt; observationContextAssert.hasNameEqualTo("grpc.client"))
+    .hasAnObservation(observationContextAssert -&gt; observationContextAssert.hasNameEqualTo("grpc.server"));</code></pre>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="concepts/histogram-quantiles.html">Histograms and Percentiles</a></span>
-  <span class="next"><a href="implementations/appOptics.html">AppOptics</a></span>
+  <span class="prev"><a href="cache.html">Cache</a></span>
+  <span class="next"><a href="okhttpclient.html">OkHttpClient</a></span>
 </nav>
 </article>
 </div>  </div>
@@ -445,20 +496,20 @@
                 <div class="col-left">
                   <ul class="nav-versions">
                     <li class="component is-current">
-                      <a class="title" href="../index.html">Micrometer</a>
+                      <a class="title" href="../../index.html">Micrometer</a>
                       <ul class="versions">
                         <li class="version is-current">
-                          <a href="index.html">
+                          <a href="../index.html">
                             1.13.0-SNAPSHOT
                           </a>
                         </li>
                         <li class="version">
-                          <a href="../1.12-SNAPSHOT/index.html">
+                          <a href="../../1.12-SNAPSHOT/index.html">
                             1.12.3-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-latest">
-                          <a href="../index.html">
+                          <a href="../../index.html">
                             1.12.2<span class="current">current</span>
                           </a>
                         </li>
@@ -488,8 +539,8 @@
 </div>
 <footer class="footer flex">
     <div id="spring-links">
-        <img class="light" id="springlogo" src="../_/img/micrometer-logo.svg" alt="Micrometer">
-        <img class="dark" id="springlogo" src="../_/img/micrometer-logo-dark.svg" alt="Micrometer">
+        <img class="light" id="springlogo" src="../../_/img/micrometer-logo.svg" alt="Micrometer">
+        <img class="dark" id="springlogo" src="../../_/img/micrometer-logo-dark.svg" alt="Micrometer">
         <p class="smallest antialiased">© <script>var d = new Date();
         document.write(d.getFullYear());</script> <a href="https://www.vmware.com/">VMware</a>, Inc. or its affiliates. <a href="https://www.vmware.com/help/legal.html">Terms of Use</a> • <a href="https://www.vmware.com/help/privacy.html" rel="noopener noreferrer">Privacy</a></p>
     </div>
@@ -498,10 +549,10 @@
         <a href="https://twitter.com/micrometerio" title="Twitter"><svg id="twitter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.93 75.93"><circle class="cls-1" cx="37.97" cy="37.97" r="37.97"/><path id="Twitter-2" data-name="Twitter" class="cls-2" d="M55.2,22.73a15.43,15.43,0,0,1-4.88,1.91,7.56,7.56,0,0,0-5.61-2.49A7.78,7.78,0,0,0,37,30a7.56,7.56,0,0,0,.2,1.79,21.63,21.63,0,0,1-15.84-8.23,8,8,0,0,0,2.37,10.52,7.66,7.66,0,0,1-3.48-1v.09A7.84,7.84,0,0,0,26.45,41a7.54,7.54,0,0,1-2,.28A7.64,7.64,0,0,1,23,41.09a7.71,7.71,0,0,0,7.18,5.47,15.21,15.21,0,0,1-9.55,3.37,15.78,15.78,0,0,1-1.83-.11,21.41,21.41,0,0,0,11.78,3.54c14.13,0,21.86-12,21.86-22.42,0-.34,0-.68,0-1a15.67,15.67,0,0,0,3.83-4.08,14.9,14.9,0,0,1-4.41,1.24A7.8,7.8,0,0,0,55.2,22.73Z"/></svg></a>
     </div>
 </footer>
-<script src="../_/js/vendor/import.js"></script>
-<script src="../_/js/site.js"></script>
-<script async src="../_/js/vendor/highlight.js"></script>
-<script async src="../_/js/vendor/asciidoctor-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
+<script src="../../_/js/vendor/import.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script async src="../../_/js/vendor/asciidoctor-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
 
 <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -510,12 +561,12 @@
                 <div id="searchbox"></div>
                 <div id="counter"></div>
                 <div class="search-link-box">
-                    <a class="search-link" href="../search.html">Search in all Spring Docs</a>
+                    <a class="search-link" href="../../search.html">Search in all Spring Docs</a>
                 </div>
                 <div class="search-by">
                     <a target="_blank" rel="noopener noreferrer" href="https://www.algolia.com/" aria-label="Search by Algolia">
-                        <img class="light" width="140" src="../_/img/algolia-light.svg" />
-                        <img class="dark" width="140" src="../_/img/algolia-dark.svg" />
+                        <img class="light" width="140" src="../../_/img/algolia-light.svg" />
+                        <img class="dark" width="140" src="../../_/img/algolia-dark.svg" />
                     </a>
                 </div>
                 <div id="hits"></div>
@@ -527,6 +578,6 @@
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.13.0" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.13.0" data-page-component="micrometer"></script>
   </body>
 </html>

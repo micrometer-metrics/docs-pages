@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-01-17T09:28:53.277Z",
+  "generated": "2024-01-17T09:32:37.628Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -285,6 +285,16 @@
               "path": "reference/commons-pool.adoc",
               "url": "/1.13-SNAPSHOT/reference/commons-pool.html",
               "title": "Apache Commons Pool Instrumentation"
+            },
+            {
+              "path": "reference/grpc.adoc",
+              "url": "/1.13-SNAPSHOT/reference/grpc.html",
+              "title": "gRPC Instrumentation"
+            },
+            {
+              "path": "reference/httpcomponents.adoc",
+              "url": "/1.13-SNAPSHOT/reference/httpcomponents.html",
+              "title": "Apache HttpComponents Client Instrumentation"
             },
             {
               "path": "reference/jetty.adoc",
