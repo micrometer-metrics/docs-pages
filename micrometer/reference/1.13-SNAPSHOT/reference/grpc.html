@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>gRPC Instrumentation :: Micrometer</title>
-    <link rel="prev" href="cache.html">
-    <link rel="next" href="okhttpclient.html">
+    <link rel="prev" href="commons-pool.html">
+    <link rel="next" href="httpcomponents.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -256,28 +256,28 @@
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="commons-pool.html">Apache Commons Pool</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="httpcomponents.html">Apache HttpComponents Client</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jvm.html">JVM</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cache.html">Cache</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="commons-pool.html">Apache Commons Pool</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="grpc.html">gRPC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="httpcomponents.html">Apache HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jvm.html">JVM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="netty.html">Netty</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="okhttpclient.html">OkHttpClient</a>
   </li>
 </ul>
   </li>
@@ -424,7 +424,7 @@
 <p><a href="https://grpc.io/">gRPC</a> is a modern open source high performance Remote Procedure Call (RPC) framework that can run in any environment.</p>
 </div>
 <div class="paragraph">
-<p>Below you can find an example of how to instrument gRPC with Micrometer.</p>
+<p>Below you can find an example of how to instrument gRPC with <a href="https://docs.micrometer.io/micrometer/reference/observation.html">Micrometer Observation</a>. That means that depending on your Observation Handler configuration you instrument once, and can have multiple benefits out of it (e.g. metrics, distributed tracing).</p>
 </div>
 <div class="paragraph">
 <p>First, client and server side interceptors need to be setup.</p>
@@ -479,8 +479,8 @@ TestObservationRegistryAssert.assertThat(observationRegistry)
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="cache.html">Cache</a></span>
-  <span class="next"><a href="okhttpclient.html">OkHttpClient</a></span>
+  <span class="prev"><a href="commons-pool.html">Apache Commons Pool</a></span>
+  <span class="next"><a href="httpcomponents.html">Apache HttpComponents Client</a></span>
 </nav>
 </article>
 </div>  </div>
