@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-01-18T03:57:04.758Z",
+  "generated": "2024-01-18T03:58:11.879Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -285,6 +285,11 @@
               "path": "reference/commons-pool.adoc",
               "url": "/1.13-SNAPSHOT/reference/commons-pool.html",
               "title": "Apache Commons Pool Instrumentation"
+            },
+            {
+              "path": "reference/db.adoc",
+              "url": "/1.13-SNAPSHOT/reference/db.html",
+              "title": "Database Instrumentation"
             },
             {
               "path": "reference/grpc.adoc",
