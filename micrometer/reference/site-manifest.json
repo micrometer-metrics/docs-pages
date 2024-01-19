@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-01-19T08:45:37.820Z",
+  "generated": "2024-01-19T08:49:48.597Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -625,6 +625,11 @@
               "path": "reference/jvm.adoc",
               "url": "/1.12-SNAPSHOT/reference/jvm.html",
               "title": "JVM Metrics"
+            },
+            {
+              "path": "reference/kafka.adoc",
+              "url": "/1.12-SNAPSHOT/reference/kafka.html",
+              "title": "Apache Kafka Metrics"
             },
             {
               "path": "reference/logging.adoc",
