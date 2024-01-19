@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
+    <title>OkHttpClient Instrumentation :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/reference/okhttpclient.html">
     <link rel="prev" href="netty.html">
     <link rel="next" href="../guides.html">
@@ -369,7 +369,7 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="OkHttpClient Instrumentation"
       data-levels="2"
     >
       <div class="toc-menu"></div>
@@ -432,6 +432,66 @@
     </tr></tbody>
   </table>
 </div>
+<h1 id="page-title" class="page">OkHttpClient Instrumentation</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Micrometer supports <a href="https://square.github.io/okhttp/">OkHttp Client</a> instrumentation through Observation and metrics.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="okhttpclient-observation"><a class="anchor" href="#okhttpclient-observation"></a>OkHttpClient Observation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Below you can find an example of how to instrument OkHttp Client  with <a href="https://docs.micrometer.io/micrometer/reference/observation.html">Micrometer Observation</a>. That means that depending on your Observation Handler configuration you instrument once, and can have multiple benefits out of it (e.g. metrics, distributed tracing).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
+private OkHttpClient client = new OkHttpClient.Builder().addInterceptor(defaultInterceptorBuilder().build())
+    .build();
+
+private OkHttpObservationInterceptor.Builder defaultInterceptorBuilder() {
+    return OkHttpObservationInterceptor.builder(observationRegistry, "okhttp.requests")
+        .tags(KeyValues.of("foo", "bar"))
+        .uriMapper(URI_MAPPER);
+}
+
+// Usage example
+Request request = new Request.Builder().url(server.baseUrl()).build();
+
+makeACall(client, request);
+
+assertThat(registry.get("okhttp.requests")
+    .tags("foo", "bar", "status", "200", "uri", URI_EXAMPLE_VALUE, "target.host", "localhost", "target.port",
+            String.valueOf(server.port()), "target.scheme", "http")
+    .timer()
+    .count()).isEqualTo(1L);
+assertThat(testHandler.context).isNotNull();
+assertThat(testHandler.context.getAllKeyValues()).contains(KeyValue.of("foo", "bar"),
+        KeyValue.of("status", "200"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The builder allows to change the default <code>ObservationConvention</code> as follows.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation with custom convention
+MyConvention myConvention = new MyConvention();
+client = new OkHttpClient.Builder()
+    .addInterceptor(defaultInterceptorBuilder()
+        .observationConvention(new StandardizedOkHttpObservationConvention(myConvention))
+        .build())
+    .build();</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="okhttpclient-metrics"><a class="anchor" href="#okhttpclient-metrics"></a>OkHttpClient Metrics</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer supports binding metrics to <code>OkHttpClient</code> through <code>EventListener</code>.</p>
 </div>
@@ -485,6 +545,8 @@ The sample might trigger tag cardinality explosion, as a URI path itself is bein
 </td>
 </tr>
 </table>
+</div>
+</div>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="netty.html">Netty</a></span>

@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-01-19T08:49:48.597Z",
+  "generated": "2024-01-19T08:52:32.306Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -648,7 +648,8 @@
             },
             {
               "path": "reference/okhttpclient.adoc",
-              "url": "/1.12-SNAPSHOT/reference/okhttpclient.html"
+              "url": "/1.12-SNAPSHOT/reference/okhttpclient.html",
+              "title": "OkHttpClient Instrumentation"
             }
           ]
         },
