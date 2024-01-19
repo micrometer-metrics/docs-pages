@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-01-19T00:06:06.238Z",
+  "generated": "2024-01-19T00:23:53.632Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -307,11 +307,13 @@
             },
             {
               "path": "reference/jvm.adoc",
-              "url": "/1.13-SNAPSHOT/reference/jvm.html"
+              "url": "/1.13-SNAPSHOT/reference/jvm.html",
+              "title": "JVM Metrics"
             },
             {
               "path": "reference/netty.adoc",
-              "url": "/1.13-SNAPSHOT/reference/netty.html"
+              "url": "/1.13-SNAPSHOT/reference/netty.html",
+              "title": "Netty Instrumentation"
             },
             {
               "path": "reference/okhttpclient.adoc",
