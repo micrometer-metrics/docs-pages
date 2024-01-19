@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-01-19T08:52:32.306Z",
+  "generated": "2024-01-19T08:56:51.850Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -312,13 +312,29 @@
               "title": "JVM Metrics"
             },
             {
+              "path": "reference/kafka.adoc",
+              "url": "/1.13-SNAPSHOT/reference/kafka.html",
+              "title": "Apache Kafka Metrics"
+            },
+            {
+              "path": "reference/logging.adoc",
+              "url": "/1.13-SNAPSHOT/reference/logging.html",
+              "title": "Logging Metrics Instrumentation"
+            },
+            {
+              "path": "reference/mongodb.adoc",
+              "url": "/1.13-SNAPSHOT/reference/mongodb.html",
+              "title": "MongoDB Metrics Instrumentation"
+            },
+            {
               "path": "reference/netty.adoc",
               "url": "/1.13-SNAPSHOT/reference/netty.html",
               "title": "Netty Instrumentation"
             },
             {
               "path": "reference/okhttpclient.adoc",
-              "url": "/1.13-SNAPSHOT/reference/okhttpclient.html"
+              "url": "/1.13-SNAPSHOT/reference/okhttpclient.html",
+              "title": "OkHttpClient Instrumentation"
             }
           ]
         },
