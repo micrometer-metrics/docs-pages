@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-01-19T03:56:53.938Z",
+  "generated": "2024-01-19T04:00:11.427Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -303,7 +303,8 @@
             },
             {
               "path": "reference/jetty.adoc",
-              "url": "/1.13-SNAPSHOT/reference/jetty.html"
+              "url": "/1.13-SNAPSHOT/reference/jetty.html",
+              "title": "Eclipse Jetty and Jersey Instrumentation"
             },
             {
               "path": "reference/jvm.adoc",
