@@ -525,8 +525,10 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
         # Supported configs
         url: "https://otlp.example.com:4318/v1/metrics"
         aggregationTemporality: "cumulative"
-        headers: "header1=value1"
-        resourceAttributes: "key=value"</code></pre>
+        headers:
+          header1: value1
+        resourceAttributes:
+          key1: value1</code></pre>
 </div>
 </div>
 <div class="olist arabic">

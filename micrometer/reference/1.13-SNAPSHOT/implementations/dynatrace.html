@@ -462,6 +462,7 @@
 <ul class="sectlevel2">
 <li><a href="#bookmark-auto-configuration">2.1. Using Dynatrace auto-configuration (preferred)</a></li>
 <li><a href="#_using_a_custom_endpoint">2.2. Using a custom endpoint</a></li>
+<li><a href="#_meter_metadata">2.3. Meter metadata</a></li>
 </ul>
 </li>
 <li><a href="#_api_versions">3. API Versions</a>
@@ -510,8 +511,8 @@ Both SaaS and self-hosted (Managed) deployments are offered.</p>
 <h2 id="_configuring"><a class="anchor" href="#_configuring"></a>2. Configuring</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For setting up new integrations with Dynatrace, it is recommended to use the latest version of the <a href="https://www.dynatrace.com/support/help/dynatrace-api/environment-api/metric-v2/">Dynatrace Metrics API</a> (v2).
-If you are using Micrometer with Spring Boot, please also refer to the <a href="https://www.dynatrace.com/support/help/extend-dynatrace/extend-metrics/ingestion-methods/micrometer/">Dynatrace documentation</a> and/or the <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.metrics.export.dynatrace">Spring Boot documentation</a>.
+<p>For setting up new integrations with Dynatrace, it is recommended to use the latest version of the <a href="https://docs.dynatrace.com/docs/shortlink/api-metrics-v2">Dynatrace Metrics API</a> (v2).
+If you are using Micrometer with Spring Boot, please also refer to the <a href="https://docs.dynatrace.com/docs/shortlink/micrometer-metrics-ingest">Dynatrace documentation</a> and/or the <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.metrics.export.dynatrace">Spring Boot documentation</a>.
 Dynatrace provides different ways of setting up integrations:</p>
 </div>
 <div class="sect2">
@@ -597,7 +598,7 @@ In this default configuration, metrics will be exported to the local OneAgent or
 <h3 id="_using_a_custom_endpoint"><a class="anchor" href="#_using_a_custom_endpoint"></a>2.2. Using a custom endpoint</h3>
 <div class="paragraph">
 <p>If auto-configuration is not available on the host, both the Dynatrace Metrics API v2 endpoint and an API token have to be specified.
-The <a href="https://www.dynatrace.com/support/help/dynatrace-api/basics/dynatrace-api-authentication/">Dynatrace API token documentation</a> contains more information on how to create an API token.
+The <a href="https://docs.dynatrace.com/docs/shortlink/api-authentication">Dynatrace API token documentation</a> contains more information on how to create an API token.
 The 'Ingest metrics' (<code>metrics.ingest</code>) permission is required on the token in order to ingest metrics.
 It is recommended to limit scope to only this permission.</p>
 </div>
@@ -665,6 +666,18 @@ management.dynatrace.metrics.export:
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_meter_metadata"><a class="anchor" href="#_meter_metadata"></a>2.3. Meter metadata</h3>
+<div class="paragraph">
+<p>Starting with Micrometer 1.12.0, the Dynatrace registry v2 exports meter metadata to Dynatrace.
+Currently supported types of metadata are <strong>unit</strong> (called "base unit" in Micrometer) and <strong>description</strong>.
+No changes are required to start exporting Metadata to Dynatrace - upgrading to version 1.12.0 or above is enough.
+Find more information about metrics metadata in the <a href="https://docs.dynatrace.com/docs/shortlink/metric-ingestion-protocol#metadata">Dynatrace documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>The export of metrics metadata can be disabled by setting the <code>exportMeterMetadata</code> property on the <code>DynatraceConfig</code> (see <a href="#bookmark-available-properties">the section on available properties</a> below) to <code>false</code>.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -673,7 +686,7 @@ management.dynatrace.metrics.export:
 <div class="sect2">
 <h3 id="bookmark-apiv2"><a class="anchor" href="#bookmark-apiv2"></a>3.1. API v2</h3>
 <div class="paragraph">
-<p>When the API version is configured to <code>v2</code>, the registry will send data using the <a href="https://www.dynatrace.com/support/help/dynatrace-api/environment-api/metric-v2/">Metrics API v2</a>.
+<p>When the API version is configured to <code>v2</code>, the registry will send data using the <a href="https://docs.dynatrace.com/docs/shortlink/api-metrics-v2">Metrics API v2</a>.
 In order to maintain backwards compatibility, when a <code>deviceId</code> is set (which is required for <code>v1</code> and not used in <code>v2</code>), <code>v1</code> is used as the default.
 Otherwise, the version defaults to <code>v2</code>, and does not have to be set explicitly.
 With no endpoint URI and token set, metrics will be exported to the local OneAgent endpoint or, if running in Kubernetes with the Dynatrace operator installed, to the endpoint provided by the operator.
@@ -685,26 +698,26 @@ Explicitly specifying these will overwrite auto-configuration.</p>
 </div>
 <div class="paragraph">
 <p>In the minimal configuration <a href="#bookmark-auto-configuration">shown above</a> (no URI or API token), the v2 registry will attempt to retrieve the endpoint provided by the Dynatrace Kubernetes operator.
-If the operator is not set up or does not provide this information, the exporter will attempt to send metrics to the <a href="https://www.dynatrace.com/support/help/how-to-use-dynatrace/metrics/metric-ingestion/ingestion-methods/local-api/">local OneAgent metrics ingest endpoint</a>.
-Note that this only works if a OneAgent is running on the host and the <a href="https://www.dynatrace.com/support/help/how-to-use-dynatrace/metrics/metric-ingestion/ingestion-methods/local-api/#enable-the-oneagent-metric-api">local OneAgent Metric API</a> is available.
+If the operator is not set up or does not provide this information, the exporter will attempt to send metrics to the <a href="https://docs.dynatrace.com/docs/shortlink/local-api">local OneAgent metrics ingest endpoint</a>.
+Note that this only works if a OneAgent is running on the host and the <a href="https://docs.dynatrace.com/docs/shortlink/local-api#enable-the-oneagent-metric-api">local OneAgent Metric API</a> is available.
 If the ingestion port for the local OneAgent was changed to a custom one, the full endpoint URI has to be provided for the URI property (with API token left empty).</p>
 </div>
 <div class="paragraph">
 <p><strong>Configuration with URI and API token</strong></p>
 </div>
 <div class="paragraph">
-<p>If no auto-configuration is available or the metrics should be sent to a different endpoint (e.g. a different tenant), the Dynatrace v2 exporter can be configured with an explicit endpoint URI and an <a href="https://www.dynatrace.com/support/help/dynatrace-api/basics/dynatrace-api-authentication/">API token</a>.
-The <a href="https://www.dynatrace.com/support/help/dynatrace-api/basics/dynatrace-api-authentication/">API token</a> must have the <a href="https://www.dynatrace.com/support/help/shortlink/api-authentication#token-permissions">"Ingest metrics"</a> (<code>metrics.ingest</code>) permission set.
+<p>If no auto-configuration is available or the metrics should be sent to a different endpoint (e.g. a different tenant), the Dynatrace v2 exporter can be configured with an explicit endpoint URI and an <a href="https://docs.dynatrace.com/docs/shortlink/api-authentication">API token</a>.
+The <a href="https://docs.dynatrace.com/docs/shortlink/api-authentication">API token</a> must have the <a href="https://docs.dynatrace.com/docs/dynatrace-api/basics/dynatrace-api-authentication#token-scopes">"Ingest metrics"</a> (<code>metrics.ingest</code>) permission set.
 It is recommended to limit scope to only this permission.</p>
 </div>
 <div class="paragraph">
-<p>The entire Metrics v2 API endpoint URI has to be specified including its path, i.e.: with the path <code>/api/v2/metrics/ingest</code> on SaaS and managed deployments, or <code>/metrics/ingest</code> for OneAgent endpoints as mentioned in the <a href="https://www.dynatrace.com/support/help/dynatrace-api/environment-api/metric-v2/post-ingest-metrics/">documentation</a>.</p>
+<p>The entire Metrics v2 API endpoint URI has to be specified including its path, i.e.: with the path <code>/api/v2/metrics/ingest</code> on SaaS and managed deployments, or <code>/metrics/ingest</code> for OneAgent endpoints as mentioned in the <a href="https://docs.dynatrace.com/docs/shortlink/api-metrics-v2-post-datapoints">documentation</a>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Properties available in the v2 exporter</strong> <a id="bookmark-available-properties"></a></p>
 </div>
 <div class="paragraph">
-<p>When using the <a href="https://www.dynatrace.com/support/help/dynatrace-api/environment-api/metric-v2/">Dynatrace metrics API v2</a>, the following properties can be set:</p>
+<p>When using the <a href="https://docs.dynatrace.com/docs/shortlink/api-metrics-v2">Dynatrace metrics API v2</a>, the following properties can be set:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -754,6 +767,12 @@ It is recommended to limit scope to only this permission.</p>
         return false;
     }
 
+    // Only available in Micrometer 1.12.0 and above
+    @Override
+    public boolean exportMeterMetadata() {
+        return true;
+    }
+
     @Override
     @Nullable
     public String get(String k) {
@@ -797,12 +816,15 @@ It is recommended to limit scope to only this permission.</p>
         # Set to false, this will restore the previous (1.8.x) behavior for Timers and DistributionSummaries.
         use-dynatrace-summary-instruments: true
 
+        # (since 1.12.0) Determines whether meter metadata (unit, description) should be exported.
+        export-meter-metadata: true
+
     # The export interval in which metrics are sent to Dynatrace (default: 60s).
     step: 60s</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>For more information about the metadata picked up by the Dynatrace metadata enrichment feature, see <a href="https://www.dynatrace.com/support/help/how-to-use-dynatrace/metrics/metric-ingestion/ingestion-methods/enrich-metrics/">the Dynatrace documentation</a>.</p>
+<p>For more information about the metadata picked up by the Dynatrace metadata enrichment feature, see <a href="https://docs.dynatrace.com/docs/shortlink/enrichment-files">the Dynatrace documentation</a>.</p>
 </div>
 <div class="paragraph">
 <p>In Micrometer 1.9.0, Dynatrace-specific summary instruments (<code>DynatraceTimer</code> and <code>DynatraceDistributionSummary</code>) were introduced.
@@ -814,11 +836,11 @@ No action is needed from users upgrading to 1.9.0. If there is a discrepancy in 
 <div class="sect2">
 <h3 id="bookmark-apiv1"><a class="anchor" href="#bookmark-apiv1"></a>3.2. API v1 (Legacy)</h3>
 <div class="paragraph">
-<p>When the apiVersion is configured to <code>v1</code>, the registry will send data using the <a href="https://www.dynatrace.com/support/help/dynatrace-api/environment-api/metric-v1/custom-metrics/">Dynatrace Timeseries API v1 for custom metrics</a>.
+<p>When the apiVersion is configured to <code>v1</code>, the registry will send data using the <a href="https://docs.dynatrace.com/docs/shortlink/api-custom-metrics">Dynatrace Timeseries API v1 for custom metrics</a>.
 If a <code>deviceId</code> is specified, it will default to <code>v1</code> for backwards compatibility with earlier setups.
 The <code>device-id</code> property is required for <code>v1</code> and not used in <code>v2</code>.
 Existing setups will continue to work when updating to newer versions of Micrometer.
-The reported metrics will be assigned to <a href="https://www.dynatrace.com/support/help/dynatrace-api/environment-api/topology-and-smartscape/custom-device-api/report-custom-device-metric-via-rest-api/">custom devices</a> in Dynatrace.</p>
+The reported metrics will be assigned to <a href="https://docs.dynatrace.com/docs/shortlink/api-custom-device-report-metric">custom devices</a> in Dynatrace.</p>
 </div>
 <div class="paragraph">
 <p>For the v1 API, do not specify the ingest path, but only the base URL of your environment, e.g.: <code>uri: <a href="https://{your-environment-id}.live.dynatrace.com" class="bare">{your-environment-id}.live.dynatrace.com</a></code></p>

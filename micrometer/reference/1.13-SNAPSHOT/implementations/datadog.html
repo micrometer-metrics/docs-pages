@@ -521,19 +521,10 @@ MeterRegistry registry = new DatadogMeterRegistry(config, Clock.SYSTEM);</code><
 </div>
 </div>
 <div class="paragraph">
-<p><code>DatadogConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration through properties. For example, Micrometer&#8217;s Spring Boot support binds properties prefixed with <code>management.metrics.export.datadog</code> directly to the <code>DatadogConfig</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">management.metrics.export.datadog:
-    apiKey: YOURKEY
-
-    # You will probably want disable Datadog publishing in a local development profile.
-    enabled: true
-
-    # The interval at which metrics are sent to Datadog. The default is 1 minute.
-    step: 1m</code></pre>
-</div>
+<p><code>DatadogConfig</code> is an interface with a set of default methods.
+If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration through properties.
+For example, Spring Boot&#8217;s Micrometer support binds properties directly to the <code>DatadogConfig</code>.
+See the <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.metrics.export.datadog">Datadog</a> section in the Spring Boot reference documentation.</p>
 </div>
 <div class="paragraph">
 <p><code>DatadogConfig.hostTag()</code> specifies a tag key that is mapped to <a href="https://docs.datadoghq.com/api/v1/metrics/#submit-metrics">the <code>host</code> field</a> when shipping metrics to Datadog.
