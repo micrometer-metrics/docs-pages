@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
+    <title>Instrumentation :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/observation/instrumenting.html">
     <link rel="prev" href="handler.html">
     <link rel="next" href="testing.html">
@@ -317,6 +317,21 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
@@ -375,7 +390,7 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Instrumentation"
       data-levels="2"
     >
       <div class="toc-menu"></div>
@@ -438,6 +453,9 @@
     </tr></tbody>
   </table>
 </div>
+<h1 id="page-title" class="page">Instrumentation</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>In this section we will see some common examples of reusing existing Micrometer and Micrometer Tracing handlers and context types to do instrumentation.</p>
 </div>
@@ -467,10 +485,12 @@ Before you decide to instrument a project yourself, please double-check whether 
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Context propagation</strong> - we propagate existing context through threads or network. We&#8217;re using the <a href="https://micrometer.io/docs/contextPropagation">Micrometer Context Propagation</a> library to define the context and to propagate it through threads. We&#8217;re using dedicated <code>SenderContext</code> and <code>ReceiverContext</code> objects, together with Micrometer Tracing handlers, to create Observations that will propagate context over the wire.</p>
+<p><strong>Context propagation</strong> - we propagate existing context through threads or network. We&#8217;re using the <a href="../contextpropagation.html" class="xref page">Micrometer Context Propagation</a> library to define the context and to propagate it through threads. We&#8217;re using dedicated <code>SenderContext</code> and <code>ReceiverContext</code> objects, together with Micrometer Tracing handlers, to create Observations that will propagate context over the wire.</p>
 </div>
 <div class="paragraph">
 <p><strong>Creation of Observations</strong> - we want to wrap an operation in an Observation to get measurements. We need to know if there previously has been a parent Observation to maintain the parent-child relationship of Observations.</p>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="instrumentation_of_thread_switching_components"><a class="anchor" href="#instrumentation_of_thread_switching_components"></a>Instrumentation of Thread Switching Components</h2>

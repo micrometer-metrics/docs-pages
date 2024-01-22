@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
+    <title>Observation Handler :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/observation/handler.html">
     <link rel="prev" href="installing.html">
     <link rel="next" href="instrumenting.html">
@@ -317,6 +317,21 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
@@ -375,7 +390,7 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Observation Handler"
       data-levels="2"
     >
       <div class="toc-menu"></div>
@@ -438,6 +453,9 @@
     </tr></tbody>
   </table>
 </div>
+<h1 id="page-title" class="page">Observation Handler</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>A popular way to record them is storing the start state in a <code>Timer.Sample</code> instance and stopping it when the event has ended.
 Recording such measurements could look like this:</p>
@@ -467,8 +485,10 @@ Observation.createNotStarted("my.operation", registry).observe(this::doSomeWorkH
 <p>One of the new features in Micrometer 1.10 is the ability to register "handlers" (<code>ObservationHandler</code>) that are notified about the lifecycle event of an observation (e.g.: you can run custom code when an observation is started/stopped).
 Using this feature lets you add tracing capabilities to your existing metrics instrumentation (see: <code>DefaultTracingObservationHandler</code>). The implementation of these handlers does not need to be tracing related, it is completely up to you how you are going to implement them (e.g.: you can add logging capabilities) if you want.</p>
 </div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="_observation_context"><a class="anchor" href="#_observation_context"></a>Observation.Context</h2>
+<h2 id="micrometer-observation-context"><a class="anchor" href="#micrometer-observation-context"></a>Observation.Context</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In order to pass information between the instrumented code and the handler (or between handler methods, e.g.: <code>onStart</code> and <code>onStop</code>), you can utilize an <code>Observation.Context</code>. An <code>Observation.Context</code> is a <code>Map</code>-like container that can store values for you while your handler can access the data inside the context.</p>
@@ -476,7 +496,7 @@ Using this feature lets you add tracing capabilities to your existing metrics in
 </div>
 </div>
 <div class="sect1">
-<h2 id="_observationhandler_example"><a class="anchor" href="#_observationhandler_example"></a>ObservationHandler Example</h2>
+<h2 id="micrometer-observation-handler-example"><a class="anchor" href="#micrometer-observation-handler-example"></a>ObservationHandler Example</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Based on this, we can implement a simple handler that lets the users know about its invocations by printing them out to <code>stdout</code>.</p>
@@ -561,7 +581,7 @@ finally {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_signaling_errors_and_arbitrary_events"><a class="anchor" href="#_signaling_errors_and_arbitrary_events"></a>Signaling Errors and Arbitrary Events</h2>
+<h2 id="micrometer-observation-events"><a class="anchor" href="#micrometer-observation-events"></a>Signaling Errors and Arbitrary Events</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>When <strong>instrumenting</strong> code we might want to signal that an error happened or signal that an arbitrary event happened. The observation API lets us do it via it <code>error</code> and <code>event</code> methods.</p>
@@ -589,7 +609,7 @@ finally {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_observation_observationconvention_example"><a class="anchor" href="#_observation_observationconvention_example"></a>Observation.ObservationConvention Example</h2>
+<h2 id="micrometer-observation-convention-example"><a class="anchor" href="#micrometer-observation-convention-example"></a>Observation.ObservationConvention Example</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>When <strong>instrumenting</strong> code we want to provide sensible defaults for tags but also we want to allow users to easily change those defaults. An <code>ObservationConvention</code> interface is a description of what tags and name we should create for an <code>Observation.Context</code>. See the full usage example of an instrumentation together with overriding the default tags.</p>
@@ -857,7 +877,7 @@ taxCalculator.calculateTax("INCOME_TAX", "1234567890");</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_observation_predicates_and_filters"><a class="anchor" href="#_observation_predicates_and_filters"></a>Observation Predicates and Filters</h2>
+<h2 id="micrometer-observation-predicates-filters"><a class="anchor" href="#micrometer-observation-predicates-filters"></a>Observation Predicates and Filters</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To globally disable observations under given conditions you can use an <code>ObservationPredicate</code>. To mutate the <code>Observation.Context</code> you can use an <code>ObservationFilter</code>.</p>
@@ -928,7 +948,7 @@ then(myContext.getHighCardinalityKeyValues())
 </div>
 </div>
 <div class="sect1">
-<h2 id="_using_annotations_with_observed"><a class="anchor" href="#_using_annotations_with_observed"></a>Using Annotations With @Observed</h2>
+<h2 id="micrometer-observation-annotations"><a class="anchor" href="#micrometer-observation-annotations"></a>Using Annotations With @Observed</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>If you have turned on Aspect Oriented Programming (e.g. via <code>org.aspectj:aspectjweaver</code>) you can use the <code>@Observed</code> annotation to create observations. You can put that annotation either on a method to observe it or a class to observe all methods in it. Let&#8217;s look at the following example.</p>

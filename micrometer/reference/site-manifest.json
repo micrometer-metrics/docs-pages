@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-01-19T23:44:21.702Z",
+  "generated": "2024-01-22T09:52:21.343Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -89,15 +89,18 @@
             },
             {
               "path": "contextpropagation/installing.adoc",
-              "url": "/1.13-SNAPSHOT/contextpropagation/installing.html"
+              "url": "/1.13-SNAPSHOT/contextpropagation/installing.html",
+              "title": "Installing"
             },
             {
               "path": "contextpropagation/purpose.adoc",
-              "url": "/1.13-SNAPSHOT/contextpropagation/purpose.html"
+              "url": "/1.13-SNAPSHOT/contextpropagation/purpose.html",
+              "title": "Purpose"
             },
             {
               "path": "contextpropagation/usage.adoc",
-              "url": "/1.13-SNAPSHOT/contextpropagation/usage.html"
+              "url": "/1.13-SNAPSHOT/contextpropagation/usage.html",
+              "title": "Usage Examples"
             },
             {
               "path": "guides.adoc",
@@ -243,28 +246,33 @@
             },
             {
               "path": "observation/handler.adoc",
-              "url": "/1.13-SNAPSHOT/observation/handler.html"
+              "url": "/1.13-SNAPSHOT/observation/handler.html",
+              "title": "Observation Handler"
             },
             {
               "path": "observation/installing.adoc",
-              "url": "/1.13-SNAPSHOT/observation/installing.html"
+              "url": "/1.13-SNAPSHOT/observation/installing.html",
+              "title": "Installing"
             },
             {
               "path": "observation/instrumenting.adoc",
-              "url": "/1.13-SNAPSHOT/observation/instrumenting.html"
+              "url": "/1.13-SNAPSHOT/observation/instrumenting.html",
+              "title": "Instrumentation"
             },
             {
               "path": "observation/introduction.adoc",
-              "url": "/1.13-SNAPSHOT/observation/introduction.html"
+              "url": "/1.13-SNAPSHOT/observation/introduction.html",
+              "title": "Introduction"
             },
             {
               "path": "observation/projects.adoc",
               "url": "/1.13-SNAPSHOT/observation/projects.html",
-              "title": "Instrumentations"
+              "title": "Existing Instrumentations"
             },
             {
               "path": "observation/testing.adoc",
-              "url": "/1.13-SNAPSHOT/observation/testing.html"
+              "url": "/1.13-SNAPSHOT/observation/testing.html",
+              "title": "Testing"
             },
             {
               "path": "overview.adoc",
@@ -430,15 +438,18 @@
             },
             {
               "path": "contextpropagation/installing.adoc",
-              "url": "/1.12-SNAPSHOT/contextpropagation/installing.html"
+              "url": "/1.12-SNAPSHOT/contextpropagation/installing.html",
+              "title": "Installing"
             },
             {
               "path": "contextpropagation/purpose.adoc",
-              "url": "/1.12-SNAPSHOT/contextpropagation/purpose.html"
+              "url": "/1.12-SNAPSHOT/contextpropagation/purpose.html",
+              "title": "Purpose"
             },
             {
               "path": "contextpropagation/usage.adoc",
-              "url": "/1.12-SNAPSHOT/contextpropagation/usage.html"
+              "url": "/1.12-SNAPSHOT/contextpropagation/usage.html",
+              "title": "Usage Examples"
             },
             {
               "path": "guides.adoc",
@@ -584,28 +595,33 @@
             },
             {
               "path": "observation/handler.adoc",
-              "url": "/1.12-SNAPSHOT/observation/handler.html"
+              "url": "/1.12-SNAPSHOT/observation/handler.html",
+              "title": "Observation Handler"
             },
             {
               "path": "observation/installing.adoc",
-              "url": "/1.12-SNAPSHOT/observation/installing.html"
+              "url": "/1.12-SNAPSHOT/observation/installing.html",
+              "title": "Installing"
             },
             {
               "path": "observation/instrumenting.adoc",
-              "url": "/1.12-SNAPSHOT/observation/instrumenting.html"
+              "url": "/1.12-SNAPSHOT/observation/instrumenting.html",
+              "title": "Instrumentation"
             },
             {
               "path": "observation/introduction.adoc",
-              "url": "/1.12-SNAPSHOT/observation/introduction.html"
+              "url": "/1.12-SNAPSHOT/observation/introduction.html",
+              "title": "Introduction"
             },
             {
               "path": "observation/projects.adoc",
               "url": "/1.12-SNAPSHOT/observation/projects.html",
-              "title": "Instrumentations"
+              "title": "Existing Instrumentations"
             },
             {
               "path": "observation/testing.adoc",
-              "url": "/1.12-SNAPSHOT/observation/testing.html"
+              "url": "/1.12-SNAPSHOT/observation/testing.html",
+              "title": "Testing"
             },
             {
               "path": "overview.adoc",

@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
+    <title>Usage Examples :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/contextpropagation/usage.html">
+    <link rel="prev" href="purpose.html">
+    <link rel="next" href="../observation.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -315,6 +317,21 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
@@ -373,7 +390,7 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Usage Examples"
       data-levels="2"
     >
       <div class="toc-menu"></div>
@@ -415,6 +432,11 @@
   </div>
 </aside><div class="doc">
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Micrometer</a></li>
+    <li><a href="../contextpropagation.html">Context Propagation</a></li>
+    <li><a href="usage.html">Usage</a></li>
+  </ul>
 </nav>
 <article>
 <div class="admonitionblock important">
@@ -431,14 +453,17 @@
     </tr></tbody>
   </table>
 </div>
-<div class="sect1">
-<h2 id="context-propagation-usage-examples"><a class="anchor" href="#context-propagation-usage-examples"></a>Usage Examples</h2>
+<h1 id="page-title" class="page">Usage Examples</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Below you will find a list of examples of using the Context Propagation library.</p>
 </div>
-<div class="sect2">
-<h3 id="context-propagation-usage-examples-thread-local"><a class="anchor" href="#context-propagation-usage-examples-thread-local"></a><code>ThreadLocal</code> Population</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="context-propagation-usage-examples-thread-local"><a class="anchor" href="#context-propagation-usage-examples-thread-local"></a><code>ThreadLocal</code> Population</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Below you can find a holder for <code>ThreadLocal</code> values.</p>
 </div>
@@ -540,7 +565,10 @@ finally {
 </div>
 </div>
 </div>
-</div>
+<nav class="pagination">
+  <span class="prev"><a href="purpose.html">Purpose</a></span>
+  <span class="next"><a href="../observation.html">Micrometer Observation</a></span>
+</nav>
 </article>
 </div>  </div>
 </main>

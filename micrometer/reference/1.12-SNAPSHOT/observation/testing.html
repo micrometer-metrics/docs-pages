@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
+    <title>Testing :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/observation/testing.html">
     <link rel="prev" href="instrumenting.html">
     <link rel="next" href="projects.html">
@@ -317,6 +317,21 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
@@ -375,7 +390,7 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Testing"
       data-levels="2"
     >
       <div class="toc-menu"></div>
@@ -438,11 +453,16 @@
     </tr></tbody>
   </table>
 </div>
+<h1 id="page-title" class="page">Testing</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer Observation comes with <code>micrometer-observation-test</code> module that allows you to unit-test your Observations.</p>
 </div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h2>
+<h2 id="micrometer-observation-installing"><a class="anchor" href="#micrometer-observation-installing"></a>Installing</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The following example shows the required dependency in Gradle (assuming that Micrometer BOM has been added):</p>
@@ -467,7 +487,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_running_observation_unit_tests"><a class="anchor" href="#_running_observation_unit_tests"></a>Running Observation Unit Tests</h2>
+<h2 id="micrometer-observation-runnning"><a class="anchor" href="#micrometer-observation-runnning"></a>Running Observation Unit Tests</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Let&#8217;s say that you have the following production code. It will create an observation with 2 tags (low and high cardinality) and then call <code>observe</code> that will start the observation, put it in scope, close the scope and stop the observation.</p>
