@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-01-23T05:52:43.238Z",
+  "generated": "2024-01-23T09:38:29.589Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -104,7 +104,8 @@
             },
             {
               "path": "guides.adoc",
-              "url": "/1.13-SNAPSHOT/guides.html"
+              "url": "/1.13-SNAPSHOT/guides.html",
+              "title": "Guides"
             },
             {
               "path": "guides/console-reporter.adoc",
@@ -123,7 +124,8 @@
             },
             {
               "path": "implementations.adoc",
-              "url": "/1.13-SNAPSHOT/implementations.html"
+              "url": "/1.13-SNAPSHOT/implementations.html",
+              "title": "Setup"
             },
             {
               "path": "implementations/appOptics.adoc",
@@ -453,7 +455,8 @@
             },
             {
               "path": "guides.adoc",
-              "url": "/1.12-SNAPSHOT/guides.html"
+              "url": "/1.12-SNAPSHOT/guides.html",
+              "title": "Guides"
             },
             {
               "path": "guides/console-reporter.adoc",
@@ -472,7 +475,8 @@
             },
             {
               "path": "implementations.adoc",
-              "url": "/1.12-SNAPSHOT/implementations.html"
+              "url": "/1.12-SNAPSHOT/implementations.html",
+              "title": "Setup"
             },
             {
               "path": "implementations/appOptics.adoc",
