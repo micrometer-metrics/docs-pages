@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -336,6 +339,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
@@ -534,7 +540,7 @@ MeterRegistry registry = new ElasticMeterRegistry(elasticConfig, Clock.SYSTEM);<
 <h2 id="_elastic_apm_agent_integration"><a class="anchor" href="#_elastic_apm_agent_integration"></a>3. Elastic APM agent integration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you are using the Elastic APM agent, it can collect metrics from Micrometer <code>MeterRegistry</code> instances automatically. You can use the <code>SimpleMeterRegistry</code> if you only want metrics collected by the Elastic APM agent and not shipped anywhere else. See the <a href="https://www.elastic.co/guide/en/apm/agent/java/current/metrics.html#metrics-micrometer">Elastic docs</a> for more details.</p>
+<p>If you are using the Elastic APM agent, it can automatically collect metrics from Micrometer <code>MeterRegistry</code> instances. If you want only metrics collected by the Elastic APM agent and not shipped anywhere else, you can use the <code>SimpleMeterRegistry</code>. See the <a href="https://www.elastic.co/guide/en/apm/agent/java/current/metrics.html#metrics-micrometer">Elastic docs</a> for more details.</p>
 </div>
 </div>
 </div>

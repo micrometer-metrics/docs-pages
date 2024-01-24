@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
@@ -338,6 +341,9 @@
     <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -477,7 +483,7 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer supports shipping metrics to Datadog directly by using its HTTP API or by using DogStatsD through the <a href="/docs/registry/statsD">StatsD registry</a>.
-The API approach is far more efficient if you need to choose between the two.</p>
+If you can choose between the two, the API approach is far more efficient.</p>
 </div>
 <div class="sect2">
 <h3 id="_direct_to_datadog_api_approach"><a class="anchor" href="#_direct_to_datadog_api_approach"></a>1.1. Direct to Datadog API Approach</h3>
@@ -545,10 +551,10 @@ To find your the correct <code>uri</code> for your account, do the following:</p
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Read about <a href="https://docs.datadoghq.com/getting_started/site/">Datadog site</a>.</p>
+<p>Read about the <a href="https://docs.datadoghq.com/getting_started/site/">Datadog site</a>.</p>
 </li>
 <li>
-<p>Go to <a href="https://docs.datadoghq.com/api/latest/metrics/">Metrics API reference</a> and select your own option from the "DATADOG SITE" dropdown.</p>
+<p>Go to the <a href="https://docs.datadoghq.com/api/latest/metrics/">Metrics API reference</a> and select your own option from the "DATADOG SITE" dropdown.</p>
 </li>
 <li>
 <p>Check any API request&#8217;s endpoint.</p>
@@ -556,7 +562,7 @@ To find your the correct <code>uri</code> for your account, do the following:</p
 </ol>
 </div>
 <div class="paragraph">
-<p>E.g. For <code>US5</code> site, the correct API endpoint is <code><a href="https://api.us5.datadoghq.com" class="bare">api.us5.datadoghq.com</a></code> while for <code>US3</code> site, it is <code><a href="https://api.us3.datadoghq.com/" class="bare">api.us3.datadoghq.com/</a></code>.</p>
+<p>For example, for the <code>US5</code> site, the correct API endpoint is <code><a href="https://api.us5.datadoghq.com" class="bare">api.us5.datadoghq.com</a></code>. For the <code>US3</code> site, it is <code><a href="https://api.us3.datadoghq.com" class="bare">api.us3.datadoghq.com</a></code>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -602,16 +608,16 @@ MeterRegistry registry = new StatsdMeterRegistry(config, Clock.SYSTEM);</code></
 </div>
 </div>
 <div class="paragraph">
-<p>Micrometer supports DogStatsD&#8217;s <a href="https://docs.datadoghq.com/developers/dogstatsd/?tab=kubernetes#origin-detection-over-udp">origin detection over UDP</a> feature on Kubernetes if the <code>DD_ENTITY_ID</code> environment variable is properly set.</p>
+<p>If the <code>DD_ENTITY_ID</code> environment variable is properly set, Micrometer supports DogStatsD&#8217;s <a href="https://docs.datadoghq.com/developers/dogstatsd/?tab=kubernetes#origin-detection-over-udp">origin detection over UDP</a> feature on Kubernetes.</p>
 </div>
 <div class="paragraph">
-<p>Micrometer, by default, publishes <code>Timer</code> meters to DogStatsD as the StatsD "timing" metric type <code>ms</code>,
-which are sent to Datadog as <a href="https://docs.datadoghq.com/metrics/types/?tab=histogram#metric-types">histogram</a> type metrics.
-Micrometer publishes <code>DistributionSummary</code> meters as histogram type metrics by default, also.</p>
+<p>Micrometer, by default, publishes <code>Timer</code> meters to DogStatsD as the StatsD &#8220;timing&#8221; metric type, <code>ms</code>.
+These meters are sent to Datadog as <a href="https://docs.datadoghq.com/metrics/types/?tab=histogram#metric-types">histogram</a> type metrics.
+Also, by default, Micrometer publishes <code>DistributionSummary</code> meters as histogram type metrics.</p>
 </div>
 <div class="paragraph">
 <p>When <code>percentileHistogram</code> is enabled for the meter, Micrometer sends <code>Timer</code> and <code>DistributionSummary</code> meters as Datadog <a href="https://docs.datadoghq.com/metrics/distributions">Distributions</a> to DogStatsD.
-You can make a <code>DistributionSummary</code> with <code>percentileHistogram</code> enabled as follows:</p>
+You can make a <code>DistributionSummary</code> with <code>percentileHistogram</code> enabled, as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">

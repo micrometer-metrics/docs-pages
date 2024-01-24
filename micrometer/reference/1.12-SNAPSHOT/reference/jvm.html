@@ -197,6 +197,9 @@
     <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -336,6 +339,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
@@ -478,7 +484,7 @@ new JvmThreadMetrics().bindTo(registry); <i class="conum" data-value="5"></i><b>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Gauges max and live data size, promotion and allocation rates, and times GC pauses (or concurrent phase time in the case of CMS).</td>
+<td>Gauges max and live data size, promotion and allocation rates, and the number of times the GC pauses (or concurrent phase time in the case of CMS).</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
@@ -486,12 +492,12 @@ new JvmThreadMetrics().bindTo(registry); <i class="conum" data-value="5"></i><b>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Gauges thread peak, number of daemon threads, and live threads.</td>
+<td>Gauges thread peak, the number of daemon threads, and live threads.</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Micrometer also provides a meter binder for <code>ExecutorService</code>. You can instrument your <code>ExecutorService</code> as follows:</p>
+<p>Micrometer also provides a meter binder for <code>ExecutorService</code>. You can instrument your <code>ExecutorService</code>, as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -533,7 +539,7 @@ another. The reported value underestimates the actual total number of steals whe
 <p><code>executor.queued</code> (<code>Gauge</code>): An estimate of the total number of tasks currently held in queues by worker threads.</p>
 </li>
 <li>
-<p><code>executor.active</code> (<code>Gauge</code>): An estimate of the number of threads that are currently stealing or executing tasks.</p>
+<p><code>executor.active</code> (<code>Gauge</code>): An estimate of the number of threads that are currently stealing or running tasks.</p>
 </li>
 <li>
 <p><code>executor.running</code> (<code>Gauge</code>): An estimate of the number of worker threads that are not blocked but are waiting to join tasks or for other managed synchronization threads.</p>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Observation Handler :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/observation/handler.html">
-    <link rel="prev" href="installing.html">
+    <link rel="prev" href="introduction.html">
     <link rel="next" href="instrumenting.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
@@ -197,6 +197,9 @@
     <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -337,6 +340,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="installing.html">Installing</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="introduction.html">Introduction</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="handler.html">Observation Handlers</a>
   </li>
@@ -457,7 +463,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>A popular way to record them is storing the start state in a <code>Timer.Sample</code> instance and stopping it when the event has ended.
+<p>A popular way to record Observations is storing the start state in a <code>Timer.Sample</code> instance and stopping it when the event has ended.
 Recording such measurements could look like this:</p>
 </div>
 <div class="listingblock">
@@ -473,7 +479,7 @@ finally {
 </div>
 </div>
 <div class="paragraph">
-<p>If you want to have more observation options (such as metrics and tracing out of the box plus anything else you will plug in) then you&#8217;ll need to rewrite that code to use the <code>Observation</code> API.</p>
+<p>If you want to have more observation options (such as metrics and tracing&#8201;&#8212;&#8201;already included in Micrometer&#8201;&#8212;&#8201;plus anything else you will plug in), you need to rewrite that code to use the <code>Observation</code> API.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -482,8 +488,8 @@ Observation.createNotStarted("my.operation", registry).observe(this::doSomeWorkH
 </div>
 </div>
 <div class="paragraph">
-<p>One of the new features in Micrometer 1.10 is the ability to register "handlers" (<code>ObservationHandler</code>) that are notified about the lifecycle event of an observation (e.g.: you can run custom code when an observation is started/stopped).
-Using this feature lets you add tracing capabilities to your existing metrics instrumentation (see: <code>DefaultTracingObservationHandler</code>). The implementation of these handlers does not need to be tracing related, it is completely up to you how you are going to implement them (e.g.: you can add logging capabilities) if you want.</p>
+<p>Starting with Micrometer 1.10, you can register "handlers" (<code>ObservationHandler</code> instances) that are notified about the lifecycle event of an observation (for example, you can run custom code when an observation is started or stopped).
+Using this feature lets you add tracing capabilities to your existing metrics instrumentation (see: <code>DefaultTracingObservationHandler</code>). The implementation of these handlers does not need to be tracing related. It is completely up to you how you are going to implement them (for example, you can add logging capabilities).</p>
 </div>
 </div>
 </div>
@@ -491,7 +497,7 @@ Using this feature lets you add tracing capabilities to your existing metrics in
 <h2 id="micrometer-observation-context"><a class="anchor" href="#micrometer-observation-context"></a>Observation.Context</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In order to pass information between the instrumented code and the handler (or between handler methods, e.g.: <code>onStart</code> and <code>onStop</code>), you can utilize an <code>Observation.Context</code>. An <code>Observation.Context</code> is a <code>Map</code>-like container that can store values for you while your handler can access the data inside the context.</p>
+<p>To pass information between the instrumented code and the handler (or between handler methods, such as <code>onStart</code> and <code>onStop</code>), you can use an <code>Observation.Context</code>. An <code>Observation.Context</code> is a <code>Map</code>-like container that can store values for you while your handler can access the data inside the context.</p>
 </div>
 </div>
 </div>
@@ -499,7 +505,7 @@ Using this feature lets you add tracing capabilities to your existing metrics in
 <h2 id="micrometer-observation-handler-example"><a class="anchor" href="#micrometer-observation-handler-example"></a>ObservationHandler Example</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Based on this, we can implement a simple handler that lets the users know about its invocations by printing them out to <code>stdout</code>.</p>
+<p>Based on this, we can implement a simple handler that lets the users know about its invocations by printing them out to <code>stdout</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -536,7 +542,7 @@ Using this feature lets you add tracing capabilities to your existing metrics in
 </div>
 </div>
 <div class="paragraph">
-<p>You need to register the handler to the <code>ObservationRegistry</code>.</p>
+<p>You need to register the handler to the <code>ObservationRegistry</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -545,7 +551,7 @@ registry.observationConfig().observationHandler(new SimpleHandler());</code></pr
 </div>
 </div>
 <div class="paragraph">
-<p>You can use the <code>observe</code> method to instrument your codebase.</p>
+<p>You can use the <code>observe</code> method to instrument your codebase:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -557,7 +563,7 @@ Observation.createNotStarted("my.operation", () -&gt; context, registry).observe
 </div>
 </div>
 <div class="paragraph">
-<p>You can also take full control of the scoping mechanism.</p>
+<p>You can also take full control of the scoping mechanism:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -584,10 +590,10 @@ finally {
 <h2 id="micrometer-observation-events"><a class="anchor" href="#micrometer-observation-events"></a>Signaling Errors and Arbitrary Events</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When <strong>instrumenting</strong> code we might want to signal that an error happened or signal that an arbitrary event happened. The observation API lets us do it via it <code>error</code> and <code>event</code> methods.</p>
+<p>When <strong>instrumenting</strong> code, we might want to signal that an error happened or signal that an arbitrary event happened. The observation API lets us do so through its <code>error</code> and <code>event</code> methods.</p>
 </div>
 <div class="paragraph">
-<p>One use-case for signaling arbitrary event can be attaching annotations to <code>Span</code> for Distributed Tracing but you can also process them however you want in your own handler, e.g.: emit log events based on them.</p>
+<p>One use-case for signaling an arbitrary event can be attaching annotations to <code>Span</code> for Distributed Tracing, but you can also process them however you want in your own handler, such as emitting log events based on them:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -612,7 +618,7 @@ finally {
 <h2 id="micrometer-observation-convention-example"><a class="anchor" href="#micrometer-observation-convention-example"></a>Observation.ObservationConvention Example</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When <strong>instrumenting</strong> code we want to provide sensible defaults for tags but also we want to allow users to easily change those defaults. An <code>ObservationConvention</code> interface is a description of what tags and name we should create for an <code>Observation.Context</code>. See the full usage example of an instrumentation together with overriding the default tags.</p>
+<p>When <strong>instrumenting</strong> code, we want to provide sensible defaults for tags, but also we want to let users easily change those defaults. An <code>ObservationConvention</code> interface is a description of what tags and name we should create for an <code>Observation.Context</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -855,7 +861,10 @@ static class CloudUtils {
 </div>
 </div>
 <div class="paragraph">
-<p>Below you can find an example of setting the whole code together.</p>
+<p>For a more detailed example, see the full usage example of an instrumentation together with overriding the default tags.</p>
+</div>
+<div class="paragraph">
+<p>The following example puts the whole code together:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -880,13 +889,13 @@ taxCalculator.calculateTax("INCOME_TAX", "1234567890");</code></pre>
 <h2 id="micrometer-observation-predicates-filters"><a class="anchor" href="#micrometer-observation-predicates-filters"></a>Observation Predicates and Filters</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To globally disable observations under given conditions you can use an <code>ObservationPredicate</code>. To mutate the <code>Observation.Context</code> you can use an <code>ObservationFilter</code>.</p>
+<p>To globally disable observations under given conditions, you can use an <code>ObservationPredicate</code>. To mutate the <code>Observation.Context</code>, you can use an <code>ObservationFilter</code>.</p>
 </div>
 <div class="paragraph">
-<p>To set these just call <code>ObservationRegistry#observationConfig()#observationPredicate()</code> and <code>ObservationRegistry#observationConfig()#observationFilter()</code> methods respectively.</p>
+<p>To set these, call the <code>ObservationRegistry#observationConfig()#observationPredicate()</code> and <code>ObservationRegistry#observationConfig()#observationFilter()</code> methods, respectively.</p>
 </div>
 <div class="paragraph">
-<p>Below you can find an example of predicates and filters.</p>
+<p>The following example uses predicates and filters:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -951,10 +960,10 @@ then(myContext.getHighCardinalityKeyValues())
 <h2 id="micrometer-observation-annotations"><a class="anchor" href="#micrometer-observation-annotations"></a>Using Annotations With @Observed</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you have turned on Aspect Oriented Programming (e.g. via <code>org.aspectj:aspectjweaver</code>) you can use the <code>@Observed</code> annotation to create observations. You can put that annotation either on a method to observe it or a class to observe all methods in it. Let&#8217;s look at the following example.</p>
+<p>If you have turned on Aspect Oriented Programming (for example, by using <code>org.aspectj:aspectjweaver</code>), you can use the <code>@Observed</code> annotation to create observations. You can put that annotation either on a method to observe it or on a class to observe all the methods in it.</p>
 </div>
 <div class="paragraph">
-<p>Here you can see an <code>ObservedService</code> that has an annotation on a method.</p>
+<p>The following example shows an <code>ObservedService</code> that has an annotation on a method:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -970,7 +979,7 @@ then(myContext.getHighCardinalityKeyValues())
 </div>
 </div>
 <div class="paragraph">
-<p>The following test asserts whether the proper observation gets created when a proxied <code>ObservedService</code> instance gets called.</p>
+<p>The following test asserts whether the proper observation gets created when a proxied <code>ObservedService</code> instance gets called:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1002,7 +1011,7 @@ TestObservationRegistryAssert.assertThat(registry)
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="installing.html">Installing</a></span>
+  <span class="prev"><a href="introduction.html">Introduction</a></span>
   <span class="next"><a href="instrumenting.html">Instrumenting</a></span>
 </nav>
 </article>

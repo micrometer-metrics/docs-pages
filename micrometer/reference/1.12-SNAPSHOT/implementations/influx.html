@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -336,6 +339,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
@@ -529,7 +535,7 @@ MeterRegistry registry = new InfluxMeterRegistry(config, Clock.SYSTEM);</code></
 </div>
 </div>
 <div class="paragraph">
-<p>To ship metrics to InfluxDB 2.x, make sure to configure the <code>org</code> and <code>bucket</code> to which to write the metrics, as well as the authentication <code>token</code>.</p>
+<p>To ship metrics to InfluxDB 2.x, make sure to configure the <code>org</code> and <code>bucket</code> to which to write the metrics, as well as the authentication <code>token</code>:</p>
 </div>
 <div class="listingblock">
 <div class="title">InfluxDB v2 configuration example</div>
@@ -612,7 +618,7 @@ MeterRegistry registry = new InfluxMeterRegistry(config, Clock.SYSTEM);</code></
 </div>
 </div>
 <div class="paragraph">
-<p>Metrics are shipped immediately over UDP to Telegraf by using Telegraf&#8217;s flavor of the StatsD line protocol.</p>
+<p>Metrics are shipped immediately over UDP to Telegraf by using Telegraf&#8217;s flavor of the StatsD line protocol:</p>
 </div>
 <div class="listingblock">
 <div class="content">
