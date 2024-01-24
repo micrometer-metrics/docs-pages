@@ -229,10 +229,10 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By using the <a href="https://github.com/micrometer-metrics/micrometer-docs-generator">Micrometer Docs Generator</a> project and by implementing the <code>ObservationDocumentation</code>, <code>SpanDocumentation</code> or <code>MeterDocumentation</code> interfaces as an <code>enum</code> we can scan your sources and generate Asciidoctor documentation. This allows you to maintain the documentation for your observability instrumentation in code, and as long as you use the <code>enum</code> implementation in your instrumentation, it will ensure that your documentation stays in-sync with the instrumentation.</p>
+<p>By using the <a href="https://github.com/micrometer-metrics/micrometer-docs-generator">Micrometer Docs Generator</a> project and by implementing the <code>ObservationDocumentation</code>, <code>SpanDocumentation</code> or <code>MeterDocumentation</code> interfaces as an <code>enum</code>, you can scan your sources and generate Asciidoctor documentation. This lets you maintain the docuemntation for your observability instrumentation in code, and as long as you use the <code>enum</code> implementation in your instrumentation, it ensures that your documentation stays in-sync with the instrumentation.</p>
 </div>
 <div class="paragraph">
-<p>Below you can find an example of a Maven <code>pom.xml</code> with the Micrometer Docs Generator project.</p>
+<p>The following example shows a Maven <code>pom.xml</code> with the Micrometer Docs Generator project:</p>
 </div>
 <div class="listingblock">
 <div class="title">pom.xml</div>
@@ -328,7 +328,7 @@ limitations under the License.
 </div>
 </div>
 <div class="paragraph">
-<p>Below you can find an example of a Gradle <code>build.gradle</code> with the Micrometer Docs Generator project.</p>
+<p>The following example shows a Gradle <code>build.gradle</code> with the Micrometer Docs Generator project:</p>
 </div>
 <div class="listingblock">
 <div class="title">build.gradle</div>
@@ -360,7 +360,7 @@ task generateObservabilityDocs(type: JavaExec) {
 </div>
 </div>
 <div class="paragraph">
-<p>Running these tasks would lead to generation of adoc files similar to these ones.</p>
+<p>Running these tasks would lead to generation of adoc files similar to these:</p>
 </div>
 <div class="listingblock">
 <div class="title">_metrics.adoc</div>
@@ -420,8 +420,8 @@ IMPORTANT: All tags and event names must be prefixed with `spring.cloud.task` pr
 <h2 id="micrometer-docs-generator-options"><a class="anchor" href="#micrometer-docs-generator-options"></a>Options</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The main entry class for the docs generation is <code>DocsGeneratorCommand</code> class.
-This class takes following options.</p>
+<p>The main entry class for the docs generation is the <code>DocsGeneratorCommand</code> class.
+This class takes the following options:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. Optional parameters</caption>
@@ -444,32 +444,32 @@ This class takes following options.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--metrics-template=&lt;location&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Handlebars template file location. This can be a path in the classpath or file system. <br>
-e.g.  <code>templates/metrics.adoc.hbs</code>, <code>/home/foo/bar.hbs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Handlebars template file location. This can be a path in the classpath or file system, <br>
+such as <code>templates/metrics.adoc.hbs</code> or <code>/home/example/bar.hbs</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--spans-template=&lt;location&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Handlebars template file location. This can be a path in the classpath or file system. <br>
-e.g.  <code>templates/spans.adoc.hbs</code>, <code>/home/foo/bar.hbs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Handlebars template file location. This can be a path in the classpath or file system, <br>
+such as <code>templates/spans.adoc.hbs</code> or <code>/home/example/bar.hbs</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--conventions-template=&lt;location&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Handlebars template file location. This can be a path in the classpath or file system. <br>
-e.g.  <code>templates/conventions.adoc.hbs</code>, <code>/home/foo/bar.hbs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Handlebars template file location. This can be a path in the classpath or file system, <br>
+such as <code>templates/conventions.adoc.hbs</code> or <code>/home/example/bar.hbs</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--metrics-output=&lt;location&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Generated metrics doc file location. This can be an absolute path or relative path to the output directory. <br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generated metrics doc file location. This can be an absolute path or a path relative to the output directory. <br>
 Default: <code>_metrics.adoc</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--spans-output=&lt;location&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Generated spans doc file location. This can be an absolute path or relative path to the output directory. <br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generated spans doc file location. This can be an absolute path or a path relative to the output directory. <br>
 Default: <code>_spans.adoc</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--conventions-output=&lt;location&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Generated observation convention doc file location. This can be an absolute path or relative path to the output directory. <br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generated observation convention doc file location. This can be an absolute path or a path relative to the output directory. <br>
 Default: <code>_conventions.adoc</code></p></td>
 </tr>
 </tbody>
