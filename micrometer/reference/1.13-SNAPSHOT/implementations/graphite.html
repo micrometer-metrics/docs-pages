@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -338,6 +341,9 @@
     <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -461,7 +467,7 @@
 <li><a href="#_configuring">2. Configuring</a></li>
 <li><a href="#_graphite_tag_support">3. Graphite Tag Support</a></li>
 <li><a href="#_hierarchical_name_mapping">4. Hierarchical name mapping</a></li>
-<li><a href="#_prefixing_your_metrics">5. Prefixing your metrics</a></li>
+<li><a href="#_prefixing_your_metrics">5. Prefixing Your Metrics</a></li>
 <li><a href="#_further_customizing_the_graphitereporter">6. Further Customizing the <code>GraphiteReporter</code></a></li>
 <li><a href="#_graphing">7. Graphing</a>
 <ul class="sectlevel2">
@@ -526,7 +532,7 @@ MeterRegistry registry = new GraphiteMeterRegistry(graphiteConfig, Clock.SYSTEM,
 </div>
 </div>
 <div class="paragraph">
-<p>Micrometer uses Dropwizard Metrics as the underlying instrumentation library when recording metrics destined for Graphite. <code>GraphiteConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you  instead bind it to a property source, you can override the default configuration. For example, Micrometer&#8217;s Spring Boot support binds properties that are prefixed with <code>management.metrics.export.graphite</code> directly to the <code>GraphiteConfig</code>:</p>
+<p>Micrometer uses Dropwizard Metrics as the underlying instrumentation library when recording metrics destined for Graphite. <code>GraphiteConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration. For example, Micrometer&#8217;s Spring Boot support binds properties that are prefixed with <code>management.metrics.export.graphite</code> directly to the <code>GraphiteConfig</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -569,7 +575,7 @@ The following documentation sections on hierarchical name mapping and metrics pr
 </div>
 </div>
 <div class="sect1">
-<h2 id="_prefixing_your_metrics"><a class="anchor" href="#_prefixing_your_metrics"></a>5. Prefixing your metrics</h2>
+<h2 id="_prefixing_your_metrics"><a class="anchor" href="#_prefixing_your_metrics"></a>5. Prefixing Your Metrics</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To add a prefix to all metrics that go to graphite, use the <code>GraphiteConfig#tagsAsPrefix</code> configuration option. This option applies the tag value of a set of common tags as a prefix. For example, if <code>tagsAsPrefix</code> contains <code>application</code>, and a meter named <code>myTimer</code> is created with a tag of <code>application=APPNAME</code>, it appears in Graphite as <code>APPNAME.myTimer</code>.</p>
@@ -586,7 +592,7 @@ public MeterRegistryCustomizer&lt;MeterRegistry&gt; commonTags() {
 </div>
 </div>
 <div class="paragraph">
-<p>We do it this way because, generally, a tag prefix in Graphite is correlated to a common tag elsewhere. Prefixes tend to be something like app name or host. By applying those values as common tags, you make your metrics more portable (that is, if you ever switch to a dimensional monitoring system, you are set).</p>
+<p>We do it this way because, generally, a tag prefix in Graphite is correlated to a common tag elsewhere. Prefixes tend to be something like app name or host. By applying those values as common tags, you make your metrics more portable (if you ever switch to a dimensional monitoring system, you are set).</p>
 </div>
 <div class="paragraph">
 <p>You can use this when the order of the prefix matters. Micrometer always sorts tags, but the order of tag keys in <code>tagsAsPrefix</code> is preserved, so adding <code>host</code> and <code>application</code> to <code>tagsAsPrefix</code> results in a prefixed metric, such as <code>HOST.APP.myCounter</code>.</p>

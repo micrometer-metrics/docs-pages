@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -336,6 +339,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
@@ -559,7 +565,7 @@ You can also configure Telegraf to accept the dogstatsd format. If you use Teleg
 <h2 id="_customizing_the_metrics_sink"><a class="anchor" href="#_customizing_the_metrics_sink"></a>3. Customizing the Metrics Sink</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default, Micrometer publishes StatsD line protocol over UDP, as the vast majority of existing StatsD agents are UDP servers. It is possible to fully customize how the line protocol is shipped by modifying the builder for <code>StatsdMeterRegistry</code>:</p>
+<p>By default, Micrometer publishes the StatsD line protocol over UDP, as the vast majority of existing StatsD agents are UDP servers. You can fully customize how the line protocol is shipped by modifying the builder for <code>StatsdMeterRegistry</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">

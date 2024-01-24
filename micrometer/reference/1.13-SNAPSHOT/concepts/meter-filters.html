@@ -197,6 +197,9 @@
     <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -338,6 +341,9 @@
     <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -465,7 +471,7 @@
 <p><strong>Deny</strong> (or <strong>Accept</strong>) meters being registered.</p>
 </li>
 <li>
-<p><strong>Transform</strong> meter IDs (for example, changing the name, adding or removing tags, and changing description or base units).</p>
+<p><strong>Transform</strong> meter IDs (for example, changing the name, adding or removing tags, and changing the description or base units).</p>
 </li>
 <li>
 <p><strong>Configure</strong> distribution statistics for some meter types.</p>
@@ -559,7 +565,7 @@
 <p><code>maximumAllowableMetrics(int)</code>: Deny any meter after the registry has reached a certain number of meters.</p>
 </li>
 <li>
-<p><code>maximumAllowableTags(String meterNamePrefix, String tagKey, int maximumTagValues, MeterFilter onMaxReached)</code>: Places an upper bound on the number of tags produced by matching series.</p>
+<p><code>maximumAllowableTags(String meterNamePrefix, String tagKey, int maximumTagValues, MeterFilter onMaxReached)</code>: Places an upper bound on the number of tags produced by the matching series.</p>
 </li>
 </ul>
 </div>
@@ -597,7 +603,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_transforming_metrics"><a class="anchor" href="#_transforming_metrics"></a>Transforming metrics</h2>
+<h2 id="_transforming_metrics"><a class="anchor" href="#_transforming_metrics"></a>Transforming Metrics</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The following example shows a transform filter:</p>

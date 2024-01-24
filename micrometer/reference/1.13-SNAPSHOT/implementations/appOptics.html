@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -336,6 +339,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
@@ -552,13 +558,13 @@ MeterRegistry registry = new AppOpticsMeterRegistry(appopticsConfig, Clock.SYSTE
 <div class="ulist">
 <ul>
 <li>
-<p><code>sum</code>: Rate of calls per second.</p>
+<p><code>count</code>: Rate of number of calls/second.</p>
 </li>
 <li>
-<p><code>count</code>: Rate of total time per second.</p>
+<p><code>sum</code>: Rate of total time/second.</p>
 </li>
 <li>
-<p><code>max</code>: A sliding window maximum amount recorded.</p>
+<p><code>max</code>: A sliding window showing the maximum amount recorded.</p>
 </li>
 </ul>
 </div>

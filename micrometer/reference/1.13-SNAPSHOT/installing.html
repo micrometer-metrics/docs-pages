@@ -197,6 +197,9 @@
     <a class="nav-link" href="implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -336,6 +339,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="observation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="observation/introduction.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="observation/handler.html">Observation Handlers</a>
@@ -482,7 +488,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Through Micrometer&#8217;s composite meter registry (described in greater detail in <a href="/docs/concepts#_composite_registries">"Concepts"</a>), you may configure more than one registry implementation if you intend to publish metrics to more than one monitoring system.</p>
+<p>Through Micrometer&#8217;s composite meter registry (described in greater detail in <a href="/docs/concepts#_composite_registries">"Concepts"</a>), you can configure more than one registry implementation if you intend to publish metrics to more than one monitoring system.</p>
 </div>
 <div class="paragraph">
 <p>If you have not decided on a monitoring system yet and want only to try out the instrumentation SPI, you can add a dependency on <code>micrometer-core</code> instead and configure the <code>SimpleMeterRegistry</code>.</p>
@@ -503,7 +509,7 @@
 <div class="paragraph">
 <p>Milestone releases are made available for early testing purposes and are not intended for production use.
 Milestone releases are published to <a href="https://repo.spring.io/milestone" class="bare">repo.spring.io/milestone</a>.
-Include that as a Maven repository in your build configuration to use milestone releases.
+To use milestone releases, include that as a Maven repository in your build configuration.
 Milestones are marked as &#8220;pre-releases&#8221; on GitHub, and the version has a suffix, such as <code>-M1</code> or <code>-RC1</code> (milestone 1 or release candidate 1, respectively).</p>
 </div>
 </div>

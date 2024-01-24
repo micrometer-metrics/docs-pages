@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -336,6 +339,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
@@ -611,7 +617,7 @@ MeterRegistry registry = new NewRelicMeterRegistry(newRelicConfig, Clock.SYSTEM)
 <div class="title">Figure 1. Timer latency.</div>
 </div>
 <div class="paragraph">
-<p>To generate a throughput chart:</p>
+<p>The following example generates a throughput chart:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -625,7 +631,7 @@ MeterRegistry registry = new NewRelicMeterRegistry(newRelicConfig, Clock.SYSTEM)
 <div class="title">Figure 2. Timer throughput.</div>
 </div>
 <div class="paragraph">
-<p>To generate a plot of client-side percentiles:</p>
+<p>The following example generates a plot of client-side percentiles:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -639,7 +645,7 @@ MeterRegistry registry = new NewRelicMeterRegistry(newRelicConfig, Clock.SYSTEM)
 <div class="title">Figure 3. Timer Percentiles.</div>
 </div>
 <div class="paragraph">
-<p>Note how these percentiles are <em>not aggregable</em>. We have selected the <code>latest(value)</code> function to display this chart (it isn&#8217;t correct to <code>average(value)</code> on a percentile value). The more dimensions you add to a timer, the less useful these values become.</p>
+<p>Note how these percentiles are <em>not aggregable</em>. We have selected the <code>latest(value)</code> function to display this chart (it is not correct to <code>average(value)</code> on a percentile value). The more dimensions you add to a timer, the less useful these values become.</p>
 </div>
 <div class="paragraph">
 <p>Finally, if you define SLO boundaries with the fluent builder for <code>Timer</code>, you can view throughput below certain SLO boundaries. In this example, we set SLO boundaries at 275 (yellow), 300 (red), and 500 (blue) milliseconds for a simulated <code>Timer</code> that is recording samples normally distributed around 250 ms. These counts represent the rate/second of samples less than or equal to each SLO boundary.</p>

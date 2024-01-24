@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -338,6 +341,9 @@
     <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -461,7 +467,7 @@
 <li><a href="#_configuring">2. Configuring</a>
 <ul class="sectlevel2">
 <li><a href="#bookmark-auto-configuration">2.1. Using Dynatrace auto-configuration (preferred)</a></li>
-<li><a href="#_using_a_custom_endpoint">2.2. Using a custom endpoint</a></li>
+<li><a href="#_using_a_custom_endpoint">2.2. Using a Custom Endpoint</a></li>
 <li><a href="#_meter_metadata">2.3. Meter metadata</a></li>
 </ul>
 </li>
@@ -511,19 +517,19 @@ Both SaaS and self-hosted (Managed) deployments are offered.</p>
 <h2 id="_configuring"><a class="anchor" href="#_configuring"></a>2. Configuring</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For setting up new integrations with Dynatrace, it is recommended to use the latest version of the <a href="https://docs.dynatrace.com/docs/shortlink/api-metrics-v2">Dynatrace Metrics API</a> (v2).
-If you are using Micrometer with Spring Boot, please also refer to the <a href="https://docs.dynatrace.com/docs/shortlink/micrometer-metrics-ingest">Dynatrace documentation</a> and/or the <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.metrics.export.dynatrace">Spring Boot documentation</a>.
+<p>For setting up new integrations with Dynatrace, we recommend using the latest version of the <a href="https://docs.dynatrace.com/docs/shortlink/api-metrics-v2">Dynatrace Metrics API</a> (currently version 2).
+If you use Micrometer with Spring Boot, see the <a href="https://docs.dynatrace.com/docs/shortlink/micrometer-metrics-ingest">Dynatrace documentation</a> and the <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.metrics.export.dynatrace">Spring Boot documentation</a>.
 Dynatrace provides different ways of setting up integrations:</p>
 </div>
 <div class="sect2">
 <h3 id="bookmark-auto-configuration"><a class="anchor" href="#bookmark-auto-configuration"></a>2.1. Using Dynatrace auto-configuration (preferred)</h3>
 <div class="paragraph">
-<p>Dynatrace auto-configuration is available for hosts that are monitored by a OneAgent or by the Dynatrace Operator for Kubernetes.</p>
+<p>Dynatrace auto-configuration is available for hosts that are monitored by OneAgent or by the Dynatrace Operator for Kubernetes.</p>
 </div>
 <div class="paragraph">
-<p>If a Dynatrace OneAgent is installed on the host running Micrometer, metrics can be exported directly using the OneAgent without having to specify an endpoint URI or API token.
-If running in Kubernetes with the Dynatrace operator installed, the registry will pick up your endpoint URI and API token from the operator instead.
-In this case there is no need to configure anything, so you can use the following code in your project to export Micrometer metrics to Dynatrace:</p>
+<p>If Dynatrace OneAgent is installed on the host running Micrometer, metrics can be exported directly by using OneAgent without having to specify an endpoint URI or API token.
+If running in Kubernetes with the Dynatrace operator installed, the registry picks up your endpoint URI and API token from the operator instead.
+In this case, there is no need to configure anything, so you can use the following code in your project to export Micrometer metrics to Dynatrace:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -540,7 +546,7 @@ MeterRegistry registry = new DynatraceMeterRegistry(dynatraceConfig, Clock.SYSTE
 </div>
 </div>
 <div class="paragraph">
-<p>If you are using Micrometer 1.10.0 or above, you can also use the DEFAULT config to achieve the same with less code:</p>
+<p>If you use Micrometer 1.10.0 or above, you can also use the DEFAULT config to achieve the same with less code:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -548,7 +554,7 @@ MeterRegistry registry = new DynatraceMeterRegistry(dynatraceConfig, Clock.SYSTE
 </div>
 </div>
 <div class="paragraph">
-<p>It is also possible to change other properties by creating an instance of the <code>DynatraceConfig</code> and overwriting the respective methods.
+<p>You can also change other properties by creating an instance of the <code>DynatraceConfig</code> and overwriting the respective methods.
 For example, you can specify the exporter version, which defaults to <code>v2</code> unless a deviceId is set:</p>
 </div>
 <div class="listingblock">
@@ -586,21 +592,21 @@ Property names for binding attributes from Spring Boot have changed in Spring Bo
 </div>
 <div class="paragraph">
 <p>Using Spring Boot Micrometer support allows configuring the Dynatrace exporter by using <a href="#bookmark-available-properties">the available properties</a>.
-When using Micrometer with Spring Boot, you don&#8217;t have to instantiate the <code>DynatraceMeterRegistry</code> manually as Spring Boot will do it automatically for you.
-All configuration options that can be set by overwriting methods can also be set via Spring Boot properties, and adding a separate MeterRegistry can lead to metrics not being exported as auto-configuration might break.</p>
+When using Micrometer with Spring Boot, you need not instantiate the <code>DynatraceMeterRegistry</code> manually, as Spring Boot does it automatically for you.
+All configuration options that can be set by overwriting methods can also be set through Spring Boot properties, and adding a separate MeterRegistry can lead to metrics not being exported, as auto-configuration might break.</p>
 </div>
 <div class="paragraph">
-<p>To use the Dynatrace metrics exporter for Micrometer in your Spring Boot project, it is enough to include the <code>runtimeOnly 'io.micrometer:micrometer-registry-dynatrace'</code> dependency.
-In this default configuration, metrics will be exported to the local OneAgent or Kubernetes operator-provided endpoint.</p>
+<p>To use the Dynatrace metrics exporter for Micrometer in your Spring Boot project, include the <code>runtimeOnly 'io.micrometer:micrometer-registry-dynatrace'</code> dependency.
+In this default configuration, metrics are exported to the local OneAgent or Kubernetes operator-provided endpoint.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_a_custom_endpoint"><a class="anchor" href="#_using_a_custom_endpoint"></a>2.2. Using a custom endpoint</h3>
+<h3 id="_using_a_custom_endpoint"><a class="anchor" href="#_using_a_custom_endpoint"></a>2.2. Using a Custom Endpoint</h3>
 <div class="paragraph">
 <p>If auto-configuration is not available on the host, both the Dynatrace Metrics API v2 endpoint and an API token have to be specified.
 The <a href="https://docs.dynatrace.com/docs/shortlink/api-authentication">Dynatrace API token documentation</a> contains more information on how to create an API token.
-The 'Ingest metrics' (<code>metrics.ingest</code>) permission is required on the token in order to ingest metrics.
-It is recommended to limit scope to only this permission.</p>
+To ingest metrics, the 'Ingest metrics' (<code>metrics.ingest</code>) permission is required on the token.
+We recommend limiting scope to only this permission.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -636,8 +642,8 @@ MeterRegistry registry = new DynatraceMeterRegistry(dynatraceConfig, Clock.SYSTE
 </div>
 </div>
 <div class="paragraph">
-<p>These properties can also be set via Spring Boot, using property or yaml files.
-It is also possible to reference environment variables using the Spring property placeholders (e.g.: <code>management.dynatrace.metrics.export.uri: ${DT_METRICS_INGEST_URL}</code>).</p>
+<p>These properties can also be set through Spring Boot, by using property or yaml files.
+You can also reference environment variables by using the Spring property placeholders (such as <code>management.dynatrace.metrics.export.uri: ${DT_METRICS_INGEST_URL}</code>).</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -646,7 +652,7 @@ It is also possible to reference environment variables using the Spring property
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>v2</code> is used as the default API version unless a <code>deviceId</code> is set (<a href="#bookmark-apiv1">see below</a>).
+<code>v2</code> is used as the default API version unless a <code>deviceId</code> is set, as described <a href="#bookmark-apiv1">below</a>.
 </td>
 </tr>
 </table>
@@ -686,38 +692,38 @@ Find more information about metrics metadata in the <a href="https://docs.dynatr
 <div class="sect2">
 <h3 id="bookmark-apiv2"><a class="anchor" href="#bookmark-apiv2"></a>3.1. API v2</h3>
 <div class="paragraph">
-<p>When the API version is configured to <code>v2</code>, the registry will send data using the <a href="https://docs.dynatrace.com/docs/shortlink/api-metrics-v2">Metrics API v2</a>.
-In order to maintain backwards compatibility, when a <code>deviceId</code> is set (which is required for <code>v1</code> and not used in <code>v2</code>), <code>v1</code> is used as the default.
-Otherwise, the version defaults to <code>v2</code>, and does not have to be set explicitly.
-With no endpoint URI and token set, metrics will be exported to the local OneAgent endpoint or, if running in Kubernetes with the Dynatrace operator installed, to the endpoint provided by the operator.
-If no auto-configuration is desired, it is possible to specify endpoint and token explicitly, in order to export metrics to that specific endpoint.
+<p>When the API version is configured to <code>v2</code>, the registry sends data by using the <a href="https://docs.dynatrace.com/docs/shortlink/api-metrics-v2">Metrics API v2</a>.
+To maintain backwards compatibility, when a <code>deviceId</code> is set (which is required for <code>v1</code> and not used in <code>v2</code>), <code>v1</code> is used as the default.
+Otherwise, the version defaults to <code>v2</code> and does not have to be set explicitly.
+With no endpoint URI and token set, metrics are exported to the local OneAgent endpoint or, if running in Kubernetes with the Dynatrace operator installed, to the endpoint provided by the operator.
+If you do not need auto-configuration, you can specify the endpoint and token explicitly, to export metrics to that specific endpoint.
 Explicitly specifying these will overwrite auto-configuration.</p>
 </div>
 <div class="paragraph">
-<p><strong>Minimal configuration with Dynatrace auto-configuration</strong></p>
+<p><strong>Minimal Configuration with Dynatrace Auto-configuration</strong></p>
 </div>
 <div class="paragraph">
-<p>In the minimal configuration <a href="#bookmark-auto-configuration">shown above</a> (no URI or API token), the v2 registry will attempt to retrieve the endpoint provided by the Dynatrace Kubernetes operator.
-If the operator is not set up or does not provide this information, the exporter will attempt to send metrics to the <a href="https://docs.dynatrace.com/docs/shortlink/local-api">local OneAgent metrics ingest endpoint</a>.
+<p>In the minimal configuration <a href="#bookmark-auto-configuration">shown earlier</a> (no URI or API token), the v2 registry tries to retrieve the endpoint provided by the Dynatrace Kubernetes operator.
+If the operator is not set up or does not provide this information, the exporter tries to send metrics to the <a href="https://docs.dynatrace.com/docs/shortlink/local-api">local OneAgent metrics ingest endpoint</a>.
 Note that this only works if a OneAgent is running on the host and the <a href="https://docs.dynatrace.com/docs/shortlink/local-api#enable-the-oneagent-metric-api">local OneAgent Metric API</a> is available.
 If the ingestion port for the local OneAgent was changed to a custom one, the full endpoint URI has to be provided for the URI property (with API token left empty).</p>
 </div>
 <div class="paragraph">
-<p><strong>Configuration with URI and API token</strong></p>
+<p><strong>Configuration with URI and API Token</strong></p>
 </div>
 <div class="paragraph">
-<p>If no auto-configuration is available or the metrics should be sent to a different endpoint (e.g. a different tenant), the Dynatrace v2 exporter can be configured with an explicit endpoint URI and an <a href="https://docs.dynatrace.com/docs/shortlink/api-authentication">API token</a>.
+<p>If no auto-configuration is available or the metrics should be sent to a different endpoint (such as a different tenant), you can configure the Dynatrace v2 exporter with an explicit endpoint URI and an <a href="https://docs.dynatrace.com/docs/shortlink/api-authentication">API token</a>.
 The <a href="https://docs.dynatrace.com/docs/shortlink/api-authentication">API token</a> must have the <a href="https://docs.dynatrace.com/docs/dynatrace-api/basics/dynatrace-api-authentication#token-scopes">"Ingest metrics"</a> (<code>metrics.ingest</code>) permission set.
-It is recommended to limit scope to only this permission.</p>
+We recommend limiting the scope to only this permission.</p>
 </div>
 <div class="paragraph">
-<p>The entire Metrics v2 API endpoint URI has to be specified including its path, i.e.: with the path <code>/api/v2/metrics/ingest</code> on SaaS and managed deployments, or <code>/metrics/ingest</code> for OneAgent endpoints as mentioned in the <a href="https://docs.dynatrace.com/docs/shortlink/api-metrics-v2-post-datapoints">documentation</a>.</p>
+<p>You must specify the entire Metrics v2 API endpoint URI, including its path&#8201;&#8212;&#8201;that is, with the <code>/api/v2/metrics/ingest</code> path on SaaS and managed deployments, or <code>/metrics/ingest</code> for OneAgent endpoints as mentioned in the <a href="https://docs.dynatrace.com/docs/shortlink/api-metrics-v2-post-datapoints">documentation</a>.</p>
 </div>
 <div class="paragraph">
-<p><strong>Properties available in the v2 exporter</strong> <a id="bookmark-available-properties"></a></p>
+<p><strong>Properties Available in the v2 Exporter</strong> <a id="bookmark-available-properties"></a></p>
 </div>
 <div class="paragraph">
-<p>When using the <a href="https://docs.dynatrace.com/docs/shortlink/api-metrics-v2">Dynatrace metrics API v2</a>, the following properties can be set:</p>
+<p>When using the <a href="https://docs.dynatrace.com/docs/shortlink/api-metrics-v2">Dynatrace metrics API v2</a>, you can set the following properties:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -782,7 +788,7 @@ It is recommended to limit scope to only this permission.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>These properties can also be set in Spring Boot configuration files:</p>
+<p>You can also set these properties in Spring Boot configuration files:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -829,21 +835,21 @@ It is recommended to limit scope to only this permission.</p>
 <div class="paragraph">
 <p>In Micrometer 1.9.0, Dynatrace-specific summary instruments (<code>DynatraceTimer</code> and <code>DynatraceDistributionSummary</code>) were introduced.
 These specialized instruments are tailored to the Dynatrace metrics ingest, and prevent the creation of invalid metrics.
-They are available from version 1.9.0 and are used as a drop-in replacement by default.
-No action is needed from users upgrading to 1.9.0. If there is a discrepancy in the observed metrics, it is possible to return to the previous behavior by setting the <code>useDynatraceSummaryInstruments</code> toggle to <code>false</code>.</p>
+They are available from version 1.9.0 and are used, by default, as a drop-in replacement.
+No action is needed from users upgrading to 1.9.0. If there is a discrepancy in the observed metrics, you can return to the previous behavior by setting the <code>useDynatraceSummaryInstruments</code> toggle to <code>false</code>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="bookmark-apiv1"><a class="anchor" href="#bookmark-apiv1"></a>3.2. API v1 (Legacy)</h3>
 <div class="paragraph">
-<p>When the apiVersion is configured to <code>v1</code>, the registry will send data using the <a href="https://docs.dynatrace.com/docs/shortlink/api-custom-metrics">Dynatrace Timeseries API v1 for custom metrics</a>.
-If a <code>deviceId</code> is specified, it will default to <code>v1</code> for backwards compatibility with earlier setups.
+<p>When the <code>apiVersion</code> is configured to be <code>v1</code>, the registry sends data by using the <a href="https://docs.dynatrace.com/docs/shortlink/api-custom-metrics">Dynatrace Timeseries API v1 for Custom Metrics</a>.
+If a <code>deviceId</code> is specified, it defaults to <code>v1</code> for backwards compatibility with earlier setups.
 The <code>device-id</code> property is required for <code>v1</code> and not used in <code>v2</code>.
-Existing setups will continue to work when updating to newer versions of Micrometer.
-The reported metrics will be assigned to <a href="https://docs.dynatrace.com/docs/shortlink/api-custom-device-report-metric">custom devices</a> in Dynatrace.</p>
+Existing setups continue to work when updating to newer versions of Micrometer.
+The reported metrics are assigned to <a href="https://docs.dynatrace.com/docs/shortlink/api-custom-device-report-metric">Custom Devices</a> in Dynatrace.</p>
 </div>
 <div class="paragraph">
-<p>For the v1 API, do not specify the ingest path, but only the base URL of your environment, e.g.: <code>uri: <a href="https://{your-environment-id}.live.dynatrace.com" class="bare">{your-environment-id}.live.dynatrace.com</a></code></p>
+<p>For the v1 API, do not specify the ingest path, but only the base URL of your environment, such as <code>uri: <a href="https://{your-environment-id}.live.dynatrace.com" class="bare">{your-environment-id}.live.dynatrace.com</a></code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">

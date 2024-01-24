@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -336,6 +339,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
@@ -563,7 +569,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=$HOME/$APP_NAME-key.json</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When running in managed environments (such as Google App Engine, Google Cloud Run, Google Cloud Function)
+<p>When running in managed environments (such as Google App Engine, Google Cloud Run, and Google Cloud Function),
 you need not configure this environmental variable. In those environments, a service account is
 automatically associated with the application instance. The underlying Stackdriver Monitoring client
 library can automatically detect and use those credentials.</p>
@@ -585,7 +591,7 @@ registry.config().commonTags("application", "my-application");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can also configure resource labels with the <code>StackdriverConfig</code> method <code>resourceLabels</code>. Depending on the configured <code>resourceType</code>, there will be required resource labels. See the documentation on <a href="https://cloud.google.com/monitoring/custom-metrics/creating-metrics#which-resource">choosing a monitored resource type</a>.</p>
+<p>You can also configure resource labels with the <code>StackdriverConfig</code> method, <code>resourceLabels</code>. Depending on the configured <code>resourceType</code>, there will be required resource labels. See the documentation on <a href="https://cloud.google.com/monitoring/custom-metrics/creating-metrics#which-resource">choosing a monitored resource type</a>.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -594,7 +600,7 @@ registry.config().commonTags("application", "my-application");</code></pre>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-When using Micrometer across multiple applications/instances, it is necessary that Stackdriver labels are unique per application/instance. Otherwise, you will see errors like <code>One or more TimeSeries could not be written: One or more points were written more frequently than the maximum sampling period configured</code>. If using a resource type other than <code>global</code>, the resource labels may already make metrics unique per application instance. If not, a common tag with the hostname or platform-provided instance ID may be a good candidate for achieving this.
+When using Micrometer across multiple applications or instances, it is necessary that Stackdriver labels are unique per application or instance. Otherwise, you will see errors such as <code>One or more TimeSeries could not be written: One or more points were written more frequently than the maximum sampling period configured</code>. If using a resource type other than <code>global</code>, the resource labels may already make metrics unique per application instance. If not, a common tag with the hostname or platform-provided instance ID may be a good candidate for achieving this.
 </td>
 </tr>
 </table>
@@ -605,7 +611,7 @@ When using Micrometer across multiple applications/instances, it is necessary th
 <h2 id="_spring_boot"><a class="anchor" href="#_spring_boot"></a>4. Spring Boot</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Spring Boot provides auto-configuration for Micrometer&#8217;s StackdriverMeterRegistry. For more information, see the <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-metrics-export-stackdriver">Spring Boot documentation</a>.</p>
+<p>Spring Boot provides auto-configuration for Micrometer&#8217;s <code>StackdriverMeterRegistry</code>. For more information, see the <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-metrics-export-stackdriver">Spring Boot documentation</a>.</p>
 </div>
 <div class="paragraph">
 <p>You can manually configure or register the <code>StackdriverMeterRegistry</code>.
@@ -649,7 +655,7 @@ management.metrics.tags.application=${spring.application.name}</code></pre>
 <h2 id="_graalvm_native_image_compilation"><a class="anchor" href="#_graalvm_native_image_compilation"></a>5. GraalVM native image compilation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To compile an application using <code>micrometer-registry-stackdriver</code> to a <a href="https://www.graalvm.org/reference-manual/native-image/">native image using GraalVM</a>, add the <a href="https://github.com/GoogleCloudPlatform/native-image-support-java">native-image-support-java</a> library as a dependency. This will ensure the correct native image configuration is available and avoid errors like <code>Classes that should be initialized at run time got initialized during image building</code>.</p>
+<p>To compile an application by using <code>micrometer-registry-stackdriver</code> to a <a href="https://www.graalvm.org/reference-manual/native-image/">native image using GraalVM</a>, add the <a href="https://github.com/GoogleCloudPlatform/native-image-support-java">native-image-support-java</a> library as a dependency. Doing so ensures that the correct native image configuration is available and avoids errors like <code>Classes that should be initialized at run time got initialized during image building</code>.</p>
 </div>
 </div>
 </div>

@@ -197,6 +197,9 @@
     <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -338,6 +341,9 @@
     <a class="nav-link" href="installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="handler.html">Observation Handlers</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
@@ -457,7 +463,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section we will see some common examples of reusing existing Micrometer and Micrometer Tracing handlers and context types to do instrumentation.</p>
+<p>In this section, we see some common examples of reusing existing Micrometer and Micrometer Tracing handlers and context types to do instrumentation.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -466,13 +472,13 @@
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Before you decide to instrument a project yourself, please double-check whether it hasn&#8217;t already been instrumented!
+Before you decide to instrument a project yourself, double-check whether that it has not already been instrumented!
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>To better understand how you can do instrumentation we need to distinguish two concepts.</p>
+<p>To better convey how you can do instrumentation, we need to distinguish two concepts:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -485,10 +491,10 @@ Before you decide to instrument a project yourself, please double-check whether 
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Context propagation</strong> - we propagate existing context through threads or network. We&#8217;re using the <a href="../contextpropagation.html" class="xref page">Micrometer Context Propagation</a> library to define the context and to propagate it through threads. We&#8217;re using dedicated <code>SenderContext</code> and <code>ReceiverContext</code> objects, together with Micrometer Tracing handlers, to create Observations that will propagate context over the wire.</p>
+<p><strong>Context propagation</strong> - We propagate existing context through threads or network. We use the <a href="../contextpropagation.html" class="xref page">Micrometer Context Propagation</a> library to define the context and to propagate it through threads. We use dedicated <code>SenderContext</code> and <code>ReceiverContext</code> objects, together with Micrometer Tracing handlers, to create Observations that propagate context over the wire.</p>
 </div>
 <div class="paragraph">
-<p><strong>Creation of Observations</strong> - we want to wrap an operation in an Observation to get measurements. We need to know if there previously has been a parent Observation to maintain the parent-child relationship of Observations.</p>
+<p><strong>Creation of Observations</strong> - We want to wrap an operation in an Observation to get measurements. We need to know if there previously has been a parent Observation to maintain the parent-child relationship of Observations.</p>
 </div>
 </div>
 </div>
@@ -496,10 +502,10 @@ Before you decide to instrument a project yourself, please double-check whether 
 <h2 id="instrumentation_of_thread_switching_components"><a class="anchor" href="#instrumentation_of_thread_switching_components"></a>Instrumentation of Thread Switching Components</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We might want to create an Observation around a <code>Runnable</code> or <code>Callable</code> that we&#8217;re submitting through an <code>Executor</code>. For that to work we need to know if in the parent thread there was an Observation that the new thread should continue, or for which a child Observation should be created.</p>
+<p>We might want to create an Observation around a <code>Runnable</code> or <code>Callable</code> that we&#8217;re submitting through an <code>Executor</code>. For that to work, we need to know if there was an Observation in the parent thread that the new thread should continue or for which a child Observation should be created.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the following example.</p>
+<p>Consider the following example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -535,12 +541,12 @@ Future&lt;Boolean&gt; child = parent.observe(() -&gt; {
 <h2 id="instrumentation_of_reactive_libraries"><a class="anchor" href="#instrumentation_of_reactive_libraries"></a>Instrumentation of Reactive Libraries</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section we&#8217;ll discuss how to wrap Reactive libraries in Observations and how to use Reactor Context to safely propagate Observations between threads.</p>
+<p>In this section, we discuss how to wrap Reactive libraries in Observations and how to use Reactor Context to safely propagate Observations between threads.</p>
 </div>
 <div class="sect2">
 <h3 id="instrumentation_of_reactive_libraries_after_reactor_3_5_3"><a class="anchor" href="#instrumentation_of_reactive_libraries_after_reactor_3_5_3"></a>For Reactor 3.5.3 and After</h3>
 <div class="paragraph">
-<p>In Reactor 3.5.3 release (through this <a href="https://github.com/reactor/reactor-core/pull/3335">PR</a>) an option to turn on automated context propagation was added. To use this, please ensure that you&#8217;re using the following projects at minimum in the following versions:</p>
+<p>In the Reactor 3.5.3 release (through this <a href="https://github.com/reactor/reactor-core/pull/3335">PR</a>), an option to turn on automated context propagation was added. To use this, ensure that you use the following projects at minimum in the following versions:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -559,7 +565,7 @@ Future&lt;Boolean&gt; child = parent.observe(() -&gt; {
 </ul>
 </div>
 <div class="paragraph">
-<p>To use the feature call the new Reactor&#8217;s Hook method (e.g. in your <code>public static void main</code> method) like this</p>
+<p>To use the feature, call the new Reactor&#8217;s Hook method (for example, in your <code>public static void main</code> method), like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -567,10 +573,10 @@ Future&lt;Boolean&gt; child = parent.observe(() -&gt; {
 </div>
 </div>
 <div class="paragraph">
-<p>This will automatically wrap Reactor internal mechanisms to propagate context between operators, threads etc. Usage of <code>tap</code> and <code>handle</code> or Context Propagation API is not required.</p>
+<p>This automatically wraps Reactor&#8217;s internal mechanisms to propagate context between operators, threads, and so on. Usage of <code>tap</code> and <code>handle</code> or the Context Propagation API is not required.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the following example.</p>
+<p>Consider the following example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -662,16 +668,16 @@ parent.stop();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If performance of this approach is not satisfactory, please verify whether disabling the hook and explicitly using <code>handle</code> or <code>tap</code> operators improves the performance.</p>
+<p>If the performance of this approach is not satisfactory, check whether disabling the hook and explicitly using <code>handle</code> or <code>tap</code> operators improves the performance.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="instrumentation_of_reactive_libraries_before_reactor_3_5_3"><a class="anchor" href="#instrumentation_of_reactive_libraries_before_reactor_3_5_3"></a>Before Reactor 3.5.3</h3>
 <div class="paragraph">
-<p>The preferred way of propagating elements through the Flux using Reactor is not via <code>ThreadLocal</code>s but through Reactor Context. Reactor however gives you two operators, <code>tap()</code> and <code>handle()</code> where, if <a href="https://micrometer.io/docs/contextPropagation">Micrometer Context Propagation</a> library is on the classpath, it will set thread local values for you.</p>
+<p>The preferred way of propagating elements through the Flux by using Reactor is not through <code>ThreadLocal</code> instances but through Reactor Context. Reactor, however, gives you two operators: <code>tap()</code> and <code>handle()</code>. With these two operators, if the <a href="https://micrometer.io/docs/contextPropagation">Micrometer Context Propagation</a> library is on the classpath, it sets the thread local values for you.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the following example.</p>
+<p>Consider the following example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -750,10 +756,10 @@ then(block).isEqualTo(2);</code></pre>
 <h2 id="instrumentation_of_http_communication"><a class="anchor" href="#instrumentation_of_http_communication"></a>Instrumentation of HTTP Communication</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In order to instrument an HTTP-based communication we need to use the <code>RequestReplySenderContext</code> and <code>RequestReplyReceiverContext</code> for the client and server side respectively.</p>
+<p>To instrument an HTTP-based communication, we need to use the <code>RequestReplySenderContext</code> and <code>RequestReplyReceiverContext</code> for the client and server side, respectively.</p>
 </div>
 <div class="paragraph">
-<p>As an example for the client side we will use a handler that instruments the HTTP request by adding a <code>foo:bar</code> header (if you have Micrometer Tracing on the classpath you could reuse the <code>PropagatingSenderTracingObservationHandler</code> and <code>PropagatingReceiverTracingObservationHandler</code> to propagate tracing context over the wire). Let&#8217;s look at the example of such a handler.</p>
+<p>As an example for the client side, we use a handler that instruments the HTTP request by adding a <code>foo:bar</code> header (if you have Micrometer Tracing on the classpath, you could reuse the <code>PropagatingSenderTracingObservationHandler</code> and <code>PropagatingReceiverTracingObservationHandler</code> to propagate tracing context over the wire). Let&#8217;s consider an example of such a handler:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -773,7 +779,7 @@ then(block).isEqualTo(2);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the following code of HTTP client side instrumentation that reuses the handler.</p>
+<p>Consider the following HTTP client side instrumentation that reuses the handler:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -828,7 +834,7 @@ verify(getRequestedFor(urlEqualTo("/foo")).withHeader("foo", equalTo("bar")));</
 </div>
 </div>
 <div class="paragraph">
-<p>As an example for the server side we will use a handler that instruments the Observation by adding the <code>foo</code> low cardinality key with the value being the matched path from the HTTP request. Let&#8217;s look at the example of such a handler.</p>
+<p>As an example for the server side, we use a handler that instruments the Observation by adding the <code>foo</code> low cardinality key with the value being the matched path from the HTTP request. Consider an example of such a handler:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -850,7 +856,7 @@ verify(getRequestedFor(urlEqualTo("/foo")).withHeader("foo", equalTo("bar")));</
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the following of HTTP server side instrumentation that reuses the handler.</p>
+<p>Consider the following HTTP server side instrumentation that reuses the handler:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -916,13 +922,13 @@ try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
 <h2 id="_instrumentation_of_messaging_communication"><a class="anchor" href="#_instrumentation_of_messaging_communication"></a>Instrumentation of Messaging Communication</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In order to instrument a message-based communication we need to use the <code>SenderContext</code> and <code>ReceiverContext</code> for the producer and consumer side respectively.</p>
+<p>To instrument messaging-based communication we need to use the <code>SenderContext</code> and <code>ReceiverContext</code> for the producer and consumer side respectively.</p>
 </div>
 <div class="paragraph">
 <p>In this section we will create a simple instrumentation for Apache Kafka.</p>
 </div>
 <div class="paragraph">
-<p>As an example for the producer side we will use a handler that instruments the message by adding a <code>foo:bar</code> header (if you have Micrometer Tracing on the classpath you could reuse the <code>PropagatingSenderTracingObservationHandler</code> and <code>PropagatingReceiverTracingObservationHandler</code> to propagate tracing context over the wire). Let&#8217;s look at an example of the <code>KafkaSenderContext</code>.</p>
+<p>As an example for the producer side we will use a handler that instruments the message by adding a <code>foo:bar</code> header (if you have Micrometer Tracing on the classpath you could reuse the <code>PropagatingSenderTracingObservationHandler</code> and <code>PropagatingReceiverTracingObservationHandler</code> to propagate tracing context over the wire). Consider the following example of the <code>KafkaSenderContext</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -938,7 +944,7 @@ try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at an example of the aforementioned handler.</p>
+<p>Consider the following example of the aforementioned handler:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -959,7 +965,7 @@ try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the code that is the <code>ProducerInterceptor</code> for Kafka.</p>
+<p>Consider the following code that is the <code>ProducerInterceptor</code> for Kafka:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1003,7 +1009,7 @@ try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the following code of the producer side instrumentation that reuses the handler.</p>
+<p>Consider the following code of the producer side instrumentation that reuses the handler:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1031,7 +1037,7 @@ producer.flush();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>As an example for the consumer side we will use a handler that instruments the Observation by adding the <code>foo</code> low cardinality key with the value being the matched path from the message. Let&#8217;s look at an example of the <code>KafkaReceiverContext</code>.</p>
+<p>As an example for the consumer side, we use a handler that instruments the Observation by adding the <code>foo</code> low cardinality key with the value being the matched path from the message. Consider the following example of the <code>KafkaReceiverContext</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1054,7 +1060,7 @@ producer.flush();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at an example of the aforementioned handler.</p>
+<p>Consider the following example of the aforementioned handler.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1076,7 +1082,7 @@ producer.flush();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the code that is the <code>ConsumerInterceptor</code> for Kafka.</p>
+<p>Consider the following code that is the <code>ConsumerInterceptor</code> for Kafka:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1115,7 +1121,7 @@ producer.flush();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the following code of the consumer side instrumentation that reuses the handler.</p>
+<p>Consider the following code of the consumer side instrumentation that reuses the handler:</p>
 </div>
 <div class="listingblock">
 <div class="content">

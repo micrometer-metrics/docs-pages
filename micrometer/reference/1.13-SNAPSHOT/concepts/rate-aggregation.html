@@ -197,6 +197,9 @@
     <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -336,6 +339,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
@@ -479,7 +485,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Representing a counter without rate aggregation over some time window is rarely useful, as the representation is a function of both the rapidity with which the counter is incremented and the longevity of the service. In the preceding example, the counter drops back to zero on service restart. The rate-aggregated graph would return back to a value around 55 as soon as the new instance (say on a production deployment) was in service.</p>
+<p>Representing a counter without rate aggregation over some time window is rarely useful, as the representation is a function of both the rapidity with which the counter is incremented and the longevity of the service. In the preceding example, the counter drops back to zero on service restart. The rate-aggregated graph would return back to a value of around 55 as soon as the new instance (say on a production deployment) was in service.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -509,15 +515,15 @@ For most production purposes, whether it be alerting, automated canary analysis,
 <div class="paragraph">
 <p>Two other classes of monitoring system either:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Expect rate-aggregated data. Given the key insight that for most production purposes, we should be basing our decisions off of rates rather than absolute values, such systems benefit from having to do less math to satisfy queries.</p>
+<p>Expect rate-aggregated data. Given the key insight that, for most production purposes, we should be basing our decisions off of rates rather than absolute values. Such systems benefit from having to do less math to satisfy queries.</p>
 </li>
 <li>
 <p>Have relatively little or no math operations that would let us rate-aggregate data through our queries. For these systems, publishing pre-aggregated data is the only way to build meaningful representations.</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="paragraph">
 <p>Micrometer efficiently maintains rate data by means of a step value that accumulates data for the current publishing interval. When the step value is polled (when publishing, for example), if the step value detects that the current interval has elapsed, it moves current data to &#8220;previous&#8221; state. This previous state is what is reported until the next time current data overwrites it. The following image shows the interaction of current and previous state, along with polling:</p>
@@ -544,7 +550,7 @@ For most production purposes, whether it be alerting, automated canary analysis,
 </ol>
 </div>
 <div class="paragraph">
-<p>The <code>count</code> statistic is meaningful by itself: It is a measure of <em>throughput</em>. <code>totalTime</code> represents the total latency of all requests in the interval. Additionally:</p>
+<p>The <code>count</code> statistic is meaningful by itself: It is a measure of <em>throughput</em>. <code>totalTime</code> represents the total latency of all requests in the interval. Additionally, consider:</p>
 </div>
 <div class="paragraph">
 <p><code>totalTime / count</code> = 2 seconds / 20 requests = 0.1 seconds / request = 100 ms / request</p>
@@ -558,7 +564,7 @@ For most production purposes, whether it be alerting, automated canary analysis,
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Micrometer reported &#8220;20 requests&#8221; for <code>count</code> on every 10 second interval. The monitoring system sums these six 10 second intervals and arrives at the conclusion that there are 120 requests / minute. Note that it is the monitoring system doing this summation, not Micrometer.</p>
+<p>Micrometer reported &#8220;20 requests&#8221; for <code>count</code> on every 10-second interval. The monitoring system sums these six 10-second intervals and arrives at the conclusion that there are 120 requests / minute. Note that it is the monitoring system doing this summation, not Micrometer.</p>
 </li>
 <li>
 <p>Micrometer reported &#8220;2 seconds&#8221; of <code>totalTime</code> on every 10 second interval. The monitoring system can sum all total time statistics over the minute to yield &#8220;12 seconds&#8221; of total time in the minute interval. Then, the average latency is as we expect: 12 seconds / 120 requests = 100 ms / request.</p>

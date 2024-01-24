@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -336,6 +339,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
@@ -535,7 +541,7 @@ MeterRegistry registry = new GangliaMeterRegistry(gangliaConfig, Clock.SYSTEM);<
 </div>
 </div>
 <div class="paragraph">
-<p>Micrometer uses Dropwizard Metrics as the underlying instrumentation library when recording metrics destined for Ganglia. <code>GangliaConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you  instead bind it to a property source, you can override the default configuration. For example, Micrometer&#8217;s Spring Boot support binds properties that are prefixed with <code>management.metrics.export.ganglia</code> directly to the <code>GangliaConfig</code>:</p>
+<p>Micrometer uses Dropwizard Metrics as the underlying instrumentation library when recording metrics destined for Ganglia. <code>GangliaConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration. For example, Micrometer&#8217;s Spring Boot support binds properties that are prefixed with <code>management.metrics.export.ganglia</code> directly to the <code>GangliaConfig</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">

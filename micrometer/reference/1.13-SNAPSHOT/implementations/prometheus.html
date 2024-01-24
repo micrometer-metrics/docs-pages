@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -338,6 +341,9 @@
     <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -460,7 +466,7 @@
 <li><a href="#implementations-installing">1. Installing</a></li>
 <li><a href="#_configuring">2. Configuring</a>
 <ul class="sectlevel2">
-<li><a href="#_scrape_format">2.1. Scrape format</a></li>
+<li><a href="#_scrape_format">2.1. Scrape Format</a></li>
 <li><a href="#_the_prometheus_rename_filter">2.2. The Prometheus Rename Filter</a></li>
 </ul>
 </li>
@@ -512,7 +518,7 @@ Prometheus is designed to operate on a pull model, periodically scraping metrics
 <div class="sectionbody">
 <div class="paragraph">
 <p>Prometheus expects to scrape or poll individual application instances for metrics.
-In addition to creating a Prometheus registry, you also need to expose an HTTP endpoint to Prometheus' scraper.
+In addition to creating a Prometheus registry, you also need to expose an HTTP endpoint to Prometheus&#8217;s scraper.
 In a Spring Boot application, a <a href="https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/#prometheus">Prometheus actuator endpoint</a> is auto-configured in the presence of Spring Boot Actuator.
 Otherwise, you can use any JVM-based HTTP server implementation to expose scrape data to Prometheus.</p>
 </div>
@@ -548,7 +554,7 @@ try {
 </table>
 </div>
 <div class="paragraph">
-<p>You can alternatively use <code>io.prometheus.client.exporter.HTTPServer</code> that you can find in <code>io.prometheus:simpleclient_httpserver</code>:</p>
+<p>You can alternatively use <code>io.prometheus.client.exporter.HTTPServer</code>, which you can find in <code>io.prometheus:simpleclient_httpserver</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -558,7 +564,7 @@ new HTTPServer(new InetSocketAddress(8080), prometheusRegistry.getPrometheusRegi
 </div>
 </div>
 <div class="paragraph">
-<p>Another alternative can be <code>io.prometheus.client.exporter.MetricsServlet</code> that you can find in <code>io.prometheus:simpleclient_servlet</code> in case your app is running in a servlet container (e.g.: Tomcat):</p>
+<p>Another alternative can be <code>io.prometheus.client.exporter.MetricsServlet</code>, which you can find in <code>io.prometheus:simpleclient_servlet</code> in case your app is running in a servlet container (such as Tomcat):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -567,9 +573,9 @@ HttpServlet metricsServlet = new MetricsServlet(prometheusRegistry.getPrometheus
 </div>
 </div>
 <div class="sect2">
-<h3 id="_scrape_format"><a class="anchor" href="#_scrape_format"></a>2.1. Scrape format</h3>
+<h3 id="_scrape_format"><a class="anchor" href="#_scrape_format"></a>2.1. Scrape Format</h3>
 <div class="paragraph">
-<p>By default, the <a href="https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format">Prometheus text format</a> is returned from the <code>PrometheusMeterRegistry</code> <code>scrape()</code> method.</p>
+<p>By default, the <code>PrometheusMeterRegistry</code> <code>scrape()</code> method returns the <a href="https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format">Prometheus text format</a>.</p>
 </div>
 <div class="paragraph">
 <p>The <a href="https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md">OpenMetrics</a> format can also be produced.
@@ -582,13 +588,13 @@ For example, to get the OpenMetrics 1.0.0 format scrape, you could use the Prome
 </div>
 </div>
 <div class="paragraph">
-<p>In Spring Boot applications, the <a href="https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/#prometheus">Prometheus Actuator endpoint</a> supports scraping in either format, defaulting to the Prometheus text format in absence of a specific <code>Accept</code> header.</p>
+<p>In Spring Boot applications, the <a href="https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/#prometheus">Prometheus Actuator endpoint</a> supports scraping in either format, defaulting to the Prometheus text format in the absence of a specific <code>Accept</code> header.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_the_prometheus_rename_filter"><a class="anchor" href="#_the_prometheus_rename_filter"></a>2.2. The Prometheus Rename Filter</h3>
 <div class="paragraph">
-<p>In some cases, Micrometer provides instrumentation that overlaps with commonly used Prometheus simple client modules but has chosen a different naming scheme for consistency and portability.
+<p>In some cases, Micrometer provides instrumentation that overlaps with the commonly used Prometheus simple client modules but has chosen a different naming scheme for consistency and portability.
 If you wish to use the Prometheus "standard" names, add the following filter:</p>
 </div>
 <div class="listingblock">
@@ -646,7 +652,7 @@ See the <a href="https://prometheus.io/docs/querying/basics">Prometheus docs</a>
 </div>
 <div class="paragraph">
 <p>Instead of using the <code>job</code> tag to distinguish different applications, this dashboard makes use of a common tag called <code>application</code>, which is applied to every metric.
-You can apply the common tag as follows:</p>
+You can apply the common tag, as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -703,7 +709,7 @@ You can apply the common tag as follows:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Representing a counter without rate normalization over some time window is rarely useful, as the representation is a function of both the rapidity with which the counter is incremented and the longevity of the service.</p>
+<p>Again, representing a counter without rate normalization over some time window is rarely useful, as the representation is a function of both the rapidity with which the counter is incremented and the longevity of the service.</p>
 </div>
 <div class="paragraph">
 <p>Using the following Prometheus queries, we can graph the most commonly used statistics about timers:</p>
@@ -728,7 +734,7 @@ You can apply the common tag as follows:</p>
 <div class="sect2">
 <h3 id="_long_task_timers"><a class="anchor" href="#_long_task_timers"></a>3.4. Long task timers</h3>
 <div class="paragraph">
-<p>The Prometheus query to plot the duration of a long task timer for a serial task is <code>long_task_timer_sum</code>. In Grafana, we can set an alert threshold at some fixed point.</p>
+<p>The following example shows a Prometheus query to plot the duration of a long task timer for a serial task is <code>long_task_timer_sum</code>. In Grafana, we can set an alert threshold at some fixed point.</p>
 </div>
 <div class="imageblock">
 <div class="content">
