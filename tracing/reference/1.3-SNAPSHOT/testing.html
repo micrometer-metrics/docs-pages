@@ -263,45 +263,45 @@
 <h2 id="_testing"><a class="anchor" href="#_testing"></a>Testing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer Tracing comes with <code>micrometer-tracing-test</code> and <code>micrometer-tracing-integration-test</code> modules.</p>
+<p>Micrometer Tracing includes the <code>micrometer-tracing-test</code> and <code>micrometer-tracing-integration-test</code> modules.</p>
 </div>
 <div class="paragraph">
-<p>For unit tests it provides a <code>SimpleTracer</code> that is a test implementation of a <code>Tracer</code>.</p>
+<p>For unit tests, it provides a <code>SimpleTracer</code> that is a test implementation of a <code>Tracer</code>.</p>
 </div>
 <div class="paragraph">
-<p>For the integration tests it provides a <code>SampleTestRunner</code> mechanism that you can hook into your samples.
-It will</p>
+<p>For integration tests, it provides a <code>SampleTestRunner</code> mechanism that you can hook into your samples.
+It:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Configure an OpenZipkin Brave Tracer</p>
+<p>Configures an OpenZipkin Brave Tracer</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Set it up with Tanzu Observability by Wavefront Reporter</p>
+<p>Sets it up with Tanzu Observability by Wavefront Reporter</p>
 </li>
 <li>
-<p>Set it up with OpenZipkin Zipkin Reporter</p>
+<p>Sets it up with OpenZipkin Zipkin Reporter</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Configure an OpenTelemetry Tracer</p>
+<p>Configures an OpenTelemetry Tracer</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Set it up with Tanzu Observability by Wavefront Exporter</p>
+<p>Sets it up with Tanzu Observability by Wavefront Exporter</p>
 </li>
 <li>
-<p>Set it up with OpenZipkin Zipkin Exporter</p>
+<p>Sets it up with OpenZipkin Zipkin Exporter</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Run all the combinations above against the user code and running infrastructure</p>
+<p>Runs all the combinations above against the user code and running infrastructure</p>
 </li>
 </ul>
 </div>
@@ -337,7 +337,7 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
 <div class="sect2">
 <h3 id="_running_tracing_unit_tests"><a class="anchor" href="#_running_tracing_unit_tests"></a>Running Tracing Unit Tests</h3>
 <div class="paragraph">
-<p>To run unit tests of your custom handler you may want to use the <code>SimpleTracer</code> test <code>Tracer</code> implementation. Let&#8217;s assume the following custom <code>TracingObservationHandler</code>.</p>
+<p>To run unit tests of your custom handler, you may want to use the <code>SimpleTracer</code> test <code>Tracer</code> implementation. Let&#8217;s assume the following custom <code>TracingObservationHandler</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -383,7 +383,7 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
 </div>
 </div>
 <div class="paragraph">
-<p>To verify whether the spans got properly created we can use the <code>SimpleTracer</code> as follows:</p>
+<p>To verify whether the spans got properly created we can use the <code>SimpleTracer</code>, as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -429,18 +429,18 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
 <div class="sect2">
 <h3 id="_running_integration_tests"><a class="anchor" href="#_running_integration_tests"></a>Running integration tests</h3>
 <div class="paragraph">
-<p>The following example shows how you can run your code to test your integrations</p>
+<p>The following example shows how you can run your code to test your integrations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>by asserting spans that were stored without emitting them to a reporting system</p>
+<p>By asserting spans that were stored without emitting them to a reporting system</p>
 </li>
 <li>
-<p>against running Tanzu Observability by Wavefront instance (this option turns on when you have passed the Wavefront related configuration in the constructor - otherwise the test will be disabled)</p>
+<p>Against running Tanzu Observability by Wavefront instance (this option turns on when you have passed the Wavefront related configuration in the constructor - otherwise the test will be disabled)</p>
 </li>
 <li>
-<p>against running Zipkin instance (this option turns on when Zipkin is running - otherwise the test will be disabled)</p>
+<p>Against running Zipkin instance (this option turns on when Zipkin is running - otherwise the test will be disabled)</p>
 </li>
 </ul>
 </div>

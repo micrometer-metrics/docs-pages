@@ -279,7 +279,7 @@ It is designed to add little to no overhead to your tracing collection activity 
 </div>
 <div class="paragraph">
 <p>It also provides a tracing extension to Micrometer&#8217;s <code>ObservationHandler</code> (from Micrometer 1.10.0).
-Whenever an <code>Observation</code> is used, a corresponding span will be created, started, stopped and reported.</p>
+Whenever an <code>Observation</code> is used, a corresponding span is created, started, stopped and reported.</p>
 </div>
 </div>
 </div>
@@ -287,7 +287,7 @@ Whenever an <code>Observation</code> is used, a corresponding span will be creat
 <h2 id="tracing-installing"><a class="anchor" href="#tracing-installing"></a>Installing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer Tracing comes with a Bill of Materials (BOM) which is a project that contains all the project versions for you.</p>
+<p>Micrometer Tracing comes with a Bill of Materials (BOM), which is a project that contains all the project versions for you.</p>
 </div>
 <div class="paragraph">
 <p>The following example shows the required dependency in Gradle:</p>
@@ -324,8 +324,8 @@ implementation 'io.micrometer:micrometer-tracing'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You should add a tracing bridge you want to use, such as <code>micrometer-tracing-bridge-brave</code> or <code>micrometer-tracing-bridge-otel</code> and span exporters / reporters.
-In case of adding a bridge the <code>micrometer-tracing</code> library is added transitively.</p>
+<p>You should add a tracing bridge, such as <code>micrometer-tracing-bridge-brave</code> or <code>micrometer-tracing-bridge-otel</code> and span exporters / reporters.
+When you add a bridge, the <code>micrometer-tracing</code> library is added transitively.</p>
 </div>
 </div>
 </div>

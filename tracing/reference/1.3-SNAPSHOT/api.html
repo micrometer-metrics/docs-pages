@@ -264,12 +264,12 @@
 <h2 id="_using_micrometer_tracing_directly"><a class="anchor" href="#_using_micrometer_tracing_directly"></a>Using Micrometer Tracing Directly</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section we will describe how to use the Micrometer Tracing API directly to create and report spans.</p>
+<p>In this section, we describe how to use the Micrometer Tracing API to directly create and report spans.</p>
 </div>
 <div class="sect2">
 <h3 id="_micrometer_tracing_examples"><a class="anchor" href="#_micrometer_tracing_examples"></a>Micrometer Tracing Examples</h3>
 <div class="paragraph">
-<p>Below you can see basic operations on a span. Please read the comments in the snippet for details.</p>
+<p>The following example shows the basic operations on a span. Read the comments in the snippet for details:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -295,7 +295,7 @@ finally {
 </div>
 </div>
 <div class="paragraph">
-<p>Below you can see how to continue a span in a new thread, that was started in another thread.</p>
+<p>The following example shows how to continue a span in a new thread that was started in another thread:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -318,7 +318,7 @@ finally {
 </div>
 </div>
 <div class="paragraph">
-<p>Below you can see how to create a child span when explicitly knowing who the parent span is.</p>
+<p>The following example shows how to create a child span when explicitly knowing who the parent span is:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -342,10 +342,10 @@ newSpan.end();</code></pre>
 <div class="sect2">
 <h3 id="_micrometer_tracing_brave_setup"><a class="anchor" href="#_micrometer_tracing_brave_setup"></a>Micrometer Tracing Brave Setup</h3>
 <div class="paragraph">
-<p>In this subsection we will set up Micrometer Tracing with Brave.</p>
+<p>In this subsection, we set up Micrometer Tracing with Brave.</p>
 </div>
 <div class="paragraph">
-<p>Below you can see how to create a Micrometer Tracing <code>Tracer</code> using Brave components that would send completed spans to Zipkin.</p>
+<p>The following example shows how to create a Micrometer Tracing <code>Tracer</code> by using Brave components that would send completed spans to Zipkin:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -397,10 +397,10 @@ Tracer tracer = new BraveTracer(this.braveTracer, this.bridgeContext, new BraveB
 <div class="sect2">
 <h3 id="_micrometer_tracing_opentelemetry_setup"><a class="anchor" href="#_micrometer_tracing_opentelemetry_setup"></a>Micrometer Tracing OpenTelemetry Setup</h3>
 <div class="paragraph">
-<p>In this subsection we will set up Micrometer Tracing with OpenTelemetry (OTel).</p>
+<p>In this subsection, we set up Micrometer Tracing with OpenTelemetry (OTel).</p>
 </div>
 <div class="paragraph">
-<p>Below you can see how to create a Micrometer Tracing <code>Tracer</code> using OTel components that would send completed spans to Zipkin.</p>
+<p>The following example shows how to create a Micrometer Tracing <code>Tracer</code> by using OTel components that would send completed spans to Zipkin:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -456,10 +456,10 @@ OtelTracer tracer = new OtelTracer(otelTracer, otelCurrentTraceContext, event -&
 <div class="sect2">
 <h3 id="_micrometer_tracing_baggage_api"><a class="anchor" href="#_micrometer_tracing_baggage_api"></a>Micrometer Tracing Baggage API</h3>
 <div class="paragraph">
-<p>Traces connect from service to service using header propagation. Besides trace identifiers, other properties (called <code>Baggage</code>) can also be passed along with the request.</p>
+<p>Traces connect from application to application by using header propagation. Besides trace identifiers, other properties (called <code>Baggage</code>) can also be passed along with the request.</p>
 </div>
 <div class="paragraph">
-<p>Below you can find an example on how to use the Tracer API to create and extract baggage.</p>
+<p>The following example shows how to use the Tracer API to create and extract baggage:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -512,7 +512,7 @@ then(tracer.getBaggage("from_span").get(span.context())).as("[Out of scope - wit
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-For Brave, remember to set up the <code>PropagationFactory</code> so that it contains the baggage fields that you will be using in your code. Check the example below for details.
+For Brave, remember to set up the <code>PropagationFactory</code> so that it contains the baggage fields that you will be using in your code. Check the following example for details:
 </td>
 </tr>
 </table>
@@ -538,7 +538,7 @@ For Brave, remember to set up the <code>PropagationFactory</code> so that it con
 <div class="sect2">
 <h3 id="_aspect_oriented_programming"><a class="anchor" href="#_aspect_oriented_programming"></a>Aspect Oriented Programming</h3>
 <div class="paragraph">
-<p>Micrometer Tracing contains a <code>@NewSpan</code>, <code>@ContinueSpan</code> and <code>@SpanTag</code> annotations that frameworks can use to create or customize spans for either specific types of methods such as those serving web request endpoints or, more generally, to all methods.</p>
+<p>Micrometer Tracing contains <code>@NewSpan</code>, <code>@ContinueSpan</code>, and <code>@SpanTag</code> annotations that frameworks can use to create or customize spans for either specific types of methods such as those serving web request endpoints or, more generally, to all methods.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -553,7 +553,7 @@ Micrometer&#8217;s Spring Boot configuration does <em>not</em> recognize these a
 </table>
 </div>
 <div class="paragraph">
-<p>An AspectJ aspect is included. You can use it in your application either through compile/load time AspectJ weaving or through framework facilities that interpret AspectJ aspects and proxy targeted methods in some other way, such as Spring AOP. Here is a sample Spring AOP configuration:</p>
+<p>An AspectJ aspect is included. You can use it in your application, either through compile/load time AspectJ weaving or through framework facilities that interpret AspectJ aspects and proxy targeted methods in some other way, such as Spring AOP. Here is a sample Spring AOP configuration:</p>
 </div>
 <div class="listingblock">
 <div class="content">

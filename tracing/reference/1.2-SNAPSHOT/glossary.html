@@ -288,19 +288,19 @@ For example, if you run a distributed big-data store, a trace might be formed by
 </div>
 <div class="paragraph">
 <p><strong>Tracer</strong>: A library that handles the lifecycle of a span.
-It can create, start, stop and report spans to an external system via reporters / exporters.</p>
+It can create, start, stop, and report spans to an external system via reporters / exporters.</p>
 </div>
 <div class="paragraph">
-<p><strong>Tracing context</strong>: For distributed tracing to work the tracing context (trace identifier, span identifier, etc.) must be propagated through the process (e.g. over threads) and over the network.</p>
+<p><strong>Tracing context</strong>: For distributed tracing to work, the tracing context (trace identifier, span identifier, and so on) must be propagated through the process (for example, over threads) and over the network.</p>
 </div>
 <div class="paragraph">
-<p><strong>Log correlation</strong>: Parts of the tracing context (e.g. trace identifier, span identifier) can be populated to the logs of a given application.
-One can then collect all logs in a single storage and group them via trace id.
-That way one can get all logs, for a single business operation (trace) from all services put in a chronological order.</p>
+<p><strong>Log correlation</strong>: Parts of the tracing context (such as the trace identifier and the span identifier) can be populated to the logs of a given application.
+One can then collect all logs in a single storage and group them with a trace ID.
+That way, you can get all logs, for a single business operation (trace) from all services put in a chronological order.</p>
 </div>
 <div class="paragraph">
 <p><strong>Latency analysis tools</strong>: A tool that collects exported spans and visualizes the whole trace.
-Allows easy latency analysis.</p>
+Such a tool allows easy latency analysis.</p>
 </div>
 <div class="paragraph">
 <p>The following image shows how <strong>Span</strong> and <strong>Trace</strong> look in a system.</p>
@@ -340,10 +340,10 @@ Span Id = C
 </div>
 </div>
 <div class="paragraph">
-<p>You can continue with a created span (example with <code>no custom span</code> indication) or you can create child spans manually (example with <code>custom span</code> indication).</p>
+<p>You can continue with a created span (example with <code>no custom span</code> indication), or you can create child spans manually (example with <code>custom span</code> indication).</p>
 </div>
 <div class="paragraph">
-<p>The following image shows how parent-child relationships of spans look:</p>
+<p>The following image shows how the parent-child relationships of spans look:</p>
 </div>
 <div class="imageblock">
 <div class="content">
