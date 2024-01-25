@@ -626,7 +626,7 @@ my_other_gauge_seconds 0.004</code></pre>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer supports one last special type of <code>Gauge</code>, called a <code>MultiGauge</code>, to help manage gauging a growing or shrinking list of criteria.
-This feature lets you select a set of well-bounded but slightly changing set of criteria from something like an SQL query and report some metric for each row as a <code>Gauge</code>. The following example creates a <code>MultiGauge</code>:</p>
+This feature lets you select a set of well-bounded but slightly changing set of criteria from something like an SQL query and report each <code>Row</code> (see the example below) as a <code>Gauge</code>. The following example creates a <code>MultiGauge</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -639,11 +639,12 @@ MultiGauge statuses = MultiGauge.builder("statuses")
 
 ...
 
-// run this periodically whenever you re-run your query
+// run this whenever you re-run your query
 statuses.register(
     resultSet.stream()
         .map(result -&gt; Row.of(Tags.of("status", result.getAsString("status")), result.getAsInt("count")))
-        .collect(toList())
+        .collect(toList()),
+    true // whether to overwrite the previous value or only record it once
 );</code></pre>
 </div>
 </div>
