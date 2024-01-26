@@ -674,7 +674,7 @@ parent.stop();</code></pre>
 <div class="sect2">
 <h3 id="instrumentation_of_reactive_libraries_before_reactor_3_5_3"><a class="anchor" href="#instrumentation_of_reactive_libraries_before_reactor_3_5_3"></a>Before Reactor 3.5.3</h3>
 <div class="paragraph">
-<p>The preferred way of propagating elements through the Flux by using Reactor is not through <code>ThreadLocal</code> instances but through Reactor Context. Reactor, however, gives you two operators: <code>tap()</code> and <code>handle()</code>. With these two operators, if the <a href="https://micrometer.io/docs/contextPropagation">Micrometer Context Propagation</a> library is on the classpath, it sets the thread local values for you.</p>
+<p>The preferred way of propagating elements through the Flux by using Reactor is not through <code>ThreadLocal</code> instances but through Reactor Context. Reactor, however, gives you two operators: <code>tap()</code> and <code>handle()</code>. With these two operators, if the <a href="https://docs.micrometer.io/context-propagation/reference/">Micrometer Context Propagation</a> library is on the classpath, it sets the thread local values for you.</p>
 </div>
 <div class="paragraph">
 <p>Consider the following example:</p>
