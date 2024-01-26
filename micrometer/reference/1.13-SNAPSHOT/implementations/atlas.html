@@ -555,7 +555,7 @@ MeterRegistry registry = new AtlasMeterRegistry(atlasConfig, Clock.SYSTEM);</cod
 <p>Atlas serves up graphs in the form of PNG images (and other <a href="https://github.com/Netflix/atlas/wiki/Output-Formats">output formats</a> as well).</p>
 </div>
 <div class="paragraph">
-<p>We use the following query to visualize the counter from Atlas. Note that the value is rate-normalized over the step interval rather than monotonically increasing. Atlas always expects <a href="/docs/concepts#_client_side">rate-aggregated</a> data for counters from Micrometer.</p>
+<p>We use the following query to visualize the counter from Atlas. Note that the value is rate-normalized over the step interval rather than monotonically increasing. Atlas always expects <a href="../concepts/rate-aggregation.html#_client_side" class="xref page">rate-aggregated</a> data for counters from Micrometer.</p>
 </div>
 <div class="imageblock">
 <div class="content">
