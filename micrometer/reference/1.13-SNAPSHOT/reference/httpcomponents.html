@@ -496,9 +496,9 @@ try (CloseableHttpClient client = classicClient()) {
 }
 assertThat(observationRegistry).hasObservationWithNameEqualTo(DEFAULT_METER_NAME)
     .that()
-    .hasLowCardinalityKeyValue("outcome", "SUCCESS")
-    .hasLowCardinalityKeyValue("status", "200")
-    .hasLowCardinalityKeyValue("method", "GET");</code></pre>
+    .hasLowCardinalityKeyValue(OUTCOME.withValue("SUCCESS"))
+    .hasLowCardinalityKeyValue(STATUS.withValue("200"))
+    .hasLowCardinalityKeyValue(METHOD.withValue("GET"));</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -521,9 +521,9 @@ try (CloseableHttpAsyncClient client = asyncClient()) {
 }
 assertThat(observationRegistry).hasObservationWithNameEqualTo(DEFAULT_METER_NAME)
     .that()
-    .hasLowCardinalityKeyValue("outcome", "SUCCESS")
-    .hasLowCardinalityKeyValue("status", "200")
-    .hasLowCardinalityKeyValue("method", "GET");</code></pre>
+    .hasLowCardinalityKeyValue(OUTCOME.withValue("SUCCESS"))
+    .hasLowCardinalityKeyValue(STATUS.withValue("200"))
+    .hasLowCardinalityKeyValue(METHOD.withValue("GET"));</code></pre>
 </div>
 </div>
 <nav class="pagination">
