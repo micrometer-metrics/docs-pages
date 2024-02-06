@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-02-06T04:48:52.442Z",
+  "generated": "2024-02-06T15:00:44.189Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -247,9 +247,9 @@
               "title": "Micrometer Observation"
             },
             {
-              "path": "observation/handler.adoc",
-              "url": "/1.13-SNAPSHOT/observation/handler.html",
-              "title": "Observation Handler"
+              "path": "observation/components.adoc",
+              "url": "/1.13-SNAPSHOT/observation/components.html",
+              "title": "Observation Components"
             },
             {
               "path": "observation/installing.adoc",
@@ -598,9 +598,9 @@
               "title": "Micrometer Observation"
             },
             {
-              "path": "observation/handler.adoc",
-              "url": "/1.12-SNAPSHOT/observation/handler.html",
-              "title": "Observation Handler"
+              "path": "observation/components.adoc",
+              "url": "/1.12-SNAPSHOT/observation/components.html",
+              "title": "Observation Components"
             },
             {
               "path": "observation/installing.adoc",

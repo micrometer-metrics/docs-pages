@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Observation Handler :: Micrometer</title>
-    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/observation/handler.html">
+    <title>Observation Components :: Micrometer</title>
     <link rel="prev" href="introduction.html">
     <link rel="next" href="instrumenting.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
@@ -344,7 +343,7 @@
     <a class="nav-link" href="introduction.html">Introduction</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="handler.html">Observation Handlers</a>
+    <a class="nav-link" href="components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="instrumenting.html">Instrumenting</a>
@@ -396,13 +395,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="Observation Handler"
+      data-title="Observation Components"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/edit/main/docs/modules/ROOT/pages/observation/handler.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/edit/main/docs/modules/ROOT/pages/observation/components.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -441,7 +440,7 @@
   <ul>
     <li><a href="../index.html">Micrometer</a></li>
     <li><a href="../observation.html">Micrometer Observation</a></li>
-    <li><a href="handler.html">Observation Handlers</a></li>
+    <li><a href="components.html">Components</a></li>
   </ul>
 </nav>
 <article>
@@ -453,14 +452,90 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../observation/handler.html">Micrometer 1.12.2</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../index.html">Micrometer 1.12.2</a>!</p>
         </div>
       </td>
     </tr></tbody>
   </table>
 </div>
-<h1 id="page-title" class="page">Observation Handler</h1>
+<h1 id="page-title" class="page">Observation Components</h1>
 <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section we will describe main components related to Micrometer Observation.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#micrometer-observation-context">Observation Context</a></p>
+</li>
+<li>
+<p><a href="#micrometer-observation-handler">Observation Handler</a></p>
+</li>
+<li>
+<p><a href="#micrometer-observation-events">Signaling Errors and Arbitrary Events</a></p>
+</li>
+<li>
+<p><a href="#micrometer-observation-convention-example">Observation Convention</a></p>
+</li>
+<li>
+<p><a href="#micrometer-observation-predicates-filters">Observation Predicates and Filters</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Micrometer Observation basic flow</strong></p>
+</div>
+<div class="paragraph">
+<p><code>Observation</code> through <code>ObservationRegistry</code> gets created with a mutable <code>Observation.Context</code>. On each Micrometer Observation lifecycle action (e.g. <code>start()</code>) a corresponding <code>ObservationHandler</code> method is called (e.g. <code>onStart</code>) with the mutable <code>Observation.Context</code> as argument.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">┌───────────────────┐┌───────┐
+│ObservationRegistry││Context│
+└┬──────────────────┘└┬──────┘
+┌▽────────────────────▽┐
+│Observation           │
+└┬─────────────────────┘
+┌▽──────┐
+│Handler│
+└───────┘</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Micrometer Observation detailed flow</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">┌───────────────────┐┌───────┐┌─────────────────────┐┌────────────────────┐
+│ObservationRegistry││Context││ObservationConvention││ObservationPredicate│
+└┬──────────────────┘└┬──────┘└┬────────────────────┘└┬───────────────────┘
+┌▽────────────────────▽────────▽──────────────────────▽┐
+│Observation                                           │
+└┬─────────────────────────────────────────────────────┘
+┌▽──────┐
+│Handler│
+└┬──────┘
+┌▽────────────────┐
+│ObservationFilter│
+└─────────────────┘</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Observation</code> through <code>ObservationRegistry</code> gets created with a mutable <code>Observation.Context</code>. To allow name and key-value customization, an <code>ObservationConvention</code> can be used instead of direct name setting. List of <code>ObservationPredicate</code> is run to verify if an <code>Observation</code> should be created instead of a no-op version.  On each Micrometer Observation lifecycle action (e.g. <code>start()</code>) a corresponding <code>ObservationHandler</code> method is called (e.g. <code>onStart</code>) with the mutable <code>Observation.Context</code> as argument. On <code>Observation</code> stop, before calling the <code>ObservationHandler</code> <code>onStop</code> methods, list of <code>ObservationFilter</code> is called to optionally further modify the <code>Observation.Context</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="micrometer-observation-context"><a class="anchor" href="#micrometer-observation-context"></a>Observation.Context</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To pass information between the instrumented code and the handler (or between handler methods, such as <code>onStart</code> and <code>onStop</code>), you can use an <code>Observation.Context</code>. An <code>Observation.Context</code> is a <code>Map</code>-like container that can store values for you while your handler can access the data inside the context.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="micrometer-observation-handler"><a class="anchor" href="#micrometer-observation-handler"></a>Observation Handler</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A popular way to record Observations is storing the start state in a <code>Timer.Sample</code> instance and stopping it when the event has ended.
@@ -491,19 +566,8 @@ Observation.createNotStarted("my.operation", registry).observe(this::doSomeWorkH
 <p>Starting with Micrometer 1.10, you can register "handlers" (<code>ObservationHandler</code> instances) that are notified about the lifecycle event of an observation (for example, you can run custom code when an observation is started or stopped).
 Using this feature lets you add tracing capabilities to your existing metrics instrumentation (see: <code>DefaultTracingObservationHandler</code>). The implementation of these handlers does not need to be tracing related. It is completely up to you how you are going to implement them (for example, you can add logging capabilities).</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="micrometer-observation-context"><a class="anchor" href="#micrometer-observation-context"></a>Observation.Context</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To pass information between the instrumented code and the handler (or between handler methods, such as <code>onStart</code> and <code>onStop</code>), you can use an <code>Observation.Context</code>. An <code>Observation.Context</code> is a <code>Map</code>-like container that can store values for you while your handler can access the data inside the context.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="micrometer-observation-handler-example"><a class="anchor" href="#micrometer-observation-handler-example"></a>ObservationHandler Example</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="micrometer-observation-handler-example"><a class="anchor" href="#micrometer-observation-handler-example"></a>ObservationHandler Example</h3>
 <div class="paragraph">
 <p>Based on this, we can implement a simple handler that lets the users know about its invocations by printing them out to <code>stdout</code>:</p>
 </div>
@@ -582,6 +646,7 @@ catch (Exception ex) {
 finally {
     observation.stop();
 }</code></pre>
+</div>
 </div>
 </div>
 </div>
