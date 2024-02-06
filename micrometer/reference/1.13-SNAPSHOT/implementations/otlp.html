@@ -533,6 +533,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
         aggregationTemporality: "cumulative"
         headers:
           header1: value1
+        step: 30s
         resourceAttributes:
           key1: value1</code></pre>
 </div>
@@ -540,14 +541,17 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>url</code> - The URL to which data is reported. Defaults to <code><a href="http://localhost:4318/v1/metrics" class="bare">localhost:4318/v1/metrics</a></code></p>
+<p><code>url</code> - The URL to which data is reported. Environment variables <code>OTEL_EXPORTER_OTLP_METRICS_ENDPOINT</code> and <code>OTEL_EXPORTER_OTLP_ENDPOINT</code> are also supported in the default implementation. If a value is not provided, it defaults to <code><a href="http://localhost:4318/v1/metrics" class="bare">localhost:4318/v1/metrics</a></code></p>
 </li>
 <li>
-<p><code>aggregationTemporality</code> - <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality" target="_blank" rel="noopener">Aggregation temporality</a> determines how the additive quantities are expressed, in relation to time. The supported values are <code>cumulative</code> or <code>delta</code>. Defaults to <code>cumulative</code>.<br>
+<p><code>aggregationTemporality</code> - <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality" target="_blank" rel="noopener">Aggregation temporality</a> determines how the additive quantities are expressed, in relation to time. The environment variable <code>OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE</code> is supported by the default implementation. The supported values are <code>cumulative</code> or <code>delta</code>. Defaults to <code>cumulative</code>.<br>
 <strong>Note</strong>: This config was introduced in version 1.11.0.</p>
 </li>
 <li>
 <p><code>headers</code> - Additional headers to send with exported metrics. This can be used for authorization headers. By default, headers are loaded from the config. If that is not set, they can be taken from the environment variables <code>OTEL_EXPORTER_OTLP_HEADERS</code> and <code>OTEL_EXPORTER_OTLP_METRICS_HEADERS</code>. If a header is set in both the environmental variables, the header in the latter overrides the former.</p>
+</li>
+<li>
+<p><code>step</code> - the interval at which metrics will be published. The environment variable <code>OTEL_METRIC_EXPORT_INTERVAL</code> is supported by the default implementation. If a value is not provided, defaults to 1 minute.</p>
 </li>
 <li>
 <p><code>resourceAttributes</code> - <a href="https://opentelemetry.io/docs/specs/otel/resource/semantic_conventions/#service" target="_blank" rel="noopener">Resource attributes</a> are used for all metrics published. By default, Micrometer adds the following resource attributes:</p>
