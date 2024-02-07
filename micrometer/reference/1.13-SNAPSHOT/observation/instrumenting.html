@@ -519,257 +519,135 @@ Before you decide to instrument a project yourself, double-check whether that it
 <div class="sect2">
 <h3 id="instrumentation_of_http_communication_client"><a class="anchor" href="#instrumentation_of_http_communication_client"></a>Instrumentation of HTTP Client Communication</h3>
 <div class="paragraph">
-<p><strong>Basic explanation of HTTP client side instrumentation</strong></p>
+<p><strong>Explanation of HTTP client side instrumentation</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">┌─────────────────────────┐┌───────┐┌───────────────────┐┌───────────┐┌─────────────────────┐┌──────────────────┐
-│RequestReplySenderContext││Carrier││ObservationRegistry││Observation││ObservationConvention││Code to Instrument│
-└────────────┬────────────┘└───┬───┘└─────────┬─────────┘└─────┬─────┘└──────────┬──────────┘└────────┬─────────┘
-             │                 │              │                │                 │                    │
-             │      Wrap       │              │                │                 │                    │
-             │────────────────&gt;│              │                │                 │                    │
-             │                 │              │                │                 │                    │
-             │                 │              │     Create     │                 │                    │
-             │                 │              │───────────────&gt;│                 │                    │
-             │                 │              │                │                 │                    │
-             │                 │   Create     │                │                 │                    │
-             │────────────────────────────────────────────────&gt;│                 │                    │
-             │                 │              │                │                 │                    │
-             │                 │              │                │     Create      │                    │
-             │                 │              │                │&lt;────────────────│                    │
-             │                 │              │                │                 │                    │
-             │                 │              │                │            Wrap in Scope             │
-             │                 │              │                │─────────────────────────────────────&gt;│
-┌────────────┴────────────┐┌───┴───┐┌─────────┴─────────┐┌─────┴─────┐┌──────────┴──────────┐┌────────┴─────────┐
-│RequestReplySenderContext││Carrier││ObservationRegistry││Observation││ObservationConvention││Code to Instrument│
-└─────────────────────────┘└───────┘└───────────────────┘└───────────┘└─────────────────────┘└──────────────────┘</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">┌─────────────────────────────┐┌───────────┐┌───────────────────────┐┌───────────────┐┌─────────────────────────┐┌──────────────────────┐┌──────────────────────┐
+│[1] RequestReplySenderContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└──────────────┬──────────────┘└─────┬─────┘└───────────┬───────────┘└───────┬───────┘└────────────┬────────────┘└──────────┬───────────┘└──────────┬───────────┘
+               │                     │                  │                    │                     │                        │                       │
+               │        Wrap         │                  │                    │                     │                        │                       │
+               │────────────────────&gt;│                  │                    │                     │                        │                       │
+               │                     │                  │                    │                     │                        │                       │
+               │                     │                  │       Create       │                     │                        │                       │
+               │                     │                  │───────────────────&gt;│                     │                        │                       │
+               │                     │                  │                    │                     │                        │                       │
+               │                     │     Create       │                    │                     │                        │                       │
+               │────────────────────────────────────────────────────────────&gt;│                     │                        │                       │
+               │                     │                  │                    │                     │                        │                       │
+               │                     │                  │                    │       Create        │                        │                       │
+               │                     │                  │                    │&lt;────────────────────│                        │                       │
+               │                     │                  │                    │                     │                        │                       │
+               │                     │                  │                    │                   onStart                    │                       │
+               │                     │                  │                    │─────────────────────────────────────────────&gt;│                       │
+               │                     │                  │                    │                     │                        │                       │
+               │                     │                  │                    │                     │      Wrap in Scope     │                       │
+               │                     │                  │                    │─────────────────────────────────────────────────────────────────────&gt;│
+┌──────────────┴──────────────┐┌─────┴─────┐┌───────────┴───────────┐┌───────┴───────┐┌────────────┴────────────┐┌──────────┴───────────┐┌──────────┴───────────┐
+│[1] RequestReplySenderContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└─────────────────────────────┘└───────────┘└───────────────────────┘└───────────────┘└─────────────────────────┘└──────────────────────┘└──────────────────────┘</code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Create a <code>RequestReplySenderContext</code> that wraps a carrier (e.g. <code>HttpRequest</code>)</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<p>In the &lt;3&gt; <code>ObservationRegistry</code> register a &lt;6&gt; handler that will propagate context (e.g. <code>PropagatingSenderTracingObservationHandler</code> from Micrometer Tracing)</p>
+</li>
+<li>
+<p>Create a &lt;1&gt; <code>RequestReplySenderContext</code> that wraps a &lt;2&gt; carrier (e.g. <code>HttpRequest</code>)</p>
+<div class="ulist">
+<ul>
 <li>
 <p>In its constructor explain how to enrich the headers (e.g. <code>(key, value) &#8594; httpRequest.header(key, value)</code>)</p>
 </li>
 <li>
-<p>Set the carrier on the <code>RequestReplySenderContext</code></p>
+<p>Set the &lt;2&gt; carrier on the &lt;1&gt; <code>RequestReplySenderContext</code></p>
 </li>
-</ol>
+</ul>
 </div>
 </li>
 <li>
-<p>Create an <code>Observation</code>, optionally using the <code>ObservationConvention</code> with the sender context</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;5&gt; <code>ObservationConvention</code> with the sender context</p>
+<div class="ulist">
+<ul>
 <li>
-<p>On <code>Observation</code> start, assuming that there is a proper registered handler through the <code>ObservationRegistry</code>, propagation will happen (e.g. carrier will be enriched with proper headers)</p>
+<p>On &lt;4&gt; <code>Observation</code> start, propagation will happen (e.g. carrier will be enriched with proper headers) via an &lt;6&gt; <code>ObservationHandler</code></p>
 </li>
-</ol>
+</ul>
 </div>
 </li>
 <li>
-<p>Wrap the code to instrument (e.g. sending of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
+<p>Wrap the &lt;7&gt; code to instrument (e.g. sending of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
 </li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>More detailed explanation of HTTP client side instrumentation</strong></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">┌─────────────────────────┐┌───────┐┌─────────────────────┐┌───────────┐┌──────────────────┐   ┌──────────┐┌──────────────────┐
-│RequestReplySenderContext││Carrier││ObservationConvention││Observation││ObservationHandler│   │Propagator││Code to Instrument│
-└────────────┬────────────┘└───┬───┘└──────────┬──────────┘└─────┬─────┘└────────┬─────────┘   └────┬─────┘└────────┬─────────┘
-             │                 │               │                 │               │                  │               │
-             │      Wrap       │               │                 │               │                  │               │
-             │────────────────&gt;│               │                 │               │                  │               │
-             │                 │               │                 │               │                  │               │
-             │                 │               │     Create      │               │                  │               │
-             │                 │               │────────────────&gt;│               │                  │               │
-             │                 │               │                 │               │                  │               │
-             │                 │    Create     │                 │               │                  │               │
-             │──────────────────────────────────────────────────&gt;│               │                  │               │
-             │                 │               │                 │               │                  │               │
-             │                 │               │                 │     Start     │                  │               │
-             │                 │               │                 │──────────────&gt;│                  │               │
-             │                 │               │                 │               │                  │               │
-             │                 │               │                 │               │Instrument Carrier│               │
-             │                 │               │                 │               │─────────────────&gt;│               │
-             │                 │               │                 │               │                  │               │
-             │                 │               │         Instrument Carrier      │                  │               │
-             │                 │&lt;───────────────────────────────────────────────────────────────────│               │
-             │                 │               │                 │               │                  │               │
-             │                 │               │                 │               │  Wrap in Scope   │               │
-             │                 │               │                 │─────────────────────────────────────────────────&gt;│
-┌────────────┴────────────┐┌───┴───┐┌──────────┴──────────┐┌─────┴─────┐┌────────┴─────────┐   ┌────┴─────┐┌────────┴─────────┐
-│RequestReplySenderContext││Carrier││ObservationConvention││Observation││ObservationHandler│   │Propagator││Code to Instrument│
-└─────────────────────────┘└───────┘└─────────────────────┘└───────────┘└──────────────────┘   └──────────┘└──────────────────┘</code></pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>In the <code>ObservationRegistry</code> register a handler that will propagate context (e.g. <code>PropagatingSenderTracingObservationHandler</code> from Micrometer Tracing)</p>
-</li>
-<li>
-<p>Create a <code>RequestReplySenderContext</code> that wraps a carrier (e.g. <code>HttpRequest</code>)</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>In its constructor explain how to enrich the headers (e.g. <code>(carrier, key, value) &#8594; carrier.header(key, value)</code>)</p>
-</li>
-<li>
-<p>Set the carrier on the <code>RequestReplySenderContext</code></p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Create an <code>Observation</code>, optionally using the <code>ObservationConvention</code> with the sender context</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>On <code>Observation</code> start the registered handler will instrument the carrier</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Wrap the code to instrument (e.g. sending of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
-</li>
-</ol>
+</ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="instrumentation_of_http_communication_server"><a class="anchor" href="#instrumentation_of_http_communication_server"></a>Instrumentation of HTTP Server Communication</h3>
 <div class="paragraph">
-<p><strong>Basic explanation of HTTP server side instrumentation</strong></p>
+<p><strong>Explanation of HTTP server side instrumentation</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">┌───────────────────────────┐┌───────┐┌───────────────────┐┌───────────┐┌─────────────────────┐┌──────────────────┐
-│RequestReplyReceiverContext││Carrier││ObservationRegistry││Observation││ObservationConvention││Code to Instrument│
-└─────────────┬─────────────┘└───┬───┘└─────────┬─────────┘└─────┬─────┘└──────────┬──────────┘└────────┬─────────┘
-              │                  │              │                │                 │                    │
-              │       Wrap       │              │                │                 │                    │
-              │─────────────────&gt;│              │                │                 │                    │
-              │                  │              │                │                 │                    │
-              │                  │              │     Create     │                 │                    │
-              │                  │              │───────────────&gt;│                 │                    │
-              │                  │              │                │                 │                    │
-              │                  │   Create     │                │                 │                    │
-              │─────────────────────────────────────────────────&gt;│                 │                    │
-              │                  │              │                │                 │                    │
-              │                  │              │                │     Create      │                    │
-              │                  │              │                │&lt;────────────────│                    │
-              │                  │              │                │                 │                    │
-              │                  │              │                │            Wrap in Scope             │
-              │                  │              │                │─────────────────────────────────────&gt;│
-┌─────────────┴─────────────┐┌───┴───┐┌─────────┴─────────┐┌─────┴─────┐┌──────────┴──────────┐┌────────┴─────────┐
-│RequestReplyReceiverContext││Carrier││ObservationRegistry││Observation││ObservationConvention││Code to Instrument│
-└───────────────────────────┘└───────┘└───────────────────┘└───────────┘└─────────────────────┘└──────────────────┘</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">┌───────────────────────────────┐┌───────────┐┌───────────────────────┐┌───────────────┐┌─────────────────────────┐┌──────────────────────┐┌──────────────────────┐
+│[1] RequestReplyReceiverContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└───────────────┬───────────────┘└─────┬─────┘└───────────┬───────────┘└───────┬───────┘└────────────┬────────────┘└──────────┬───────────┘└──────────┬───────────┘
+                │                      │                  │                    │                     │                        │                       │
+                │         Wrap         │                  │                    │                     │                        │                       │
+                │─────────────────────&gt;│                  │                    │                     │                        │                       │
+                │                      │                  │                    │                     │                        │                       │
+                │                      │                  │       Create       │                     │                        │                       │
+                │                      │                  │───────────────────&gt;│                     │                        │                       │
+                │                      │                  │                    │                     │                        │                       │
+                │                      │     Create       │                    │                     │                        │                       │
+                │─────────────────────────────────────────────────────────────&gt;│                     │                        │                       │
+                │                      │                  │                    │                     │                        │                       │
+                │                      │                  │                    │       Create        │                        │                       │
+                │                      │                  │                    │&lt;────────────────────│                        │                       │
+                │                      │                  │                    │                     │                        │                       │
+                │                      │                  │                    │                   onStart                    │                       │
+                │                      │                  │                    │─────────────────────────────────────────────&gt;│                       │
+                │                      │                  │                    │                     │                        │                       │
+                │                      │                  │                    │                     │      Wrap in Scope     │                       │
+                │                      │                  │                    │─────────────────────────────────────────────────────────────────────&gt;│
+┌───────────────┴───────────────┐┌─────┴─────┐┌───────────┴───────────┐┌───────┴───────┐┌────────────┴────────────┐┌──────────┴───────────┐┌──────────┴───────────┐
+│[1] RequestReplyReceiverContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└───────────────────────────────┘└───────────┘└───────────────────────┘└───────────────┘└─────────────────────────┘└──────────────────────┘└──────────────────────┘</code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Create a <code>RequestReplyReceiverContext</code> that wraps a carrier (e.g. <code>HttpRequest</code>)</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>In its constructor explain how to retrieve the header values (e.g. <code>(carrier, key) &#8594; carrier.header(key)</code>)</p>
-</li>
-<li>
-<p>Set the carrier on the <code>RequestReplyReceiverContext</code></p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Create an <code>Observation</code>, optionally using the <code>ObservationConvention</code> with the sender context</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>On <code>Observation</code> start, assuming that there is a proper registered handler through the <code>ObservationRegistry</code>, propagation will happen (e.g. tracing information will be retrieved from the headers)</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Wrap the code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>More detailed explanation of HTTP client side instrumentation</strong></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">┌───────────────────────────┐┌───────┐┌─────────────────────┐┌───────────┐┌──────────────────┐┌──────────┐┌──────────────────┐
-│RequestReplyReceiverContext││Carrier││ObservationConvention││Observation││ObservationHandler││Propagator││Code to Instrument│
-└─────────────┬─────────────┘└───┬───┘└──────────┬──────────┘└─────┬─────┘└────────┬─────────┘└────┬─────┘└────────┬─────────┘
-              │                  │               │                 │               │               │               │
-              │       Wrap       │               │                 │               │               │               │
-              │─────────────────&gt;│               │                 │               │               │               │
-              │                  │               │                 │               │               │               │
-              │                  │               │     Create      │               │               │               │
-              │                  │               │────────────────&gt;│               │               │               │
-              │                  │               │                 │               │               │               │
-              │                  │    Create     │                 │               │               │               │
-              │───────────────────────────────────────────────────&gt;│               │               │               │
-              │                  │               │                 │               │               │               │
-              │                  │               │                 │     Start     │               │               │
-              │                  │               │                 │──────────────&gt;│               │               │
-              │                  │               │                 │               │               │               │
-              │                  │               │                 │               │Extract Carrier│               │
-              │                  │               │                 │               │──────────────&gt;│               │
-              │                  │               │                 │               │               │               │
-              │                  │               │         Extract Carrier         │               │               │
-              │                  │&lt;────────────────────────────────────────────────────────────────│               │
-              │                  │               │                 │               │               │               │
-              │                  │               │                 │               │ Wrap in Scope │               │
-              │                  │               │                 │──────────────────────────────────────────────&gt;│
-┌─────────────┴─────────────┐┌───┴───┐┌──────────┴──────────┐┌─────┴─────┐┌────────┴─────────┐┌────┴─────┐┌────────┴─────────┐
-│RequestReplyReceiverContext││Carrier││ObservationConvention││Observation││ObservationHandler││Propagator││Code to Instrument│
-└───────────────────────────┘└───────┘└─────────────────────┘└───────────┘└──────────────────┘└──────────┘└──────────────────┘</code></pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p>In the <code>ObservationRegistry</code> register a handler that will propagate context (e.g. <code>PropagatingReceiverTracingObservationHandler</code> from Micrometer Tracing)</p>
 </li>
 <li>
-<p>Create a <code>RequestReplyReceiverContext</code> that wraps a carrier (e.g. <code>HttpRequest</code>)</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<p>Create a &lt;1&gt; <code>RequestReplyReceiverContext</code> that wraps a &lt;2&gt; carrier (e.g. <code>HttpRequest</code>)</p>
+<div class="ulist">
+<ul>
 <li>
 <p>In its constructor explain how to retrieve the header values (e.g. <code>(carrier, key) &#8594; carrier.header(key)</code>)</p>
 </li>
 <li>
-<p>Set the carrier on the <code>RequestReplyReceiverContext</code></p>
+<p>Set the &lt;2&gt; carrier on the &lt;1&gt; <code>RequestReplyReceiverContext</code></p>
 </li>
-</ol>
+</ul>
 </div>
 </li>
 <li>
-<p>Create an <code>Observation</code>, optionally using the <code>ObservationConvention</code> with the sender context</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;5&gt; <code>ObservationConvention</code> with the sender context</p>
+<div class="ulist">
+<ul>
 <li>
-<p>On <code>Observation</code> start, propagation will happen (e.g. tracing information will be retrieved from the headers)</p>
+<p>On &lt;4&gt; <code>Observation</code> start, propagation will happen (e.g. carrier will be enriched with proper headers) via an &lt;6&gt; <code>ObservationHandler</code></p>
 </li>
-</ol>
+</ul>
 </div>
 </li>
 <li>
-<p>Wrap the code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
+<p>Wrap the &lt;6&gt; code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
 </li>
-</ol>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -947,271 +825,142 @@ try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
 <div class="sect2">
 <h3 id="instrumentation_of_messaging_communication_producer"><a class="anchor" href="#instrumentation_of_messaging_communication_producer"></a>Instrumentation of Messaging Producer Side</h3>
 <div class="paragraph">
-<p><strong>Basic explanation of messaging producer side instrumentation</strong></p>
+<p><strong>Explanation of messaging producer side instrumentation</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">┌─────────────┐┌───────┐┌───────────────────┐┌───────────┐┌─────────────────────┐┌──────────────────┐
-│SenderContext││Carrier││ObservationRegistry││Observation││ObservationConvention││Code to Instrument│
-└──────┬──────┘└───┬───┘└─────────┬─────────┘└─────┬─────┘└──────────┬──────────┘└────────┬─────────┘
-       │           │              │                │                 │                    │
-       │   Wrap    │              │                │                 │                    │
-       │──────────&gt;│              │                │                 │                    │
-       │           │              │                │                 │                    │
-       │           │              │     Create     │                 │                    │
-       │           │              │───────────────&gt;│                 │                    │
-       │           │              │                │                 │                    │
-       │           │      Create  │                │                 │                    │
-       │──────────────────────────────────────────&gt;│                 │                    │
-       │           │              │                │                 │                    │
-       │           │              │                │     Create      │                    │
-       │           │              │                │&lt;────────────────│                    │
-       │           │              │                │                 │                    │
-       │           │              │                │            Wrap in Scope             │
-       │           │              │                │─────────────────────────────────────&gt;│
-┌──────┴──────┐┌───┴───┐┌─────────┴─────────┐┌─────┴─────┐┌──────────┴──────────┐┌────────┴─────────┐
-│SenderContext││Carrier││ObservationRegistry││Observation││ObservationConvention││Code to Instrument│
-└─────────────┘└───────┘└───────────────────┘└───────────┘└─────────────────────┘└──────────────────┘</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">┌─────────────────┐┌───────────┐┌───────────────────────┐┌───────────────┐┌─────────────────────────┐┌──────────────────────┐┌──────────────────────┐
+│[1] SenderContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└────────┬────────┘└─────┬─────┘└───────────┬───────────┘└───────┬───────┘└────────────┬────────────┘└──────────┬───────────┘└──────────┬───────────┘
+         │               │                  │                    │                     │                        │                       │
+         │     Wrap      │                  │                    │                     │                        │                       │
+         │──────────────&gt;│                  │                    │                     │                        │                       │
+         │               │                  │                    │                     │                        │                       │
+         │               │                  │       Create       │                     │                        │                       │
+         │               │                  │───────────────────&gt;│                     │                        │                       │
+         │               │                  │                    │                     │                        │                       │
+         │               │        Create    │                    │                     │                        │                       │
+         │──────────────────────────────────────────────────────&gt;│                     │                        │                       │
+         │               │                  │                    │                     │                        │                       │
+         │               │                  │                    │       Create        │                        │                       │
+         │               │                  │                    │&lt;────────────────────│                        │                       │
+         │               │                  │                    │                     │                        │                       │
+         │               │                  │                    │                   onStart                    │                       │
+         │               │                  │                    │─────────────────────────────────────────────&gt;│                       │
+         │               │                  │                    │                     │                        │                       │
+         │               │                  │                    │                     │      Wrap in Scope     │                       │
+         │               │                  │                    │─────────────────────────────────────────────────────────────────────&gt;│
+┌────────┴────────┐┌─────┴─────┐┌───────────┴───────────┐┌───────┴───────┐┌────────────┴────────────┐┌──────────┴───────────┐┌──────────┴───────────┐
+│[1] SenderContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└─────────────────┘└───────────┘└───────────────────────┘└───────────────┘└─────────────────────────┘└──────────────────────┘└──────────────────────┘</code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Create a <code>SenderContext</code> that wraps a carrier (e.g. <code>AmqpMessage</code>)</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<p>In the &lt;3&gt; <code>ObservationRegistry</code> register a &lt;6&gt; handler that will propagate context (e.g. <code>PropagatingReceiverTracingObservationHandler</code> from Micrometer Tracing)</p>
+</li>
+<li>
+<p>Create a &lt;1&gt; <code>SenderContext</code> that wraps a &lt;2&gt; carrier (e.g. <code>AmqpMessage</code>)</p>
+<div class="ulist">
+<ul>
 <li>
 <p>In its constructor explain how to enrich the headers (e.g. <code>(key, value) &#8594; amqpMessage.header(key, value)</code>)</p>
 </li>
 <li>
-<p>Set the carrier on the <code>SenderContext</code></p>
+<p>Set the &lt;2&gt; carrier on the &lt;1&gt; <code>SenderContext</code></p>
 </li>
-</ol>
+</ul>
 </div>
 </li>
 <li>
-<p>Create an <code>Observation</code>, optionally using the <code>ObservationConvention</code> with the sender context</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;5&gt; <code>ObservationConvention</code> with the sender context</p>
+<div class="ulist">
+<ul>
 <li>
-<p>On <code>Observation</code> start, assuming that there is a proper registered handler through the <code>ObservationRegistry</code>, propagation will happen (e.g. carrier will be enriched with proper headers)</p>
+<p>On &lt;4&gt; <code>Observation</code> start, propagation will happen (e.g. carrier will be enriched with proper headers) via an &lt;6&gt; <code>ObservationHandler</code></p>
 </li>
-</ol>
+</ul>
 </div>
 </li>
 <li>
-<p>Wrap the code to instrument (e.g. sending of an AMQP message) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
+<p>Wrap the &lt;7&gt; code to instrument (e.g. sending of an AMQP message) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
 </li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>More detailed explanation of messaging producer side instrumentation</strong></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">┌─────────────┐┌───────┐┌─────────────────────┐┌───────────┐┌──────────────────┐   ┌──────────┐┌──────────────────┐
-│SenderContext││Carrier││ObservationConvention││Observation││ObservationHandler│   │Propagator││Code to Instrument│
-└──────┬──────┘└───┬───┘└──────────┬──────────┘└─────┬─────┘└────────┬─────────┘   └────┬─────┘└────────┬─────────┘
-       │           │               │                 │               │                  │               │
-       │   Wrap    │               │                 │               │                  │               │
-       │──────────&gt;│               │                 │               │                  │               │
-       │           │               │                 │               │                  │               │
-       │           │               │     Create      │               │                  │               │
-       │           │               │────────────────&gt;│               │                  │               │
-       │           │               │                 │               │                  │               │
-       │           │       Create  │                 │               │                  │               │
-       │────────────────────────────────────────────&gt;│               │                  │               │
-       │           │               │                 │               │                  │               │
-       │           │               │                 │     Start     │                  │               │
-       │           │               │                 │──────────────&gt;│                  │               │
-       │           │               │                 │               │                  │               │
-       │           │               │                 │               │Instrument Carrier│               │
-       │           │               │                 │               │─────────────────&gt;│               │
-       │           │               │                 │               │                  │               │
-       │           │               │         Instrument Carrier      │                  │               │
-       │           │&lt;───────────────────────────────────────────────────────────────────│               │
-       │           │               │                 │               │                  │               │
-       │           │               │                 │               │  Wrap in Scope   │               │
-       │           │               │                 │─────────────────────────────────────────────────&gt;│
-┌──────┴──────┐┌───┴───┐┌──────────┴──────────┐┌─────┴─────┐┌────────┴─────────┐   ┌────┴─────┐┌────────┴─────────┐
-│SenderContext││Carrier││ObservationConvention││Observation││ObservationHandler│   │Propagator││Code to Instrument│
-└─────────────┘└───────┘└─────────────────────┘└───────────┘└──────────────────┘   └──────────┘└──────────────────┘</code></pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>In the <code>ObservationRegistry</code> register a handler that will propagate context (e.g. <code>PropagatingReceiverTracingObservationHandler</code> from Micrometer Tracing)</p>
-</li>
-<li>
-<p>Create a <code>SenderContext</code> that wraps a carrier (e.g. <code>AmqpMessage</code>)</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>In its constructor explain how to enrich the headers (e.g. <code>(key, value) &#8594; amqpMessage.header(key, value)</code>)</p>
-</li>
-<li>
-<p>Set the carrier on the <code>SenderContext</code></p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Create an <code>Observation</code>, optionally using the <code>ObservationConvention</code> with the sender context</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>On <code>Observation</code> start, propagation will happen (e.g. carrier will be enriched with proper headers)</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Wrap the code to instrument (e.g. sending of an AMQP message) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
-</li>
-</ol>
+</ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="instrumentation_of_messaging_communication_consumer"><a class="anchor" href="#instrumentation_of_messaging_communication_consumer"></a>Instrumentation of Messaging Consumer Side Communication</h3>
 <div class="paragraph">
-<p><strong>Basic explanation of messaging consumer side instrumentation</strong></p>
+<p><strong>Explanation of messaging consumer side instrumentation</strong></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">┌───────────────┐┌───────┐┌───────────────────┐┌───────────┐┌─────────────────────┐┌──────────────────┐
-│ReceiverContext││Carrier││ObservationRegistry││Observation││ObservationConvention││Code to Instrument│
-└───────┬───────┘└───┬───┘└─────────┬─────────┘└─────┬─────┘└──────────┬──────────┘└────────┬─────────┘
-        │            │              │                │                 │                    │
-        │    Wrap    │              │                │                 │                    │
-        │───────────&gt;│              │                │                 │                    │
-        │            │              │                │                 │                    │
-        │            │              │     Create     │                 │                    │
-        │            │              │───────────────&gt;│                 │                    │
-        │            │              │                │                 │                    │
-        │            │      Create  │                │                 │                    │
-        │───────────────────────────────────────────&gt;│                 │                    │
-        │            │              │                │                 │                    │
-        │            │              │                │     Create      │                    │
-        │            │              │                │&lt;────────────────│                    │
-        │            │              │                │                 │                    │
-        │            │              │                │            Wrap in Scope             │
-        │            │              │                │─────────────────────────────────────&gt;│
-┌───────┴───────┐┌───┴───┐┌─────────┴─────────┐┌─────┴─────┐┌──────────┴──────────┐┌────────┴─────────┐
-│ReceiverContext││Carrier││ObservationRegistry││Observation││ObservationConvention││Code to Instrument│
-└───────────────┘└───────┘└───────────────────┘└───────────┘└─────────────────────┘└──────────────────┘</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">┌───────────────────┐┌───────────┐┌───────────────────────┐┌───────────────┐┌─────────────────────────┐┌──────────────────────┐┌──────────────────────┐
+│[1] ReceiverContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└─────────┬─────────┘└─────┬─────┘└───────────┬───────────┘└───────┬───────┘└────────────┬────────────┘└──────────┬───────────┘└──────────┬───────────┘
+          │                │                  │                    │                     │                        │                       │
+          │      Wrap      │                  │                    │                     │                        │                       │
+          │───────────────&gt;│                  │                    │                     │                        │                       │
+          │                │                  │                    │                     │                        │                       │
+          │                │                  │       Create       │                     │                        │                       │
+          │                │                  │───────────────────&gt;│                     │                        │                       │
+          │                │                  │                    │                     │                        │                       │
+          │                │        Create    │                    │                     │                        │                       │
+          │───────────────────────────────────────────────────────&gt;│                     │                        │                       │
+          │                │                  │                    │                     │                        │                       │
+          │                │                  │                    │       Create        │                        │                       │
+          │                │                  │                    │&lt;────────────────────│                        │                       │
+          │                │                  │                    │                     │                        │                       │
+          │                │                  │                    │                   onStart                    │                       │
+          │                │                  │                    │─────────────────────────────────────────────&gt;│                       │
+          │                │                  │                    │                     │                        │                       │
+          │                │                  │                    │                     │      Wrap in Scope     │                       │
+          │                │                  │                    │─────────────────────────────────────────────────────────────────────&gt;│
+┌─────────┴─────────┐┌─────┴─────┐┌───────────┴───────────┐┌───────┴───────┐┌────────────┴────────────┐┌──────────┴───────────┐┌──────────┴───────────┐
+│[1] ReceiverContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└───────────────────┘└───────────┘└───────────────────────┘└───────────────┘└─────────────────────────┘└──────────────────────┘└──────────────────────┘</code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Create a <code>ReceiverContext</code> that wraps a carrier (e.g. <code>AmqpMessage</code>)</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<p>In the &lt;3&gt; <code>ObservationRegistry</code> register a &lt;6&gt; handler that will propagate context (e.g. <code>PropagatingReceiverTracingObservationHandler</code> from Micrometer Tracing)</p>
+</li>
+<li>
+<p>Create a &lt;1&gt; <code>ReceiverContext</code> that wraps a &lt;2&gt; carrier (e.g. <code>AmqpMessage</code>)</p>
+<div class="ulist">
+<ul>
 <li>
 <p>In its constructor explain how to retrieve the header values (e.g. <code>(carrier, key) &#8594; carrier.header(key)</code>)</p>
 </li>
 <li>
-<p>Set the carrier on the <code>ReceiverContext</code></p>
+<p>Set the &lt;2&gt; carrier on the &lt;1&gt; <code>ReceiverContext</code></p>
 </li>
-</ol>
+</ul>
 </div>
 </li>
 <li>
-<p>Create an <code>Observation</code>, optionally using the <code>ObservationConvention</code> with the sender context</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;6&gt; <code>ObservationConvention</code> with the sender context</p>
+<div class="ulist">
+<ul>
 <li>
-<p>On <code>Observation</code> start, assuming that there is a proper registered handler through the <code>ObservationRegistry</code>, propagation will happen (e.g. tracing information will be retrieved from the headers)</p>
+<p>On &lt;4&gt; <code>Observation</code> start, propagation will happen (e.g. carrier will be enriched with proper headers) via an &lt;6&gt; <code>ObservationHandler</code></p>
 </li>
-</ol>
+</ul>
 </div>
 </li>
 <li>
-<p>Wrap the code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<p>Wrap the &lt;7&gt; code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
+<div class="ulist">
+<ul>
 <li>
 <p>Some libraries (e.g. RabbitMQ) you might not have a handle on user&#8217;s code, and you may require the user to allow starting a consumer side Observation and opening its scope by the framework (putting values in thread local) with the requirement of manually closing both the scope and stopping the Observation later by the user in their code!</p>
 </li>
-</ol>
+</ul>
 </div>
 </li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>More detailed explanation of messaging consumer side instrumentation</strong></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">┌───────────────┐┌───────┐┌─────────────────────┐┌───────────┐┌──────────────────┐┌──────────┐┌──────────────────┐
-│ReceiverContext││Carrier││ObservationConvention││Observation││ObservationHandler││Propagator││Code to Instrument│
-└───────┬───────┘└───┬───┘└──────────┬──────────┘└─────┬─────┘└────────┬─────────┘└────┬─────┘└────────┬─────────┘
-        │            │               │                 │               │               │               │
-        │    Wrap    │               │                 │               │               │               │
-        │───────────&gt;│               │                 │               │               │               │
-        │            │               │                 │               │               │               │
-        │            │               │     Create      │               │               │               │
-        │            │               │────────────────&gt;│               │               │               │
-        │            │               │                 │               │               │               │
-        │            │       Create  │                 │               │               │               │
-        │─────────────────────────────────────────────&gt;│               │               │               │
-        │            │               │                 │               │               │               │
-        │            │               │                 │     Start     │               │               │
-        │            │               │                 │──────────────&gt;│               │               │
-        │            │               │                 │               │               │               │
-        │            │               │                 │               │Extract Carrier│               │
-        │            │               │                 │               │──────────────&gt;│               │
-        │            │               │                 │               │               │               │
-        │            │               │         Extract Carrier         │               │               │
-        │            │&lt;────────────────────────────────────────────────────────────────│               │
-        │            │               │                 │               │               │               │
-        │            │               │                 │               │ Wrap in Scope │               │
-        │            │               │                 │──────────────────────────────────────────────&gt;│
-┌───────┴───────┐┌───┴───┐┌──────────┴──────────┐┌─────┴─────┐┌────────┴─────────┐┌────┴─────┐┌────────┴─────────┐
-│ReceiverContext││Carrier││ObservationConvention││Observation││ObservationHandler││Propagator││Code to Instrument│
-└───────────────┘└───────┘└─────────────────────┘└───────────┘└──────────────────┘└──────────┘└──────────────────┘</code></pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>In the <code>ObservationRegistry</code> register a handler that will propagate context (e.g. <code>PropagatingReceiverTracingObservationHandler</code> from Micrometer Tracing)</p>
-</li>
-<li>
-<p>Create a <code>ReceiverContext</code> that wraps a carrier (e.g. <code>AmqpMessage</code>)</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>In its constructor explain how to retrieve the header values (e.g. <code>(carrier, key) &#8594; carrier.header(key)</code>)</p>
-</li>
-<li>
-<p>Set the carrier on the <code>ReceiverContext</code></p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Create an <code>Observation</code>, optionally using the <code>ObservationConvention</code> with the sender context</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>On <code>Observation</code> start, propagation will happen (e.g. tracing information will be retrieved from the headers)</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Wrap the code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Some libraries (e.g. RabbitMQ) you might not have a handle on user&#8217;s code, and you may require the user to allow starting a consumer side Observation and opening its scope by the framework (putting values in thread local) with the requirement of manually closing both the scope and stopping the Observation later by the user in their code!</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -1805,9 +1554,6 @@ then(block).isEqualTo(2);</code></pre>
             <main class="modal__content" id="modal-1-content">
                 <div id="searchbox"></div>
                 <div id="counter"></div>
-                <div class="search-link-box">
-                    <a class="search-link" href="../../search.html">Search in all Spring Docs</a>
-                </div>
                 <div class="search-by">
                     <a target="_blank" rel="noopener noreferrer" href="https://www.algolia.com/" aria-label="Search by Algolia">
                         <img class="light" width="140" src="../../_/img/algolia-light.svg" />
