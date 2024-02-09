@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer Tracing</title>
+    <title>Using Micrometer Tracing Directly :: Micrometer Tracing</title>
     <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/api.html">
     <link rel="prev" href="reporters.html">
     <link rel="next" href="configuring.html">
@@ -198,7 +198,7 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Using Micrometer Tracing Directly"
       data-levels="2"
     >
       <div class="toc-menu"></div>
@@ -260,14 +260,17 @@
     </tr></tbody>
   </table>
 </div>
-<div class="sect1">
-<h2 id="_using_micrometer_tracing_directly"><a class="anchor" href="#_using_micrometer_tracing_directly"></a>Using Micrometer Tracing Directly</h2>
+<h1 id="page-title" class="page">Using Micrometer Tracing Directly</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>In this section, we describe how to use the Micrometer Tracing API to directly create and report spans.</p>
 </div>
-<div class="sect2">
-<h3 id="_micrometer_tracing_examples"><a class="anchor" href="#_micrometer_tracing_examples"></a>Micrometer Tracing Examples</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_micrometer_tracing_examples"><a class="anchor" href="#_micrometer_tracing_examples"></a>Micrometer Tracing Examples</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The following example shows the basic operations on a span. Read the comments in the snippet for details:</p>
 </div>
@@ -339,8 +342,10 @@ newSpan.end();</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_micrometer_tracing_brave_setup"><a class="anchor" href="#_micrometer_tracing_brave_setup"></a>Micrometer Tracing Brave Setup</h3>
+</div>
+<div class="sect1">
+<h2 id="_micrometer_tracing_brave_setup"><a class="anchor" href="#_micrometer_tracing_brave_setup"></a>Micrometer Tracing Brave Setup</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>In this subsection, we set up Micrometer Tracing with Brave.</p>
 </div>
@@ -394,8 +399,10 @@ Tracer tracer = new BraveTracer(this.braveTracer, this.bridgeContext, new BraveB
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_micrometer_tracing_opentelemetry_setup"><a class="anchor" href="#_micrometer_tracing_opentelemetry_setup"></a>Micrometer Tracing OpenTelemetry Setup</h3>
+</div>
+<div class="sect1">
+<h2 id="_micrometer_tracing_opentelemetry_setup"><a class="anchor" href="#_micrometer_tracing_opentelemetry_setup"></a>Micrometer Tracing OpenTelemetry Setup</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>In this subsection, we set up Micrometer Tracing with OpenTelemetry (OTel).</p>
 </div>
@@ -453,8 +460,10 @@ OtelTracer tracer = new OtelTracer(otelTracer, otelCurrentTraceContext, event -&
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_micrometer_tracing_baggage_api"><a class="anchor" href="#_micrometer_tracing_baggage_api"></a>Micrometer Tracing Baggage API</h3>
+</div>
+<div class="sect1">
+<h2 id="_micrometer_tracing_baggage_api"><a class="anchor" href="#_micrometer_tracing_baggage_api"></a>Micrometer Tracing Baggage API</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Traces connect from application to application by using header propagation. Besides trace identifiers, other properties (called <code>Baggage</code>) can also be passed along with the request.</p>
 </div>
@@ -535,8 +544,10 @@ For Brave, remember to set up the <code>PropagationFactory</code> so that it con
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_aspect_oriented_programming"><a class="anchor" href="#_aspect_oriented_programming"></a>Aspect Oriented Programming</h3>
+</div>
+<div class="sect1">
+<h2 id="_aspect_oriented_programming"><a class="anchor" href="#_aspect_oriented_programming"></a>Aspect Oriented Programming</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer Tracing contains <code>@NewSpan</code>, <code>@ContinueSpan</code>, and <code>@SpanTag</code> annotations that frameworks can use to create or customize spans for either specific types of methods such as those serving web request endpoints or, more generally, to all methods.</p>
 </div>
@@ -699,7 +710,6 @@ try (Tracer.SpanInScope ws = this.tracer.withSpan(span.start())) {
     then(continuedSpan.getEvents()).extracting("value").contains("customTest.before", "customTest.after");
 }
 span.end();</code></pre>
-</div>
 </div>
 </div>
 </div>

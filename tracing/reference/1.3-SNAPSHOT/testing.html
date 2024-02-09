@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer Tracing</title>
+    <title>Testing :: Micrometer Tracing</title>
     <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/testing.html">
     <link rel="prev" href="configuring.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
@@ -197,7 +197,7 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Testing"
       data-levels="2"
     >
       <div class="toc-menu"></div>
@@ -259,8 +259,8 @@
     </tr></tbody>
   </table>
 </div>
-<div class="sect1">
-<h2 id="_testing"><a class="anchor" href="#_testing"></a>Testing</h2>
+<h1 id="page-title" class="page">Testing</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer Tracing includes the <code>micrometer-tracing-test</code> and <code>micrometer-tracing-integration-test</code> modules.</p>
@@ -305,8 +305,11 @@ It:</p>
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The following example shows the required dependency in Gradle (assuming that Micrometer Tracing BOM has been added):</p>
 </div>
@@ -334,8 +337,10 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_running_tracing_unit_tests"><a class="anchor" href="#_running_tracing_unit_tests"></a>Running Tracing Unit Tests</h3>
+</div>
+<div class="sect1">
+<h2 id="_running_tracing_unit_tests"><a class="anchor" href="#_running_tracing_unit_tests"></a>Running Tracing Unit Tests</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>To run unit tests of your custom handler, you may want to use the <code>SimpleTracer</code> test <code>Tracer</code> implementation. Let&#8217;s assume the following custom <code>TracingObservationHandler</code>:</p>
 </div>
@@ -426,8 +431,10 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_running_integration_tests"><a class="anchor" href="#_running_integration_tests"></a>Running integration tests</h3>
+</div>
+<div class="sect1">
+<h2 id="_running_integration_tests"><a class="anchor" href="#_running_integration_tests"></a>Running integration tests</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The following example shows how you can run your code to test your integrations:</p>
 </div>
@@ -502,7 +509,6 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
     }
 
 }</code></pre>
-</div>
 </div>
 </div>
 </div>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer Tracing</title>
+    <title>Configuring with Micrometer Observation :: Micrometer Tracing</title>
     <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/configuring.html">
     <link rel="prev" href="api.html">
     <link rel="next" href="testing.html">
@@ -198,7 +198,7 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Configuring with Micrometer Observation"
       data-levels="2"
     >
       <div class="toc-menu"></div>
@@ -260,11 +260,10 @@
     </tr></tbody>
   </table>
 </div>
+<h1 id="page-title" class="page">Configuring with Micrometer Observation</h1>
 <div class="sect1">
-<h2 id="_configuring_with_micrometer_observation"><a class="anchor" href="#_configuring_with_micrometer_observation"></a>Configuring with Micrometer Observation</h2>
+<h2 id="_handler_configuration"><a class="anchor" href="#_handler_configuration"></a>Handler Configuration</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_handler_configuration"><a class="anchor" href="#_handler_configuration"></a>Handler Configuration</h3>
 <div class="paragraph">
 <p>For Micrometer Tracing to work with Micrometer Observation, you need to add a tracing-related <code>ObservationHandler</code>.
 The following example shows how to add and use a single <code>DefaultTracingObservationHandler</code>:</p>
@@ -356,8 +355,8 @@ Observation.createNotStarted("my.operation", registry)
 <img src="_images/tracing/zipkin.jpg" alt="Trace Info propagation">
 </div>
 </div>
-<div class="sect3">
-<h4 id="_ordered_handler_configuration"><a class="anchor" href="#_ordered_handler_configuration"></a>Ordered Handler Configuration</h4>
+<div class="sect2">
+<h3 id="_ordered_handler_configuration"><a class="anchor" href="#_ordered_handler_configuration"></a>Ordered Handler Configuration</h3>
 <div class="paragraph">
 <p>Micrometer Tracing comes with multiple <code>ObservationHandler</code> implementations.
 To introduce ordering, you can use the <code>ObservationHandler.AllMatchingCompositeObservationHandler</code> to run logic for all <code>ObservationHandler</code> instances that match the given predicate and <code>ObservationHandler</code>. Use <code>FirstMatchingCompositeObservationHandler</code> to run logic only for the first <code>ObservationHandler</code> that matches the predicate.
@@ -365,8 +364,10 @@ The former can group handlers and the latter can be chosen to (for example) run 
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_context_propagation_with_micrometer_tracing"><a class="anchor" href="#_context_propagation_with_micrometer_tracing"></a>Context Propagation with Micrometer Tracing</h3>
+</div>
+<div class="sect1">
+<h2 id="_context_propagation_with_micrometer_tracing"><a class="anchor" href="#_context_propagation_with_micrometer_tracing"></a>Context Propagation with Micrometer Tracing</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>To make <a href="https://docs.micrometer.io/context-propagation/reference/">Context Propagation</a> work with Micrometer Tracing, you need to manually register the proper <code>ThreadLocalAccessor</code>, as follows:</p>
 </div>
@@ -422,8 +423,10 @@ List&lt;String&gt; hello = Mono.just("hello")
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_exemplars"><a class="anchor" href="#_exemplars"></a>Exemplars</h3>
+</div>
+<div class="sect1">
+<h2 id="_exemplars"><a class="anchor" href="#_exemplars"></a>Exemplars</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>To add support for <a href="https://grafana.com/docs/grafana/latest/fundamentals/exemplars/">exemplars</a> instead of using the <code>DefaultMeterObservationHandler</code> you should use the <code>TracingAwareMeterObservationHandler</code>, as follows:</p>
 </div>
@@ -436,7 +439,6 @@ registry.observationConfig()
     // ...instead register the tracing aware version
     .observationHandler(new TracingAwareMeterObservationHandler&lt;&gt;(
             new DefaultMeterObservationHandler(meterRegistry), tracer));</code></pre>
-</div>
 </div>
 </div>
 </div>
