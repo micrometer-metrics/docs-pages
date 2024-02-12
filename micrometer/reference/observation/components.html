@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
-    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/observation/handler.html">
-    <link rel="prev" href="installing.html">
+    <title>Observation Components :: Micrometer</title>
+    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/observation/components.html">
+    <link rel="prev" href="introduction.html">
     <link rel="next" href="instrumenting.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.2">
+    <meta name="version" content="1.12.3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.2">
+<div class="nav-container" data-component="micrometer" data-version="1.12.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.2</span>
+  <span class="version">1.12.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -197,6 +197,9 @@
     <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -257,19 +260,46 @@
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/jvm.html">JVM</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="../reference/commons-pool.html">Commons Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/db.html">Database</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/jvm.html">JVM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/kafka.html">Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/mongodb.html">MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/netty.html">Netty</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/system.html">System</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -290,13 +320,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="installing.html">Installing</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="introduction.html">Introduction</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="handler.html">Observation Handlers</a>
+    <a class="nav-link" href="components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="instrumenting.html">Instrumenting</a>
@@ -348,13 +396,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Observation Components"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.2/docs/modules/ROOT/pages/observation/handler.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.3/docs/modules/ROOT/pages/observation/components.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -393,12 +441,97 @@
   <ul>
     <li><a href="../index.html">Micrometer</a></li>
     <li><a href="../observation.html">Micrometer Observation</a></li>
-    <li><a href="handler.html">Observation Handlers</a></li>
+    <li><a href="components.html">Components</a></li>
   </ul>
 </nav>
 <article>
+<h1 id="page-title" class="page">Observation Components</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>A popular way to record them is storing the start state in a <code>Timer.Sample</code> instance and stopping it when the event has ended.
+<p>In this section we will describe main components related to Micrometer Observation.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#micrometer-observation-context">Observation Context</a></p>
+</li>
+<li>
+<p><a href="#micrometer-observation-handler">Observation Handler</a></p>
+</li>
+<li>
+<p><a href="#micrometer-observation-events">Signaling Errors and Arbitrary Events</a></p>
+</li>
+<li>
+<p><a href="#micrometer-observation-convention-example">Observation Convention</a></p>
+</li>
+<li>
+<p><a href="#micrometer-observation-predicates-filters">Observation Predicates and Filters</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Micrometer Observation basic flow</strong></p>
+</div>
+<div class="paragraph">
+<p><code>Observation</code> through <code>ObservationRegistry</code> gets created with a mutable <code>Observation.Context</code>. On each Micrometer Observation lifecycle action (e.g. <code>start()</code>) a corresponding <code>ObservationHandler</code> method is called (e.g. <code>onStart</code>) with the mutable <code>Observation.Context</code> as argument.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">┌───────────────────┐┌───────┐
+│ObservationRegistry││Context│
+└┬──────────────────┘└┬──────┘
+┌▽────────────────────▽┐
+│Observation           │
+└┬─────────────────────┘
+┌▽──────┐
+│Handler│
+└───────┘</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Micrometer Observation detailed flow</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">┌───────────────────┐┌───────┐┌─────────────────────┐┌────────────────────┐
+│ObservationRegistry││Context││ObservationConvention││ObservationPredicate│
+└┬──────────────────┘└┬──────┘└┬────────────────────┘└┬───────────────────┘
+┌▽────────────────────▽────────▽──────────────────────▽┐
+│Observation                                           │
+└┬─────────────────────────────────────────────────────┘
+┌▽──────┐
+│Handler│
+└┬──────┘
+┌▽────────────────┐
+│ObservationFilter│
+└─────────────────┘</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Observation</code> through <code>ObservationRegistry</code> gets created with a mutable <code>Observation.Context</code>. To allow name and key-value customization, an <code>ObservationConvention</code> can be used instead of direct name setting. List of <code>ObservationPredicate</code> is run to verify if an <code>Observation</code> should be created instead of a no-op version.  On each <a href="introduction.html" class="xref page">Micrometer Observation lifecycle</a> action (e.g. <code>start()</code>) a corresponding <code>ObservationHandler</code> method is called (e.g. <code>onStart</code>) with the mutable <code>Observation.Context</code> as argument. On <code>Observation</code> stop, before calling the <code>ObservationHandler</code> <code>onStop</code> methods, list of <code>ObservationFilter</code> is called to optionally further modify the <code>Observation.Context</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="micrometer-observation-context"><a class="anchor" href="#micrometer-observation-context"></a>Observation.Context</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To pass information between the instrumented code and the handler (or between handler methods, such as <code>onStart</code> and <code>onStop</code>), you can use an <code>Observation.Context</code>. An <code>Observation.Context</code> is a <code>Map</code>-like container that can store values for you while your handler can access the data inside the context.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="micrometer-observation-handler"><a class="anchor" href="#micrometer-observation-handler"></a>Observation Handler</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Observation Handler allows adding capabilities to existing instrumentations (i.e. you instrument code once and depending on the Observation Handler setup, different actions, such as create spans, metrics, logs will happen). In other words, if you have instrumented code and want to add metrics around it, it&#8217;s enough for you to register an Observation Handler in the Observation Registry to add that behaviour.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s look at the following example of adding a timer behaviour to an existing instrumentation.</p>
+</div>
+<div class="paragraph">
+<p>A popular way to record Observations is storing the start state in a <code>Timer.Sample</code> instance and stopping it when the event has ended.
 Recording such measurements could look like this:</p>
 </div>
 <div class="listingblock">
@@ -414,7 +547,7 @@ finally {
 </div>
 </div>
 <div class="paragraph">
-<p>If you want to have more observation options (such as metrics and tracing out of the box plus anything else you will plug in) then you&#8217;ll need to rewrite that code to use the <code>Observation</code> API.</p>
+<p>If you want to have more observation options (such as metrics and tracing&#8201;&#8212;&#8201;already included in Micrometer&#8201;&#8212;&#8201;plus anything else you will plug in), you need to rewrite that code to use the <code>Observation</code> API.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -423,22 +556,13 @@ Observation.createNotStarted("my.operation", registry).observe(this::doSomeWorkH
 </div>
 </div>
 <div class="paragraph">
-<p>One of the new features in Micrometer 1.10 is the ability to register "handlers" (<code>ObservationHandler</code>) that are notified about the lifecycle event of an observation (e.g.: you can run custom code when an observation is started/stopped).
-Using this feature lets you add tracing capabilities to your existing metrics instrumentation (see: <code>DefaultTracingObservationHandler</code>). The implementation of these handlers does not need to be tracing related, it is completely up to you how you are going to implement them (e.g.: you can add logging capabilities) if you want.</p>
+<p>Starting with Micrometer 1.10, you can register "handlers" (<code>ObservationHandler</code> instances) that are notified about the <a href="introduction.html" class="xref page">lifecycle event</a> of an observation (for example, you can run custom code when an observation is started or stopped).
+Using this feature lets you add tracing capabilities to your existing metrics instrumentation (see: <code>DefaultTracingObservationHandler</code>). The implementation of these handlers does not need to be tracing related. It is completely up to you how you are going to implement them (for example, you can add logging capabilities).</p>
 </div>
-<div class="sect1">
-<h2 id="_observation_context"><a class="anchor" href="#_observation_context"></a>Observation.Context</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="micrometer-observation-handler-example"><a class="anchor" href="#micrometer-observation-handler-example"></a>ObservationHandler Example</h3>
 <div class="paragraph">
-<p>In order to pass information between the instrumented code and the handler (or between handler methods, e.g.: <code>onStart</code> and <code>onStop</code>), you can utilize an <code>Observation.Context</code>. An <code>Observation.Context</code> is a <code>Map</code>-like container that can store values for you while your handler can access the data inside the context.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_observationhandler_example"><a class="anchor" href="#_observationhandler_example"></a>ObservationHandler Example</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Based on this, we can implement a simple handler that lets the users know about its invocations by printing them out to <code>stdout</code>.</p>
+<p>Based on this, we can implement a simple handler that lets the users know about its invocations by printing them out to <code>stdout</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -475,7 +599,7 @@ Using this feature lets you add tracing capabilities to your existing metrics in
 </div>
 </div>
 <div class="paragraph">
-<p>You need to register the handler to the <code>ObservationRegistry</code>.</p>
+<p>You need to register the handler to the <code>ObservationRegistry</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -484,7 +608,7 @@ registry.observationConfig().observationHandler(new SimpleHandler());</code></pr
 </div>
 </div>
 <div class="paragraph">
-<p>You can use the <code>observe</code> method to instrument your codebase.</p>
+<p>You can use the <code>observe</code> method to instrument your codebase:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -496,7 +620,7 @@ Observation.createNotStarted("my.operation", () -&gt; context, registry).observe
 </div>
 </div>
 <div class="paragraph">
-<p>You can also take full control of the scoping mechanism.</p>
+<p>You can also take full control of the scoping mechanism:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -519,14 +643,15 @@ finally {
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
-<h2 id="_signaling_errors_and_arbitrary_events"><a class="anchor" href="#_signaling_errors_and_arbitrary_events"></a>Signaling Errors and Arbitrary Events</h2>
+<h2 id="micrometer-observation-events"><a class="anchor" href="#micrometer-observation-events"></a>Signaling Errors and Arbitrary Events</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When <strong>instrumenting</strong> code we might want to signal that an error happened or signal that an arbitrary event happened. The observation API lets us do it via it <code>error</code> and <code>event</code> methods.</p>
+<p>When <strong>instrumenting</strong> code, we might want to signal that an error happened or signal that an arbitrary event happened. The observation API lets us do so through its <code>error</code> and <code>event</code> methods.</p>
 </div>
 <div class="paragraph">
-<p>One use-case for signaling arbitrary event can be attaching annotations to <code>Span</code> for Distributed Tracing but you can also process them however you want in your own handler, e.g.: emit log events based on them.</p>
+<p>One use-case for signaling an arbitrary event can be attaching annotations to <code>Span</code> for Distributed Tracing, but you can also process them however you want in your own handler, such as emitting log events based on them:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -548,10 +673,10 @@ finally {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_observation_observationconvention_example"><a class="anchor" href="#_observation_observationconvention_example"></a>Observation.ObservationConvention Example</h2>
+<h2 id="micrometer-observation-convention-example"><a class="anchor" href="#micrometer-observation-convention-example"></a>Observation.ObservationConvention Example</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When <strong>instrumenting</strong> code we want to provide sensible defaults for tags but also we want to allow users to easily change those defaults. An <code>ObservationConvention</code> interface is a description of what tags and name we should create for an <code>Observation.Context</code>. See the full usage example of an instrumentation together with overriding the default tags.</p>
+<p>When <strong>instrumenting</strong> code, we want to provide sensible defaults for tags, but also we want to let users easily change those defaults. An <code>ObservationConvention</code> interface is a description of what tags and name we should create for an <code>Observation.Context</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -794,7 +919,10 @@ static class CloudUtils {
 </div>
 </div>
 <div class="paragraph">
-<p>Below you can find an example of setting the whole code together.</p>
+<p>For a more detailed example, see the full usage example of an instrumentation together with overriding the default tags.</p>
+</div>
+<div class="paragraph">
+<p>The following example puts the whole code together:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -816,16 +944,16 @@ taxCalculator.calculateTax("INCOME_TAX", "1234567890");</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_observation_predicates_and_filters"><a class="anchor" href="#_observation_predicates_and_filters"></a>Observation Predicates and Filters</h2>
+<h2 id="micrometer-observation-predicates-filters"><a class="anchor" href="#micrometer-observation-predicates-filters"></a>Observation Predicates and Filters</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To globally disable observations under given conditions you can use an <code>ObservationPredicate</code>. To mutate the <code>Observation.Context</code> you can use an <code>ObservationFilter</code>.</p>
+<p>To globally disable observations under given conditions, you can use an <code>ObservationPredicate</code>. To mutate the <code>Observation.Context</code>, you can use an <code>ObservationFilter</code>.</p>
 </div>
 <div class="paragraph">
-<p>To set these just call <code>ObservationRegistry#observationConfig()#observationPredicate()</code> and <code>ObservationRegistry#observationConfig()#observationFilter()</code> methods respectively.</p>
+<p>To set these, call the <code>ObservationRegistry#observationConfig()#observationPredicate()</code> and <code>ObservationRegistry#observationConfig()#observationFilter()</code> methods, respectively.</p>
 </div>
 <div class="paragraph">
-<p>Below you can find an example of predicates and filters.</p>
+<p>The following example uses predicates and filters:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -887,13 +1015,13 @@ then(myContext.getHighCardinalityKeyValues())
 </div>
 </div>
 <div class="sect1">
-<h2 id="_using_annotations_with_observed"><a class="anchor" href="#_using_annotations_with_observed"></a>Using Annotations With @Observed</h2>
+<h2 id="micrometer-observation-annotations"><a class="anchor" href="#micrometer-observation-annotations"></a>Using Annotations With @Observed</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you have turned on Aspect Oriented Programming (e.g. via <code>org.aspectj:aspectjweaver</code>) you can use the <code>@Observed</code> annotation to create observations. You can put that annotation either on a method to observe it or a class to observe all methods in it. Let&#8217;s look at the following example.</p>
+<p>If you have turned on Aspect Oriented Programming (for example, by using <code>org.aspectj:aspectjweaver</code>), you can use the <code>@Observed</code> annotation to create observations. You can put that annotation either on a method to observe it or on a class to observe all the methods in it.</p>
 </div>
 <div class="paragraph">
-<p>Here you can see an <code>ObservedService</code> that has an annotation on a method.</p>
+<p>The following example shows an <code>ObservedService</code> that has an annotation on a method:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -909,7 +1037,7 @@ then(myContext.getHighCardinalityKeyValues())
 </div>
 </div>
 <div class="paragraph">
-<p>The following test asserts whether the proper observation gets created when a proxied <code>ObservedService</code> instance gets called.</p>
+<p>The following test asserts whether the proper observation gets created when a proxied <code>ObservedService</code> instance gets called:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -941,7 +1069,7 @@ TestObservationRegistryAssert.assertThat(registry)
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="installing.html">Installing</a></span>
+  <span class="prev"><a href="introduction.html">Introduction</a></span>
   <span class="next"><a href="instrumenting.html">Instrumenting</a></span>
 </nav>
 </article>
@@ -967,12 +1095,12 @@ TestObservationRegistryAssert.assertThat(registry)
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.3-SNAPSHOT
+                            1.12.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.2<span class="current">current</span>
+                            1.12.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -1037,6 +1165,6 @@ TestObservationRegistryAssert.assertThat(registry)
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.3" data-page-component="micrometer"></script>
   </body>
 </html>

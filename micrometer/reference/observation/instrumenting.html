@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
+    <title>Instrumentation :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/observation/instrumenting.html">
-    <link rel="prev" href="handler.html">
+    <link rel="prev" href="components.html">
     <link rel="next" href="testing.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.2">
+    <meta name="version" content="1.12.3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.2">
+<div class="nav-container" data-component="micrometer" data-version="1.12.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.2</span>
+  <span class="version">1.12.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -197,6 +197,9 @@
     <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -257,19 +260,46 @@
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/jvm.html">JVM</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="../reference/commons-pool.html">Commons Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/db.html">Database</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/jvm.html">JVM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/kafka.html">Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/mongodb.html">MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/netty.html">Netty</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/system.html">System</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -290,13 +320,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="handler.html">Observation Handlers</a>
+    <a class="nav-link" href="introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="components.html">Components</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="instrumenting.html">Instrumenting</a>
@@ -348,13 +396,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Instrumentation"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.2/docs/modules/ROOT/pages/observation/instrumenting.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.3/docs/modules/ROOT/pages/observation/instrumenting.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -397,8 +445,23 @@
   </ul>
 </nav>
 <article>
+<h1 id="page-title" class="page">Instrumentation</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This section of the documentation is targeted to users who want to add instrumentation to their codebase.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>In this section we will see some common examples of reusing existing Micrometer and Micrometer Tracing handlers and context types to do instrumentation.</p>
+<p>In this section, we see some common examples of reusing existing Micrometer and Micrometer Tracing handlers and context types to do instrumentation.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -407,13 +470,13 @@
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Before you decide to instrument a project yourself, please double-check whether it hasn&#8217;t already been instrumented!
+Before you decide to instrument a project yourself, double-check whether that it has not already been instrumented!
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>To better understand how you can do instrumentation we need to distinguish two concepts.</p>
+<p>To better convey how you can do instrumentation, we need to distinguish two concepts:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -426,19 +489,729 @@ Before you decide to instrument a project yourself, please double-check whether 
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Context propagation</strong> - we propagate existing context through threads or network. We&#8217;re using the <a href="https://micrometer.io/docs/contextPropagation">Micrometer Context Propagation</a> library to define the context and to propagate it through threads. We&#8217;re using dedicated <code>SenderContext</code> and <code>ReceiverContext</code> objects, together with Micrometer Tracing handlers, to create Observations that will propagate context over the wire.</p>
+<p><strong>Context propagation</strong> - We propagate existing context through threads or network. We use the <a href="../contextpropagation.html" class="xref page">Micrometer Context Propagation</a> library to define the context and to propagate it through threads. We use dedicated <code>SenderContext</code> and <code>ReceiverContext</code> objects, together with Micrometer Tracing handlers, to create Observations that propagate context over the wire.</p>
 </div>
 <div class="paragraph">
-<p><strong>Creation of Observations</strong> - we want to wrap an operation in an Observation to get measurements. We need to know if there previously has been a parent Observation to maintain the parent-child relationship of Observations.</p>
+<p><strong>Creation of Observations</strong> - We want to wrap an operation in an Observation to get measurements. We need to know if there previously has been a parent Observation to maintain the parent-child relationship of Observations.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="instrumentation_of_http_communication"><a class="anchor" href="#instrumentation_of_http_communication"></a>Instrumentation of HTTP Communication</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section you can find how to instrument libraries that do HTTP communication.</p>
+</div>
+<div class="sect2">
+<h3 id="instrumentation_of_http_communication_client"><a class="anchor" href="#instrumentation_of_http_communication_client"></a>Instrumentation of HTTP Client Communication</h3>
+<div class="paragraph">
+<p><strong>Explanation of HTTP client side instrumentation</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">┌─────────────────────────────┐┌───────────┐┌───────────────────────┐┌───────────────┐┌─────────────────────────┐┌──────────────────────┐┌──────────────────────┐
+│[1] RequestReplySenderContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└──────────────┬──────────────┘└─────┬─────┘└───────────┬───────────┘└───────┬───────┘└────────────┬────────────┘└──────────┬───────────┘└──────────┬───────────┘
+               │                     │                  │                    │                     │                        │                       │
+               │        Wrap         │                  │                    │                     │                        │                       │
+               │────────────────────&gt;│                  │                    │                     │                        │                       │
+               │                     │                  │                    │                     │                        │                       │
+               │                     │                  │       Create       │                     │                        │                       │
+               │                     │                  │───────────────────&gt;│                     │                        │                       │
+               │                     │                  │                    │                     │                        │                       │
+               │                     │     Create       │                    │                     │                        │                       │
+               │────────────────────────────────────────────────────────────&gt;│                     │                        │                       │
+               │                     │                  │                    │                     │                        │                       │
+               │                     │                  │                    │       Create        │                        │                       │
+               │                     │                  │                    │&lt;────────────────────│                        │                       │
+               │                     │                  │                    │                     │                        │                       │
+               │                     │                  │                    │                   onStart                    │                       │
+               │                     │                  │                    │─────────────────────────────────────────────&gt;│                       │
+               │                     │                  │                    │                     │                        │                       │
+               │                     │                  │                    │                     │      Wrap in Scope     │                       │
+               │                     │                  │                    │─────────────────────────────────────────────────────────────────────&gt;│
+┌──────────────┴──────────────┐┌─────┴─────┐┌───────────┴───────────┐┌───────┴───────┐┌────────────┴────────────┐┌──────────┴───────────┐┌──────────┴───────────┐
+│[1] RequestReplySenderContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└─────────────────────────────┘└───────────┘└───────────────────────┘└───────────────┘└─────────────────────────┘└──────────────────────┘└──────────────────────┘</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In the &lt;3&gt; <code>ObservationRegistry</code> register a &lt;6&gt; handler that will propagate context (e.g. <code>PropagatingSenderTracingObservationHandler</code> from Micrometer Tracing)</p>
+</li>
+<li>
+<p>Create a &lt;1&gt; <code>RequestReplySenderContext</code> that wraps a &lt;2&gt; carrier (e.g. <code>HttpRequest</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>In its constructor explain how to enrich the headers (e.g. <code>(key, value) &#8594; httpRequest.header(key, value)</code>)</p>
+</li>
+<li>
+<p>Set the &lt;2&gt; carrier on the &lt;1&gt; <code>RequestReplySenderContext</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;5&gt; <code>ObservationConvention</code> with the sender context</p>
+<div class="ulist">
+<ul>
+<li>
+<p>On &lt;4&gt; <code>Observation</code> start, propagation will happen (e.g. carrier will be enriched with proper headers) via an &lt;6&gt; <code>ObservationHandler</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wrap the &lt;7&gt; code to instrument (e.g. sending of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="instrumentation_of_http_communication_server"><a class="anchor" href="#instrumentation_of_http_communication_server"></a>Instrumentation of HTTP Server Communication</h3>
+<div class="paragraph">
+<p><strong>Explanation of HTTP server side instrumentation</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">┌───────────────────────────────┐┌───────────┐┌───────────────────────┐┌───────────────┐┌─────────────────────────┐┌──────────────────────┐┌──────────────────────┐
+│[1] RequestReplyReceiverContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└───────────────┬───────────────┘└─────┬─────┘└───────────┬───────────┘└───────┬───────┘└────────────┬────────────┘└──────────┬───────────┘└──────────┬───────────┘
+                │                      │                  │                    │                     │                        │                       │
+                │         Wrap         │                  │                    │                     │                        │                       │
+                │─────────────────────&gt;│                  │                    │                     │                        │                       │
+                │                      │                  │                    │                     │                        │                       │
+                │                      │                  │       Create       │                     │                        │                       │
+                │                      │                  │───────────────────&gt;│                     │                        │                       │
+                │                      │                  │                    │                     │                        │                       │
+                │                      │     Create       │                    │                     │                        │                       │
+                │─────────────────────────────────────────────────────────────&gt;│                     │                        │                       │
+                │                      │                  │                    │                     │                        │                       │
+                │                      │                  │                    │       Create        │                        │                       │
+                │                      │                  │                    │&lt;────────────────────│                        │                       │
+                │                      │                  │                    │                     │                        │                       │
+                │                      │                  │                    │                   onStart                    │                       │
+                │                      │                  │                    │─────────────────────────────────────────────&gt;│                       │
+                │                      │                  │                    │                     │                        │                       │
+                │                      │                  │                    │                     │      Wrap in Scope     │                       │
+                │                      │                  │                    │─────────────────────────────────────────────────────────────────────&gt;│
+┌───────────────┴───────────────┐┌─────┴─────┐┌───────────┴───────────┐┌───────┴───────┐┌────────────┴────────────┐┌──────────┴───────────┐┌──────────┴───────────┐
+│[1] RequestReplyReceiverContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└───────────────────────────────┘└───────────┘└───────────────────────┘└───────────────┘└─────────────────────────┘└──────────────────────┘└──────────────────────┘</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In the <code>ObservationRegistry</code> register a handler that will propagate context (e.g. <code>PropagatingReceiverTracingObservationHandler</code> from Micrometer Tracing)</p>
+</li>
+<li>
+<p>Create a &lt;1&gt; <code>RequestReplyReceiverContext</code> that wraps a &lt;2&gt; carrier (e.g. <code>HttpRequest</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>In its constructor explain how to retrieve the header values (e.g. <code>(carrier, key) &#8594; carrier.header(key)</code>)</p>
+</li>
+<li>
+<p>Set the &lt;2&gt; carrier on the &lt;1&gt; <code>RequestReplyReceiverContext</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;5&gt; <code>ObservationConvention</code> with the sender context</p>
+<div class="ulist">
+<ul>
+<li>
+<p>On &lt;4&gt; <code>Observation</code> start, propagation will happen (e.g. carrier will be enriched with proper headers) via an &lt;6&gt; <code>ObservationHandler</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wrap the &lt;6&gt; code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="instrumentation_of_http_communication_example"><a class="anchor" href="#instrumentation_of_http_communication_example"></a>Instrumentation of HTTP Communication Example</h3>
+<div class="paragraph">
+<p>To instrument an HTTP-based communication, we need to use the <code>RequestReplySenderContext</code> and <code>RequestReplyReceiverContext</code> for the client and server side, respectively.</p>
+</div>
+<div class="paragraph">
+<p>As an example for the client side, we use a handler that instruments the HTTP request by adding a <code>foo:bar</code> header (if you have Micrometer Tracing on the classpath, you could reuse the <code>PropagatingSenderTracingObservationHandler</code> and <code>PropagatingReceiverTracingObservationHandler</code> to propagate tracing context over the wire). Let&#8217;s consider an example of such a handler:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static class HeaderPropagatingHandler implements ObservationHandler&lt;SenderContext&lt;Object&gt;&gt; {
+
+    @Override
+    public void onStart(SenderContext&lt;Object&gt; context) {
+        context.getSetter().set(context.getCarrier(), "foo", "bar");
+    }
+
+    @Override
+    public boolean supportsContext(Observation.Context context) {
+        return context instanceof SenderContext;
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Consider the following HTTP client side instrumentation that reuses the handler:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// This example can be combined with the idea of ObservationConvention to allow
+// users to easily customize the key values. Please read the rest of the
+// documentation on how to do it.
+
+// In Micrometer Tracing we would have predefined
+// PropagatingSenderTracingObservationHandler but for the sake of this demo we
+// create our own handler that puts "foo":"bar" headers into the request
+registry.observationConfig().observationHandler(new HeaderPropagatingHandler());
+
+// We're using WireMock to stub the HTTP GET call to "/foo" with a response "OK"
+stubFor(get("/foo").willReturn(ok().withBody("OK")));
+
+// RequestReplySenderContext is a special type of context used for request-reply
+// communication. It requires to define what the Request type is and how we can
+// instrument it. It also needs to know what the Response type is
+RequestReplySenderContext&lt;HttpUriRequestBase, ClassicHttpResponse&gt; context = new RequestReplySenderContext&lt;&gt;(
+        (carrier, key, value) -&gt; Objects.requireNonNull(carrier).addHeader(key, value));
+
+// We're instrumenting the Apache HTTPClient
+try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+    // The HttpGet is our carrier (we can mutate it to instrument the headers)
+    HttpGet httpget = new HttpGet(info.getHttpBaseUrl() + "/foo");
+    // We must set the carrier BEFORE we run &lt;Observation#start&gt;
+    context.setCarrier(httpget);
+    // You can set the remote service address to provide more debugging
+    // information
+    context.setRemoteServiceAddress(info.getHttpBaseUrl());
+    // Examples of setting key values from the request
+    Observation observation = Observation.createNotStarted("http.client.requests", () -&gt; context, registry)
+        .contextualName("HTTP " + httpget.getMethod())
+        .lowCardinalityKeyValue("http.url", info.getHttpBaseUrl() + "/{name}")
+        .highCardinalityKeyValue("http.full-url", httpget.getRequestUri());
+    observation.observeChecked(() -&gt; {
+        String response = httpclient.execute(httpget, classicHttpResponse -&gt; {
+            // We should set the response before we stop the observation
+            context.setResponse(classicHttpResponse);
+            // Example of setting key values from the response
+            observation.highCardinalityKeyValue("http.content.length",
+                    String.valueOf(classicHttpResponse.getEntity().getContentLength()));
+            return EntityUtils.toString(classicHttpResponse.getEntity());
+        });
+
+        then(response).isEqualTo("OK");
+    });
+}
+
+// We want to be sure that we have successfully enriched the HTTP headers
+verify(getRequestedFor(urlEqualTo("/foo")).withHeader("foo", equalTo("bar")));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As an example for the server side, we use a handler that instruments the Observation by adding the <code>foo</code> low cardinality key with the value being the matched path from the HTTP request. Consider an example of such a handler:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static class HeaderReadingHandler implements ObservationHandler&lt;ReceiverContext&lt;Context&gt;&gt; {
+
+    @Override
+    public void onStart(ReceiverContext&lt;Context&gt; context) {
+        String fooHeader = context.getGetter().get(context.getCarrier(), "foo");
+        // We're setting the value of the &lt;foo&gt; header as a low cardinality key value
+        context.addLowCardinalityKeyValue(KeyValue.of("foo", fooHeader));
+    }
+
+    @Override
+    public boolean supportsContext(Observation.Context context) {
+        return context instanceof ReceiverContext;
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Consider the following HTTP server side instrumentation that reuses the handler:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// This example can be combined with the idea of ObservationConvention to allow
+// users to easily customize the key values. Please read the rest of the
+// documentation on how to do it.
+
+// In Micrometer Tracing we would have predefined
+// PropagatingReceiverTracingObservationHandler but for the sake of this demo we
+// create our own handler that will reuse the &lt;foo&gt; header from the request as a
+// low cardinality key value
+registry.observationConfig().observationHandler(new HeaderReadingHandler());
+
+try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
+    // We're creating the special RequestReplyReceiverContext that will reuse the
+    // information from the HTTP headers
+    RequestReplyReceiverContext&lt;Context, Context&gt; receiverContext = new RequestReplyReceiverContext&lt;&gt;(
+            Context::header);
+    // Remember to set the carrier!!!
+    receiverContext.setCarrier(ctx);
+    String remoteServiceAddress = ctx.scheme() + "://" + ctx.host();
+    receiverContext.setRemoteServiceAddress(remoteServiceAddress);
+    // We're starting an Observation with the context
+    Observation observation = Observation
+        .createNotStarted("http.server.requests", () -&gt; receiverContext, registry)
+        .contextualName("HTTP " + ctx.method() + " " + ctx.matchedPath())
+        .lowCardinalityKeyValue("http.url", remoteServiceAddress + ctx.matchedPath())
+        .highCardinalityKeyValue("http.full-url", remoteServiceAddress + ctx.path())
+        .lowCardinalityKeyValue("http.method", ctx.method().name())
+        .start();
+    // Let's be consistent and always set the Observation related objects under
+    // the same key
+    ctx.attribute(ObservationThreadLocalAccessor.KEY, observation);
+}).get("/hello/{name}", ctx -&gt; {
+    // We need to be thread-safe - we're not using ThreadLocals, we're retrieving
+    // information from the attributes
+    Observation observation = ctx.attribute(ObservationThreadLocalAccessor.KEY);
+    observation.scoped(() -&gt; {
+        // If we need thread locals (e.g. MDC entries) we can use &lt;scoped()&gt;
+        log.info("We're using scoped - Observation in thread local here [" + registry.getCurrentObservation()
+                + "]");
+        then(registry.getCurrentObservation()).isNotNull();
+    });
+    // We're returning body
+    ctx.result("Hello World [" + observation.getContext().getLowCardinalityKeyValue("foo").getValue() + "]");
+}).after("/hello/{name}", ctx -&gt; {
+    // After sending the response we want to stop the Observation
+    Observation observation = ctx.attribute(ObservationThreadLocalAccessor.KEY);
+    observation.stop();
+}).start(0)) {
+    // We're sending an HTTP request with a &lt;foo:bar&gt; header. We're expecting that
+    // it will be reused in the response
+    String response = sendRequestToHelloEndpointWithHeader(javalin.port(), "foo", "bar");
+
+    // The response must contain the value from the header
+    then(response).isEqualTo("Hello World [bar]");
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="instrumentation_of_messaging_communication"><a class="anchor" href="#instrumentation_of_messaging_communication"></a>Instrumentation of Messaging Communication</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section you can find how to instrument libraries that do fire-and-forget like communication.</p>
+</div>
+<div class="sect2">
+<h3 id="instrumentation_of_messaging_communication_producer"><a class="anchor" href="#instrumentation_of_messaging_communication_producer"></a>Instrumentation of Messaging Producer Side</h3>
+<div class="paragraph">
+<p><strong>Explanation of messaging producer side instrumentation</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">┌─────────────────┐┌───────────┐┌───────────────────────┐┌───────────────┐┌─────────────────────────┐┌──────────────────────┐┌──────────────────────┐
+│[1] SenderContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└────────┬────────┘└─────┬─────┘└───────────┬───────────┘└───────┬───────┘└────────────┬────────────┘└──────────┬───────────┘└──────────┬───────────┘
+         │               │                  │                    │                     │                        │                       │
+         │     Wrap      │                  │                    │                     │                        │                       │
+         │──────────────&gt;│                  │                    │                     │                        │                       │
+         │               │                  │                    │                     │                        │                       │
+         │               │                  │       Create       │                     │                        │                       │
+         │               │                  │───────────────────&gt;│                     │                        │                       │
+         │               │                  │                    │                     │                        │                       │
+         │               │        Create    │                    │                     │                        │                       │
+         │──────────────────────────────────────────────────────&gt;│                     │                        │                       │
+         │               │                  │                    │                     │                        │                       │
+         │               │                  │                    │       Create        │                        │                       │
+         │               │                  │                    │&lt;────────────────────│                        │                       │
+         │               │                  │                    │                     │                        │                       │
+         │               │                  │                    │                   onStart                    │                       │
+         │               │                  │                    │─────────────────────────────────────────────&gt;│                       │
+         │               │                  │                    │                     │                        │                       │
+         │               │                  │                    │                     │      Wrap in Scope     │                       │
+         │               │                  │                    │─────────────────────────────────────────────────────────────────────&gt;│
+┌────────┴────────┐┌─────┴─────┐┌───────────┴───────────┐┌───────┴───────┐┌────────────┴────────────┐┌──────────┴───────────┐┌──────────┴───────────┐
+│[1] SenderContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└─────────────────┘└───────────┘└───────────────────────┘└───────────────┘└─────────────────────────┘└──────────────────────┘└──────────────────────┘</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In the &lt;3&gt; <code>ObservationRegistry</code> register a &lt;6&gt; handler that will propagate context (e.g. <code>PropagatingReceiverTracingObservationHandler</code> from Micrometer Tracing)</p>
+</li>
+<li>
+<p>Create a &lt;1&gt; <code>SenderContext</code> that wraps a &lt;2&gt; carrier (e.g. <code>AmqpMessage</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>In its constructor explain how to enrich the headers (e.g. <code>(key, value) &#8594; amqpMessage.header(key, value)</code>)</p>
+</li>
+<li>
+<p>Set the &lt;2&gt; carrier on the &lt;1&gt; <code>SenderContext</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;5&gt; <code>ObservationConvention</code> with the sender context</p>
+<div class="ulist">
+<ul>
+<li>
+<p>On &lt;4&gt; <code>Observation</code> start, propagation will happen (e.g. carrier will be enriched with proper headers) via an &lt;6&gt; <code>ObservationHandler</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wrap the &lt;7&gt; code to instrument (e.g. sending of an AMQP message) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="instrumentation_of_messaging_communication_consumer"><a class="anchor" href="#instrumentation_of_messaging_communication_consumer"></a>Instrumentation of Messaging Consumer Side Communication</h3>
+<div class="paragraph">
+<p><strong>Explanation of messaging consumer side instrumentation</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">┌───────────────────┐┌───────────┐┌───────────────────────┐┌───────────────┐┌─────────────────────────┐┌──────────────────────┐┌──────────────────────┐
+│[1] ReceiverContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└─────────┬─────────┘└─────┬─────┘└───────────┬───────────┘└───────┬───────┘└────────────┬────────────┘└──────────┬───────────┘└──────────┬───────────┘
+          │                │                  │                    │                     │                        │                       │
+          │      Wrap      │                  │                    │                     │                        │                       │
+          │───────────────&gt;│                  │                    │                     │                        │                       │
+          │                │                  │                    │                     │                        │                       │
+          │                │                  │       Create       │                     │                        │                       │
+          │                │                  │───────────────────&gt;│                     │                        │                       │
+          │                │                  │                    │                     │                        │                       │
+          │                │        Create    │                    │                     │                        │                       │
+          │───────────────────────────────────────────────────────&gt;│                     │                        │                       │
+          │                │                  │                    │                     │                        │                       │
+          │                │                  │                    │       Create        │                        │                       │
+          │                │                  │                    │&lt;────────────────────│                        │                       │
+          │                │                  │                    │                     │                        │                       │
+          │                │                  │                    │                   onStart                    │                       │
+          │                │                  │                    │─────────────────────────────────────────────&gt;│                       │
+          │                │                  │                    │                     │                        │                       │
+          │                │                  │                    │                     │      Wrap in Scope     │                       │
+          │                │                  │                    │─────────────────────────────────────────────────────────────────────&gt;│
+┌─────────┴─────────┐┌─────┴─────┐┌───────────┴───────────┐┌───────┴───────┐┌────────────┴────────────┐┌──────────┴───────────┐┌──────────┴───────────┐
+│[1] ReceiverContext││[2] Carrier││[3] ObservationRegistry││[4] Observation││[5] ObservationConvention││[6] ObservationHandler││[7] Code to Instrument│
+└───────────────────┘└───────────┘└───────────────────────┘└───────────────┘└─────────────────────────┘└──────────────────────┘└──────────────────────┘</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In the &lt;3&gt; <code>ObservationRegistry</code> register a &lt;6&gt; handler that will propagate context (e.g. <code>PropagatingReceiverTracingObservationHandler</code> from Micrometer Tracing)</p>
+</li>
+<li>
+<p>Create a &lt;1&gt; <code>ReceiverContext</code> that wraps a &lt;2&gt; carrier (e.g. <code>AmqpMessage</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>In its constructor explain how to retrieve the header values (e.g. <code>(carrier, key) &#8594; carrier.header(key)</code>)</p>
+</li>
+<li>
+<p>Set the &lt;2&gt; carrier on the &lt;1&gt; <code>ReceiverContext</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;6&gt; <code>ObservationConvention</code> with the sender context</p>
+<div class="ulist">
+<ul>
+<li>
+<p>On &lt;4&gt; <code>Observation</code> start, propagation will happen (e.g. carrier will be enriched with proper headers) via an &lt;6&gt; <code>ObservationHandler</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wrap the &lt;7&gt; code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Some libraries (e.g. RabbitMQ) you might not have a handle on user&#8217;s code, and you may require the user to allow starting a consumer side Observation and opening its scope by the framework (putting values in thread local) with the requirement of manually closing both the scope and stopping the Observation later by the user in their code!</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="instrumentation_of_messaging_communication_example"><a class="anchor" href="#instrumentation_of_messaging_communication_example"></a>Instrumentation of Messaging Communication Example</h3>
+<div class="paragraph">
+<p>To instrument messaging-based communication we need to use the <code>SenderContext</code> and <code>ReceiverContext</code> for the producer and consumer side respectively.</p>
+</div>
+<div class="paragraph">
+<p>In this section we will create a simple instrumentation for Apache Kafka.</p>
+</div>
+<div class="paragraph">
+<p>As an example for the producer side we will use a handler that instruments the message by adding a <code>foo:bar</code> header (if you have Micrometer Tracing on the classpath you could reuse the <code>PropagatingSenderTracingObservationHandler</code> and <code>PropagatingReceiverTracingObservationHandler</code> to propagate tracing context over the wire). Consider the following example of the <code>KafkaSenderContext</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static class KafkaSenderContext extends SenderContext&lt;ProducerRecord&lt;String, String&gt;&gt; {
+
+    public KafkaSenderContext(ProducerRecord&lt;String, String&gt; producerRecord) {
+        // We describe how the carrier will be mutated (we mutate headers)
+        super((carrier, key, value) -&gt; carrier.headers().add(key, value.getBytes(StandardCharsets.UTF_8)));
+        setCarrier(producerRecord);
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Consider the following example of the aforementioned handler:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static class HeaderPropagatingHandler implements ObservationHandler&lt;KafkaSenderContext&gt; {
+
+    @Override
+    public void onStart(KafkaSenderContext context) {
+        context.getSetter().set(context.getCarrier(), "foo", "bar");
+        context.addLowCardinalityKeyValue(KeyValue.of("sent", "true"));
+    }
+
+    @Override
+    public boolean supportsContext(Observation.Context context) {
+        return context instanceof KafkaSenderContext;
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Consider the following code that is the <code>ProducerInterceptor</code> for Kafka:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class ProducerInterceptorConfig implements ProducerInterceptor&lt;String, String&gt; {
+
+    private ObservationRegistry observationRegistry;
+
+    private Observation observation;
+
+    @Override
+    public ProducerRecord&lt;String, String&gt; onSend(ProducerRecord&lt;String, String&gt; record) {
+        // This code will be called before the message gets sent. We create
+        // a context and pass it to an Observation. Upon start, the handler will be called
+        // and the ProducerRecord will be mutated
+        KafkaSenderContext context = new KafkaSenderContext(record);
+        this.observation = Observation.start("kafka.send", () -&gt; context, observationRegistry);
+        // We return the mutated carrier
+        return context.getCarrier();
+    }
+
+    @Override
+    public void onAcknowledgement(RecordMetadata metadata, Exception exception) {
+        // Once the message got sent (with or without an exception) we attach an exception
+        // and stop the observation
+        this.observation.error(exception);
+        this.observation.stop();
+    }
+
+    @Override
+    public void close() {
+
+    }
+
+    @Override
+    public void configure(Map&lt;String, ?&gt; configs) {
+        // We retrieve the ObservationRegistry from the configuration
+        this.observationRegistry = (ObservationRegistry) configs.get(ObservationRegistry.class.getName());
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Consider the following code of the producer side instrumentation that reuses the handler:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">TestObservationRegistry registry = TestObservationRegistry.create();
+
+// In Micrometer Tracing we would have predefined
+// PropagatingSenderTracingObservationHandler but for the sake of this demo we
+// create our own handler that puts "foo":"bar" headers into the request and will
+// set the low cardinality key "sent" to "true".
+registry.observationConfig().observationHandler(new HeaderPropagatingHandler());
+
+// Producer side...
+Properties producerConfigs = new Properties();
+producerConfigs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaContainer.getBootstrapServers());
+producerConfigs.put(ProducerConfig.CLIENT_ID_CONFIG, UUID.randomUUID().toString());
+producerConfigs.put(ObservationRegistry.class.getName(), registry);
+producerConfigs.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG,
+        "io.micrometer.docs.observation.messaging.ProducerInterceptorConfig");
+Producer&lt;String, String&gt; producer = new KafkaProducer&lt;&gt;(producerConfigs, new StringSerializer(),
+        new StringSerializer());
+
+// Producer sends a message
+producer.send(new ProducerRecord&lt;&gt;(topic, "foo"));
+producer.flush();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As an example for the consumer side, we use a handler that instruments the Observation by adding the <code>foo</code> low cardinality key with the value being the matched path from the message. Consider the following example of the <code>KafkaReceiverContext</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static class KafkaReceiverContext extends ReceiverContext&lt;ConsumerRecords&lt;String, String&gt;&gt; {
+
+    public KafkaReceiverContext(ConsumerRecords&lt;String, String&gt; consumerRecord) {
+        // We describe how to read entries from the carrier (we read headers)
+        super((carrier, key) -&gt; {
+            // This is a very naive approach that takes the first ConsumerRecord
+            Header header = carrier.iterator().next().headers().lastHeader(key);
+            if (header != null) {
+                return new String(header.value());
+            }
+            return null;
+        });
+        setCarrier(consumerRecord);
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Consider the following example of the aforementioned handler.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static class HeaderReadingHandler implements ObservationHandler&lt;KafkaReceiverContext&gt; {
+
+    @Override
+    public void onStart(KafkaReceiverContext context) {
+        String fooHeader = context.getGetter().get(context.getCarrier(), "foo");
+        // We're setting the value of the &lt;foo&gt; header as a low cardinality key value
+        context.addLowCardinalityKeyValue(KeyValue.of("received foo header", fooHeader));
+    }
+
+    @Override
+    public boolean supportsContext(Observation.Context context) {
+        return context instanceof KafkaReceiverContext;
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Consider the following code that is the <code>ConsumerInterceptor</code> for Kafka:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class ConsumerInterceptorConfig implements ConsumerInterceptor&lt;String, String&gt; {
+
+    private ObservationRegistry observationRegistry;
+
+    @Override
+    public ConsumerRecords&lt;String, String&gt; onConsume(ConsumerRecords&lt;String, String&gt; records) {
+        // We're creating the receiver context
+        KafkaReceiverContext context = new KafkaReceiverContext(records);
+        // Then, we're just starting and stopping the observation on the consumer side
+        Observation.start("kafka.receive", () -&gt; context, observationRegistry).stop();
+        // We could put the Observation in scope so that the users can propagate it
+        // further on
+        return context.getCarrier();
+    }
+
+    @Override
+    public void onCommit(Map&lt;TopicPartition, OffsetAndMetadata&gt; offsets) {
+
+    }
+
+    @Override
+    public void close() {
+
+    }
+
+    @Override
+    public void configure(Map&lt;String, ?&gt; configs) {
+        // We retrieve the ObservationRegistry from the configuration
+        this.observationRegistry = (ObservationRegistry) configs.get(ObservationRegistry.class.getName());
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Consider the following code of the consumer side instrumentation that reuses the handler:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">TestObservationRegistry registry = TestObservationRegistry.create();
+
+// Consumer side...
+// In Micrometer Tracing we would have predefined
+// PropagatingReceiverTracingObservationHandler but for the sake of this demo we
+// create our own handler that takes the "foo" header's value and sets it as a low
+// cardinality key "received foo header"
+registry.observationConfig().observationHandler(new HeaderReadingHandler());
+
+Properties consumerConfigs = new Properties();
+consumerConfigs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaContainer.getBootstrapServers());
+consumerConfigs.put(ConsumerConfig.GROUP_ID_CONFIG, "test-" + UUID.randomUUID());
+consumerConfigs.put(ObservationRegistry.class.getName(), registry);
+consumerConfigs.put(ConsumerConfig.INTERCEPTOR_CLASSES_CONFIG,
+        "io.micrometer.docs.observation.messaging.ConsumerInterceptorConfig");
+consumerConfigs.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+Consumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(consumerConfigs, new StringDeserializer(),
+        new StringDeserializer());
+
+// Consumer scubscribes to the topic
+consumer.subscribe(Collections.singletonList(topic));
+
+// Consumer polls for a message
+consumer.poll(Duration.ofMillis(1000));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s look at the assertions after having sent and received a message. We should have 2 observations, 1 on the consumer and 1 on the producer side, each with proper key values as shown in the handlers.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">TestObservationRegistryAssert.assertThat(registry)
+    .hasObservationWithNameEqualTo("kafka.send")
+    .that()
+    .hasBeenStarted()
+    .hasBeenStopped()
+    .hasLowCardinalityKeyValue("sent", "true");
+
+TestObservationRegistryAssert.assertThat(registry)
+    .hasObservationWithNameEqualTo("kafka.receive")
+    .that()
+    .hasBeenStarted()
+    .hasBeenStopped()
+    .hasLowCardinalityKeyValue("received foo header", "bar");</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="instrumentation_of_thread_switching_components"><a class="anchor" href="#instrumentation_of_thread_switching_components"></a>Instrumentation of Thread Switching Components</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We might want to create an Observation around a <code>Runnable</code> or <code>Callable</code> that we&#8217;re submitting through an <code>Executor</code>. For that to work we need to know if in the parent thread there was an Observation that the new thread should continue, or for which a child Observation should be created.</p>
+<p>We might want to create an Observation around a <code>Runnable</code> or <code>Callable</code> that we&#8217;re submitting through an <code>Executor</code>. For that to work, we need to know if there was an Observation in the parent thread that the new thread should continue or for which a child Observation should be created.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the following example.</p>
+<p>Consider the following example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -474,12 +1247,12 @@ Future&lt;Boolean&gt; child = parent.observe(() -&gt; {
 <h2 id="instrumentation_of_reactive_libraries"><a class="anchor" href="#instrumentation_of_reactive_libraries"></a>Instrumentation of Reactive Libraries</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section we&#8217;ll discuss how to wrap Reactive libraries in Observations and how to use Reactor Context to safely propagate Observations between threads.</p>
+<p>In this section, we discuss how to wrap Reactive libraries in Observations and how to use Reactor Context to safely propagate Observations between threads.</p>
 </div>
 <div class="sect2">
 <h3 id="instrumentation_of_reactive_libraries_after_reactor_3_5_3"><a class="anchor" href="#instrumentation_of_reactive_libraries_after_reactor_3_5_3"></a>For Reactor 3.5.3 and After</h3>
 <div class="paragraph">
-<p>In Reactor 3.5.3 release (through this <a href="https://github.com/reactor/reactor-core/pull/3335">PR</a>) an option to turn on automated context propagation was added. To use this, please ensure that you&#8217;re using the following projects at minimum in the following versions:</p>
+<p>In the Reactor 3.5.3 release (through this <a href="https://github.com/reactor/reactor-core/pull/3335">PR</a>), an option to turn on automated context propagation was added. To use this, ensure that you use the following projects at minimum in the following versions:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -498,7 +1271,7 @@ Future&lt;Boolean&gt; child = parent.observe(() -&gt; {
 </ul>
 </div>
 <div class="paragraph">
-<p>To use the feature call the new Reactor&#8217;s Hook method (e.g. in your <code>public static void main</code> method) like this</p>
+<p>To use the feature, call the new Reactor&#8217;s Hook method (for example, in your <code>public static void main</code> method), like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -506,10 +1279,10 @@ Future&lt;Boolean&gt; child = parent.observe(() -&gt; {
 </div>
 </div>
 <div class="paragraph">
-<p>This will automatically wrap Reactor internal mechanisms to propagate context between operators, threads etc. Usage of <code>tap</code> and <code>handle</code> or Context Propagation API is not required.</p>
+<p>This automatically wraps Reactor&#8217;s internal mechanisms to propagate context between operators, threads, and so on. Usage of <code>tap</code> and <code>handle</code> or the Context Propagation API is not required.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the following example.</p>
+<p>Consider the following example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -601,16 +1374,16 @@ parent.stop();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If performance of this approach is not satisfactory, please verify whether disabling the hook and explicitly using <code>handle</code> or <code>tap</code> operators improves the performance.</p>
+<p>If the performance of this approach is not satisfactory, check whether disabling the hook and explicitly using <code>handle</code> or <code>tap</code> operators improves the performance.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="instrumentation_of_reactive_libraries_before_reactor_3_5_3"><a class="anchor" href="#instrumentation_of_reactive_libraries_before_reactor_3_5_3"></a>Before Reactor 3.5.3</h3>
 <div class="paragraph">
-<p>The preferred way of propagating elements through the Flux using Reactor is not via <code>ThreadLocal</code>s but through Reactor Context. Reactor however gives you two operators, <code>tap()</code> and <code>handle()</code> where, if <a href="https://micrometer.io/docs/contextPropagation">Micrometer Context Propagation</a> library is on the classpath, it will set thread local values for you.</p>
+<p>The preferred way of propagating elements through the Flux by using Reactor is not through <code>ThreadLocal</code> instances but through Reactor Context. Reactor, however, gives you two operators: <code>tap()</code> and <code>handle()</code>. With these two operators, if the <a href="https://docs.micrometer.io/context-propagation/reference/">Micrometer Context Propagation</a> library is on the classpath, it sets the thread local values for you.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the following example.</p>
+<p>Consider the following example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -685,182 +1458,8 @@ then(block).isEqualTo(2);</code></pre>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="instrumentation_of_http_communication"><a class="anchor" href="#instrumentation_of_http_communication"></a>Instrumentation of HTTP Communication</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In order to instrument an HTTP-based communication we need to use the <code>RequestReplySenderContext</code> and <code>RequestReplyReceiverContext</code> for the client and server side respectively.</p>
-</div>
-<div class="paragraph">
-<p>As an example for the client side we will use a handler that instruments the HTTP request by adding a <code>foo:bar</code> header (if you have Micrometer Tracing on the classpath you could reuse the <code>PropagatingSenderTracingObservationHandler</code> and <code>PropagatingReceiverTracingObservationHandler</code> to propagate tracing context over the wire). Let&#8217;s look at the example of such a handler.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static class HeaderPropagatingHandler implements ObservationHandler&lt;SenderContext&lt;Object&gt;&gt; {
-
-    @Override
-    public void onStart(SenderContext&lt;Object&gt; context) {
-        context.getSetter().set(context.getCarrier(), "foo", "bar");
-    }
-
-    @Override
-    public boolean supportsContext(Observation.Context context) {
-        return context instanceof SenderContext;
-    }
-
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s look at the following of HTTP client side instrumentation that reuses the handler.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// This example can be combined with the idea of ObservationConvention to allow
-// users to easily customize the key values. Please read the rest of the
-// documentation on how to do it.
-
-// In Micrometer Tracing we would have predefined
-// PropagatingSenderTracingObservationHandler but for the sake of this demo we
-// create our own handler that puts "foo":"bar" headers into the request
-registry.observationConfig().observationHandler(new HeaderPropagatingHandler());
-
-// We're using WireMock to stub the HTTP GET call to "/foo" with a response "OK"
-stubFor(get("/foo").willReturn(ok().withBody("OK")));
-
-// RequestReplySenderContext is a special type of context used for request-reply
-// communication. It requires to define what the Request type is and how we can
-// instrument it. It also needs to know what the Response type is
-RequestReplySenderContext&lt;HttpUriRequestBase, ClassicHttpResponse&gt; context = new RequestReplySenderContext&lt;&gt;(
-        (carrier, key, value) -&gt; Objects.requireNonNull(carrier).addHeader(key, value));
-
-// We're instrumenting the Apache HTTPClient
-try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-    // The HttpGet is our carrier (we can mutate it to instrument the headers)
-    HttpGet httpget = new HttpGet(info.getHttpBaseUrl() + "/foo");
-    // We must set the carrier BEFORE we run &lt;Observation#start&gt;
-    context.setCarrier(httpget);
-    // You can set the remote service address to provide more debugging
-    // information
-    context.setRemoteServiceAddress(info.getHttpBaseUrl());
-    // Examples of setting key values from the request
-    Observation observation = Observation.createNotStarted("http.client.requests", () -&gt; context, registry)
-        .contextualName("HTTP " + httpget.getMethod())
-        .lowCardinalityKeyValue("http.url", info.getHttpBaseUrl() + "/{name}")
-        .highCardinalityKeyValue("http.full-url", httpget.getRequestUri());
-    observation.observeChecked(() -&gt; {
-        String response = httpclient.execute(httpget, classicHttpResponse -&gt; {
-            // We should set the response before we stop the observation
-            context.setResponse(classicHttpResponse);
-            // Example of setting key values from the response
-            observation.highCardinalityKeyValue("http.content.length",
-                    String.valueOf(classicHttpResponse.getEntity().getContentLength()));
-            return EntityUtils.toString(classicHttpResponse.getEntity());
-        });
-
-        then(response).isEqualTo("OK");
-    });
-}
-
-// We want to be sure that we have successfully enriched the HTTP headers
-verify(getRequestedFor(urlEqualTo("/foo")).withHeader("foo", equalTo("bar")));</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As an example for the server side we will use a handler that instruments the Observation by adding the <code>foo</code> low cardinality key with the value being the matched path from the HTTP request. Let&#8217;s look at the example of such a handler.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static class HeaderReadingHandler implements ObservationHandler&lt;ReceiverContext&lt;Context&gt;&gt; {
-
-    @Override
-    public void onStart(ReceiverContext&lt;Context&gt; context) {
-        String fooHeader = context.getGetter().get(context.getCarrier(), "foo");
-        // We're setting the value of the &lt;foo&gt; header as a low cardinality key value
-        context.addLowCardinalityKeyValue(KeyValue.of("foo", fooHeader));
-    }
-
-    @Override
-    public boolean supportsContext(Observation.Context context) {
-        return context instanceof ReceiverContext;
-    }
-
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s look at the following of HTTP server side instrumentation that reuses the handler.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// This example can be combined with the idea of ObservationConvention to allow
-// users to easily customize the key values. Please read the rest of the
-// documentation on how to do it.
-
-// In Micrometer Tracing we would have predefined
-// PropagatingReceiverTracingObservationHandler but for the sake of this demo we
-// create our own handler that will reuse the &lt;foo&gt; header from the request as a
-// low cardinality key value
-registry.observationConfig().observationHandler(new HeaderReadingHandler());
-
-try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
-    // We're creating the special RequestReplyReceiverContext that will reuse the
-    // information from the HTTP headers
-    RequestReplyReceiverContext&lt;Context, Context&gt; receiverContext = new RequestReplyReceiverContext&lt;&gt;(
-            Context::header);
-    // Remember to set the carrier!!!
-    receiverContext.setCarrier(ctx);
-    String remoteServiceAddress = ctx.scheme() + "://" + ctx.host();
-    receiverContext.setRemoteServiceAddress(remoteServiceAddress);
-    // We're starting an Observation with the context
-    Observation observation = Observation
-        .createNotStarted("http.server.requests", () -&gt; receiverContext, registry)
-        .contextualName("HTTP " + ctx.method() + " " + ctx.matchedPath())
-        .lowCardinalityKeyValue("http.url", remoteServiceAddress + ctx.matchedPath())
-        .highCardinalityKeyValue("http.full-url", remoteServiceAddress + ctx.path())
-        .lowCardinalityKeyValue("http.method", ctx.method().name())
-        .start();
-    // Let's be consistent and always set the Observation related objects under
-    // the same key
-    ctx.attribute(ObservationThreadLocalAccessor.KEY, observation);
-}).get("/hello/{name}", ctx -&gt; {
-    // We need to be thread-safe - we're not using ThreadLocals, we're retrieving
-    // information from the attributes
-    Observation observation = ctx.attribute(ObservationThreadLocalAccessor.KEY);
-    observation.scoped(() -&gt; {
-        // If we need thread locals (e.g. MDC entries) we can use &lt;scoped()&gt;
-        log.info("We're using scoped - Observation in thread local here [" + registry.getCurrentObservation()
-                + "]");
-        then(registry.getCurrentObservation()).isNotNull();
-    });
-    // We're returning body
-    ctx.result("Hello World [" + observation.getContext().getLowCardinalityKeyValue("foo").getValue() + "]");
-}).after("/hello/{name}", ctx -&gt; {
-    // After sending the response we want to stop the Observation
-    Observation observation = ctx.attribute(ObservationThreadLocalAccessor.KEY);
-    observation.stop();
-}).start(0)) {
-    // We're sending an HTTP request with a &lt;foo:bar&gt; header. We're expecting that
-    // it will be reused in the response
-    String response = sendRequestToHelloEndpointWithHeader(javalin.port(), "foo", "bar");
-
-    // The response must contain the value from the header
-    then(response).isEqualTo("Hello World [bar]");
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_instrumentation_of_messaging_communication"><a class="anchor" href="#_instrumentation_of_messaging_communication"></a>Instrumentation of Messaging Communication</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To instrument messaging components you should proceed in the same way as you would with <a href="#instrumentation_of_http_communication">HTTP-based communication</a>, however instead of <code>RequestReplySenderContext</code> and <code>RequestReplyReceiverContext</code> you would use <code>SenderContext</code> and <code>ReceiverContext</code>. You can also set the <code>remoteServiceName</code> on a context to suggest the name of the broker (e.g. <code>kafka</code> or <code>rabbitmq</code>).</p>
-</div>
-</div>
-</div>
 <nav class="pagination">
-  <span class="prev"><a href="handler.html">Observation Handlers</a></span>
+  <span class="prev"><a href="components.html">Components</a></span>
   <span class="next"><a href="testing.html">Testing</a></span>
 </nav>
 </article>
@@ -886,12 +1485,12 @@ try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.3-SNAPSHOT
+                            1.12.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.2<span class="current">current</span>
+                            1.12.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -956,6 +1555,6 @@ try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.3" data-page-component="micrometer"></script>
   </body>
 </html>

@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.2">
+    <meta name="version" content="1.12.3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.2">
+<div class="nav-container" data-component="micrometer" data-version="1.12.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.2</span>
+  <span class="version">1.12.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -257,19 +260,46 @@
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/jvm.html">JVM</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="../reference/commons-pool.html">Commons Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/db.html">Database</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/jvm.html">JVM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/kafka.html">Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/mongodb.html">MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/netty.html">Netty</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/system.html">System</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -290,13 +320,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/instrumenting.html">Instrumenting</a>
@@ -354,7 +402,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.2/docs/modules/ROOT/pages/implementations/stackdriver.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.3/docs/modules/ROOT/pages/implementations/stackdriver.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -507,7 +555,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=$HOME/$APP_NAME-key.json</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When running in managed environments (such as Google App Engine, Google Cloud Run, Google Cloud Function)
+<p>When running in managed environments (such as Google App Engine, Google Cloud Run, and Google Cloud Function),
 you need not configure this environmental variable. In those environments, a service account is
 automatically associated with the application instance. The underlying Stackdriver Monitoring client
 library can automatically detect and use those credentials.</p>
@@ -519,7 +567,7 @@ library can automatically detect and use those credentials.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer metrics tags are mapped to <a href="https://cloud.google.com/monitoring/api/v3/metrics-details#intro-time-series">Stackdriver metrics labels</a>. With tags and labels, you can further filter or group
-by the tag or label. See <a href="/docs/concepts#_tag_naming">Micrometer Concepts</a> for more information on tags.
+by the tag or label. See <a href="../concepts/naming.html#_tag_naming" class="xref page">Micrometer Concepts</a> for more information on tags.
 The following example filters by tags:</p>
 </div>
 <div class="listingblock">
@@ -529,7 +577,7 @@ registry.config().commonTags("application", "my-application");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can also configure resource labels with the <code>StackdriverConfig</code> method <code>resourceLabels</code>. Depending on the configured <code>resourceType</code>, there will be required resource labels. See the documentation on <a href="https://cloud.google.com/monitoring/custom-metrics/creating-metrics#which-resource">choosing a monitored resource type</a>.</p>
+<p>You can also configure resource labels with the <code>StackdriverConfig</code> method, <code>resourceLabels</code>. Depending on the configured <code>resourceType</code>, there will be required resource labels. See the documentation on <a href="https://cloud.google.com/monitoring/custom-metrics/creating-metrics#which-resource">choosing a monitored resource type</a>.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -538,7 +586,7 @@ registry.config().commonTags("application", "my-application");</code></pre>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-When using Micrometer across multiple applications/instances, it is necessary that Stackdriver labels are unique per application/instance. Otherwise, you will see errors like <code>One or more TimeSeries could not be written: One or more points were written more frequently than the maximum sampling period configured</code>. If using a resource type other than <code>global</code>, the resource labels may already make metrics unique per application instance. If not, a common tag with the hostname or platform-provided instance ID may be a good candidate for achieving this.
+When using Micrometer across multiple applications or instances, it is necessary that Stackdriver labels are unique per application or instance. Otherwise, you will see errors such as <code>One or more TimeSeries could not be written: One or more points were written more frequently than the maximum sampling period configured</code>. If using a resource type other than <code>global</code>, the resource labels may already make metrics unique per application instance. If not, a common tag with the hostname or platform-provided instance ID may be a good candidate for achieving this.
 </td>
 </tr>
 </table>
@@ -549,7 +597,7 @@ When using Micrometer across multiple applications/instances, it is necessary th
 <h2 id="_spring_boot"><a class="anchor" href="#_spring_boot"></a>4. Spring Boot</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Spring Boot provides auto-configuration for Micrometer&#8217;s StackdriverMeterRegistry. For more information, see the <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-metrics-export-stackdriver">Spring Boot documentation</a>.</p>
+<p>Spring Boot provides auto-configuration for Micrometer&#8217;s <code>StackdriverMeterRegistry</code>. For more information, see the <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-metrics-export-stackdriver">Spring Boot documentation</a>.</p>
 </div>
 <div class="paragraph">
 <p>You can manually configure or register the <code>StackdriverMeterRegistry</code>.
@@ -593,7 +641,7 @@ management.metrics.tags.application=${spring.application.name}</code></pre>
 <h2 id="_graalvm_native_image_compilation"><a class="anchor" href="#_graalvm_native_image_compilation"></a>5. GraalVM native image compilation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To compile an application using <code>micrometer-registry-stackdriver</code> to a <a href="https://www.graalvm.org/reference-manual/native-image/">native image using GraalVM</a>, add the <a href="https://github.com/GoogleCloudPlatform/native-image-support-java">native-image-support-java</a> library as a dependency. This will ensure the correct native image configuration is available and avoid errors like <code>Classes that should be initialized at run time got initialized during image building</code>.</p>
+<p>To compile an application by using <code>micrometer-registry-stackdriver</code> to a <a href="https://www.graalvm.org/reference-manual/native-image/">native image using GraalVM</a>, add the <a href="https://github.com/GoogleCloudPlatform/native-image-support-java">native-image-support-java</a> library as a dependency. Doing so ensures that the correct native image configuration is available and avoids errors like <code>Classes that should be initialized at run time got initialized during image building</code>.</p>
 </div>
 </div>
 </div>
@@ -624,12 +672,12 @@ management.metrics.tags.application=${spring.application.name}</code></pre>
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.3-SNAPSHOT
+                            1.12.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.2<span class="current">current</span>
+                            1.12.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -694,6 +742,6 @@ management.metrics.tags.application=${spring.application.name}</code></pre>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.3" data-page-component="micrometer"></script>
   </body>
 </html>

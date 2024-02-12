@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.2">
+    <meta name="version" content="1.12.3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.2">
+<div class="nav-container" data-component="micrometer" data-version="1.12.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.2</span>
+  <span class="version">1.12.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -257,19 +260,46 @@
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/jvm.html">JVM</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="../reference/commons-pool.html">Commons Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/db.html">Database</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/jvm.html">JVM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/kafka.html">Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/mongodb.html">MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/netty.html">Netty</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/system.html">System</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -290,13 +320,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/instrumenting.html">Instrumenting</a>
@@ -354,7 +402,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.2/docs/modules/ROOT/pages/implementations/graphite.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.3/docs/modules/ROOT/pages/implementations/graphite.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -405,7 +453,7 @@
 <li><a href="#_configuring">2. Configuring</a></li>
 <li><a href="#_graphite_tag_support">3. Graphite Tag Support</a></li>
 <li><a href="#_hierarchical_name_mapping">4. Hierarchical name mapping</a></li>
-<li><a href="#_prefixing_your_metrics">5. Prefixing your metrics</a></li>
+<li><a href="#_prefixing_your_metrics">5. Prefixing Your Metrics</a></li>
 <li><a href="#_further_customizing_the_graphitereporter">6. Further Customizing the <code>GraphiteReporter</code></a></li>
 <li><a href="#_graphing">7. Graphing</a>
 <ul class="sectlevel2">
@@ -470,20 +518,7 @@ MeterRegistry registry = new GraphiteMeterRegistry(graphiteConfig, Clock.SYSTEM,
 </div>
 </div>
 <div class="paragraph">
-<p>Micrometer uses Dropwizard Metrics as the underlying instrumentation library when recording metrics destined for Graphite. <code>GraphiteConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you  instead bind it to a property source, you can override the default configuration. For example, Micrometer&#8217;s Spring Boot support binds properties that are prefixed with <code>management.metrics.export.graphite</code> directly to the <code>GraphiteConfig</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">management.metrics.export.graphite:
-    # The location of your Graphite server
-    host: mygraphitehost
-
-    # You will probably want to conditionally disable Graphite publishing in local development.
-    enabled: true
-
-    # The interval at which metrics are sent to Graphite. The default is 1 minute.
-    step: 1m</code></pre>
-</div>
+<p>Micrometer uses Dropwizard Metrics as the underlying instrumentation library when recording metrics destined for Graphite. <code>GraphiteConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration. For example, Spring Boot&#8217;s Micrometer support binds its application properties directly to the <code>GraphiteConfig</code>. See <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.metrics.export.graphite">Spring Boot Reference Documentation</a> for details.</p>
 </div>
 </div>
 </div>
@@ -513,7 +548,7 @@ The following documentation sections on hierarchical name mapping and metrics pr
 </div>
 </div>
 <div class="sect1">
-<h2 id="_prefixing_your_metrics"><a class="anchor" href="#_prefixing_your_metrics"></a>5. Prefixing your metrics</h2>
+<h2 id="_prefixing_your_metrics"><a class="anchor" href="#_prefixing_your_metrics"></a>5. Prefixing Your Metrics</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To add a prefix to all metrics that go to graphite, use the <code>GraphiteConfig#tagsAsPrefix</code> configuration option. This option applies the tag value of a set of common tags as a prefix. For example, if <code>tagsAsPrefix</code> contains <code>application</code>, and a meter named <code>myTimer</code> is created with a tag of <code>application=APPNAME</code>, it appears in Graphite as <code>APPNAME.myTimer</code>.</p>
@@ -530,7 +565,7 @@ public MeterRegistryCustomizer&lt;MeterRegistry&gt; commonTags() {
 </div>
 </div>
 <div class="paragraph">
-<p>We do it this way because, generally, a tag prefix in Graphite is correlated to a common tag elsewhere. Prefixes tend to be something like app name or host. By applying those values as common tags, you make your metrics more portable (that is, if you ever switch to a dimensional monitoring system, you are set).</p>
+<p>We do it this way because, generally, a tag prefix in Graphite is correlated to a common tag elsewhere. Prefixes tend to be something like app name or host. By applying those values as common tags, you make your metrics more portable (if you ever switch to a dimensional monitoring system, you are set).</p>
 </div>
 <div class="paragraph">
 <p>You can use this when the order of the prefix matters. Micrometer always sorts tags, but the order of tag keys in <code>tagsAsPrefix</code> is preserved, so adding <code>host</code> and <code>application</code> to <code>tagsAsPrefix</code> results in a prefixed metric, such as <code>HOST.APP.myCounter</code>.</p>
@@ -621,12 +656,12 @@ If you use a custom <code>HierarchicalNameMapper</code>, <code>tagsAsPrefix</cod
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.3-SNAPSHOT
+                            1.12.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.2<span class="current">current</span>
+                            1.12.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -691,6 +726,6 @@ If you use a custom <code>HierarchicalNameMapper</code>, <code>tagsAsPrefix</cod
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.3" data-page-component="micrometer"></script>
   </body>
 </html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
+    <title>Testing :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/observation/testing.html">
     <link rel="prev" href="instrumenting.html">
     <link rel="next" href="projects.html">
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.2">
+    <meta name="version" content="1.12.3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.2">
+<div class="nav-container" data-component="micrometer" data-version="1.12.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.2</span>
+  <span class="version">1.12.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -197,6 +197,9 @@
     <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -257,19 +260,46 @@
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/jvm.html">JVM</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="../reference/commons-pool.html">Commons Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/db.html">Database</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/jvm.html">JVM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/kafka.html">Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/mongodb.html">MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/netty.html">Netty</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/system.html">System</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -290,13 +320,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="handler.html">Observation Handlers</a>
+    <a class="nav-link" href="introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="instrumenting.html">Instrumenting</a>
@@ -348,13 +396,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Testing"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.2/docs/modules/ROOT/pages/observation/testing.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.3/docs/modules/ROOT/pages/observation/testing.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -397,14 +445,19 @@
   </ul>
 </nav>
 <article>
-<div class="paragraph">
-<p>Micrometer Observation comes with <code>micrometer-observation-test</code> module that allows you to unit-test your Observations.</p>
-</div>
-<div class="sect1">
-<h2 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h2>
+<h1 id="page-title" class="page">Testing</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following example shows the required dependency in Gradle (assuming that Micrometer BOM has been added):</p>
+<p>Micrometer Observation comes with the <code>micrometer-observation-test</code> module, which lets you unit-test your Observations.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="micrometer-observation-installing"><a class="anchor" href="#micrometer-observation-installing"></a>Installing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following example shows the required dependency in Gradle (assuming that the Micrometer BOM has been added):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -412,7 +465,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>The following example shows the required dependency in Maven (assuming that Micrometer BOM has been added):</p>
+<p>The following example shows the required dependency in Maven (assuming that the Micrometer BOM has been added):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -426,10 +479,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_running_observation_unit_tests"><a class="anchor" href="#_running_observation_unit_tests"></a>Running Observation Unit Tests</h2>
+<h2 id="micrometer-observation-runnning"><a class="anchor" href="#micrometer-observation-runnning"></a>Running Observation Unit Tests</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s say that you have the following production code. It will create an observation with 2 tags (low and high cardinality) and then call <code>observe</code> that will start the observation, put it in scope, close the scope and stop the observation.</p>
+<p>Suppose you have the following production code. It will create an observation with two tags (low and high cardinality) and then call <code>observe</code> to start the observation, put it in scope, close the scope, and stop the observation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -452,7 +505,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>To unit-test this code you can use the <code>TestObservationRegistry</code> class.</p>
+<p>To unit-test this code, you can use the <code>TestObservationRegistry</code> class:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -505,12 +558,12 @@ void should_assert_your_observation() {
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.3-SNAPSHOT
+                            1.12.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.2<span class="current">current</span>
+                            1.12.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -575,6 +628,6 @@ void should_assert_your_observation() {
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.3" data-page-component="micrometer"></script>
   </body>
 </html>

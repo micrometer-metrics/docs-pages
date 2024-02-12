@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
+    <title>JVM Metrics :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/reference/jvm.html">
-    <link rel="prev" href="../reference.html">
-    <link rel="next" href="cache.html">
+    <link rel="prev" href="jetty.html">
+    <link rel="next" href="kafka.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.2">
+    <meta name="version" content="1.12.3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.2">
+<div class="nav-container" data-component="micrometer" data-version="1.12.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.2</span>
+  <span class="version">1.12.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -197,6 +197,9 @@
     <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -256,20 +259,47 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cache.html">Cache</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="commons-pool.html">Commons Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="db.html">Database</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="httpcomponents.html">HttpComponents Client</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jetty.html">Jetty and Jersey</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="jvm.html">JVM</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cache.html">Cache</a>
+    <a class="nav-link" href="kafka.html">Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mongodb.html">MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="netty.html">Netty</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="okhttpclient.html">OkHttpClient</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jetty.html">Jetty and Jersey</a>
+    <a class="nav-link" href="system.html">System</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="netty.html">Netty</a>
+    <a class="nav-link" href="tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -290,13 +320,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/instrumenting.html">Instrumenting</a>
@@ -348,13 +396,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="JVM Metrics"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.2/docs/modules/ROOT/pages/reference/jvm.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.3/docs/modules/ROOT/pages/reference/jvm.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -397,6 +445,7 @@
   </ul>
 </nav>
 <article>
+<h1 id="page-title" class="page">JVM Metrics</h1>
 <div class="paragraph">
 <p>Micrometer provides several binders for monitoring the JVM:</p>
 </div>
@@ -421,7 +470,7 @@ new JvmThreadMetrics().bindTo(registry); <i class="conum" data-value="5"></i><b>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Gauges max and live data size, promotion and allocation rates, and times GC pauses (or concurrent phase time in the case of CMS).</td>
+<td>Gauges max and live data size, promotion and allocation rates, and the number of times the GC pauses (or concurrent phase time in the case of CMS).</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
@@ -429,12 +478,12 @@ new JvmThreadMetrics().bindTo(registry); <i class="conum" data-value="5"></i><b>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Gauges thread peak, number of daemon threads, and live threads.</td>
+<td>Gauges thread peak, the number of daemon threads, and live threads.</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Micrometer also provides a meter binder for <code>ExecutorService</code>. You can instrument your <code>ExecutorService</code> as follows:</p>
+<p>Micrometer also provides a meter binder for <code>ExecutorService</code>. You can instrument your <code>ExecutorService</code>, as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -476,7 +525,7 @@ another. The reported value underestimates the actual total number of steals whe
 <p><code>executor.queued</code> (<code>Gauge</code>): An estimate of the total number of tasks currently held in queues by worker threads.</p>
 </li>
 <li>
-<p><code>executor.active</code> (<code>Gauge</code>): An estimate of the number of threads that are currently stealing or executing tasks.</p>
+<p><code>executor.active</code> (<code>Gauge</code>): An estimate of the number of threads that are currently stealing or running tasks.</p>
 </li>
 <li>
 <p><code>executor.running</code> (<code>Gauge</code>): An estimate of the number of worker threads that are not blocked but are waiting to join tasks or for other managed synchronization threads.</p>
@@ -484,8 +533,8 @@ another. The reported value underestimates the actual total number of steals whe
 </ul>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="../reference.html">Reference Instrumentations</a></span>
-  <span class="next"><a href="cache.html">Cache</a></span>
+  <span class="prev"><a href="jetty.html">Jetty and Jersey</a></span>
+  <span class="next"><a href="kafka.html">Kafka</a></span>
 </nav>
 </article>
 </div>  </div>
@@ -510,12 +559,12 @@ another. The reported value underestimates the actual total number of steals whe
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.3-SNAPSHOT
+                            1.12.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.2<span class="current">current</span>
+                            1.12.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -580,6 +629,6 @@ another. The reported value underestimates the actual total number of steals whe
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.3" data-page-component="micrometer"></script>
   </body>
 </html>

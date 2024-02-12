@@ -1,11 +1,11 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-02-12T20:08:42.385Z",
+  "generated": "2024-02-12T20:13:59.565Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
       "title": "Micrometer",
-      "latest": "1.12.2",
+      "latest": "1.12.3",
       "versions": {
         "1.13.0": {
           "prerelease": true,
@@ -358,9 +358,9 @@
             }
           ]
         },
-        "1.12.3": {
+        "1.12.4": {
           "prerelease": true,
-          "displayVersion": "1.12.3-SNAPSHOT",
+          "displayVersion": "1.12.4-SNAPSHOT",
           "url": "/1.12-SNAPSHOT/index.html",
           "pages": [
             {
@@ -709,7 +709,7 @@
             }
           ]
         },
-        "1.12.2": {
+        "1.12.3": {
           "url": "/index.html",
           "pages": [
             {
@@ -789,19 +789,23 @@
             },
             {
               "path": "contextpropagation/installing.adoc",
-              "url": "/contextpropagation/installing.html"
+              "url": "/contextpropagation/installing.html",
+              "title": "Installing"
             },
             {
               "path": "contextpropagation/purpose.adoc",
-              "url": "/contextpropagation/purpose.html"
+              "url": "/contextpropagation/purpose.html",
+              "title": "Purpose"
             },
             {
               "path": "contextpropagation/usage.adoc",
-              "url": "/contextpropagation/usage.html"
+              "url": "/contextpropagation/usage.html",
+              "title": "Usage Examples"
             },
             {
               "path": "guides.adoc",
-              "url": "/guides.html"
+              "url": "/guides.html",
+              "title": "Guides"
             },
             {
               "path": "guides/console-reporter.adoc",
@@ -820,7 +824,8 @@
             },
             {
               "path": "implementations.adoc",
-              "url": "/implementations.html"
+              "url": "/implementations.html",
+              "title": "Setup"
             },
             {
               "path": "implementations/appOptics.adoc",
@@ -942,29 +947,34 @@
               "title": "Micrometer Observation"
             },
             {
-              "path": "observation/handler.adoc",
-              "url": "/observation/handler.html"
+              "path": "observation/components.adoc",
+              "url": "/observation/components.html",
+              "title": "Observation Components"
             },
             {
               "path": "observation/installing.adoc",
-              "url": "/observation/installing.html"
+              "url": "/observation/installing.html",
+              "title": "Installing"
             },
             {
               "path": "observation/instrumenting.adoc",
-              "url": "/observation/instrumenting.html"
+              "url": "/observation/instrumenting.html",
+              "title": "Instrumentation"
             },
             {
               "path": "observation/introduction.adoc",
-              "url": "/observation/introduction.html"
+              "url": "/observation/introduction.html",
+              "title": "Introduction"
             },
             {
               "path": "observation/projects.adoc",
               "url": "/observation/projects.html",
-              "title": "Instrumentations"
+              "title": "Existing Instrumentations"
             },
             {
               "path": "observation/testing.adoc",
-              "url": "/observation/testing.html"
+              "url": "/observation/testing.html",
+              "title": "Testing"
             },
             {
               "path": "overview.adoc",
@@ -978,23 +988,73 @@
             },
             {
               "path": "reference/cache.adoc",
-              "url": "/reference/cache.html"
+              "url": "/reference/cache.html",
+              "title": "Micrometer Cache Instrumentations"
+            },
+            {
+              "path": "reference/commons-pool.adoc",
+              "url": "/reference/commons-pool.html",
+              "title": "Apache Commons Pool Instrumentation"
+            },
+            {
+              "path": "reference/db.adoc",
+              "url": "/reference/db.html",
+              "title": "Database Instrumentation"
+            },
+            {
+              "path": "reference/grpc.adoc",
+              "url": "/reference/grpc.html",
+              "title": "gRPC Instrumentation"
+            },
+            {
+              "path": "reference/httpcomponents.adoc",
+              "url": "/reference/httpcomponents.html",
+              "title": "Apache HttpComponents Client Instrumentation"
             },
             {
               "path": "reference/jetty.adoc",
-              "url": "/reference/jetty.html"
+              "url": "/reference/jetty.html",
+              "title": "Eclipse Jetty and Jersey Instrumentation"
             },
             {
               "path": "reference/jvm.adoc",
-              "url": "/reference/jvm.html"
+              "url": "/reference/jvm.html",
+              "title": "JVM Metrics"
+            },
+            {
+              "path": "reference/kafka.adoc",
+              "url": "/reference/kafka.html",
+              "title": "Apache Kafka Metrics"
+            },
+            {
+              "path": "reference/logging.adoc",
+              "url": "/reference/logging.html",
+              "title": "Logging Metrics Instrumentation"
+            },
+            {
+              "path": "reference/mongodb.adoc",
+              "url": "/reference/mongodb.html",
+              "title": "MongoDB Metrics Instrumentation"
             },
             {
               "path": "reference/netty.adoc",
-              "url": "/reference/netty.html"
+              "url": "/reference/netty.html",
+              "title": "Netty Instrumentation"
             },
             {
               "path": "reference/okhttpclient.adoc",
-              "url": "/reference/okhttpclient.html"
+              "url": "/reference/okhttpclient.html",
+              "title": "OkHttpClient Instrumentation"
+            },
+            {
+              "path": "reference/system.adoc",
+              "url": "/reference/system.html",
+              "title": "System Metrics"
+            },
+            {
+              "path": "reference/tomcat.adoc",
+              "url": "/reference/tomcat.html",
+              "title": "Apache Tomcat Metrics Instrumentation"
             }
           ]
         }

@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
+    <title>Micrometer Cache Instrumentations :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/reference/cache.html">
-    <link rel="prev" href="jvm.html">
-    <link rel="next" href="okhttpclient.html">
+    <link rel="prev" href="../reference.html">
+    <link rel="next" href="commons-pool.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.2">
+    <meta name="version" content="1.12.3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.2">
+<div class="nav-container" data-component="micrometer" data-version="1.12.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.2</span>
+  <span class="version">1.12.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -197,6 +197,9 @@
     <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -256,20 +259,47 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="jvm.html">JVM</a>
-  </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="commons-pool.html">Commons Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="db.html">Database</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jvm.html">JVM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="kafka.html">Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mongodb.html">MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="netty.html">Netty</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="okhttpclient.html">OkHttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="system.html">System</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -290,13 +320,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/instrumenting.html">Instrumenting</a>
@@ -348,13 +396,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Micrometer Cache Instrumentations"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.2/docs/modules/ROOT/pages/reference/cache.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.3/docs/modules/ROOT/pages/reference/cache.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -397,9 +445,17 @@
   </ul>
 </nav>
 <article>
+<h1 id="page-title" class="page">Micrometer Cache Instrumentations</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer supports binding metrics to a variety of different popular caching libraries. Each implementation supports basic features, such as cache hits versus misses, from which you can derive basic information about the cache hit ratio over a period of time. Micrometer uses a function tracking counter to monitor such things as hits and misses, giving you a notion not only of hits and misses over the total life of the cache (the basic metric exposed from Guava&#8217;s <code>CacheStats</code>, for example) but hits and misses inside a given interval.</p>
+<p>Micrometer supports binding metrics to a variety of popular caching libraries. Each implementation supports basic features, such as cache hits versus misses, from which you can derive basic information about the cache hit ratio over a period of time. Micrometer uses a function-tracking counter to monitor such things as hits and misses, giving you a notion not only of hits and misses over the total life of the cache (the basic metric exposed from Guava&#8217;s <code>CacheStats</code>, for example) but hits and misses inside a given interval.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cache-example"><a class="anchor" href="#cache-example"></a>Example</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>To demonstrate the features of cache monitoring, we start with a simple program that uses <code>reactor-netty</code> to read the entirety of Mary Shelley&#8217;s <em>Frankenstein</em> and put each word in the cache if it has not yet been seen:</p>
 </div>
@@ -437,7 +493,7 @@ HttpClient.create("www.gutenberg.org")
 </div>
 </div>
 <div class="paragraph">
-<p>By dividing the hits by the sum of all <code>get</code> operations (regardless of whether or not each one was a hit or a miss), we can arrive at a notion of the upper bound for the hit ratio for reading Frankenstein with only 10,000 words:</p>
+<p>By dividing the hits by the sum of all <code>get</code> operations (regardless of whether or not each one was a hit or a miss), we can arrive at a notion of the upper bound for the hit ratio for reading <em>Frankenstein</em> with only 10,000 words:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -451,7 +507,7 @@ HttpClient.create("www.gutenberg.org")
 </div>
 </div>
 <div class="paragraph">
-<p>In a real-world scenario, we tune caches according to how we evaluate the tradeoff between storage and load efficiency. You could create an alert based on some upper bound for the rate at which misses occur or on a lower bound for the hit ratio. Setting an upper bound on miss ratio is better than a lower bound on hit ratio. For both ratios, an absence of any activity drops the value to 0.
+<p>In a real-world scenario, we tune caches according to how we evaluate the tradeoff between storage and load efficiency. You could create an alert based on some upper bound for the rate at which misses occur or on a lower bound for the hit ratio. Setting an upper bound on the miss ratio is better than a lower bound on the hit ratio. For both ratios, an absence of any activity drops the value to 0.
 The following image shows the miss ratio when it exceeds 10%:</p>
 </div>
 <div class="imageblock">
@@ -460,9 +516,146 @@ The following image shows the miss ratio when it exceeds 10%:</p>
 </div>
 <div class="title">Figure 3. Alerting when the miss ratio exceeds 10%</div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cache_implementations"><a class="anchor" href="#_cache_implementations"></a>Cache implementations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Micrometer can instrument various cache implementations</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#cache-caffeine">Caffeine</a></p>
+</li>
+<li>
+<p><a href="#cache-ehcache">EhCache</a></p>
+</li>
+<li>
+<p><a href="#cache-guava">Guava</a></p>
+</li>
+<li>
+<p><a href="#cache-hazelcast">Hazelcast</a></p>
+</li>
+<li>
+<p><a href="#cache-jcache">JCache</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="cache-caffeine"><a class="anchor" href="#cache-caffeine"></a>Caffeine</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
+LoadingCache&lt;String, String&gt; cache = Caffeine.newBuilder().build(key -&gt; "");
+
+CaffeineCacheMetrics&lt;String, String, Cache&lt;String, String&gt;&gt; metrics = new CaffeineCacheMetrics&lt;&gt;(cache, "testCache",
+        expectedTag);
+
+
+// Binding manually
+MeterRegistry registry = new SimpleMeterRegistry();
+metrics.bindTo(registry);
+
+// Binding through a static method
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+CaffeineCacheMetrics.monitor(meterRegistry, cache, "testCache", expectedTag);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cache-ehcache"><a class="anchor" href="#cache-ehcache"></a>EhCache2</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
+static Cache cache;
+
+EhCache2Metrics metrics = new EhCache2Metrics(cache, expectedTag);
+
+
+// Binding manually
+MeterRegistry registry = new SimpleMeterRegistry();
+metrics.bindTo(registry);
+
+// Binding through a static method
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+EhCache2Metrics.monitor(meterRegistry, cache, expectedTag);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cache-guava"><a class="anchor" href="#cache-guava"></a>Guava</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
+LoadingCache&lt;String, String&gt; cache = CacheBuilder.newBuilder().build(new CacheLoader&lt;String, String&gt;() {
+    public String load(String key) throws Exception {
+        return "";
+    }
+});
+
+GuavaCacheMetrics&lt;String, String, Cache&lt;String, String&gt;&gt; metrics = new GuavaCacheMetrics&lt;&gt;(cache, "testCache",
+        expectedTag);
+
+
+// Binding manually
+MeterRegistry registry = new SimpleMeterRegistry();
+metrics.bindTo(registry);
+
+// Binding through a static method
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+GuavaCacheMetrics.monitor(meterRegistry, cache, "testCache", expectedTag);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cache-hazelcast"><a class="anchor" href="#cache-hazelcast"></a>Hazelcast</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
+static IMap&lt;String, String&gt; cache;
+
+HazelcastCacheMetrics metrics = new HazelcastCacheMetrics(cache, expectedTag);
+
+
+// Binding manually
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+metrics.bindTo(meterRegistry);
+
+// Binding through a static method
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+HazelcastCacheMetrics.monitor(meterRegistry, cache, expectedTag);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cache-jcache"><a class="anchor" href="#cache-jcache"></a>JCache</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
+Cache&lt;String, String&gt; cache;
+
+JCacheMetrics&lt;String, String, Cache&lt;String, String&gt;&gt; metrics;
+
+
+metrics = new JCacheMetrics&lt;&gt;(cache, expectedTag);
+
+// Binding manually
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+metrics.bindTo(meterRegistry);
+
+// Binding through a static method
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+JCacheMetrics.monitor(meterRegistry, cache, expectedTag);</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <nav class="pagination">
-  <span class="prev"><a href="jvm.html">JVM</a></span>
-  <span class="next"><a href="okhttpclient.html">OkHttpClient</a></span>
+  <span class="prev"><a href="../reference.html">Reference Instrumentations</a></span>
+  <span class="next"><a href="commons-pool.html">Commons Pool</a></span>
 </nav>
 </article>
 </div>  </div>
@@ -487,12 +680,12 @@ The following image shows the miss ratio when it exceeds 10%:</p>
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.3-SNAPSHOT
+                            1.12.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.2<span class="current">current</span>
+                            1.12.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -557,6 +750,6 @@ The following image shows the miss ratio when it exceeds 10%:</p>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.3" data-page-component="micrometer"></script>
   </body>
 </html>

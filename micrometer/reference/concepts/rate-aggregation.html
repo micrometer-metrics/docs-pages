@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.2">
+    <meta name="version" content="1.12.3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.2">
+<div class="nav-container" data-component="micrometer" data-version="1.12.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.2</span>
+  <span class="version">1.12.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -197,6 +197,9 @@
     <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -257,19 +260,46 @@
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/jvm.html">JVM</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="../reference/commons-pool.html">Commons Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/db.html">Database</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/jvm.html">JVM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/kafka.html">Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/mongodb.html">MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/netty.html">Netty</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/system.html">System</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -290,13 +320,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/instrumenting.html">Instrumenting</a>
@@ -354,7 +402,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.2/docs/modules/ROOT/pages/concepts/rate-aggregation.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.3/docs/modules/ROOT/pages/concepts/rate-aggregation.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -423,7 +471,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Representing a counter without rate aggregation over some time window is rarely useful, as the representation is a function of both the rapidity with which the counter is incremented and the longevity of the service. In the preceding example, the counter drops back to zero on service restart. The rate-aggregated graph would return back to a value around 55 as soon as the new instance (say on a production deployment) was in service.</p>
+<p>Representing a counter without rate aggregation over some time window is rarely useful, as the representation is a function of both the rapidity with which the counter is incremented and the longevity of the service. In the preceding example, the counter drops back to zero on service restart. The rate-aggregated graph would return back to a value of around 55 as soon as the new instance (say on a production deployment) was in service.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -453,15 +501,15 @@ For most production purposes, whether it be alerting, automated canary analysis,
 <div class="paragraph">
 <p>Two other classes of monitoring system either:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Expect rate-aggregated data. Given the key insight that for most production purposes, we should be basing our decisions off of rates rather than absolute values, such systems benefit from having to do less math to satisfy queries.</p>
+<p>Expect rate-aggregated data. Given the key insight that, for most production purposes, we should be basing our decisions off of rates rather than absolute values. Such systems benefit from having to do less math to satisfy queries.</p>
 </li>
 <li>
 <p>Have relatively little or no math operations that would let us rate-aggregate data through our queries. For these systems, publishing pre-aggregated data is the only way to build meaningful representations.</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="paragraph">
 <p>Micrometer efficiently maintains rate data by means of a step value that accumulates data for the current publishing interval. When the step value is polled (when publishing, for example), if the step value detects that the current interval has elapsed, it moves current data to &#8220;previous&#8221; state. This previous state is what is reported until the next time current data overwrites it. The following image shows the interaction of current and previous state, along with polling:</p>
@@ -488,7 +536,7 @@ For most production purposes, whether it be alerting, automated canary analysis,
 </ol>
 </div>
 <div class="paragraph">
-<p>The <code>count</code> statistic is meaningful by itself: It is a measure of <em>throughput</em>. <code>totalTime</code> represents the total latency of all requests in the interval. Additionally:</p>
+<p>The <code>count</code> statistic is meaningful by itself: It is a measure of <em>throughput</em>. <code>totalTime</code> represents the total latency of all requests in the interval. Additionally, consider:</p>
 </div>
 <div class="paragraph">
 <p><code>totalTime / count</code> = 2 seconds / 20 requests = 0.1 seconds / request = 100 ms / request</p>
@@ -502,7 +550,7 @@ For most production purposes, whether it be alerting, automated canary analysis,
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Micrometer reported &#8220;20 requests&#8221; for <code>count</code> on every 10 second interval. The monitoring system sums these six 10 second intervals and arrives at the conclusion that there are 120 requests / minute. Note that it is the monitoring system doing this summation, not Micrometer.</p>
+<p>Micrometer reported &#8220;20 requests&#8221; for <code>count</code> on every 10-second interval. The monitoring system sums these six 10-second intervals and arrives at the conclusion that there are 120 requests / minute. Note that it is the monitoring system doing this summation, not Micrometer.</p>
 </li>
 <li>
 <p>Micrometer reported &#8220;2 seconds&#8221; of <code>totalTime</code> on every 10 second interval. The monitoring system can sum all total time statistics over the minute to yield &#8220;12 seconds&#8221; of total time in the minute interval. Then, the average latency is as we expect: 12 seconds / 120 requests = 100 ms / request.</p>
@@ -538,12 +586,12 @@ For most production purposes, whether it be alerting, automated canary analysis,
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.3-SNAPSHOT
+                            1.12.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.2<span class="current">current</span>
+                            1.12.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -608,6 +656,6 @@ For most production purposes, whether it be alerting, automated canary analysis,
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.3" data-page-component="micrometer"></script>
   </body>
 </html>

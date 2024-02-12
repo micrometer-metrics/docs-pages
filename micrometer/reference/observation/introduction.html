@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer</title>
+    <title>Introduction :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/observation/introduction.html">
+    <link rel="prev" href="installing.html">
+    <link rel="next" href="components.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -18,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.2">
+    <meta name="version" content="1.12.3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -99,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.2">
+<div class="nav-container" data-component="micrometer" data-version="1.12.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.2</span>
+  <span class="version">1.12.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -195,6 +197,9 @@
     <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -255,19 +260,46 @@
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/jvm.html">JVM</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="../reference/commons-pool.html">Commons Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/db.html">Database</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/jvm.html">JVM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/kafka.html">Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/mongodb.html">MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/netty.html">Netty</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/system.html">System</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -288,13 +320,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="installing.html">Installing</a>
   </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="introduction.html">Introduction</a>
+  </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="handler.html">Observation Handlers</a>
+    <a class="nav-link" href="components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="instrumenting.html">Instrumenting</a>
@@ -346,13 +396,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Introduction"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.2/docs/modules/ROOT/pages/observation/introduction.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.3/docs/modules/ROOT/pages/observation/introduction.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -388,10 +438,18 @@
   </div>
 </aside><div class="doc">
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Micrometer</a></li>
+    <li><a href="../observation.html">Micrometer Observation</a></li>
+    <li><a href="introduction.html">Introduction</a></li>
+  </ul>
 </nav>
 <article>
+<h1 id="page-title" class="page">Introduction</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>For any Observation to happen, you need to register <code>ObservationHandler</code> objects through an <code>ObservationRegistry</code>. An <code>ObservationHandler</code> reacts only to supported implementations of an <code>Observation.Context</code> and can create timers, spans, and logs by reacting to the lifecycle events of an Observation such as</p>
+<p>For any Observation to happen, you need to register <code>ObservationHandler</code> objects through an <code>ObservationRegistry</code>. An <code>ObservationHandler</code> reacts only to supported implementations of an <code>Observation.Context</code> and can create timers, spans, and logs by reacting to the lifecycle events of an Observation, such as:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -419,7 +477,7 @@
 <p>Whenever any of these methods is called, an <code>ObservationHandler</code> method (such as <code>onStart(T extends Observation.Context ctx)</code>, <code>onStop(T extends Observation.Context ctx)</code>, and so on) is called. To pass state between the handler methods, you can use the <code>Observation.Context</code>.</p>
 </div>
 <div class="paragraph">
-<p>This is how Observation state diagram looks like:</p>
+<p>This is how the Observation state diagram looks like:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -429,7 +487,7 @@ Created ----------&gt; Started ----------&gt; Stopped</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This is how Observation Scope state diagram looks like:</p>
+<p>This is how the Observation Scope state diagram looks like:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -448,8 +506,7 @@ Scope Started ----------&gt; Scope Finished</code></pre>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<strong>High cardinality</strong> means that a pair will have an unbounded number of possible values. An HTTP URL is a good
-example of such a key value (e.g. <code>/foo/user1234</code>, <code>/foo/user2345</code> etc.). <strong>Low cardinality</strong> means that a key value will  have a bounded number of possible values. A <strong>templated</strong> HTTP URL is a good example of such a key value (e.g. <code>/foo/{userId}</code>).
+<strong>High cardinality</strong> means that a pair will have an unbounded number of possible values. An HTTP URL is a good example of such a key value (such as <code>/example/user1234</code>, <code>/example/user2345</code> etc.). <strong>Low cardinality</strong> means that a key value will have a bounded number of possible values. A <strong>templated</strong> HTTP URL is a good example of such a key value (such as <code>/example/{userId}</code>).
 </td>
 </tr>
 </table>
@@ -458,7 +515,7 @@ example of such a key value (e.g. <code>/foo/user1234</code>, <code>/foo/user234
 <p>To separate Observation lifecycle operations from an Observation configuration (such as names and low and high cardinality tags), you can use the <code>ObservationConvention</code> that provides an easy way of overriding the default naming conventions.</p>
 </div>
 <div class="paragraph">
-<p>Below you can find an example of using the Observation API.</p>
+<p>The following example uses the Observation API:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -492,6 +549,91 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="micrometer-observation-building-blocks"><a class="anchor" href="#micrometer-observation-building-blocks"></a>Building Blocks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section we will describe a high overview of Micrometer Observation components. You can read more about those in <a href="components.html" class="xref page">this part of the documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>Glossary</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ObservationRegistry</code> - registry containing <code>Observation</code> related configuration (e.g. handlers, predicates, filters)</p>
+</li>
+<li>
+<p><code>ObservationHandler</code> - handles lifecycle of an <code>Observation</code> (e.g. create a timer on observation start, stop it on observation stop)</p>
+</li>
+<li>
+<p><code>ObservationFilter</code> - mutates the <code>Context</code> before the <code>Observation</code> gets stopped (e.g. add a high cardinality key-value with the cloud server region)</p>
+</li>
+<li>
+<p><code>ObservationPredicate</code> - condition to disable creation of an <code>Observation</code> (e.g. don&#8217;t create observations with given key-value)</p>
+</li>
+<li>
+<p><code>Context</code> (actually <code>Observation.Context</code>) - a mutable map attached to an <code>Observation</code>, passed between handlers (that way you can pass state without doing any thread locals)</p>
+</li>
+<li>
+<p><code>ObservationConvention</code> - mean to separate Observation lifecycle (starting, stopping, opening scopes) from adding meta-data (such as observation name, key-value pairs). That way the naming of observations and meta-data handling becomes a configuration problem (e.g. adding key-values do not require changing instrumentation code, but changing the convention)</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="micrometer-observation-usage"><a class="anchor" href="#micrometer-observation-usage"></a>Usage Flow</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">┌──────────────────┐┌─────────────────┐┌────────────────────┐┌───────┐┌─────────────────────┐
+│ObservationHandler││ObservationFilter││ObservationPredicate││Context││ObservationConvention│
+└┬─────────────────┘└┬────────────────┘└┬───────────────────┘└┬──────┘└┬────────────────────┘
+┌▽───────────────────▽──────────────────▽┐                    │        │
+│ObservationRegistry                     │                    │        │
+└┬───────────────────────────────────────┘                    │        │
+┌▽────────────────────────────────────────────────────────────▽────────▽┐
+│Observation                                                            │
+└───────────────────────────────────────────────────────────────────────┘</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ObservationHandler</code>, <code>ObservationFilter</code>, <code>ObservationPredicate</code> get registered on the <code>ObservationRegistry</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ObservationHandler</code> can be composed together (e.g. via the <code>FirstMatchingCompositeObservationHandler</code> - that can be useful when you group multiple handlers of the same type, e.g. <code>TracingHandler</code> or <code>MeterHandler</code>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>ObservationRegistry</code>, <code>Context</code> are mandatory to create an <code>Observation</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Either you create an <code>Observation</code> with name, <code>ObservationRegistry</code> and <code>Context</code></p>
+</li>
+<li>
+<p>Or with <code>ObservationRegistry</code>, <code>ObservationConvention</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>When <code>Observation</code> calls its lifecycle methods, all <code>ObservationHandlers</code> that pass the <code>supportsContext</code> check with the corresponding <code>Context</code> will have their lifecycle methods executed (e.g. if a handler has an <code>instanceof SenderContext</code> check in <code>supportsContext</code> then it will be called only for such types of contexts)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="installing.html">Installing</a></span>
+  <span class="next"><a href="components.html">Components</a></span>
+</nav>
 </article>
 </div>  </div>
 </main>
@@ -515,12 +657,12 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.3-SNAPSHOT
+                            1.12.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.2<span class="current">current</span>
+                            1.12.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -585,6 +727,6 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.3" data-page-component="micrometer"></script>
   </body>
 </html>

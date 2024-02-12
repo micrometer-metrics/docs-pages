@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.2">
+    <meta name="version" content="1.12.3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.2">
+<div class="nav-container" data-component="micrometer" data-version="1.12.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.2</span>
+  <span class="version">1.12.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -257,19 +260,46 @@
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/jvm.html">JVM</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="../reference/commons-pool.html">Commons Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/db.html">Database</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/jvm.html">JVM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/kafka.html">Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/mongodb.html">MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/netty.html">Netty</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/system.html">System</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -290,13 +320,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/instrumenting.html">Instrumenting</a>
@@ -354,7 +402,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.2/docs/modules/ROOT/pages/implementations/otlp.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.3/docs/modules/ROOT/pages/implementations/otlp.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -410,7 +458,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>OpenTelemetry is a CNCF incubating project for providing standards for telemetry data. OpenTelemetry protocol (OTLP) is a vendor neutral protocol that can be used to send data to various backends which support it. You can read the corresponding docs on how the metrics are ingested and can be visualized in the respective vendor docs.</p>
+<p>OpenTelemetry is a CNCF incubating project for providing standards for telemetry data. OpenTelemetry protocol (OTLP) is a vendor-neutral protocol that you can use to send data to various backends that support it. You can read the corresponding docs on how the metrics are ingested and can be visualized in the respective vendor docs.</p>
 </div>
 </div>
 </div>
@@ -458,7 +506,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </div>
 </div>
 <div class="paragraph">
-<p><code>OtlpConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source (e.g.: a simple <code>Map</code> can work), you can override the default configuration through properties. For example, Micrometer&#8217;s Spring Boot support binds properties prefixed with <code>management.otlp.metrics.export</code> directly to the <code>OtlpConfig</code>:</p>
+<p><code>OtlpConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source (for example, a simple <code>Map</code> can work), you can override the default configuration through properties. For example, Micrometer&#8217;s Spring Boot support binds properties prefixed with <code>management.otlp.metrics.export</code> directly to the <code>OtlpConfig</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -469,24 +517,25 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
         # Supported configs
         url: "https://otlp.example.com:4318/v1/metrics"
         aggregationTemporality: "cumulative"
-        headers: "header1=value1"
-        resourceAttributes: "key=value"</code></pre>
+        headers:
+          header1: value1
+        resourceAttributes:
+          key1: value1</code></pre>
 </div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>url</code> - The URL to which data will be reported. Defaults to <code><a href="http://localhost:4318/v1/metrics" class="bare">localhost:4318/v1/metrics</a></code></p>
+<p><code>url</code> - The URL to which data is reported. Defaults to <code><a href="http://localhost:4318/v1/metrics" class="bare">localhost:4318/v1/metrics</a></code></p>
 </li>
 <li>
-<p><code>aggregationTemporality</code> - <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality" target="_blank" rel="noopener">Aggregation temporality</a> determines how the additive quantities are expressed, in relation to time. The supported values are <code>cumulative</code> or <code>delta</code>. Defaults to <code>cumulative</code>.<br>
-<strong>Note</strong>: This config was introduced in version 1.11.0.</p>
+<p><code>aggregationTemporality</code> - <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality" target="_blank" rel="noopener">Aggregation temporality</a> determines how the additive quantities are expressed, in relation to time. The supported values are <code>cumulative</code> or <code>delta</code>. Defaults to <code>cumulative</code>.</p>
 </li>
 <li>
-<p><code>headers</code> - Additional headers to send with exported metrics. This can be used for authorization headers. By default, headers will be loaded from the config. If that is not set, they can be taken from the environment variables <code>OTEL_EXPORTER_OTLP_HEADERS</code> and <code>OTEL_EXPORTER_OTLP_METRICS_HEADERS</code>. If a header is set in both the environmental variables, the header in the latter will override the former.</p>
+<p><code>headers</code> - Additional headers to send with exported metrics. This can be used for authorization headers. By default, headers are loaded from the config. If that is not set, they can be taken from the environment variables <code>OTEL_EXPORTER_OTLP_HEADERS</code> and <code>OTEL_EXPORTER_OTLP_METRICS_HEADERS</code>. If a header is set in both the environmental variables, the header in the latter overrides the former.</p>
 </li>
 <li>
-<p><code>resourceAttributes</code> - <a href="https://opentelemetry.io/docs/specs/otel/resource/semantic_conventions/#service" target="_blank" rel="noopener">Resource attributes</a> that will be used for all metrics published. By default, Micrometer adds the following resource attributes:</p>
+<p><code>resourceAttributes</code> - <a href="https://opentelemetry.io/docs/specs/otel/resource/semantic_conventions/#service" target="_blank" rel="noopener">Resource attributes</a> are used for all metrics published. By default, Micrometer adds the following resource attributes:</p>
 </li>
 </ol>
 </div>
@@ -521,7 +570,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </tbody>
 </table>
 <div class="paragraph">
-<p>If this config is empty, then resource attributes will be loaded from the environmental variable <code>OTEL_RESOURCE_ATTRIBUTES</code>. <code>service.name</code> can be overridden by the environmental variable <code>OTEL_SERVICE_NAME</code> and this takes precedence over other configs.</p>
+<p>If this config is empty, resource attributes are loaded from the <code>OTEL_RESOURCE_ATTRIBUTES</code> environmental variable. You can override <code>service.name</code> by setting the <code>OTEL_SERVICE_NAME</code> environmental variable, and this takes precedence over other configs.</p>
 </div>
 </div>
 </div>
@@ -548,7 +597,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </ol>
 </div>
 <div class="paragraph">
-<p>The below table maps OTLP data points and the Micrometer meters:</p>
+<p>The following table maps OTLP data points and the Micrometer meters:</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content">
 <colgroup>
@@ -586,7 +635,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>max</code> on Histogram data point is only supported in delta aggregation temporality. This is because the values represented by cumulative min and max will stabilize as more events are recorded and are less useful when recorded over application&#8217;s lifecycle.</p>
+<p><code>max</code> on the Histogram data point is supported only in delta aggregation temporality. This is because the values represented by cumulative min and max stabilize as more events are recorded and are less useful when recorded over application&#8217;s lifecycle.</p>
 </li>
 <li>
 <p>Currently, Micrometer only exports metadata for type <code>Meter</code> to OTLP.</p>
@@ -599,7 +648,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <h2 id="_histograms_and_percentiles"><a class="anchor" href="#_histograms_and_percentiles"></a>4. Histograms and Percentiles</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer <code>Timer</code> and <code>DistributionSummary</code> support configuring <a href="/docs/concepts#_histograms_and_percentiles">client-side percentiles and percentile histograms</a>. OTLP specification terms Summary data point (client-side percentiles) as legacy and not recommended for new applications. Summary data point also cannot have min/max associated with it. Due to these reasons Micrometer prefers exporting Timers and DistributionSummary as Histogram data point. By default, a Timer/DistributionSummary without any additional percentile/histogram config will be exported as Histogram data point. However, by configuring the timer to generate only client-side percentiles using <code>publishPercentiles</code> this can be changed to a Summary data point exporting pre-calculated percentiles. When both <code>publishPercentiles</code> and (<code>publishPercentileHistogram</code> or <code>serviceLevelObjectives</code>) are configured, Histogram data point is preferred and pre-calculated percentiles <strong>will not</strong> be generated. See the below table on which data point will be used with different configurations:</p>
+<p>Micrometer <code>Timer</code> and <code>DistributionSummary</code> support configuring <a href="../concepts/histogram-quantiles.html" class="xref page">client-side percentiles and percentile histograms</a>. The OTLP specification terms the Summary data point (client-side percentiles) as legacy and not recommended for new applications. The Summary data point also cannot have min/max associated with it. Due to these reasons, Micrometer prefers exporting Timers and DistributionSummary as a Histogram data point. By default, a Timer/DistributionSummary without any additional percentile/histogram config is exported as a Histogram data point. However, by configuring the timer to generate only client-side percentiles, by using <code>publishPercentiles</code>, you can change this to a Summary data point that exports pre-calculated percentiles. When both <code>publishPercentiles</code> and (<code>publishPercentileHistogram</code> or <code>serviceLevelObjectives</code>) are configured, the Histogram data point is preferred and pre-calculated percentiles are <strong>not</strong> generated. The following table describes which data point is used with different configurations:</p>
 </div>
 <table class="tableblock frame-all grid-all fit-content">
 <colgroup>
@@ -632,10 +681,10 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Alternatively, if you are using Spring Boot, you can use the <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.metrics.customizing.per-meter-properties" target="_blank" rel="noopener">per-meter properties</a> to configure this behaviour.</p>
+<p>Alternatively, if you use Spring Boot, you can use the <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.metrics.customizing.per-meter-properties" target="_blank" rel="noopener">per-meter properties</a> to configure this behavior.</p>
 </div>
 <div class="paragraph">
-<p>If you want to generate Histogram data point for a Timer with name <code>test.timer</code> and default buckets generated by Micrometer, use:</p>
+<p>If you want to generate a Histogram data point for a Timer with name <code>test.timer</code> and default buckets generated by Micrometer, use:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -643,7 +692,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </div>
 </div>
 <div class="paragraph">
-<p>and for buckets with customized SLO, use:</p>
+<p>For buckets with customized SLO, use:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -651,7 +700,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </div>
 </div>
 <div class="paragraph">
-<p>Alternatively, if you want to generate Summary data point for a timer with name <code>test.timer</code> and 90th and 99th percentiles, you can use the below config:</p>
+<p>Alternatively, if you want to generate Summary data point for a timer with name <code>test.timer</code> and 90th and 99th percentiles, you can use:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -687,12 +736,12 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.3-SNAPSHOT
+                            1.12.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.2<span class="current">current</span>
+                            1.12.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -757,6 +806,6 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.3" data-page-component="micrometer"></script>
   </body>
 </html>

@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.2">
+    <meta name="version" content="1.12.3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.2">
+<div class="nav-container" data-component="micrometer" data-version="1.12.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.2</span>
+  <span class="version">1.12.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -197,6 +197,9 @@
     <a class="nav-link" href="atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="azure-monitor.html">Azure Monitor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
@@ -257,19 +260,46 @@
     <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/jvm.html">JVM</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="../reference/commons-pool.html">Commons Pool</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/db.html">Database</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/grpc.html">gRPC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/jvm.html">JVM</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/kafka.html">Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/mongodb.html">MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/netty.html">Netty</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/system.html">System</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -290,13 +320,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../observation/handler.html">Observation Handlers</a>
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../observation/instrumenting.html">Instrumenting</a>
@@ -354,7 +402,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.2/docs/modules/ROOT/pages/implementations/datadog.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.3/docs/modules/ROOT/pages/implementations/datadog.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -420,8 +468,8 @@
 <h2 id="_installation_and_configuration"><a class="anchor" href="#_installation_and_configuration"></a>1. Installation and Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer supports shipping metrics to Datadog directly by using its HTTP API or by using DogStatsD through the <a href="/docs/registry/statsD">StatsD registry</a>.
-The API approach is far more efficient if you need to choose between the two.</p>
+<p>Micrometer supports shipping metrics to Datadog directly by using its HTTP API or by using DogStatsD through the <a href="statsD.html" class="xref page">StatsD registry</a>.
+If you can choose between the two, the API approach is far more efficient.</p>
 </div>
 <div class="sect2">
 <h3 id="_direct_to_datadog_api_approach"><a class="anchor" href="#_direct_to_datadog_api_approach"></a>1.1. Direct to Datadog API Approach</h3>
@@ -465,19 +513,10 @@ MeterRegistry registry = new DatadogMeterRegistry(config, Clock.SYSTEM);</code><
 </div>
 </div>
 <div class="paragraph">
-<p><code>DatadogConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration through properties. For example, Micrometer&#8217;s Spring Boot support binds properties prefixed with <code>management.metrics.export.datadog</code> directly to the <code>DatadogConfig</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">management.metrics.export.datadog:
-    apiKey: YOURKEY
-
-    # You will probably want disable Datadog publishing in a local development profile.
-    enabled: true
-
-    # The interval at which metrics are sent to Datadog. The default is 1 minute.
-    step: 1m</code></pre>
-</div>
+<p><code>DatadogConfig</code> is an interface with a set of default methods.
+If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration through properties.
+For example, Spring Boot&#8217;s Micrometer support binds properties directly to the <code>DatadogConfig</code>.
+See the <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.metrics.export.datadog">Datadog</a> section in the Spring Boot reference documentation.</p>
 </div>
 <div class="paragraph">
 <p><code>DatadogConfig.hostTag()</code> specifies a tag key that is mapped to <a href="https://docs.datadoghq.com/api/v1/metrics/#submit-metrics">the <code>host</code> field</a> when shipping metrics to Datadog.
@@ -498,10 +537,10 @@ To find your the correct <code>uri</code> for your account, do the following:</p
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Read about <a href="https://docs.datadoghq.com/getting_started/site/">Datadog site</a>.</p>
+<p>Read about the <a href="https://docs.datadoghq.com/getting_started/site/">Datadog site</a>.</p>
 </li>
 <li>
-<p>Go to <a href="https://docs.datadoghq.com/api/latest/metrics/">Metrics API reference</a> and select your own option from the "DATADOG SITE" dropdown.</p>
+<p>Go to the <a href="https://docs.datadoghq.com/api/latest/metrics/">Metrics API reference</a> and select your own option from the "DATADOG SITE" dropdown.</p>
 </li>
 <li>
 <p>Check any API request&#8217;s endpoint.</p>
@@ -509,7 +548,7 @@ To find your the correct <code>uri</code> for your account, do the following:</p
 </ol>
 </div>
 <div class="paragraph">
-<p>E.g. For <code>US5</code> site, the correct API endpoint is <code><a href="https://api.us5.datadoghq.com" class="bare">api.us5.datadoghq.com</a></code> while for <code>US3</code> site, it is <code><a href="https://api.us3.datadoghq.com/" class="bare">api.us3.datadoghq.com/</a></code>.</p>
+<p>For example, for the <code>US5</code> site, the correct API endpoint is <code><a href="https://api.us5.datadoghq.com" class="bare">api.us5.datadoghq.com</a></code>. For the <code>US3</code> site, it is <code><a href="https://api.us3.datadoghq.com" class="bare">api.us3.datadoghq.com</a></code>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -555,16 +594,16 @@ MeterRegistry registry = new StatsdMeterRegistry(config, Clock.SYSTEM);</code></
 </div>
 </div>
 <div class="paragraph">
-<p>Micrometer supports DogStatsD&#8217;s <a href="https://docs.datadoghq.com/developers/dogstatsd/?tab=kubernetes#origin-detection-over-udp">origin detection over UDP</a> feature on Kubernetes if the <code>DD_ENTITY_ID</code> environment variable is properly set.</p>
+<p>If the <code>DD_ENTITY_ID</code> environment variable is properly set, Micrometer supports DogStatsD&#8217;s <a href="https://docs.datadoghq.com/developers/dogstatsd/?tab=kubernetes#origin-detection-over-udp">origin detection over UDP</a> feature on Kubernetes.</p>
 </div>
 <div class="paragraph">
-<p>Micrometer, by default, publishes <code>Timer</code> meters to DogStatsD as the StatsD "timing" metric type <code>ms</code>,
-which are sent to Datadog as <a href="https://docs.datadoghq.com/metrics/types/?tab=histogram#metric-types">histogram</a> type metrics.
-Micrometer publishes <code>DistributionSummary</code> meters as histogram type metrics by default, also.</p>
+<p>Micrometer, by default, publishes <code>Timer</code> meters to DogStatsD as the StatsD &#8220;timing&#8221; metric type, <code>ms</code>.
+These meters are sent to Datadog as <a href="https://docs.datadoghq.com/metrics/types/?tab=histogram#metric-types">histogram</a> type metrics.
+Also, by default, Micrometer publishes <code>DistributionSummary</code> meters as histogram type metrics.</p>
 </div>
 <div class="paragraph">
 <p>When <code>percentileHistogram</code> is enabled for the meter, Micrometer sends <code>Timer</code> and <code>DistributionSummary</code> meters as Datadog <a href="https://docs.datadoghq.com/metrics/distributions">Distributions</a> to DogStatsD.
-You can make a <code>DistributionSummary</code> with <code>percentileHistogram</code> enabled as follows:</p>
+You can make a <code>DistributionSummary</code> with <code>percentileHistogram</code> enabled, as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -604,12 +643,12 @@ You can make a <code>DistributionSummary</code> with <code>percentileHistogram</
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.3-SNAPSHOT
+                            1.12.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.2<span class="current">current</span>
+                            1.12.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -674,6 +713,6 @@ You can make a <code>DistributionSummary</code> with <code>percentileHistogram</
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.3" data-page-component="micrometer"></script>
   </body>
 </html>
