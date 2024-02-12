@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer Tracing</title>
+    <title>Configuring with Micrometer Observation :: Micrometer Tracing</title>
     <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/configuring.html">
     <link rel="prev" href="api.html">
     <link rel="next" href="testing.html">
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="./_/css/vendor/page-search.css">
     <link rel="stylesheet" href="./_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.2.2">
+    <meta name="version" content="1.2.3">
     <meta name="component" content="tracing">
     <meta name="latest-version" content="true">
     <link rel="icon" href="./_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.2.2">
+<div class="nav-container" data-component="tracing" data-version="1.2.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.2.2</span>
+  <span class="version">1.2.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -198,13 +198,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Configuring with Micrometer Observation"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.2.2/docs/modules/ROOT/pages/configuring.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.2.3/docs/modules/ROOT/pages/configuring.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -246,14 +246,13 @@
   </ul>
 </nav>
 <article>
+<h1 id="page-title" class="page">Configuring with Micrometer Observation</h1>
 <div class="sect1">
-<h2 id="_configuring_with_micrometer_observation"><a class="anchor" href="#_configuring_with_micrometer_observation"></a>Configuring with Micrometer Observation</h2>
+<h2 id="_handler_configuration"><a class="anchor" href="#_handler_configuration"></a>Handler Configuration</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_handler_configuration"><a class="anchor" href="#_handler_configuration"></a>Handler Configuration</h3>
 <div class="paragraph">
-<p>For Micrometer Tracing to work with Micrometer Observation, you need to add a tracing related <code>ObservationHandler</code>.
-Check the example below for an example of adding and using a single <code>DefaultTracingObservationHandler</code>.</p>
+<p>For Micrometer Tracing to work with Micrometer Observation, you need to add a tracing-related <code>ObservationHandler</code>.
+The following example shows how to add and use a single <code>DefaultTracingObservationHandler</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -306,7 +305,7 @@ finally {
 </div>
 </div>
 <div class="paragraph">
-<p>You can also use a shorter version to perform measurements via the <code>observe</code> method.</p>
+<p>You can also use a shorter version to perform measurements by using the <code>observe</code> method:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -335,37 +334,87 @@ Observation.createNotStarted("my.operation", registry)
 </div>
 </div>
 <div class="paragraph">
-<p>And the following trace view in e.g. Zipkin</p>
+<p>It also results in the following trace view in (for example) Zipkin:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tracing/zipkin.jpg" alt="Trace Info propagation">
 </div>
 </div>
-<div class="sect3">
-<h4 id="_ordered_handler_configuration"><a class="anchor" href="#_ordered_handler_configuration"></a>Ordered Handler Configuration</h4>
+<div class="sect2">
+<h3 id="_ordered_handler_configuration"><a class="anchor" href="#_ordered_handler_configuration"></a>Ordered Handler Configuration</h3>
 <div class="paragraph">
 <p>Micrometer Tracing comes with multiple <code>ObservationHandler</code> implementations.
-To introduce ordering, you can use the <code>ObservationHandler.AllMatchingCompositeObservationHandler</code> to run logic for all <code>ObservationHandler</code>s that are matching the given predicate and <code>ObservationHandler.FirstMatchingCompositeObservationHandler</code> to run logic only for the first <code>ObservationHandler</code> that matches the predicate.
-The former can group handlers and the latter can be chosen to e.g. run only one matching <code>TracingObservationHandler</code>.</p>
+To introduce ordering, you can use the <code>ObservationHandler.AllMatchingCompositeObservationHandler</code> to run logic for all <code>ObservationHandler</code> instances that match the given predicate and <code>ObservationHandler</code>. Use <code>FirstMatchingCompositeObservationHandler</code> to run logic only for the first <code>ObservationHandler</code> that matches the predicate.
+The former can group handlers and the latter can be chosen to (for example) run only one matching <code>TracingObservationHandler</code>.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_context_propagation_with_micrometer_tracing"><a class="anchor" href="#_context_propagation_with_micrometer_tracing"></a>Context Propagation with Micrometer Tracing</h3>
+</div>
+<div class="sect1">
+<h2 id="_context_propagation_with_micrometer_tracing"><a class="anchor" href="#_context_propagation_with_micrometer_tracing"></a>Context Propagation with Micrometer Tracing</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>In order to make <a href="https://micrometer.io/docs/contextPropagation">Context Propagation</a> work with Micrometer Tracing you need to manually register the proper <code>ThreadLocalAccessor</code> as presented below.</p>
+<p>To make <a href="https://docs.micrometer.io/context-propagation/reference/">Context Propagation</a> work with Micrometer Tracing, you need to manually register the proper <code>ThreadLocalAccessor</code>, as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContextRegistry.getInstance().registerThreadLocalAccessor(new ObservationAwareSpanThreadLocalAccessor(tracer));</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContextRegistry.getInstance().registerThreadLocalAccessor(new ObservationAwareSpanThreadLocalAccessor(tracer));
+ContextRegistry.getInstance()
+    .registerThreadLocalAccessor(new ObservationAwareBaggageThreadLocalAccessor(registry, tracer));</code></pre>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_exemplars"><a class="anchor" href="#_exemplars"></a>Exemplars</h3>
 <div class="paragraph">
-<p>To add support for <a href="https://grafana.com/docs/grafana/latest/fundamentals/exemplars/">exemplars</a> instead of using the <code>DefaultMeterObservationHandler</code> you should use the <code>TracingAwareMeterObservationHandler</code> like presented below.</p>
+<p>The <code>ObservationAwareSpanThreadLocalAccessor</code> is required to propagate manually created spans (not the ones that are governed by Observations). The <code>ObservationAwareBaggageThreadLocalAccessor</code> is required to propagate baggage created by the user.</p>
+</div>
+<div class="paragraph">
+<p>With Project Reactor one should set the values of <code>Observation</code>, <code>Span</code> or <code>BaggageToPropagate</code> in the Reactor Context as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setup example
+ContextRegistry contextRegistry = ContextRegistry.getInstance();
+
+ObservationAwareSpanThreadLocalAccessor accessor;
+
+ObservationAwareBaggageThreadLocalAccessor observationAwareBaggageThreadLocalAccessor;
+
+
+accessor = new ObservationAwareSpanThreadLocalAccessor(observationRegistry, getTracer());
+observationAwareBaggageThreadLocalAccessor = new ObservationAwareBaggageThreadLocalAccessor(observationRegistry,
+        getTracer());
+contextRegistry.loadThreadLocalAccessors()
+    .registerThreadLocalAccessor(accessor)
+    .registerThreadLocalAccessor(observationAwareBaggageThreadLocalAccessor);
+Hooks.enableAutomaticContextPropagation();
+
+// Usage example
+Hooks.enableAutomaticContextPropagation();
+Observation observation = Observation.start("parent", observationRegistry);
+
+List&lt;String&gt; hello = Mono.just("hello")
+    .subscribeOn(Schedulers.single())
+    .flatMap(s -&gt; {
+        Mono&lt;List&lt;String&gt;&gt; mono = Mono.defer(() -&gt; Mono.just(Arrays.asList(
+            getTracer().getBaggage("tenant").get(),
+            getTracer().getBaggage("tenant2").get())
+        ));
+    return mono.subscribeOn(Schedulers.parallel())
+        .contextWrite(ReactorBaggage.append("tenant", s + ":baggage")); // Appends baggage to existing one (tenant2:baggage2)
+})
+    .contextWrite(Context.of(ObservationThreadLocalAccessor.KEY, observation, // Puts observation to Reactor Context
+            ObservationAwareBaggageThreadLocalAccessor.KEY, new BaggageToPropagate("tenant2", "baggage2") // Puts baggage to Reactor Context
+        ))
+    .block();</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exemplars"><a class="anchor" href="#_exemplars"></a>Exemplars</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To add support for <a href="https://grafana.com/docs/grafana/latest/fundamentals/exemplars/">exemplars</a> instead of using the <code>DefaultMeterObservationHandler</code> you should use the <code>TracingAwareMeterObservationHandler</code>, as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -376,7 +425,6 @@ registry.observationConfig()
     // ...instead register the tracing aware version
     .observationHandler(new TracingAwareMeterObservationHandler&lt;&gt;(
             new DefaultMeterObservationHandler(meterRegistry), tracer));</code></pre>
-</div>
 </div>
 </div>
 </div>
@@ -408,12 +456,12 @@ registry.observationConfig()
                         </li>
                         <li class="version">
                           <a href="1.2-SNAPSHOT/index.html">
-                            1.2.3-SNAPSHOT
+                            1.2.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="index.html">
-                            1.2.2<span class="current">current</span>
+                            1.2.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -478,6 +526,6 @@ registry.observationConfig()
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.2.2" data-page-component="tracing"></script>
+<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.2.3" data-page-component="tracing"></script>
   </body>
 </html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer Tracing</title>
+    <title>Supported Tracers :: Micrometer Tracing</title>
     <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/tracers.html">
     <link rel="prev" href="glossary.html">
     <link rel="next" href="reporters.html">
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="./_/css/vendor/page-search.css">
     <link rel="stylesheet" href="./_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.2.2">
+    <meta name="version" content="1.2.3">
     <meta name="component" content="tracing">
     <meta name="latest-version" content="true">
     <link rel="icon" href="./_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.2.2">
+<div class="nav-container" data-component="tracing" data-version="1.2.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.2.2</span>
+  <span class="version">1.2.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -198,13 +198,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Supported Tracers"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.2.2/docs/modules/ROOT/pages/tracers.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.2.3/docs/modules/ROOT/pages/tracers.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -246,8 +246,8 @@
   </ul>
 </nav>
 <article>
-<div class="sect1">
-<h2 id="_supported_tracers"><a class="anchor" href="#_supported_tracers"></a>Supported Tracers</h2>
+<h1 id="page-title" class="page">Supported Tracers</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer Tracing supports the following Tracers.</p>
@@ -262,10 +262,13 @@
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The following example shows the required dependency in Gradle (assuming that Micrometer Tracing BOM has been added):</p>
+<p>The following example shows the required dependency in Gradle (assuming that the Micrometer Tracing BOM has been added):</p>
 </div>
 <div class="listingblock">
 <div class="title">Brave Tracer</div>
@@ -280,7 +283,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>The following example shows the required dependency in Maven (assuming that Micrometer Tracing BOM has been added):</p>
+<p>The following example shows the required dependency in Maven (assuming that the Micrometer Tracing BOM has been added):</p>
 </div>
 <div class="listingblock">
 <div class="title">Brave Tracer</div>
@@ -308,11 +311,10 @@
 </td>
 <td class="content">
 Remember to pick <strong>only one</strong> bridge.
-You <strong>shouldn&#8217;t have</strong> two bridges on the classpath.
+You <strong>should not have</strong> two bridges on the classpath.
 </td>
 </tr>
 </table>
-</div>
 </div>
 </div>
 </div>
@@ -343,12 +345,12 @@ You <strong>shouldn&#8217;t have</strong> two bridges on the classpath.
                         </li>
                         <li class="version">
                           <a href="1.2-SNAPSHOT/index.html">
-                            1.2.3-SNAPSHOT
+                            1.2.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="index.html">
-                            1.2.2<span class="current">current</span>
+                            1.2.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -413,6 +415,6 @@ You <strong>shouldn&#8217;t have</strong> two bridges on the classpath.
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.2.2" data-page-component="tracing"></script>
+<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.2.3" data-page-component="tracing"></script>
   </body>
 </html>

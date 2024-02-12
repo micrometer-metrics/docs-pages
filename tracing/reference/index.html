@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="./_/css/vendor/page-search.css">
     <link rel="stylesheet" href="./_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.2.2">
+    <meta name="version" content="1.2.3">
     <meta name="component" content="tracing">
     <meta name="latest-version" content="true">
     <link rel="icon" href="./_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -100,14 +100,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.2.2">
+<div class="nav-container" data-component="tracing" data-version="1.2.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.2.2</span>
+  <span class="version">1.2.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -203,7 +203,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.2.2/docs/modules/ROOT/pages/index.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.2.3/docs/modules/ROOT/pages/index.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -249,12 +249,23 @@
 <h2 id="tracing-purpose"><a class="anchor" href="#tracing-purpose"></a>Purpose</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p>The problem of tracing is not new.
+Application developers have been creating ways to track the state of their applications for a long time.
+For much of that time, developers had to create the necessary tracing framework themselves.</p>
+</div>
+<div class="paragraph">
+<p>In 2016, the Spring Cloud team created a tracing library that could help a lot of developers.
+It was called <a href="https://github.com/spring-cloud/spring-cloud-sleuth">Spring Cloud Sleuth</a>.
+The Spring team realized that tracing could be separated from Spring Cloud and created the Micrometer Tracing project, which is, essentially, a Spring-agnostic copy of Spring Cloud Sleuth.
+Micrometer Tracing had its 1.0.0 GA release in November 2022 and has been getting steadily better ever since.</p>
+</div>
+<div class="paragraph">
 <p><a href="https://github.com/micrometer-metrics/tracing">Micrometer Tracing</a> provides a simple facade for the most popular tracer libraries, letting you instrument your JVM-based application code without vendor lock-in.
 It is designed to add little to no overhead to your tracing collection activity while maximizing the portability of your tracing effort.</p>
 </div>
 <div class="paragraph">
 <p>It also provides a tracing extension to Micrometer&#8217;s <code>ObservationHandler</code> (from Micrometer 1.10.0).
-Whenever an <code>Observation</code> is used, a corresponding span will be created, started, stopped and reported.</p>
+Whenever an <code>Observation</code> is used, a corresponding span is created, started, stopped and reported.</p>
 </div>
 </div>
 </div>
@@ -262,7 +273,7 @@ Whenever an <code>Observation</code> is used, a corresponding span will be creat
 <h2 id="tracing-installing"><a class="anchor" href="#tracing-installing"></a>Installing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer Tracing comes with a Bill of Materials (BOM) which is a project that contains all the project versions for you.</p>
+<p>Micrometer Tracing comes with a Bill of Materials (BOM), which is a project that contains all the project versions for you.</p>
 </div>
 <div class="paragraph">
 <p>The following example shows the required dependency in Gradle:</p>
@@ -299,8 +310,8 @@ implementation 'io.micrometer:micrometer-tracing'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You should add a tracing bridge you want to use, such as <code>micrometer-tracing-bridge-brave</code> or <code>micrometer-tracing-bridge-otel</code> and span exporters / reporters.
-In case of adding a bridge the <code>micrometer-tracing</code> library is added transitively.</p>
+<p>You should add a tracing bridge, such as <code>micrometer-tracing-bridge-brave</code> or <code>micrometer-tracing-bridge-otel</code> and span exporters / reporters.
+When you add a bridge, the <code>micrometer-tracing</code> library is added transitively.</p>
 </div>
 </div>
 </div>
@@ -330,12 +341,12 @@ In case of adding a bridge the <code>micrometer-tracing</code> library is added 
                         </li>
                         <li class="version">
                           <a href="1.2-SNAPSHOT/index.html">
-                            1.2.3-SNAPSHOT
+                            1.2.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="index.html">
-                            1.2.2<span class="current">current</span>
+                            1.2.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -400,6 +411,6 @@ In case of adding a bridge the <code>micrometer-tracing</code> library is added 
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.2.2" data-page-component="tracing"></script>
+<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.2.3" data-page-component="tracing"></script>
   </body>
 </html>

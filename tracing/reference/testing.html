@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer Tracing</title>
+    <title>Testing :: Micrometer Tracing</title>
     <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/testing.html">
     <link rel="prev" href="configuring.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="./_/css/vendor/page-search.css">
     <link rel="stylesheet" href="./_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.2.2">
+    <meta name="version" content="1.2.3">
     <meta name="component" content="tracing">
     <meta name="latest-version" content="true">
     <link rel="icon" href="./_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -100,14 +100,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.2.2">
+<div class="nav-container" data-component="tracing" data-version="1.2.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.2.2</span>
+  <span class="version">1.2.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -197,13 +197,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Testing"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.2.2/docs/modules/ROOT/pages/testing.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.2.3/docs/modules/ROOT/pages/testing.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -245,54 +245,57 @@
   </ul>
 </nav>
 <article>
-<div class="sect1">
-<h2 id="_testing"><a class="anchor" href="#_testing"></a>Testing</h2>
+<h1 id="page-title" class="page">Testing</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer Tracing comes with <code>micrometer-tracing-test</code> and <code>micrometer-tracing-integration-test</code> modules.</p>
+<p>Micrometer Tracing includes the <code>micrometer-tracing-test</code> and <code>micrometer-tracing-integration-test</code> modules.</p>
 </div>
 <div class="paragraph">
-<p>For unit tests it provides a <code>SimpleTracer</code> that is a test implementation of a <code>Tracer</code>.</p>
+<p>For unit tests, it provides a <code>SimpleTracer</code> that is a test implementation of a <code>Tracer</code>.</p>
 </div>
 <div class="paragraph">
-<p>For the integration tests it provides a <code>SampleTestRunner</code> mechanism that you can hook into your samples.
-It will</p>
+<p>For integration tests, it provides a <code>SampleTestRunner</code> mechanism that you can hook into your samples.
+It:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Configure an OpenZipkin Brave Tracer</p>
+<p>Configures an OpenZipkin Brave Tracer</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Set it up with Tanzu Observability by Wavefront Reporter</p>
+<p>Sets it up with Tanzu Observability by Wavefront Reporter</p>
 </li>
 <li>
-<p>Set it up with OpenZipkin Zipkin Reporter</p>
+<p>Sets it up with OpenZipkin Zipkin Reporter</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Configure an OpenTelemetry Tracer</p>
+<p>Configures an OpenTelemetry Tracer</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Set it up with Tanzu Observability by Wavefront Exporter</p>
+<p>Sets it up with Tanzu Observability by Wavefront Exporter</p>
 </li>
 <li>
-<p>Set it up with OpenZipkin Zipkin Exporter</p>
+<p>Sets it up with OpenZipkin Zipkin Exporter</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Run all the combinations above against the user code and running infrastructure</p>
+<p>Runs all the combinations above against the user code and running infrastructure</p>
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The following example shows the required dependency in Gradle (assuming that Micrometer Tracing BOM has been added):</p>
 </div>
@@ -320,10 +323,12 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_running_tracing_unit_tests"><a class="anchor" href="#_running_tracing_unit_tests"></a>Running Tracing Unit Tests</h3>
+</div>
+<div class="sect1">
+<h2 id="_running_tracing_unit_tests"><a class="anchor" href="#_running_tracing_unit_tests"></a>Running Tracing Unit Tests</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>To run unit tests of your custom handler you may want to use the <code>SimpleTracer</code> test <code>Tracer</code> implementation. Let&#8217;s assume the following custom <code>TracingObservationHandler</code>.</p>
+<p>To run unit tests of your custom handler, you may want to use the <code>SimpleTracer</code> test <code>Tracer</code> implementation. Let&#8217;s assume the following custom <code>TracingObservationHandler</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -369,7 +374,7 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
 </div>
 </div>
 <div class="paragraph">
-<p>To verify whether the spans got properly created we can use the <code>SimpleTracer</code> as follows:</p>
+<p>To verify whether the spans got properly created we can use the <code>SimpleTracer</code>, as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -412,21 +417,23 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_running_integration_tests"><a class="anchor" href="#_running_integration_tests"></a>Running integration tests</h3>
+</div>
+<div class="sect1">
+<h2 id="_running_integration_tests"><a class="anchor" href="#_running_integration_tests"></a>Running integration tests</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The following example shows how you can run your code to test your integrations</p>
+<p>The following example shows how you can run your code to test your integrations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>by asserting spans that were stored without emitting them to a reporting system</p>
+<p>By asserting spans that were stored without emitting them to a reporting system</p>
 </li>
 <li>
-<p>against running Tanzu Observability by Wavefront instance (this option turns on when you have passed the Wavefront related configuration in the constructor - otherwise the test will be disabled)</p>
+<p>Against running Tanzu Observability by Wavefront instance (this option turns on when you have passed the Wavefront related configuration in the constructor - otherwise the test will be disabled)</p>
 </li>
 <li>
-<p>against running Zipkin instance (this option turns on when Zipkin is running - otherwise the test will be disabled)</p>
+<p>Against running Zipkin instance (this option turns on when Zipkin is running - otherwise the test will be disabled)</p>
 </li>
 </ul>
 </div>
@@ -492,7 +499,6 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
 </div>
 </div>
 </div>
-</div>
 <nav class="pagination">
   <span class="prev"><a href="configuring.html">Micrometer Observation Configuration</a></span>
 </nav>
@@ -519,12 +525,12 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
                         </li>
                         <li class="version">
                           <a href="1.2-SNAPSHOT/index.html">
-                            1.2.3-SNAPSHOT
+                            1.2.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="index.html">
-                            1.2.2<span class="current">current</span>
+                            1.2.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -589,6 +595,6 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.2.2" data-page-component="tracing"></script>
+<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.2.3" data-page-component="tracing"></script>
   </body>
 </html>

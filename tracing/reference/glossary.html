@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Micrometer Tracing</title>
+    <title>Glossary :: Micrometer Tracing</title>
     <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/glossary.html">
     <link rel="prev" href="index.html">
     <link rel="next" href="tracers.html">
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="./_/css/vendor/page-search.css">
     <link rel="stylesheet" href="./_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.2.2">
+    <meta name="version" content="1.2.3">
     <meta name="component" content="tracing">
     <meta name="latest-version" content="true">
     <link rel="icon" href="./_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.2.2">
+<div class="nav-container" data-component="tracing" data-version="1.2.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.2.2</span>
+  <span class="version">1.2.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -198,13 +198,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title=""
+      data-title="Glossary"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.2.2/docs/modules/ROOT/pages/glossary.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.2.3/docs/modules/ROOT/pages/glossary.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -246,9 +246,7 @@
   </ul>
 </nav>
 <article>
-<div class="sect1">
-<h2 id="_glossary"><a class="anchor" href="#_glossary"></a>Glossary</h2>
-<div class="sectionbody">
+<h1 id="page-title" class="page">Glossary</h1>
 <div class="paragraph">
 <p>Micrometer Tracing contains a core module with an instrumentation <a href="https://en.wikipedia.org/wiki/Service_provider_interface">SPI</a>, a set of modules containing bridges to various tracers, a set of modules containing dedicated span reporting mechanisms, and a test kit.
 You need to understand the following definitions for distributed tracing:</p>
@@ -274,19 +272,19 @@ For example, if you run a distributed big-data store, a trace might be formed by
 </div>
 <div class="paragraph">
 <p><strong>Tracer</strong>: A library that handles the lifecycle of a span.
-It can create, start, stop and report spans to an external system via reporters / exporters.</p>
+It can create, start, stop, and report spans to an external system via reporters / exporters.</p>
 </div>
 <div class="paragraph">
-<p><strong>Tracing context</strong>: For distributed tracing to work the tracing context (trace identifier, span identifier, etc.) must be propagated through the process (e.g. over threads) and over the network.</p>
+<p><strong>Tracing context</strong>: For distributed tracing to work, the tracing context (trace identifier, span identifier, and so on) must be propagated through the process (for example, over threads) and over the network.</p>
 </div>
 <div class="paragraph">
-<p><strong>Log correlation</strong>: Parts of the tracing context (e.g. trace identifier, span identifier) can be populated to the logs of a given application.
-One can then collect all logs in a single storage and group them via trace id.
-That way one can get all logs, for a single business operation (trace) from all services put in a chronological order.</p>
+<p><strong>Log correlation</strong>: Parts of the tracing context (such as the trace identifier and the span identifier) can be populated to the logs of a given application.
+One can then collect all logs in a single storage and group them with a trace ID.
+That way, you can get all logs, for a single business operation (trace) from all services put in a chronological order.</p>
 </div>
 <div class="paragraph">
 <p><strong>Latency analysis tools</strong>: A tool that collects exported spans and visualizes the whole trace.
-Allows easy latency analysis.</p>
+Such a tool allows easy latency analysis.</p>
 </div>
 <div class="paragraph">
 <p>The following image shows how <strong>Span</strong> and <strong>Trace</strong> look in a system.</p>
@@ -326,16 +324,14 @@ Span Id = C
 </div>
 </div>
 <div class="paragraph">
-<p>You can continue with a created span (example with <code>no custom span</code> indication) or you can create child spans manually (example with <code>custom span</code> indication).</p>
+<p>You can continue with a created span (example with <code>no custom span</code> indication), or you can create child spans manually (example with <code>custom span</code> indication).</p>
 </div>
 <div class="paragraph">
-<p>The following image shows how parent-child relationships of spans look:</p>
+<p>The following image shows how the parent-child relationships of spans look:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tracing/parents.jpg" alt="Parent child relationship">
-</div>
-</div>
 </div>
 </div>
 <nav class="pagination">
@@ -365,12 +361,12 @@ Span Id = C
                         </li>
                         <li class="version">
                           <a href="1.2-SNAPSHOT/index.html">
-                            1.2.3-SNAPSHOT
+                            1.2.4-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="index.html">
-                            1.2.2<span class="current">current</span>
+                            1.2.3<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -435,6 +431,6 @@ Span Id = C
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.2.2" data-page-component="tracing"></script>
+<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.2.3" data-page-component="tracing"></script>
   </body>
 </html>
