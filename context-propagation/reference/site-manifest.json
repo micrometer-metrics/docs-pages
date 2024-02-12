@@ -1,11 +1,11 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-02-08T18:17:50.113Z",
+  "generated": "2024-02-12T18:03:33.537Z",
   "url": "https://docs.micrometer.io/context-propagation/reference",
   "components": {
     "context-propagation": {
       "title": "Micrometer Context Propagation",
-      "latest": "1.1.0",
+      "latest": "1.1.1",
       "versions": {
         "1.2.0": {
           "prerelease": true,
@@ -34,9 +34,9 @@
             }
           ]
         },
-        "1.1.1": {
+        "1.1.2": {
           "prerelease": true,
-          "displayVersion": "1.1.1-SNAPSHOT",
+          "displayVersion": "1.1.2-SNAPSHOT",
           "url": "/1.1-SNAPSHOT/index.html",
           "pages": [
             {
@@ -61,7 +61,7 @@
             }
           ]
         },
-        "1.1.0": {
+        "1.1.1": {
           "url": "/index.html",
           "pages": [
             {
