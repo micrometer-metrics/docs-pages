@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Glossary :: Micrometer Tracing</title>
-    <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/glossary.html">
-    <link rel="prev" href="index.html">
-    <link rel="next" href="tracers.html">
+    <title>Testing :: Micrometer Tracing</title>
+    <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/testing.html">
+    <link rel="prev" href="configuring.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -20,7 +19,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.2.4">
+    <meta name="version" content="1.3.0-M1">
     <meta name="component" content="tracing">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +100,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.2.4">
+<div class="nav-container" data-component="tracing" data-version="1.3.0-M1">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.2.4-SNAPSHOT</span>
+  <span class="version">1.3.0-M1</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -141,7 +140,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="index.html">Micrometer Tracing</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="glossary.html">Glossary</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -156,7 +155,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="configuring.html">Micrometer Observation Configuration</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="testing.html">Testing</a>
   </li>
 </ul>
@@ -198,13 +197,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="Glossary"
+      data-title="Testing"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/edit/1.2.x/docs/modules/ROOT/pages/glossary.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.3.0-M1/docs/modules/ROOT/pages/testing.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -242,7 +241,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Micrometer Tracing</a></li>
-    <li><a href="glossary.html">Glossary</a></li>
+    <li><a href="testing.html">Testing</a></li>
   </ul>
 </nav>
 <article>
@@ -254,103 +253,268 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../glossary.html">Micrometer Tracing 1.2.3</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../testing.html">Micrometer Tracing 1.2.3</a>!</p>
         </div>
       </td>
     </tr></tbody>
   </table>
 </div>
-<h1 id="page-title" class="page">Glossary</h1>
+<h1 id="page-title" class="page">Testing</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer Tracing contains a core module with an instrumentation <a href="https://en.wikipedia.org/wiki/Service_provider_interface">SPI</a>, a set of modules containing bridges to various tracers, a set of modules containing dedicated span reporting mechanisms, and a test kit.
-You need to understand the following definitions for distributed tracing:</p>
-</div>
-<div class="paragraph">
-<p>Micrometer Tracing borrows <a href="https://research.google.com/pubs/pub36356.html">Dapper&#8217;s</a> terminology.</p>
+<p>Micrometer Tracing includes the <code>micrometer-tracing-test</code> and <code>micrometer-tracing-integration-test</code> modules.</p>
 </div>
 <div class="paragraph">
-<p><strong>Span</strong>: The basic unit of work.
-For example, sending an RPC is a new span, as is sending a response to an RPC.
-Spans also have other data, such as descriptions, timestamped events, key-value annotations (tags), the ID of the span that caused them, and process IDs (normally IP addresses).</p>
+<p>For unit tests, it provides a <code>SimpleTracer</code> that is a test implementation of a <code>Tracer</code>.</p>
 </div>
 <div class="paragraph">
-<p>Spans can be started and stopped, and they keep track of their timing information.
-Once you create a span, you must stop it at some point in the future.</p>
+<p>For integration tests, it provides a <code>SampleTestRunner</code> mechanism that you can hook into your samples.
+It:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>Configures an OpenZipkin Brave Tracer</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Sets it up with Tanzu Observability by Wavefront Reporter</p>
+</li>
+<li>
+<p>Sets it up with OpenZipkin Zipkin Reporter</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Configures an OpenTelemetry Tracer</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Sets it up with Tanzu Observability by Wavefront Exporter</p>
+</li>
+<li>
+<p>Sets it up with OpenZipkin Zipkin Exporter</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Runs all the combinations above against the user code and running infrastructure</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p><strong>Trace</strong>: A set of spans forming a tree-like structure.
-For example, if you run a distributed big-data store, a trace might be formed by a <code>PUT</code> request.</p>
-</div>
-<div class="paragraph">
-<p><strong>Annotation/Event</strong>: Used to record the existence of an event in time.</p>
-</div>
-<div class="paragraph">
-<p><strong>Tracer</strong>: A library that handles the lifecycle of a span.
-It can create, start, stop, and report spans to an external system via reporters / exporters.</p>
-</div>
-<div class="paragraph">
-<p><strong>Tracing context</strong>: For distributed tracing to work, the tracing context (trace identifier, span identifier, and so on) must be propagated through the process (for example, over threads) and over the network.</p>
-</div>
-<div class="paragraph">
-<p><strong>Log correlation</strong>: Parts of the tracing context (such as the trace identifier and the span identifier) can be populated to the logs of a given application.
-One can then collect all logs in a single storage and group them with a trace ID.
-That way, you can get all logs, for a single business operation (trace) from all services put in a chronological order.</p>
-</div>
-<div class="paragraph">
-<p><strong>Latency analysis tools</strong>: A tool that collects exported spans and visualizes the whole trace.
-Such a tool allows easy latency analysis.</p>
-</div>
-<div class="paragraph">
-<p>The following image shows how <strong>Span</strong> and <strong>Trace</strong> look in a system.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/tracing/trace-id.jpg" alt="Trace Info propagation">
-</div>
-</div>
-<div class="paragraph">
-<p>Each color of a note signifies a span (there are seven spans - from <strong>A</strong> to <strong>G</strong>).
-Consider the following note:</p>
+<p>The following example shows the required dependency in Gradle (assuming that Micrometer Tracing BOM has been added):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">Trace Id = X
-Span Id = D
-Client Sent</code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">testImplementation 'io.micrometer:micrometer-tracing-test' // for unit tests
+testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for integration tests</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This note indicates that the current span has <strong>Trace Id</strong> set to <strong>X</strong> and <strong>Span Id</strong> set to <strong>D</strong>.
-Also, from the RPC perspective, the <code>Client Sent</code> event took place.</p>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s consider more notes:</p>
+<p>The following example shows the required dependency in Maven (assuming that Micrometer Tracing BOM has been added):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">Trace Id = X
-Span Id = A
-(no custom span)
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
+    &lt;artifactId&gt;micrometer-tracing-test&lt;/artifactId&gt; &lt;!-- For unit tests --&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
+    &lt;artifactId&gt;micrometer-tracing-integration-test&lt;/artifactId&gt; &lt;!-- For integration tests --&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_running_tracing_unit_tests"><a class="anchor" href="#_running_tracing_unit_tests"></a>Running Tracing Unit Tests</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To run unit tests of your custom handler, you may want to use the <code>SimpleTracer</code> test <code>Tracer</code> implementation. Let&#8217;s assume the following custom <code>TracingObservationHandler</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static class MyTracingObservationHandler implements TracingObservationHandler&lt;CustomContext&gt; {
 
-Trace Id = X
-Span Id = C
-(custom span)</code></pre>
+    private final Tracer tracer;
+
+    MyTracingObservationHandler(Tracer tracer) {
+        this.tracer = tracer;
+    }
+
+    @Override
+    public void onStart(CustomContext context) {
+        String databaseName = context.getDatabaseName();
+        Span.Builder builder = this.tracer.spanBuilder().kind(Span.Kind.CLIENT).remoteServiceName(databaseName);
+        getTracingContext(context).setSpan(builder.start());
+    }
+
+    @Override
+    public void onError(CustomContext context) {
+        getTracingContext(context).getSpan().error(context.getError());
+    }
+
+    @Override
+    public void onStop(CustomContext context) {
+        Span span = getRequiredSpan(context);
+        span.name(context.getContextualName() != null ? context.getContextualName() : context.getName());
+        tagSpan(context, span);
+        span.end();
+    }
+
+    @Override
+    public boolean supportsContext(Observation.Context context) {
+        return context instanceof CustomContext;
+    }
+
+    @Override
+    public Tracer getTracer() {
+        return this.tracer;
+    }
+
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can continue with a created span (example with <code>no custom span</code> indication), or you can create child spans manually (example with <code>custom span</code> indication).</p>
+<p>To verify whether the spans got properly created we can use the <code>SimpleTracer</code>, as follows:</p>
 </div>
-<div class="paragraph">
-<p>The following image shows how the parent-child relationships of spans look:</p>
-</div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="_images/tracing/parents.jpg" alt="Parent child relationship">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class SomeComponentThatIsUsingMyTracingObservationHandlerTests {
+
+    ObservationRegistry registry = ObservationRegistry.create();
+
+    SomeComponent someComponent = new SomeComponent(registry);
+
+    SimpleTracer simpleTracer = new SimpleTracer();
+
+    MyTracingObservationHandler handler = new MyTracingObservationHandler(simpleTracer);
+
+    @BeforeEach
+    void setup() {
+        registry.observationConfig().observationHandler(handler);
+    }
+
+    @Test
+    void should_store_a_span() {
+        // this code will call actual Observation API
+        someComponent.doSthThatShouldCreateSpans();
+
+        TracerAssert.assertThat(simpleTracer)
+                .onlySpan()
+                .hasNameEqualTo("insert user")
+                .hasKindEqualTo(Span.Kind.CLIENT)
+                .hasRemoteServiceNameEqualTo("mongodb-database")
+                .hasTag("mongodb.command", "insert")
+                .hasTag("mongodb.collection", "user")
+                .hasTagWithKey("mongodb.cluster_id")
+                .assertThatThrowable()
+                .isInstanceOf(IllegalStateException.class)
+                .backToSpan()
+                .hasIpThatIsBlank()
+                .hasPortThatIsNotSet();
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_running_integration_tests"><a class="anchor" href="#_running_integration_tests"></a>Running integration tests</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following example shows how you can run your code to test your integrations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>By asserting spans that were stored without emitting them to a reporting system</p>
+</li>
+<li>
+<p>Against running Tanzu Observability by Wavefront instance (this option turns on when you have passed the Wavefront related configuration in the constructor - otherwise the test will be disabled)</p>
+</li>
+<li>
+<p>Against running Zipkin instance (this option turns on when Zipkin is running - otherwise the test will be disabled)</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class ObservabilitySmokeTest extends SampleTestRunner {
+
+    ObservabilitySmokeTest() {
+        super(SampleRunnerConfig.builder().wavefrontApplicationName("my-app").wavefrontServiceName("my-service")
+                .wavefrontToken("...")
+                .wavefrontUrl("...")
+                .zipkinUrl("...") // defaults to localhost:9411
+                .build());
+    }
+
+    @Override
+    public BiConsumer&lt;BuildingBlocks, Deque&lt;ObservationHandler&lt;? extends Observation.Context&gt;&gt;&gt; customizeObservationHandlers() {
+        return (bb, handlers) -&gt; {
+            ObservationHandler defaultHandler = handlers.removeLast();
+            handlers.addLast(new MyTracingObservationHandler(bb.getTracer()));
+            handlers.addLast(defaultHandler);
+        };
+    }
+
+    @Override
+    public SampleTestRunnerConsumer yourCode() {
+        return (bb, meterRegistry) -&gt; {
+            // here you would be running your code
+            yourCode();
+
+            SpansAssert.assertThat(bb.getFinishedSpans())
+                    .haveSameTraceId()
+                    .hasNumberOfSpansEqualTo(8)
+                    .hasNumberOfSpansWithNameEqualTo("handle", 4)
+                    .forAllSpansWithNameEqualTo("handle", span -&gt; span.hasTagWithKey("rsocket.request-type"))
+                    .hasASpanWithNameIgnoreCase("request_stream")
+                    .thenASpanWithNameEqualToIgnoreCase("request_stream")
+                    .hasTag("rsocket.request-type", "REQUEST_STREAM")
+                    .backToSpans()
+                    .hasASpanWithNameIgnoreCase("request_channel")
+                    .thenASpanWithNameEqualToIgnoreCase("request_channel")
+                    .hasTag("rsocket.request-type", "REQUEST_CHANNEL")
+                    .backToSpans()
+                    .hasASpanWithNameIgnoreCase("request_fnf")
+                    .thenASpanWithNameEqualToIgnoreCase("request_fnf")
+                    .hasTag("rsocket.request-type", "REQUEST_FNF")
+                    .backToSpans()
+                    .hasASpanWithNameIgnoreCase("request_response")
+                    .thenASpanWithNameEqualToIgnoreCase("request_response")
+                    .hasTag("rsocket.request-type", "REQUEST_RESPONSE");
+
+            MeterRegistryAssert.assertThat(meterRegistry)
+                    .hasTimerWithNameAndTags("rsocket.response", Tags.of(Tag.of("error", "none"), Tag.of("rsocket.request-type", "REQUEST_RESPONSE")))
+                    .hasTimerWithNameAndTags("rsocket.fnf", Tags.of(Tag.of("error", "none"), Tag.of("rsocket.request-type", "REQUEST_FNF")))
+                    .hasTimerWithNameAndTags("rsocket.request", Tags.of(Tag.of("error", "none"), Tag.of("rsocket.request-type", "REQUEST_RESPONSE")))
+                    .hasTimerWithNameAndTags("rsocket.channel", Tags.of(Tag.of("error", "none"), Tag.of("rsocket.request-type", "REQUEST_CHANNEL")))
+                    .hasTimerWithNameAndTags("rsocket.stream", Tags.of(Tag.of("error", "none"), Tag.of("rsocket.request-type", "REQUEST_STREAM")));
+        };
+    }
+
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="index.html">Micrometer Tracing</a></span>
-  <span class="next"><a href="tracers.html">Supported Tracers</a></span>
+  <span class="prev"><a href="configuring.html">Micrometer Observation Configuration</a></span>
 </nav>
 </article>
 </div>  </div>
@@ -373,13 +537,13 @@ Span Id = C
                             1.3.0-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version">
-                          <a href="../1.3/index.html">
+                        <li class="version is-current">
+                          <a href="index.html">
                             1.3.0-M1
                           </a>
                         </li>
-                        <li class="version is-current">
-                          <a href="index.html">
+                        <li class="version">
+                          <a href="../1.2-SNAPSHOT/index.html">
                             1.2.4-SNAPSHOT
                           </a>
                         </li>
@@ -450,6 +614,6 @@ Span Id = C
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.2.4" data-page-component="tracing"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.3.0-M1" data-page-component="tracing"></script>
   </body>
 </html>
