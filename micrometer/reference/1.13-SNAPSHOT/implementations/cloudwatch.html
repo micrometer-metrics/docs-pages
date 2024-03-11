@@ -500,18 +500,6 @@
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The <code>micrometer-registry-cloudwatch2</code> module uses AWS SDK v2. <code>micrometer-registry-cloudwatch</code> is for AWS SDK v1.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -540,7 +528,7 @@ MeterRegistry meterRegistry = new CloudWatchMeterRegistry(cloudWatchConfig, Cloc
 <p>You can provide your own <code>CloudWatchAsyncClient</code> to the constructor of the registry.</p>
 </div>
 <div class="paragraph">
-<p><code>CloudWatchConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration. For example, <a href="https://docs.awspring.io/spring-cloud-aws/docs/current/reference/html/index.html#cloudwatch-metrics">Micrometer support in Spring Cloud AWS</a> binds properties prefixed with <code>management.metrics.export.cloudwatch</code> directly to the <code>CloudWatchConfig</code>:</p>
+<p><code>CloudWatchConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration. For example, <a href="https://docs.awspring.io/spring-cloud-aws/docs/3.1.0/reference/html/index.html#cloudwatch-metrics">Micrometer support in Spring Cloud AWS</a> binds properties prefixed with <code>management.metrics.export.cloudwatch</code> directly to the <code>CloudWatchConfig</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
