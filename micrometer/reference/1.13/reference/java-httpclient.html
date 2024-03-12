@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>MongoDB Metrics Instrumentation :: Micrometer</title>
-    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/reference/mongodb.html">
-    <link rel="prev" href="logging.html">
-    <link rel="next" href="netty.html">
+    <title>Java HttpClient instrumentation :: Micrometer</title>
+    <link rel="prev" href="httpcomponents.html">
+    <link rel="next" href="jetty.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -20,7 +19,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.13.0">
+    <meta name="version" content="1.13.0-M2">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +100,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.13.0">
+<div class="nav-container" data-component="micrometer" data-version="1.13.0-M2">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.13.0-SNAPSHOT</span>
+  <span class="version">1.13.0-M2</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -274,7 +273,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="httpcomponents.html">HttpComponents Client</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="java-httpclient.html">Java HttpClient</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -289,7 +288,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="logging.html">Logging</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="mongodb.html">MongoDB</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -399,13 +398,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="MongoDB Metrics Instrumentation"
+      data-title="Java HttpClient instrumentation"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/edit/main/docs/modules/ROOT/pages/reference/mongodb.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.13.0-M2/docs/modules/ROOT/pages/reference/java-httpclient.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -444,7 +443,7 @@
   <ul>
     <li><a href="../index.html">Micrometer</a></li>
     <li><a href="../reference.html">Reference Instrumentations</a></li>
-    <li><a href="mongodb.html">MongoDB</a></li>
+    <li><a href="java-httpclient.html">Java HttpClient</a></li>
   </ul>
 </nav>
 <article>
@@ -456,97 +455,64 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../reference/mongodb.html">Micrometer 1.12.4</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../index.html">Micrometer 1.12.4</a>!</p>
         </div>
       </td>
     </tr></tbody>
   </table>
 </div>
-<h1 id="page-title" class="page">MongoDB Metrics Instrumentation</h1>
+<h1 id="page-title" class="page">Java HttpClient instrumentation</h1>
 <div class="paragraph">
-<p><a href="https://www.mongodb.com/">MongoDB</a> is a modern database that supports transactional, search, analytics, and mobile use cases with a flexible document data model and a unified query interface.</p>
+<p>Since Java 11, an <code>HttpClient</code> is provided as part of the JDK. See <a href="https://openjdk.org/groups/net/httpclient/intro.html">this introduction</a> to it. Micrometer provides instrumentation of this via a <code>micrometer-java11</code> module. This module requires Java 11 or later.</p>
 </div>
 <div class="paragraph">
-<p>Below you can find an example of how to instrument MongoDb with Micrometer.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-To add more capabilities such as distributed tracing, please consider using <a href="https://docs.spring.io/spring-data/mongodb/reference/observability/observability.html">Spring Data MongoDb</a> which uses <a href="../observation.html" class="xref page">Micrometer Observation</a> under the hood.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Below you can find an example of metrics for command execution.</p>
+<p>For Gradle, add the following implementation:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
-registry = new SimpleMeterRegistry();
-MongoClientSettings settings = MongoClientSettings.builder()
-    .addCommandListener(new MongoMetricsCommandListener(registry))
-    .applyToClusterSettings(builder -&gt; builder.hosts(singletonList(new ServerAddress(host, port)))
-        .addClusterListener(new ClusterListener() {
-            @Override
-            public void clusterOpening(ClusterOpeningEvent event) {
-                clusterId.set(event.getClusterId().getValue());
-            }
-        }))
-    .build();
-mongo = MongoClients.create(settings);
-
-// Usage example
-mongo.getDatabase("test").getCollection("testCol").insertOne(new Document("testDoc", new Date()));
-
-Tags tags = Tags.of("cluster.id", clusterId.get(), "server.address", String.format("%s:%s", host, port),
-        "command", "insert", "database", "test", "collection", "testCol", "status", "SUCCESS");
-assertThat(registry.get("mongodb.driver.commands").tags(tags).timer().count()).isEqualTo(1);</code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-java11'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Below you can find an example of metrics of the connection pool.</p>
+<p>For Maven, add the following dependency:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
-MeterRegistry registry = new SimpleMeterRegistry();
-MongoMetricsConnectionPoolListener connectionPoolListener = new MongoMetricsConnectionPoolListener(registry,
-        e -&gt; Tags.of("cluster.id", e.getServerId().getClusterId().getValue(), "server.address",
-                e.getServerId().getAddress().toString(), "my.custom.connection.pool.identifier", "custom"));
-MongoClientSettings settings = MongoClientSettings.builder()
-    .applyToConnectionPoolSettings(
-            builder -&gt; builder.minSize(2).addConnectionPoolListener(connectionPoolListener))
-    .applyToClusterSettings(builder -&gt; builder.hosts(singletonList(new ServerAddress(host, port)))
-        .addClusterListener(new ClusterListener() {
-            @Override
-            public void clusterOpening(ClusterOpeningEvent event) {
-                clusterId.set(event.getClusterId().getValue());
-            }
-        }))
-    .build();
-MongoClient mongo = MongoClients.create(settings);
-
-// Usage example
-mongo.getDatabase("test").createCollection("testCol");
-
-Tags tags = Tags.of("cluster.id", clusterId.get(), "server.address", String.format("%s:%s", host, port),
-        "my.custom.connection.pool.identifier", "custom");
-
-assertThat(registry.get("mongodb.driver.pool.size").tags(tags).gauge().value()).isEqualTo(2);
-assertThat(registry.get("mongodb.driver.pool.checkedout").gauge().value()).isZero();
-assertThat(registry.get("mongodb.driver.pool.waitqueuesize").gauge().value()).isZero();
-
-mongo.close();</code></pre>
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
+  &lt;artifactId&gt;micrometer-java11&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create an <code>HttpClient</code> as you normally would. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClient httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can instrument this <code>HttpClient</code> as follows with an <code>ObservationRegistry</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClient observedClient = MicrometerHttpClient.instrumentationBuilder(httpClient, meterRegistry)
+    .observationRegistry(observationRegistry)
+    .build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, if you are not using an <code>ObservationRegistry</code>, you can instrument with only a <code>MeterRegistry</code> as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClient observedClient = MicrometerHttpClient.instrumentationBuilder(httpClient, meterRegistry).build();</code></pre>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="logging.html">Logging</a></span>
-  <span class="next"><a href="netty.html">Netty</a></span>
+  <span class="prev"><a href="httpcomponents.html">HttpComponents Client</a></span>
+  <span class="next"><a href="jetty.html">Jetty and Jersey</a></span>
 </nav>
 </article>
 </div>  </div>
@@ -564,13 +530,13 @@ mongo.close();</code></pre>
                     <li class="component is-current">
                       <a class="title" href="../../index.html">Micrometer</a>
                       <ul class="versions">
-                        <li class="version is-current">
-                          <a href="../index.html">
+                        <li class="version">
+                          <a href="../../1.13-SNAPSHOT/index.html">
                             1.13.0-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version">
-                          <a href="../../1.13/index.html">
+                        <li class="version is-current">
+                          <a href="../index.html">
                             1.13.0-M2
                           </a>
                         </li>
@@ -647,6 +613,6 @@ mongo.close();</code></pre>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.13.0" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.13.0-M2" data-page-component="micrometer"></script>
   </body>
 </html>

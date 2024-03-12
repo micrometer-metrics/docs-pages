@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.13.0-M1">
+    <meta name="version" content="1.13.0-M2">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.13.0-M1">
+<div class="nav-container" data-component="micrometer" data-version="1.13.0-M2">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.13.0-M1</span>
+  <span class="version">1.13.0-M2</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -275,6 +275,9 @@
     <a class="nav-link" href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/java-httpclient.html">Java HttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -402,7 +405,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.13.0-M1/docs/modules/ROOT/pages/implementations/cloudwatch.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.13.0-M2/docs/modules/ROOT/pages/implementations/cloudwatch.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -497,18 +500,6 @@
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The <code>micrometer-registry-cloudwatch2</code> module uses AWS SDK v2. <code>micrometer-registry-cloudwatch</code> is for AWS SDK v1.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -537,7 +528,7 @@ MeterRegistry meterRegistry = new CloudWatchMeterRegistry(cloudWatchConfig, Cloc
 <p>You can provide your own <code>CloudWatchAsyncClient</code> to the constructor of the registry.</p>
 </div>
 <div class="paragraph">
-<p><code>CloudWatchConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration. For example, <a href="https://docs.awspring.io/spring-cloud-aws/docs/current/reference/html/index.html#cloudwatch-metrics">Micrometer support in Spring Cloud AWS</a> binds properties prefixed with <code>management.metrics.export.cloudwatch</code> directly to the <code>CloudWatchConfig</code>:</p>
+<p><code>CloudWatchConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration. For example, <a href="https://docs.awspring.io/spring-cloud-aws/docs/3.1.0/reference/html/index.html#cloudwatch-metrics">Micrometer support in Spring Cloud AWS</a> binds properties prefixed with <code>management.metrics.export.cloudwatch</code> directly to the <code>CloudWatchConfig</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -580,7 +571,7 @@ MeterRegistry meterRegistry = new CloudWatchMeterRegistry(cloudWatchConfig, Cloc
                         </li>
                         <li class="version is-current">
                           <a href="../index.html">
-                            1.13.0-M1
+                            1.13.0-M2
                           </a>
                         </li>
                         <li class="version">
@@ -656,6 +647,6 @@ MeterRegistry meterRegistry = new CloudWatchMeterRegistry(cloudWatchConfig, Cloc
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.13.0-M1" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.13.0-M2" data-page-component="micrometer"></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-03-11T22:31:51.980Z",
+  "generated": "2024-03-12T00:00:07.547Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -363,7 +363,7 @@
             }
           ]
         },
-        "1.13.0-M1": {
+        "1.13.0-M2": {
           "prerelease": true,
           "url": "/1.13/index.html",
           "pages": [
@@ -665,6 +665,11 @@
               "path": "reference/httpcomponents.adoc",
               "url": "/1.13/reference/httpcomponents.html",
               "title": "Apache HttpComponents Client Instrumentation"
+            },
+            {
+              "path": "reference/java-httpclient.adoc",
+              "url": "/1.13/reference/java-httpclient.html",
+              "title": "Java HttpClient instrumentation"
             },
             {
               "path": "reference/jetty.adoc",
