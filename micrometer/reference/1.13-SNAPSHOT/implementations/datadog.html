@@ -488,6 +488,18 @@
 <p>Micrometer supports shipping metrics to Datadog directly by using its HTTP API or by using DogStatsD through the <a href="statsD.html" class="xref page">StatsD registry</a>.
 If you can choose between the two, the API approach is far more efficient.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you encounter a rate limit problem with the Datadog API approach, try the DogStatsD approach or one of <a href="https://docs.datadoghq.com/metrics/guide/micrometer/">alternatives that are described in the Datadog documentation</a>.
+</td>
+</tr>
+</table>
+</div>
 <div class="sect2">
 <h3 id="_direct_to_datadog_api_approach"><a class="anchor" href="#_direct_to_datadog_api_approach"></a>1.1. Direct to Datadog API Approach</h3>
 <div class="paragraph">
