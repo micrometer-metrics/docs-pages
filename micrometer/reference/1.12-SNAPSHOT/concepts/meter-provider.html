@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Rate Aggregation :: Micrometer</title>
-    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/concepts/rate-aggregation.html">
-    <link rel="prev" href="meter-filters.html">
-    <link rel="next" href="counters.html">
+    <title>Meter Provider :: Micrometer</title>
+    <link rel="prev" href="histogram-quantiles.html">
+    <link rel="next" href="../implementations.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -163,7 +162,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="meter-filters.html">Meter Filters</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="rate-aggregation.html">Rate Aggregation</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -184,7 +183,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="histogram-quantiles.html">Histograms and Percentiles</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="meter-provider.html">Meter Provider</a>
   </li>
 </ul>
@@ -399,13 +398,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="Rate Aggregation"
+      data-title="Meter Provider"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/edit/1.12.x/docs/modules/ROOT/pages/concepts/rate-aggregation.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/edit/1.12.x/docs/modules/ROOT/pages/concepts/meter-provider.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -444,7 +443,7 @@
   <ul>
     <li><a href="../index.html">Micrometer</a></li>
     <li><a href="../concepts.html">Concepts</a></li>
-    <li><a href="rate-aggregation.html">Rate Aggregation</a></li>
+    <li><a href="meter-provider.html">Meter Provider</a></li>
   </ul>
 </nav>
 <article>
@@ -456,129 +455,105 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../concepts/rate-aggregation.html">Micrometer 1.12.4</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../index.html">Micrometer 1.12.4</a>!</p>
         </div>
       </td>
     </tr></tbody>
   </table>
 </div>
-<h1 id="page-title" class="page">Rate Aggregation</h1>
-<div id="preamble">
-<div class="sectionbody">
+<h1 id="page-title" class="page">Meter Provider</h1>
 <div class="paragraph">
-<p>Micrometer is aware of whether a particular monitoring system expects rate aggregation to happen client-side before metrics are published or ad-hoc as part of the query on the server. It accumulates metrics according to which style the monitoring system expects.</p>
+<p>It&#8217;s a common use-case to attach tags dynamically to a <code>Meter</code>. Let&#8217;s say we execute a job and we want to use a <code>Timer</code> to instrument it:</p>
 </div>
-<div class="paragraph">
-<p>Not all measurements are reported or best viewed as a rate. For example, gauge values and the active task count long task timers are not rates.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_server_side"><a class="anchor" href="#_server_side"></a>Server-side</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Monitoring systems that perform server-side rate math expect absolute values to be reported at each publishing interval. For example, the absolute count of all increments to a counter since the beginning of the application is sent on each publishing interval.</p>
-</div>
-<div class="paragraph">
-<p>Suppose we have a slightly positively biased random walk that chooses to increment a counter once every 10 milliseconds. If we view the raw counter value in a system like Prometheus, we see a step-wise monotonically increasing function (the width of the step is the interval at which Prometheus is polling or scraping for data).</p>
-</div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="../_images/concepts/prometheus-counter-norate.png" alt="Absolute counter value">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Timer.Sample sample = Timer.start(registry);
+
+Result result = job.execute();
+
+Timer timer = Timer.builder("job.execution")
+    .tag("job.name", "job")
+    .tag("status", result.status())
+    .register(registry);
+sample.stop(timer);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Representing a counter without rate aggregation over some time window is rarely useful, as the representation is a function of both the rapidity with which the counter is incremented and the longevity of the service. In the preceding example, the counter drops back to zero on service restart. The rate-aggregated graph would return back to a value of around 55 as soon as the new instance (say on a production deployment) was in service.</p>
+<p>This lets us dynamically determine the <code>status</code> tag from the end state of the operation we are timing. There are two drawbacks of doing this:</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/concepts/prometheus-counter.png" alt="Rate-aggregated counter">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Every time the above is executed, a new <code>Timer.Builder</code> instance is created. This increases the amount of data that the GC needs to collect.</p>
+</li>
+<li>
+<p>The code above is somewhat boilerplate, it does not let you define the common properties of a Timer and attach what is dynamically changing but everything is always present.</p>
+</li>
+</ol>
 </div>
-</div>
-<div class="paragraph">
-<p>If you have achieved zero-downtime deployments (for example, through red-black deployments), you should be able to comfortably set <em>minimum</em> alert thresholds on the rate-aggregated graph without service restarts causing dips in the counter value.</p>
-</div>
-<div class="admonitionblock important">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For most production purposes, whether it be alerting, automated canary analysis, or other use cases, base your automation off of rate-aggregated data.
+In some cases you can use <code>registry.timer("job.execution", "job.name", "my-job", "status", result.status())</code> instead of using <code>Timer.Builder</code> which can save you some extra objects but this is not always possible.
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_client_side"><a class="anchor" href="#_client_side"></a>Client-side</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Two other classes of monitoring system either:</p>
+<p>You can resolve both of these issues by using a <code>MeterProvider</code>. It&#8217;s a convenience interface to create new meters from tags using a common "template".</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Expect rate-aggregated data. Given the key insight that, for most production purposes, we should be basing our decisions off of rates rather than absolute values. Such systems benefit from having to do less math to satisfy queries.</p>
-</li>
-<li>
-<p>Have relatively little or no math operations that would let us rate-aggregate data through our queries. For these systems, publishing pre-aggregated data is the only way to build meaningful representations.</p>
-</li>
-</ul>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Not every <code>Meter</code> can do this, <code>MeterProvider</code> can be used with <code>Counter</code>, <code>Timer</code>, <code>LongTaskTimer</code>, and <code>DistributionSummary</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Micrometer efficiently maintains rate data by means of a step value that accumulates data for the current publishing interval. When the step value is polled (when publishing, for example), if the step value detects that the current interval has elapsed, it moves current data to &#8220;previous&#8221; state. This previous state is what is reported until the next time current data overwrites it. The following image shows the interaction of current and previous state, along with polling:</p>
+<p>Here&#8217;s what you can do instead of the above:</p>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="../_images/concepts/rate-normalizing.png" alt="Behavior of a step value" width="1200">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">private MeterProvider&lt;Timer&gt; timerProvider = Timer.builder("job.execution")
+    .tag("job.name", "my-job")
+    .withRegistry(registry); <i class="conum" data-value="1"></i><b>(1)</b>
+
+// ...
+
+Timer.Sample sample = Timer.start(registry);
+
+Result result = job.execute();
+
+sample.stop(timerProvider.withTags("status", result.status())); <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>The value returned by the poll function is always <em>rate per second * interval</em>. If the step value shown in the preceding image represents the values of a counter, we could say that the counter saw &#8220;0.3 increments per second&#8221; in the first interval, which is reportable to the backend at any time during the second interval.</p>
-</div>
-<div class="paragraph">
-<p>Micrometer timers track at least a count and the total time as separate measurements. Suppose we configure publishing at 10-second intervals and we saw 20 requests that each took 100ms. Then, for the first interval:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>count</code> = 10 seconds * (20 requests / 10 seconds) = 20 requests</p>
-</li>
-<li>
-<p><code>totalTime</code> = 10 seconds * (20 * 100 ms / 10 seconds) = 2 seconds</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The <code>count</code> statistic is meaningful by itself: It is a measure of <em>throughput</em>. <code>totalTime</code> represents the total latency of all requests in the interval. Additionally, consider:</p>
-</div>
-<div class="paragraph">
-<p><code>totalTime / count</code> = 2 seconds / 20 requests = 0.1 seconds / request = 100 ms / request</p>
-</div>
-<div class="paragraph">
-<p>This is a useful measure of <em>average latency</em>. When the same idea is applied to the <code>totalAmount</code> and <code>count</code> emanating from distribution summaries, the measure is called a <em>distribution average</em>. Average latency is just the distribution average for a distribution summary measured in time (a timer). Some monitoring systems (such as Atlas) provide facilities for computing the distribution average from these statistics, and Micrometer includes <code>totalTime</code> and <code>count</code> as separate statistics. Others, (such as Datadog) do not have this kind of operation built-in, and Micrometer calculates the distribution average client-side and ships that.</p>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Definition of the <code>MeterProvider</code> for <code>Timer</code> with all the "static" fields necessary. Please note the <code>withRegistry</code> method call.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Definition of the dynamic tags. Note that only those tags are defined here that are dynamic and everying else is defined where the <code>MeterProvider</code> is created. The <code>withTags</code> method returns a <code>Timer</code> that is created using the tags defined in <code>withTags</code> plus everything else that is defined by the <code>MeterProvider</code>.</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Shipping the rate for the publishing interval is sufficient to reason about the rate over any time window greater than or equal to the publishing interval. In our example, if a service continues to receive 20 requests that each take 100ms for every 10 second interval in a given minute, we could say:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Micrometer reported &#8220;20 requests&#8221; for <code>count</code> on every 10-second interval. The monitoring system sums these six 10-second intervals and arrives at the conclusion that there are 120 requests / minute. Note that it is the monitoring system doing this summation, not Micrometer.</p>
-</li>
-<li>
-<p>Micrometer reported &#8220;2 seconds&#8221; of <code>totalTime</code> on every 10 second interval. The monitoring system can sum all total time statistics over the minute to yield &#8220;12 seconds&#8221; of total time in the minute interval. Then, the average latency is as we expect: 12 seconds / 120 requests = 100 ms / request.</p>
-</li>
-</ol>
-</div>
-</div>
+<p>This and the previous example produce the same output, the only difference is the amount of boilerplate in your code and the amount of builder objects created in the heap.</p>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="meter-filters.html">Meter Filters</a></span>
-  <span class="next"><a href="counters.html">Counters</a></span>
+  <span class="prev"><a href="histogram-quantiles.html">Histograms and Percentiles</a></span>
+  <span class="next"><a href="../implementations.html">Implementations</a></span>
 </nav>
 </article>
 </div>  </div>
