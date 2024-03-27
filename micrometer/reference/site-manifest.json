@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-03-27T03:22:21.928Z",
+  "generated": "2024-03-27T03:25:50.239Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -56,6 +56,11 @@
               "path": "concepts/meter-filters.adoc",
               "url": "/1.13-SNAPSHOT/concepts/meter-filters.html",
               "title": "Meter Filters"
+            },
+            {
+              "path": "concepts/meter-provider.adoc",
+              "url": "/1.13-SNAPSHOT/concepts/meter-provider.html",
+              "title": "Meter Provider"
             },
             {
               "path": "concepts/meters.adoc",

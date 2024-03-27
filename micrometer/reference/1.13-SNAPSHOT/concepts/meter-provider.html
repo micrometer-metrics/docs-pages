@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Installing :: Micrometer</title>
-    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/observation/installing.html">
-    <link rel="prev" href="../observation.html">
-    <link rel="next" href="introduction.html">
+    <title>Meter Provider :: Micrometer</title>
+    <link rel="prev" href="histogram-quantiles.html">
+    <link rel="next" href="../implementations.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -149,43 +148,43 @@
     <a class="nav-link" href="../concepts.html">Concepts</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/implementations.html">Supported Monitoring Systems</a>
+    <a class="nav-link" href="implementations.html">Supported Monitoring Systems</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/registry.html">Registry</a>
+    <a class="nav-link" href="registry.html">Registry</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/meters.html">Meters</a>
+    <a class="nav-link" href="meters.html">Meters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/naming.html">Naming Meters</a>
+    <a class="nav-link" href="naming.html">Naming Meters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/meter-filters.html">Meter Filters</a>
+    <a class="nav-link" href="meter-filters.html">Meter Filters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/rate-aggregation.html">Rate Aggregation</a>
+    <a class="nav-link" href="rate-aggregation.html">Rate Aggregation</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/counters.html">Counters</a>
+    <a class="nav-link" href="counters.html">Counters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/gauges.html">Gauges</a>
+    <a class="nav-link" href="gauges.html">Gauges</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/timers.html">Timers</a>
+    <a class="nav-link" href="timers.html">Timers</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/distribution-summaries.html">Distribution Summaries</a>
+    <a class="nav-link" href="distribution-summaries.html">Distribution Summaries</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/long-task-timers.html">Long Task Timers</a>
+    <a class="nav-link" href="long-task-timers.html">Long Task Timers</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/histogram-quantiles.html">Histograms and Percentiles</a>
+    <a class="nav-link" href="histogram-quantiles.html">Histograms and Percentiles</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../concepts/meter-provider.html">Meter Provider</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="meter-provider.html">Meter Provider</a>
   </li>
 </ul>
   </li>
@@ -343,23 +342,23 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="installing.html">Installing</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="introduction.html">Introduction</a>
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="components.html">Components</a>
+    <a class="nav-link" href="../observation/components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="instrumenting.html">Instrumenting</a>
+    <a class="nav-link" href="../observation/instrumenting.html">Instrumenting</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="testing.html">Testing</a>
+    <a class="nav-link" href="../observation/testing.html">Testing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="projects.html">Instrumented Projects</a>
+    <a class="nav-link" href="../observation/projects.html">Instrumented Projects</a>
   </li>
 </ul>
   </li>
@@ -402,13 +401,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="Installing"
+      data-title="Meter Provider"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/edit/main/docs/modules/ROOT/pages/observation/installing.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/edit/main/docs/modules/ROOT/pages/concepts/meter-provider.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -446,8 +445,8 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Micrometer</a></li>
-    <li><a href="../observation.html">Micrometer Observation</a></li>
-    <li><a href="installing.html">Installing</a></li>
+    <li><a href="../concepts.html">Concepts</a></li>
+    <li><a href="meter-provider.html">Meter Provider</a></li>
   </ul>
 </nav>
 <article>
@@ -459,53 +458,105 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../observation/installing.html">Micrometer 1.12.4</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../index.html">Micrometer 1.12.4</a>!</p>
         </div>
       </td>
     </tr></tbody>
   </table>
 </div>
-<h1 id="page-title" class="page">Installing</h1>
+<h1 id="page-title" class="page">Meter Provider</h1>
 <div class="paragraph">
-<p>Micrometer comes with a Bill of Materials (BOM), which is a project that manages all the project versions for consistency.</p>
-</div>
-<div class="paragraph">
-<p>The following example shows the required dependency for Micrometer Observation in Gradle:</p>
+<p>It&#8217;s a common use-case to attach tags dynamically to a <code>Meter</code>. Let&#8217;s say we execute a job and we want to use a <code>Timer</code> to instrument it:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation platform('io.micrometer:micrometer-bom:latest.release')
-implementation 'io.micrometer:micrometer-observation'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The following example shows the required dependency in Maven:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
-            &lt;artifactId&gt;micrometer-bom&lt;/artifactId&gt;
-            &lt;version&gt;${micrometer.version}&lt;/version&gt;
-            &lt;type&gt;pom&lt;/type&gt;
-            &lt;scope&gt;import&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Timer.Sample sample = Timer.start(registry);
 
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
-      &lt;artifactId&gt;micrometer-observation&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</code></pre>
+Result result = job.execute();
+
+Timer timer = Timer.builder("job.execution")
+    .tag("job.name", "job")
+    .tag("status", result.status())
+    .register(registry);
+sample.stop(timer);</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>This lets us dynamically determine the <code>status</code> tag from the end state of the operation we are timing. There are two drawbacks of doing this:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Every time the above is executed, a new <code>Timer.Builder</code> instance is created. This increases the amount of data that the GC needs to collect.</p>
+</li>
+<li>
+<p>The code above is somewhat boilerplate, it does not let you define the common properties of a Timer and attach what is dynamically changing but everything is always present.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In some cases you can use <code>registry.timer("job.execution", "job.name", "my-job", "status", result.status())</code> instead of using <code>Timer.Builder</code> which can save you some extra objects but this is not always possible.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can resolve both of these issues by using a <code>MeterProvider</code>. It&#8217;s a convenience interface to create new meters from tags using a common "template".</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Not every <code>Meter</code> can do this, <code>MeterProvider</code> can be used with <code>Counter</code>, <code>Timer</code>, <code>LongTaskTimer</code>, and <code>DistributionSummary</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s what you can do instead of the above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">private MeterProvider&lt;Timer&gt; timerProvider = Timer.builder("job.execution")
+    .tag("job.name", "my-job")
+    .withRegistry(registry); <i class="conum" data-value="1"></i><b>(1)</b>
+
+// ...
+
+Timer.Sample sample = Timer.start(registry);
+
+Result result = job.execute();
+
+sample.stop(timerProvider.withTags("status", result.status())); <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Definition of the <code>MeterProvider</code> for <code>Timer</code> with all the "static" fields necessary. Please note the <code>withRegistry</code> method call.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Definition of the dynamic tags. Note that only those tags are defined here that are dynamic and everying else is defined where the <code>MeterProvider</code> is created. The <code>withTags</code> method returns a <code>Timer</code> that is created using the tags defined in <code>withTags</code> plus everything else that is defined by the <code>MeterProvider</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This and the previous example produce the same output, the only difference is the amount of boilerplate in your code and the amount of builder objects created in the heap.</p>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="../observation.html">Micrometer Observation</a></span>
-  <span class="next"><a href="introduction.html">Introduction</a></span>
+  <span class="prev"><a href="histogram-quantiles.html">Histograms and Percentiles</a></span>
+  <span class="next"><a href="../implementations.html">Implementations</a></span>
 </nav>
 </article>
 </div>  </div>
