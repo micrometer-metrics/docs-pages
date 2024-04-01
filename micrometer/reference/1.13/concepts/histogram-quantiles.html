@@ -12,7 +12,7 @@
 !function (theme, navWidth) {
   if (theme === 'dark') document.documentElement.classList.add('dark-theme')
   if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
-}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'),
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
   localStorage && localStorage.getItem('nav-width'))
     </script>
     <link rel="stylesheet" href="../../_/css/site.css">
@@ -439,16 +439,8 @@
         </a>
     </div>
   </div>
-</aside><div class="doc">
-<nav class="breadcrumbs" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="../index.html">Micrometer</a></li>
-    <li><a href="../concepts.html">Concepts</a></li>
-    <li><a href="histogram-quantiles.html">Histograms and Percentiles</a></li>
-  </ul>
-</nav>
-<article>
-<div class="admonitionblock important">
+</aside><article class="doc">
+<div class="admonitionblock important latest">
   <table>
     <tbody><tr>
       <td class="icon">
@@ -462,6 +454,13 @@
     </tr></tbody>
   </table>
 </div>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Micrometer</a></li>
+    <li><a href="../concepts.html">Concepts</a></li>
+    <li><a href="histogram-quantiles.html">Histograms and Percentiles</a></li>
+  </ul>
+</nav>
 <h1 id="page-title" class="page">Histograms and Percentiles</h1>
 <div class="paragraph">
 <p>Timers and distribution summaries support collecting data to observe their percentile distributions. There are two main approaches to viewing percentiles:</p>
@@ -546,7 +545,7 @@ registry.timer("myservice.db.requests").record(..);</code></pre>
   <span class="next"><a href="../implementations.html">Implementations</a></span>
 </nav>
 </article>
-</div>  </div>
+  </div>
 </main>
 <div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>

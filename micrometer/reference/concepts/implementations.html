@@ -12,7 +12,7 @@
 !function (theme, navWidth) {
   if (theme === 'dark') document.documentElement.classList.add('dark-theme')
   if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
-}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'),
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
   localStorage && localStorage.getItem('nav-width'))
     </script>
     <link rel="stylesheet" href="../_/css/site.css">
@@ -436,7 +436,7 @@
         </a>
     </div>
   </div>
-</aside><div class="doc">
+</aside><article class="doc">
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Micrometer</a></li>
@@ -444,7 +444,6 @@
     <li><a href="implementations.html">Supported Monitoring Systems</a></li>
   </ul>
 </nav>
-<article>
 <h1 id="page-title" class="page">Supported Monitoring Systems</h1>
 <div class="paragraph">
 <p>Micrometer contains a core module with an instrumentation <a href="https://en.wikipedia.org/wiki/Service_provider_interface">SPI</a>, a set of modules containing implementations for various monitoring systems (each is called a registry), and a test kit. You need to understand three important characteristics of monitoring systems:</p>
@@ -538,7 +537,7 @@
   <span class="next"><a href="registry.html">Registry</a></span>
 </nav>
 </article>
-</div>  </div>
+  </div>
 </main>
 <div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>

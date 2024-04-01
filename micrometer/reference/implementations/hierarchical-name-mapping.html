@@ -10,7 +10,7 @@
 !function (theme, navWidth) {
   if (theme === 'dark') document.documentElement.classList.add('dark-theme')
   if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
-}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'),
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
   localStorage && localStorage.getItem('nav-width'))
     </script>
     <link rel="stylesheet" href="../_/css/site.css">
@@ -434,10 +434,9 @@
         </a>
     </div>
   </div>
-</aside><div class="doc">
+</aside><article class="doc">
 <nav class="breadcrumbs" aria-label="breadcrumbs">
 </nav>
-<article>
 <div class="sect1">
 <h2 id="_hierarchical_name_mapping"><a class="anchor" href="#_hierarchical_name_mapping"></a>Hierarchical name mapping</h2>
 <div class="sectionbody">
@@ -453,7 +452,7 @@
 </div>
 </div>
 </article>
-</div>  </div>
+  </div>
 </main>
 <div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>

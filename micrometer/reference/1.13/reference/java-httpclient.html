@@ -11,7 +11,7 @@
 !function (theme, navWidth) {
   if (theme === 'dark') document.documentElement.classList.add('dark-theme')
   if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
-}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'),
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
   localStorage && localStorage.getItem('nav-width'))
     </script>
     <link rel="stylesheet" href="../../_/css/site.css">
@@ -438,16 +438,8 @@
         </a>
     </div>
   </div>
-</aside><div class="doc">
-<nav class="breadcrumbs" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="../index.html">Micrometer</a></li>
-    <li><a href="../reference.html">Reference Instrumentations</a></li>
-    <li><a href="java-httpclient.html">Java HttpClient</a></li>
-  </ul>
-</nav>
-<article>
-<div class="admonitionblock important">
+</aside><article class="doc">
+<div class="admonitionblock important latest">
   <table>
     <tbody><tr>
       <td class="icon">
@@ -461,6 +453,13 @@
     </tr></tbody>
   </table>
 </div>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Micrometer</a></li>
+    <li><a href="../reference.html">Reference Instrumentations</a></li>
+    <li><a href="java-httpclient.html">Java HttpClient</a></li>
+  </ul>
+</nav>
 <h1 id="page-title" class="page">Java HttpClient instrumentation</h1>
 <div class="paragraph">
 <p>Since Java 11, an <code>HttpClient</code> is provided as part of the JDK. See <a href="https://openjdk.org/groups/net/httpclient/intro.html">this introduction</a> to it. Micrometer provides instrumentation of this via a <code>micrometer-java11</code> module. This module requires Java 11 or later.</p>
@@ -515,7 +514,7 @@
   <span class="next"><a href="jetty.html">Jetty and Jersey</a></span>
 </nav>
 </article>
-</div>  </div>
+  </div>
 </main>
 <div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>

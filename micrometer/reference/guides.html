@@ -12,7 +12,7 @@
 !function (theme, navWidth) {
   if (theme === 'dark') document.documentElement.classList.add('dark-theme')
   if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
-}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'),
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
   localStorage && localStorage.getItem('nav-width'))
     </script>
     <link rel="stylesheet" href="./_/css/site.css">
@@ -436,14 +436,13 @@
         </a>
     </div>
   </div>
-</aside><div class="doc">
+</aside><article class="doc">
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Micrometer</a></li>
     <li><a href="guides.html">Guides</a></li>
   </ul>
 </nav>
-<article>
 <h1 id="page-title" class="page">Guides</h1>
 <div class="paragraph">
 <p>In this section you can find guides on how to perform certain uncommon actions with Micrometer.</p>
@@ -453,7 +452,7 @@
   <span class="next"><a href="guides/console-reporter.html">Passing through to Dropwizard&#8217;s console reporter</a></span>
 </nav>
 </article>
-</div>  </div>
+  </div>
 </main>
 <div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>

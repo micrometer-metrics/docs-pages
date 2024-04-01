@@ -12,7 +12,7 @@
 !function (theme, navWidth) {
   if (theme === 'dark') document.documentElement.classList.add('dark-theme')
   if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
-}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'),
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
   localStorage && localStorage.getItem('nav-width'))
     </script>
     <link rel="stylesheet" href="../_/css/site.css">
@@ -436,7 +436,7 @@
         </a>
     </div>
   </div>
-</aside><div class="doc">
+</aside><article class="doc">
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Micrometer</a></li>
@@ -444,7 +444,6 @@
     <li><a href="registry.html">Registry</a></li>
   </ul>
 </nav>
-<article>
 <h1 id="page-title" class="page">Registry</h1>
 <div id="preamble">
 <div class="sectionbody">
@@ -567,7 +566,7 @@ class MyApplication {
   <span class="next"><a href="meters.html">Meters</a></span>
 </nav>
 </article>
-</div>  </div>
+  </div>
 </main>
 <div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
