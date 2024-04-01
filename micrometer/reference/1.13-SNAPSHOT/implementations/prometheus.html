@@ -483,6 +483,7 @@
 <li><a href="#_long_task_timers">3.4. Long task timers</a></li>
 </ul>
 </li>
+<li><a href="#_limitation_on_same_name_with_different_set_of_tag_keys">4. Limitation on same name with different set of tag keys</a></li>
 </ul>
 </div>
 <div id="preamble">
@@ -746,6 +747,32 @@ You can apply the common tag, as follows:</p>
 <img src="../_images/implementations/prometheus-long-task-timer.png" alt="Grafana-rendered Prometheus long task timer">
 </div>
 <div class="title">Figure 4. Simulated back-to-back long tasks with a fixed alert threshold.</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_limitation_on_same_name_with_different_set_of_tag_keys"><a class="anchor" href="#_limitation_on_same_name_with_different_set_of_tag_keys"></a>4. Limitation on same name with different set of tag keys</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>PrometheusMeterRegistry</code> doesn&#8217;t allow to create meters having the same name with a different set of tag keys, so you should guarantee that meters having the same name have the same set of tag keys.
+Otherwise, subsequent meters having the same name with a different set of tag keys will not be registered silently by default.
+You can change the default behavior by registering a meter registration failed listener.
+For example, you can register a meter registration failed listener that throws an exception as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.config().onMeterRegistrationFailed((id, reason) -&gt; {
+    throw new IllegalArgumentException(reason);
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Actually, the <code>PrometheusMeterRegistry</code> has a shortcut for this, so you can do the following to achieve the same:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.throwExceptionOnRegistrationFailure();</code></pre>
 </div>
 </div>
 </div>
