@@ -12,7 +12,7 @@
 !function (theme, navWidth) {
   if (theme === 'dark') document.documentElement.classList.add('dark-theme')
   if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
-}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'),
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
   localStorage && localStorage.getItem('nav-width'))
     </script>
     <link rel="stylesheet" href="../_/css/site.css">
@@ -238,15 +238,8 @@
         </a>
     </div>
   </div>
-</aside><div class="doc">
-<nav class="breadcrumbs" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="index.html">Micrometer Tracing</a></li>
-    <li><a href="reporters.html">Supported Reporters</a></li>
-  </ul>
-</nav>
-<article>
-<div class="admonitionblock important">
+</aside><article class="doc">
+<div class="admonitionblock important latest">
   <table>
     <tbody><tr>
       <td class="icon">
@@ -260,6 +253,12 @@
     </tr></tbody>
   </table>
 </div>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Micrometer Tracing</a></li>
+    <li><a href="reporters.html">Supported Reporters</a></li>
+  </ul>
+</nav>
 <h1 id="page-title" class="page">Supported Reporters</h1>
 <div id="preamble">
 <div class="sectionbody">
@@ -366,7 +365,7 @@ Remember that, by default, Brave adds Zipkin as a dependency. If you want to use
   <span class="next"><a href="api.html">Micrometer Tracing API</a></span>
 </nav>
 </article>
-</div>  </div>
+  </div>
 </main>
 <div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
