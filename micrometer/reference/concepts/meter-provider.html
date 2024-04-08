@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Micrometer Observation :: Micrometer</title>
-    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/observation.html">
-    <link rel="prev" href="contextpropagation/usage.html">
-    <link rel="next" href="observation/installing.html">
+    <title>Meter Provider :: Micrometer</title>
+    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/concepts/meter-provider.html">
+    <link rel="prev" href="histogram-quantiles.html">
+    <link rel="next" href="../implementations.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -20,9 +20,9 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.6">
+    <meta name="version" content="1.12.5">
     <meta name="component" content="micrometer">
-    <meta name="latest-version" content="false">
+    <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
   </head>
   <body class="article">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.6">
+<div class="nav-container" data-component="micrometer" data-version="1.12.5">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.6-SNAPSHOT</span>
+  <span class="version">1.12.5</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -139,224 +139,224 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="overview.html">Overview</a>
+    <a class="nav-link" href="../overview.html">Overview</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="installing.html">Installing</a>
+    <a class="nav-link" href="../installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="concepts.html">Concepts</a>
+    <a class="nav-link" href="../concepts.html">Concepts</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/implementations.html">Supported Monitoring Systems</a>
+    <a class="nav-link" href="implementations.html">Supported Monitoring Systems</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/registry.html">Registry</a>
+    <a class="nav-link" href="registry.html">Registry</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/meters.html">Meters</a>
+    <a class="nav-link" href="meters.html">Meters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/naming.html">Naming Meters</a>
+    <a class="nav-link" href="naming.html">Naming Meters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/meter-filters.html">Meter Filters</a>
+    <a class="nav-link" href="meter-filters.html">Meter Filters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/rate-aggregation.html">Rate Aggregation</a>
+    <a class="nav-link" href="rate-aggregation.html">Rate Aggregation</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/counters.html">Counters</a>
+    <a class="nav-link" href="counters.html">Counters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/gauges.html">Gauges</a>
+    <a class="nav-link" href="gauges.html">Gauges</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/timers.html">Timers</a>
+    <a class="nav-link" href="timers.html">Timers</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/distribution-summaries.html">Distribution Summaries</a>
+    <a class="nav-link" href="distribution-summaries.html">Distribution Summaries</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/long-task-timers.html">Long Task Timers</a>
+    <a class="nav-link" href="long-task-timers.html">Long Task Timers</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/histogram-quantiles.html">Histograms and Percentiles</a>
+    <a class="nav-link" href="histogram-quantiles.html">Histograms and Percentiles</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="concepts/meter-provider.html">Meter Provider</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="meter-provider.html">Meter Provider</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="implementations.html">Implementations</a>
+    <a class="nav-link" href="../implementations.html">Implementations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/appOptics.html">AppOptics</a>
+    <a class="nav-link" href="../implementations/appOptics.html">AppOptics</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/atlas.html">Atlas</a>
+    <a class="nav-link" href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/azure-monitor.html">Azure Monitor</a>
+    <a class="nav-link" href="../implementations/azure-monitor.html">Azure Monitor</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/cloudwatch.html">CloudWatch</a>
+    <a class="nav-link" href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/datadog.html">Datadog</a>
+    <a class="nav-link" href="../implementations/datadog.html">Datadog</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/dynatrace.html">Dynatrace</a>
+    <a class="nav-link" href="../implementations/dynatrace.html">Dynatrace</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/elastic.html">Elasticsearch</a>
+    <a class="nav-link" href="../implementations/elastic.html">Elasticsearch</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/ganglia.html">Ganglia</a>
+    <a class="nav-link" href="../implementations/ganglia.html">Ganglia</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/graphite.html">Graphite</a>
+    <a class="nav-link" href="../implementations/graphite.html">Graphite</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/humio.html">Humio</a>
+    <a class="nav-link" href="../implementations/humio.html">Humio</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/influx.html">Influx</a>
+    <a class="nav-link" href="../implementations/influx.html">Influx</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/instana.html">Instana</a>
+    <a class="nav-link" href="../implementations/instana.html">Instana</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/jmx.html">JMX</a>
+    <a class="nav-link" href="../implementations/jmx.html">JMX</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/kairos.html">KairosDB</a>
+    <a class="nav-link" href="../implementations/kairos.html">KairosDB</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/new-relic.html">New Relic</a>
+    <a class="nav-link" href="../implementations/new-relic.html">New Relic</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/otlp.html">OpenTelemetry Protocol (OTLP)</a>
+    <a class="nav-link" href="../implementations/otlp.html">OpenTelemetry Protocol (OTLP)</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/prometheus.html">Prometheus</a>
+    <a class="nav-link" href="../implementations/prometheus.html">Prometheus</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/signalFx.html">SignalFx</a>
+    <a class="nav-link" href="../implementations/signalFx.html">SignalFx</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/stackdriver.html">Stackdriver</a>
+    <a class="nav-link" href="../implementations/stackdriver.html">Stackdriver</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/statsD.html">statsD</a>
+    <a class="nav-link" href="../implementations/statsD.html">statsD</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="implementations/wavefront.html">Wavefront</a>
+    <a class="nav-link" href="../implementations/wavefront.html">Wavefront</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="reference.html">Reference Instrumentations</a>
+    <a class="nav-link" href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/cache.html">Cache</a>
+    <a class="nav-link" href="../reference/cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/commons-pool.html">Commons Pool</a>
+    <a class="nav-link" href="../reference/commons-pool.html">Commons Pool</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/db.html">Database</a>
+    <a class="nav-link" href="../reference/db.html">Database</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/grpc.html">gRPC</a>
+    <a class="nav-link" href="../reference/grpc.html">gRPC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/httpcomponents.html">HttpComponents Client</a>
+    <a class="nav-link" href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/jetty.html">Jetty and Jersey</a>
+    <a class="nav-link" href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/jvm.html">JVM</a>
+    <a class="nav-link" href="../reference/jvm.html">JVM</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/kafka.html">Kafka</a>
+    <a class="nav-link" href="../reference/kafka.html">Kafka</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/logging.html">Logging</a>
+    <a class="nav-link" href="../reference/logging.html">Logging</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/mongodb.html">MongoDB</a>
+    <a class="nav-link" href="../reference/mongodb.html">MongoDB</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/netty.html">Netty</a>
+    <a class="nav-link" href="../reference/netty.html">Netty</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link" href="../reference/okhttpclient.html">OkHttpClient</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/system.html">System</a>
+    <a class="nav-link" href="../reference/system.html">System</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="reference/tomcat.html">Tomcat</a>
+    <a class="nav-link" href="../reference/tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="guides.html">Guides</a>
+    <a class="nav-link" href="../guides.html">Guides</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="guides/console-reporter.html">Passing through to Dropwizard&#8217;s console reporter</a>
+    <a class="nav-link" href="../guides/console-reporter.html">Passing through to Dropwizard&#8217;s console reporter</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="guides/http-sender-resilience4j-retry.html">HttpSender with Resilience4j retry</a>
+    <a class="nav-link" href="../guides/http-sender-resilience4j-retry.html">HttpSender with Resilience4j retry</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="guides/custom-meter-registry.html">Custom meter registry</a>
+    <a class="nav-link" href="../guides/custom-meter-registry.html">Custom meter registry</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="contextpropagation.html">Context Propagation</a>
+    <a class="nav-link" href="../contextpropagation.html">Context Propagation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contextpropagation/installing.html">Installing</a>
+    <a class="nav-link" href="../contextpropagation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contextpropagation/purpose.html">Purpose</a>
+    <a class="nav-link" href="../contextpropagation/purpose.html">Purpose</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="contextpropagation/usage.html">Usage</a>
+    <a class="nav-link" href="../contextpropagation/usage.html">Usage</a>
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="observation.html">Micrometer Observation</a>
+    <a class="nav-link" href="../observation.html">Micrometer Observation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="observation/installing.html">Installing</a>
+    <a class="nav-link" href="../observation/installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="observation/introduction.html">Introduction</a>
+    <a class="nav-link" href="../observation/introduction.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="observation/components.html">Components</a>
+    <a class="nav-link" href="../observation/components.html">Components</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="observation/instrumenting.html">Instrumenting</a>
+    <a class="nav-link" href="../observation/instrumenting.html">Instrumenting</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="observation/testing.html">Testing</a>
+    <a class="nav-link" href="../observation/testing.html">Testing</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="observation/projects.html">Instrumented Projects</a>
+    <a class="nav-link" href="../observation/projects.html">Instrumented Projects</a>
   </li>
 </ul>
   </li>
@@ -399,13 +399,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="Micrometer Observation"
+      data-title="Meter Provider"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/edit/1.12.x/docs/modules/ROOT/pages/observation.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.5/docs/modules/ROOT/pages/concepts/meter-provider.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -440,40 +440,106 @@
     </div>
   </div>
 </aside><article class="doc">
-<div class="admonitionblock important latest">
-  <table>
-    <tbody><tr>
-      <td class="icon">
-        <i class="fa icon-important" title="Important"></i>
-      </td>
-      <td class="content">
-        <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../observation.html">Micrometer 1.12.5</a>!</p>
-        </div>
-      </td>
-    </tr></tbody>
-  </table>
-</div>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Micrometer</a></li>
-    <li><a href="observation.html">Micrometer Observation</a></li>
+    <li><a href="../index.html">Micrometer</a></li>
+    <li><a href="../concepts.html">Concepts</a></li>
+    <li><a href="meter-provider.html">Meter Provider</a></li>
   </ul>
 </nav>
-<h1 id="page-title" class="page">Micrometer Observation</h1>
+<h1 id="page-title" class="page">Meter Provider</h1>
 <div class="paragraph">
-<p>Micrometer Observation is part of the <a href="https://github.com/micrometer-metrics/micrometer">Micrometer</a> project and contains the Observation API. The main idea behind it is that you</p>
+<p>It&#8217;s a common use-case to attach tags dynamically to a <code>Meter</code>. Let&#8217;s say we execute a job and we want to use a <code>Timer</code> to instrument it:</p>
 </div>
-<div class="sidebarblock">
+<div class="listingblock">
 <div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Timer.Sample sample = Timer.start(registry);
+
+Result result = job.execute();
+
+Timer timer = Timer.builder("job.execution")
+    .tag("job.name", "job")
+    .tag("status", result.status())
+    .register(registry);
+sample.stop(timer);</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p><em>"Instrument code once, and get multiple benefits out of it."</em></p>
+<p>This lets us dynamically determine the <code>status</code> tag from the end state of the operation we are timing. There are two drawbacks of doing this:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Every time the above is executed, a new <code>Timer.Builder</code> instance is created. This increases the amount of data that the GC needs to collect.</p>
+</li>
+<li>
+<p>The code above is somewhat boilerplate, it does not let you define the common properties of a Timer and attach what is dynamically changing but everything is always present.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In some cases you can use <code>registry.timer("job.execution", "job.name", "my-job", "status", result.status())</code> instead of using <code>Timer.Builder</code> which can save you some extra objects but this is not always possible.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can resolve both of these issues by using a <code>MeterProvider</code>. It&#8217;s a convenience interface to create new meters from tags using a common "template".</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Not every <code>Meter</code> can do this, <code>MeterProvider</code> can be used with <code>Counter</code>, <code>Timer</code>, <code>LongTaskTimer</code>, and <code>DistributionSummary</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s what you can do instead of the above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">private MeterProvider&lt;Timer&gt; timerProvider = Timer.builder("job.execution")
+    .tag("job.name", "my-job")
+    .withRegistry(registry); <i class="conum" data-value="1"></i><b>(1)</b>
+
+// ...
+
+Timer.Sample sample = Timer.start(registry);
+
+Result result = job.execute();
+
+sample.stop(timerProvider.withTags("status", result.status())); <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Definition of the <code>MeterProvider</code> for <code>Timer</code> with all the "static" fields necessary. Please note the <code>withRegistry</code> method call.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Definition of the dynamic tags. Note that only those tags are defined here that are dynamic and everying else is defined where the <code>MeterProvider</code> is created. The <code>withTags</code> method returns a <code>Timer</code> that is created using the tags defined in <code>withTags</code> plus everything else that is defined by the <code>MeterProvider</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This and the previous example produce the same output, the only difference is the amount of boilerplate in your code and the amount of builder objects created in the heap.</p>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="contextpropagation/usage.html">Usage</a></span>
-  <span class="next"><a href="observation/installing.html">Installing</a></span>
+  <span class="prev"><a href="histogram-quantiles.html">Histograms and Percentiles</a></span>
+  <span class="next"><a href="../implementations.html">Implementations</a></span>
 </nav>
 </article>
   </div>
@@ -501,12 +567,12 @@
                             1.13.0-M2
                           </a>
                         </li>
-                        <li class="version is-current">
-                          <a href="index.html">
+                        <li class="version">
+                          <a href="../1.12-SNAPSHOT/index.html">
                             1.12.6-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version is-latest">
+                        <li class="version is-current is-latest">
                           <a href="../index.html">
                             1.12.5<span class="current">current</span>
                           </a>
@@ -574,6 +640,6 @@
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.6" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.5" data-page-component="micrometer"></script>
   </body>
 </html>
