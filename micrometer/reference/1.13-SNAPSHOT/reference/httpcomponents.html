@@ -465,6 +465,8 @@
   </ul>
 </nav>
 <h1 id="page-title" class="page">Apache HttpComponents Client Instrumentation</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -478,11 +480,16 @@ This section requires usage of Apache HttpComponents Client at least in version 
 </table>
 </div>
 <div class="paragraph">
-<p><a href="https://hc.apache.org/index.html/">Apache HttpComponents Client</a> is an HTTP/1.1 compliant HTTP agent implementation.</p>
+<p><a href="https://hc.apache.org/index.html">Apache HttpComponents Client</a> is an HTTP/1.1 compliant HTTP agent implementation.</p>
 </div>
 <div class="paragraph">
 <p>Below you can find an example of how to instrument Apache HttpComponents Client <a href="../observation.html" class="xref page">Micrometer Observation</a>. That means that depending on your Observation Handler configuration you instrument once, and can have multiple benefits out of it (e.g. metrics, distributed tracing).</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_instrumentation"><a class="anchor" href="#_instrumentation"></a>Instrumentation</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Example of classic, blocking HTTP client.</p>
 </div>
@@ -491,7 +498,8 @@ This section requires usage of Apache HttpComponents Client at least in version 
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation (you need to create a client from the builder)
 HttpClientBuilder clientBuilder = HttpClients.custom()
     .setRetryStrategy(retryStrategy)
-    .addExecInterceptorLast("micrometer", new ObservationExecChainHandler(observationRegistry))
+    .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
+            new ObservationExecChainHandler(observationRegistry))
     .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
         .setDefaultConnectionConfig(connectionConfig)
         .build());
@@ -514,7 +522,8 @@ assertThat(observationRegistry).hasObservationWithNameEqualTo(DEFAULT_METER_NAME
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation (you need to create a client from the builder)
 HttpAsyncClientBuilder clientBuilder = HttpAsyncClients.custom()
-    .addExecInterceptorLast("micrometer", new ObservationExecChainHandler(observationRegistry))
+    .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
+            new ObservationExecChainHandler(observationRegistry))
     .setRetryStrategy(retryStrategy)
     .setConnectionManager(PoolingAsyncClientConnectionManagerBuilder.create()
         .setDefaultConnectionConfig(connectionConfig)
@@ -530,6 +539,51 @@ assertThat(observationRegistry).hasObservationWithNameEqualTo(DEFAULT_METER_NAME
     .hasLowCardinalityKeyValue(OUTCOME.withValue("SUCCESS"))
     .hasLowCardinalityKeyValue(STATUS.withValue("200"))
     .hasLowCardinalityKeyValue(METHOD.withValue("GET"));</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_retry_strategy_considerations"><a class="anchor" href="#_retry_strategy_considerations"></a>Retry Strategy Considerations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>HttpClient supports build-in request retry handling. Like micrometer observations, this functionality is implemented as an <code>ExecChainHandler</code> named <code>ChainElement.RETRY</code>. When instrumenting the client, you&#8217;ll have to decide whether to observe individual retries or not. If the <code>ObservationExecChainHandler</code> is placed <em>before</em> the retry handler, micrometer will see the initial request and the final outcome after the last retry. Elapsed time will account for any delays imposed by the retry handler. On the other hand, if micrometer is registered <em>after</em> the retry handler, it will be invoked for each individual retry. Elapsed time will measure the individual http requests, but <strong><em>without</em></strong> the backoff delay imposed by the retry handler. The described behaviour and related configuration are the same for both the classic and the async client - with one exception described in the following note.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When using the <strong>async client</strong>, placing micrometer <strong>before</strong> the retry handler requires at least version <strong>5.3.x</strong> of the HttpComponents Client library. The classic client has no further restrictions.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example instrumentation code.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Example: setup instrumentation to meter retries individually
+HttpClientBuilder clientBuilder = HttpClients.custom()
+    .setRetryStrategy(retryStrategy)
+    .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
+            new ObservationExecChainHandler(observationRegistry))
+    .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
+        .setDefaultConnectionConfig(connectionConfig)
+        .build());
+
+// Example: setup instrumentation to aggregate retries
+HttpAsyncClientBuilder clientBuilder = HttpAsyncClients.custom()
+    .addExecInterceptorFirst("micrometer", new ObservationExecChainHandler(observationRegistry))
+    .setRetryStrategy(retryStrategy)
+    .setConnectionManager(PoolingAsyncClientConnectionManagerBuilder.create()
+        .setDefaultConnectionConfig(connectionConfig)
+        .build());</code></pre>
+</div>
+</div>
 </div>
 </div>
 <nav class="pagination">
