@@ -637,7 +637,7 @@ Before you decide to instrument a project yourself, double-check whether that it
 </div>
 </li>
 <li>
-<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;5&gt; <code>ObservationConvention</code> with the sender context</p>
+<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;5&gt; <code>ObservationConvention</code> with the receiver context</p>
 <div class="ulist">
 <ul>
 <li>
@@ -860,7 +860,7 @@ try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
 <div class="ulist">
 <ul>
 <li>
-<p>In the &lt;3&gt; <code>ObservationRegistry</code> register a &lt;6&gt; handler that will propagate context (e.g. <code>PropagatingReceiverTracingObservationHandler</code> from Micrometer Tracing)</p>
+<p>In the &lt;3&gt; <code>ObservationRegistry</code> register a &lt;6&gt; handler that will propagate context (e.g. <code>PropagatingSenderTracingObservationHandler</code> from Micrometer Tracing)</p>
 </li>
 <li>
 <p>Create a &lt;1&gt; <code>SenderContext</code> that wraps a &lt;2&gt; carrier (e.g. <code>AmqpMessage</code>)</p>
@@ -943,7 +943,7 @@ try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
 </div>
 </li>
 <li>
-<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;6&gt; <code>ObservationConvention</code> with the sender context</p>
+<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;6&gt; <code>ObservationConvention</code> with the receiver context</p>
 <div class="ulist">
 <ul>
 <li>
@@ -953,11 +953,11 @@ try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
 </div>
 </li>
 <li>
-<p>Wrap the &lt;7&gt; code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
+<p>Wrap the &lt;7&gt; code to instrument (e.g. processing of an AMQP message) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Some libraries (e.g. RabbitMQ) you might not have a handle on user&#8217;s code, and you may require the user to allow starting a consumer side Observation and opening its scope by the framework (putting values in thread local) with the requirement of manually closing both the scope and stopping the Observation later by the user in their code!</p>
+<p>For some libraries (e.g. RabbitMQ) you might not have a handle on user&#8217;s code, and you may require the user to allow starting a consumer side Observation and opening its scope by the framework (putting values in thread local) with the requirement of manually both closing the scope and stopping the Observation later by the user in their code!</p>
 </li>
 </ul>
 </div>
@@ -1273,7 +1273,7 @@ Future&lt;Boolean&gt; child = parent.observe(() -&gt; {
 <div class="ulist">
 <ul>
 <li>
-<p>Reactor <a href="https://github.com/reactor/reactor-core/releases/tag/v3.5.7">3.5.7</a></p>
+<p>Reactor <a href="https://github.com/reactor/reactor-core/releases/tag/v3.5.3">3.5.3</a></p>
 </li>
 <li>
 <p>Micrometer Context-Propagation <a href="https://github.com/micrometer-metrics/context-propagation/releases/tag/v1.0.3">1.0.3</a></p>

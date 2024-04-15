@@ -465,7 +465,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Timers are intended for measuring short-duration latencies and the frequency of such events. All implementations of <code>Timer</code> report at least the total time and the count of events as separate time series but other time series can also be reported depending on what is supported by the backend (max, prcentiles, histograms). While you can use timers for other use cases, note that negative values are not supported, and recording many longer durations could cause overflow of the total time at <code>Long.MAX_VALUE</code> nanoseconds (292.3 years).</p>
+<p>Timers are intended for measuring short-duration latencies and the frequency of such events. All implementations of <code>Timer</code> report at least the total time and the count of events as separate time series but other time series can also be reported depending on what is supported by the backend (max, percentiles, histograms). While you can use timers for other use cases, note that negative values are not supported, and recording many longer durations could cause overflow of the total time at <code>Long.MAX_VALUE</code> nanoseconds (292.3 years).</p>
 </div>
 <div class="paragraph">
 <p>As an example, consider a graph showing request latency to a typical web server. The server can be expected to respond to many requests quickly, so the timer gets updated many times per second.</p>
@@ -506,9 +506,9 @@ The maximum statistical value for basic <code>Timer</code> implementations, such
 It means that its value is the maximum value during a time window.
 If no new values are recorded for the time window length, the max is reset to 0 as a new time window starts.
 The time window size until values are fully expired is the <code>expiry</code> multiplied by the <code>bufferLength</code> in <code>DistributionStatisticConfig</code>.
-<code>expiry</code> defaults to the step size of the meter registry unless is explicitly set to a different value, and <code>bufferLength</code> defaults to <code>3</code>.
+<code>expiry</code> defaults to the step size of the meter registry unless it&#8217;s explicitly set to a different value, and <code>bufferLength</code> defaults to <code>3</code>.
 A time window maximum is used to capture maximum latency in a subsequent interval after heavy resource pressure triggers the latency and prevents metrics from being published.
-Percentiles are also time window percentiles (<code>TimeWindowPercentileHistogram</code>). Histogram buckets usually behave like counters so depending on the backend, they can be reported as cumulative values (for example in the case of Prometheus) or as a rate at which a counter increments over the push interval.
+Percentiles are also time window percentiles (<code>TimeWindowPercentileHistogram</code>). Histogram buckets usually behave like counters, so depending on the backend, they can be reported as cumulative values (for example in the case of Prometheus) or as a rate at which a counter increments over the push interval.
 </td>
 </tr>
 </table>

@@ -573,9 +573,8 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
 <div class="paragraph">
 <p>In this section we will describe a high overview of Micrometer Observation components. You can read more about those in <a href="components.html" class="xref page">this part of the documentation</a>.</p>
 </div>
-<div class="paragraph">
-<p>Glossary</p>
-</div>
+<div class="sect2">
+<h3 id="micrometer-observation-glossary"><a class="anchor" href="#micrometer-observation-glossary"></a>Glossary</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -594,9 +593,10 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
 <p><code>Context</code> (actually <code>Observation.Context</code>) - a mutable map attached to an <code>Observation</code>, passed between handlers (that way you can pass state without doing any thread locals)</p>
 </li>
 <li>
-<p><code>ObservationConvention</code> - mean to separate Observation lifecycle (starting, stopping, opening scopes) from adding meta-data (such as observation name, key-value pairs). That way the naming of observations and meta-data handling becomes a configuration problem (e.g. adding key-values do not require changing instrumentation code, but changing the convention)</p>
+<p><code>ObservationConvention</code> - mean to separate Observation lifecycle (starting, stopping, opening scopes) from adding metadata (such as observation name, key-value pairs). That way the naming of observations and metadata handling becomes a configuration problem (e.g. adding key-values does not require changing instrumentation code, but changing the convention)</p>
 </li>
 </ul>
+</div>
 </div>
 <div class="sect2">
 <h3 id="micrometer-observation-usage"><a class="anchor" href="#micrometer-observation-usage"></a>Usage Flow</h3>
@@ -616,7 +616,7 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
 <div class="ulist">
 <ul>
 <li>
-<p><code>ObservationHandler</code>, <code>ObservationFilter</code>, <code>ObservationPredicate</code> get registered on the <code>ObservationRegistry</code></p>
+<p><code>ObservationHandler</code>, <code>ObservationFilter</code>, and <code>ObservationPredicate</code> get registered on the <code>ObservationRegistry</code></p>
 <div class="ulist">
 <ul>
 <li>
@@ -626,14 +626,11 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
 </div>
 </li>
 <li>
-<p><code>ObservationRegistry</code>, <code>Context</code> are mandatory to create an <code>Observation</code></p>
+<p><code>ObservationRegistry</code> and <code>Context</code> are mandatory to create an <code>Observation</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Either you create an <code>Observation</code> with name, <code>ObservationRegistry</code> and <code>Context</code></p>
-</li>
-<li>
-<p>Or with <code>ObservationRegistry</code>, <code>ObservationConvention</code></p>
+<p>You create an <code>Observation</code> either with name, <code>ObservationRegistry</code>, and <code>Context</code> or with <code>ObservationRegistry</code> and <code>ObservationConvention</code></p>
 </li>
 </ul>
 </div>

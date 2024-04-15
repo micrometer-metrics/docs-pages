@@ -465,7 +465,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer can instrument various libraries that interact with databases</p>
+<p>Micrometer can instrument various libraries that interact with databases:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -489,7 +489,7 @@
 <h2 id="db-datasource-observation"><a class="anchor" href="#db-datasource-observation"></a>DataSource Observation Instrumentation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Through the <a href="https://github.com/jdbc-observations/datasource-micrometer">Datasource Micrometer</a> project you can instrument your <code>Datasource</code> to start producing <a href="../observation.html" class="xref page">Observations</a> while interacting with the database. That means that depending on your Observation Handler setup you can plug in producing of metrics or distributed tracing.</p>
+<p>Through the <a href="https://github.com/jdbc-observations/datasource-micrometer">Datasource Micrometer</a> project you can instrument your <code>DataSource</code> to start producing <a href="../observation.html" class="xref page">Observations</a> while interacting with the database. That means that depending on your Observation Handler setup you can plug in producing of metrics or distributed tracing.</p>
 </div>
 <div class="paragraph">
 <p>You can read more about Datasource Micrometer <a href="https://jdbc-observations.github.io/datasource-micrometer/docs/current/docs/html/">reference documentation</a> here.</p>
@@ -533,7 +533,7 @@ assertThat(meterRegistry.get("jooq.query").tag("name", "selectAllAuthors").timer
 </div>
 </div>
 <div class="sect1">
-<h2 id="db-postgres"><a class="anchor" href="#db-postgres"></a>PostgresSQL Instrumentation</h2>
+<h2 id="db-postgres"><a class="anchor" href="#db-postgres"></a>PostgreSQL Instrumentation</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
