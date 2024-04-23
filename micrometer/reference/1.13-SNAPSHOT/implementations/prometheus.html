@@ -757,6 +757,59 @@ For example, you can register a meter registration failed listener that throws a
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_exemplars"><a class="anchor" href="#_exemplars"></a>5. Exemplars</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Exemplars are metadata that you can attach to the value of your time series. They can reference data outside of your metrics. A common use case is storing tracing information (<code>traceId</code>, <code>spanId</code>). Exemplars are not tags/dimensions (labels in Prometheus terminology), they will not increase cardinality since they belong to the values of the time series.</p>
+</div>
+<div class="paragraph">
+<p>In order to setup Exemplars for <code>PrometheusMeterRegistry</code>, you will need a component that provides you the tracing information: <code>SpanContextSupplier</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can set it up as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PrometheusMeterRegistry registry = new PrometheusMeterRegistry(
+    PrometheusConfig.DEFAULT,
+    new CollectorRegistry(),
+    Clock.SYSTEM,
+    new DefaultExemplarSampler(new MySpanContextSupplier()) <i class="conum" data-value="1"></i><b>(1)</b>
+);
+registry.counter("test").increment();
+System.out.println(registry.scrape(TextFormat.CONTENT_TYPE_OPENMETRICS_100));</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>You need to implement <code>MySpanContextSupplier</code> (<code>class MySpanContextSupplier implements SpanContextSupplier { &#8230;&#8203; }</code>) or use an implementation that already exists.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If your configuration is correct, you should get something like this, the <code># {span_id="321",trace_id="123"} &#8230;&#8203;</code> section is the Exempar right after the value:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs"># TYPE test counter
+# HELP test
+test_total 1.0 # {span_id="321",trace_id="123"} 1.0 1713310767.908
+# EOF</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Exemplars are only supported in the OpenMetrics format (they will not show up in the Prometheus text format). You might need to explicitly ask for the OpenMetrics format, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">curl --silent -H 'Accept: application/openmetrics-text; version=1.0.0' localhost:8080/prometheus</code></pre>
+</div>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="otlp.html">OpenTelemetry Protocol (OTLP)</a></span>
   <span class="next"><a href="signalFx.html">SignalFx</a></span>
