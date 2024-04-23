@@ -472,10 +472,13 @@
 <p>Prometheus is a dimensional time series database with a built-in UI, a custom query language, and math operations.
 Prometheus is designed to operate on a pull model, periodically scraping metrics from application instances, based on service discovery.</p>
 </div>
+<div class="paragraph">
+<p>Micrometer uses the Prometheus Java Client under the hood; there are two versions of it and Micrometer supports both. If you want to use the "new" client (<code>1.x</code>), use <code>micrometer-registry-prometheus</code> but if you want to use the "legacy" client (<code>0.x</code>), use <code>micrometer-registry-prometheus-simpleclient</code>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="implementations-installing"><a class="anchor" href="#implementations-installing"></a>1. Installing</h2>
+<h2 id="installing-micrometer-registry-prometheus"><a class="anchor" href="#installing-micrometer-registry-prometheus"></a>1. Installing micrometer-registry-prometheus</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>For Gradle, add the following implementation:</p>
@@ -500,7 +503,32 @@ Prometheus is designed to operate on a pull model, periodically scraping metrics
 </div>
 </div>
 <div class="sect1">
-<h2 id="_configuring"><a class="anchor" href="#_configuring"></a>2. Configuring</h2>
+<h2 id="installing-micrometer-registry-prometheus-simpleclient"><a class="anchor" href="#installing-micrometer-registry-prometheus-simpleclient"></a>2. Installing micrometer-registry-prometheus-simpleclient</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For Gradle, add the following implementation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-registry-prometheus-simpleclient:latest.release'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Maven, add the following dependency:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
+  &lt;artifactId&gt;micrometer-registry-prometheus-simpleclient&lt;/artifactId&gt;
+  &lt;version&gt;${micrometer.version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuring"><a class="anchor" href="#_configuring"></a>3. Configuring</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Prometheus expects to scrape or poll individual application instances for metrics.
@@ -526,7 +554,8 @@ try {
     });
 
     new Thread(server::start).start();
-} catch (IOException e) {
+}
+catch (IOException e) {
     throw new RuntimeException(e);
 }</code></pre>
 </div>
@@ -540,7 +569,19 @@ try {
 </table>
 </div>
 <div class="paragraph">
-<p>You can alternatively use <code>io.prometheus.client.exporter.HTTPServer</code>, which you can find in <code>io.prometheus:simpleclient_httpserver</code>:</p>
+<p>If you use the "new" client (<code>micrometer-registry-prometheus</code>), you can alternatively use <code>io.prometheus.metrics.exporter.httpserver.HTTPServer</code>, which you can find in <code>io.prometheus:prometheus-metrics-exporter-httpserver</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PrometheusMeterRegistry prometheusRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+HTTPServer.builder()
+    .port(8080)
+    .registry(prometheusRegistry.getPrometheusRegistry())
+    .buildAndStart();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you use the "legacy" client (<code>micrometer-registry-prometheus-simpleclient</code>), you can alternatively use <code>io.prometheus.client.exporter.HTTPServer</code>, which you can find in <code>io.prometheus:simpleclient_httpserver</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -550,23 +591,40 @@ new HTTPServer(new InetSocketAddress(8080), prometheusRegistry.getPrometheusRegi
 </div>
 </div>
 <div class="paragraph">
-<p>Another alternative can be <code>io.prometheus.client.exporter.MetricsServlet</code>, which you can find in <code>io.prometheus:simpleclient_servlet</code> in case your app is running in a servlet container (such as Tomcat):</p>
+<p>If you use the "new" client (<code>micrometer-registry-prometheus</code>), another alternative can be <code>io.prometheus.metrics.exporter.servlet.jakarta.PrometheusMetricsServlet</code>, which you can find in <code>io.prometheus:prometheus-metrics-exporter-servlet-jakarta</code> in case your app is running in a servlet container (such as Tomcat):</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PrometheusMeterRegistry prometheusRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
-HttpServlet metricsServlet = new MetricsServlet(prometheusRegistry.getPrometheusRegistry());</code></pre>
+HttpServlet servlet = new PrometheusMetricsServlet(prometheusRegistry.getPrometheusRegistry());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you use the "legacy" client (<code>micrometer-registry-prometheus-simpleclient</code>), another alternative can be <code>io.prometheus.client.exporter.MetricsServlet</code>, which you can find in <code>io.prometheus:simpleclient_servlet</code> in case your app is running in a servlet container (such as Tomcat):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PrometheusMeterRegistry prometheusRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+HttpServlet servlet = new MetricsServlet(prometheusRegistry.getPrometheusRegistry());</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_scrape_format"><a class="anchor" href="#_scrape_format"></a>2.1. Scrape Format</h3>
+<h3 id="_scrape_format"><a class="anchor" href="#_scrape_format"></a>3.1. Scrape Format</h3>
 <div class="paragraph">
 <p>By default, the <code>PrometheusMeterRegistry</code> <code>scrape()</code> method returns the <a href="https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format">Prometheus text format</a>.</p>
 </div>
 <div class="paragraph">
 <p>The <a href="https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md">OpenMetrics</a> format can also be produced.
 To specify the format to be returned, you can pass a content type to the <code>scrape</code> method.
-For example, to get the OpenMetrics 1.0.0 format scrape, you could use the Prometheus Java client constant for it, as follows:</p>
+For example, to get the OpenMetrics 1.0.0 format scrape, you could use the Prometheus Java client constant for it, as follows in case of the "new" client (<code>micrometer-registry-prometheus</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">String openMetricsScrape = registry.scrape("application/openmetrics-text");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>if you use the "legacy" client (<code>micrometer-registry-prometheus-simpleclient</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -578,7 +636,7 @@ For example, to get the OpenMetrics 1.0.0 format scrape, you could use the Prome
 </div>
 </div>
 <div class="sect2">
-<h3 id="_the_prometheus_rename_filter"><a class="anchor" href="#_the_prometheus_rename_filter"></a>2.2. The Prometheus Rename Filter</h3>
+<h3 id="_the_prometheus_rename_filter"><a class="anchor" href="#_the_prometheus_rename_filter"></a>3.2. The Prometheus Rename Filter</h3>
 <div class="paragraph">
 <p>In some cases, Micrometer provides instrumentation that overlaps with the commonly used Prometheus simple client modules but has chosen a different naming scheme for consistency and portability.
 If you wish to use the Prometheus "standard" names, add the following filter:</p>
@@ -589,17 +647,59 @@ If you wish to use the Prometheus "standard" names, add the following filter:</p
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_prometheus_client_properties"><a class="anchor" href="#_prometheus_client_properties"></a>3.3. Prometheus Client Properties</h3>
+<div class="paragraph">
+<p>If you use the "new" client (<code>micrometer-registry-prometheus</code>), you can use some of the properties that the Prometheus Java Client supports, see the <a href="https://prometheus.github.io/client_java/config/config/">Prometheus Java Client Config docs</a>.
+These properties can be loaded from any source that is supported by the Prometheus Java Client (Properties file, System properties, etc.) or they can be obtained through Micrometer using <code>PrometheusConfig</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PrometheusConfig config = new PrometheusConfig() {
+    @Override
+    public String get(String key) {
+        return null;
+    }
+
+    @Override
+    public Properties prometheusProperties() {
+        Properties properties = new Properties();
+        properties.putAll(PrometheusConfig.super.prometheusProperties()); <i class="conum" data-value="1"></i><b>(1)</b>
+        properties.setProperty("io.prometheus.exemplars.sampleIntervalMilliseconds", "1"); <i class="conum" data-value="2"></i><b>(2)</b>
+        return properties;
+    }
+};
+
+PrometheusMeterRegistry registry = new PrometheusMeterRegistry(config, new PrometheusRegistry(), Clock.SYSTEM);</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>You can reuse the "default" properties defined in <code>PrometheusConfig</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>You can set any property from any property source.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Micrometer passes these properties to the Exporters and the Examplar Sampler of the Prometheus client so you can use the <a href="https://prometheus.github.io/client_java/config/config/#exporter-properties">exporter</a>-, and the <a href="https://prometheus.github.io/client_java/config/config/#exemplar-properties">exemplar</a> properties of the Prometheus Client.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_graphing"><a class="anchor" href="#_graphing"></a>3. Graphing</h2>
+<h2 id="_graphing"><a class="anchor" href="#_graphing"></a>4. Graphing</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section serves as a quick start to rendering useful representations in Prometheus for metrics originating in Micrometer.
 See the <a href="https://prometheus.io/docs/querying/basics">Prometheus docs</a> for a far more complete reference of what is possible in Prometheus.</p>
 </div>
 <div class="sect2">
-<h3 id="_grafana_dashboard"><a class="anchor" href="#_grafana_dashboard"></a>3.1. Grafana Dashboard</h3>
+<h3 id="_grafana_dashboard"><a class="anchor" href="#_grafana_dashboard"></a>4.1. Grafana Dashboard</h3>
 <div class="paragraph">
 <p>A publicly available Grafana dashboard for Micrometer-sourced JVM and Tomcat metrics is available <a href="https://grafana.com/grafana/dashboards/4701-jvm-micrometer/">here</a>.</p>
 </div>
@@ -655,7 +755,7 @@ You can apply the common tag, as follows:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_counters"><a class="anchor" href="#_counters"></a>3.2. Counters</h3>
+<h3 id="_counters"><a class="anchor" href="#_counters"></a>4.2. Counters</h3>
 <div class="paragraph">
 <p>The query that generates a graph for the random-walk counter is
 <code>rate(counter[10s])</code>.</p>
@@ -680,7 +780,7 @@ You can apply the common tag, as follows:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_timers"><a class="anchor" href="#_timers"></a>3.3. Timers</h3>
+<h3 id="_timers"><a class="anchor" href="#_timers"></a>4.3. Timers</h3>
 <div class="paragraph">
 <p>The Prometheus <code>Timer</code> produces two counter time series with different names:</p>
 </div>
@@ -718,7 +818,7 @@ You can apply the common tag, as follows:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_long_task_timers"><a class="anchor" href="#_long_task_timers"></a>3.4. Long task timers</h3>
+<h3 id="_long_task_timers"><a class="anchor" href="#_long_task_timers"></a>4.4. Long task timers</h3>
 <div class="paragraph">
 <p>The following example shows a Prometheus query to plot the duration of a long task timer for a serial task is <code>long_task_timer_sum</code>. In Grafana, we can set an alert threshold at some fixed point.</p>
 </div>
@@ -732,7 +832,7 @@ You can apply the common tag, as follows:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_limitation_on_same_name_with_different_set_of_tag_keys"><a class="anchor" href="#_limitation_on_same_name_with_different_set_of_tag_keys"></a>4. Limitation on same name with different set of tag keys</h2>
+<h2 id="_limitation_on_same_name_with_different_set_of_tag_keys"><a class="anchor" href="#_limitation_on_same_name_with_different_set_of_tag_keys"></a>5. Limitation on same name with different set of tag keys</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>PrometheusMeterRegistry</code> doesn&#8217;t allow to create meters having the same name with a different set of tag keys, so you should guarantee that meters having the same name have the same set of tag keys.
@@ -758,16 +858,39 @@ For example, you can register a meter registration failed listener that throws a
 </div>
 </div>
 <div class="sect1">
-<h2 id="_exemplars"><a class="anchor" href="#_exemplars"></a>5. Exemplars</h2>
+<h2 id="_exemplars"><a class="anchor" href="#_exemplars"></a>6. Exemplars</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Exemplars are metadata that you can attach to the value of your time series. They can reference data outside of your metrics. A common use case is storing tracing information (<code>traceId</code>, <code>spanId</code>). Exemplars are not tags/dimensions (labels in Prometheus terminology), they will not increase cardinality since they belong to the values of the time series.</p>
 </div>
 <div class="paragraph">
-<p>In order to setup Exemplars for <code>PrometheusMeterRegistry</code>, you will need a component that provides you the tracing information: <code>SpanContextSupplier</code>.</p>
+<p>In order to setup Exemplars for <code>PrometheusMeterRegistry</code>, you will need a component that provides you the tracing information. If you use the "new" client (<code>micrometer-registry-prometheus</code>), this component is the <code>io.prometheus.metrics.tracer.common.SpanContext</code> while if you use the "legacy" client (<code>micrometer-registry-prometheus-simpleclient</code>), it is the <code>SpanContextSupplier</code>.</p>
 </div>
 <div class="paragraph">
-<p>You can set it up as follows:</p>
+<p>Setting them up are somewhat similar, if you use the "new" client (<code>micrometer-registry-prometheus</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PrometheusMeterRegistry registry = new PrometheusMeterRegistry(
+    PrometheusConfig.DEFAULT,
+    new PrometheusRegistry(),
+    Clock.SYSTEM,
+    new MySpanContext() <i class="conum" data-value="1"></i><b>(1)</b>
+);
+registry.counter("test").increment();
+System.out.println(registry.scrape("application/openmetrics-text"));</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>You need to implement <code>MySpanContext</code> (<code>class MySpanContext implements SpanContext { &#8230;&#8203; }</code>) or use an implementation that already exists.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>But if you use the "legacy" client (<code>micrometer-registry-prometheus-simpleclient</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">
