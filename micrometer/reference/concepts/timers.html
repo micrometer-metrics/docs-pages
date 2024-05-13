@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.5">
+    <meta name="version" content="1.12.6">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.5">
+<div class="nav-container" data-component="micrometer" data-version="1.12.6">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.5</span>
+  <span class="version">1.12.6</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -405,7 +405,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.5/docs/modules/ROOT/pages/concepts/timers.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.6/docs/modules/ROOT/pages/concepts/timers.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -452,7 +452,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Timers are intended for measuring short-duration latencies and the frequency of such events. All implementations of <code>Timer</code> report at least the total time and the count of events as separate time series but other time series can also be reported depending on what is supported by the backend (max, prcentiles, histograms). While you can use timers for other use cases, note that negative values are not supported, and recording many longer durations could cause overflow of the total time at <code>Long.MAX_VALUE</code> nanoseconds (292.3 years).</p>
+<p>Timers are intended for measuring short-duration latencies and the frequency of such events. All implementations of <code>Timer</code> report at least the total time and the count of events as separate time series but other time series can also be reported depending on what is supported by the backend (max, percentiles, histograms). While you can use timers for other use cases, note that negative values are not supported, and recording many longer durations could cause overflow of the total time at <code>Long.MAX_VALUE</code> nanoseconds (292.3 years).</p>
 </div>
 <div class="paragraph">
 <p>As an example, consider a graph showing request latency to a typical web server. The server can be expected to respond to many requests quickly, so the timer gets updated many times per second.</p>
@@ -493,9 +493,9 @@ The maximum statistical value for basic <code>Timer</code> implementations, such
 It means that its value is the maximum value during a time window.
 If no new values are recorded for the time window length, the max is reset to 0 as a new time window starts.
 The time window size until values are fully expired is the <code>expiry</code> multiplied by the <code>bufferLength</code> in <code>DistributionStatisticConfig</code>.
-<code>expiry</code> defaults to the step size of the meter registry unless is explicitly set to a different value, and <code>bufferLength</code> defaults to <code>3</code>.
+<code>expiry</code> defaults to the step size of the meter registry unless it&#8217;s explicitly set to a different value, and <code>bufferLength</code> defaults to <code>3</code>.
 A time window maximum is used to capture maximum latency in a subsequent interval after heavy resource pressure triggers the latency and prevents metrics from being published.
-Percentiles are also time window percentiles (<code>TimeWindowPercentileHistogram</code>). Histogram buckets usually behave like counters so depending on the backend, they can be reported as cumulative values (for example in the case of Prometheus) or as a rate at which a counter increments over the push interval.
+Percentiles are also time window percentiles (<code>TimeWindowPercentileHistogram</code>). Histogram buckets usually behave like counters, so depending on the backend, they can be reported as cumulative values (for example in the case of Prometheus) or as a rate at which a counter increments over the push interval.
 </td>
 </tr>
 </table>
@@ -927,12 +927,12 @@ For Prometheus, specifically, R is <em>always</em> equal to 1, regardless of how
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.6-SNAPSHOT
+                            1.12.7-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.5<span class="current">current</span>
+                            1.12.6<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -996,6 +996,6 @@ For Prometheus, specifically, R is <em>always</em> equal to 1, regardless of how
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.5" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.6" data-page-component="micrometer"></script>
   </body>
 </html>

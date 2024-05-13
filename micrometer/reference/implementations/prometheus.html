@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.5">
+    <meta name="version" content="1.12.6">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.5">
+<div class="nav-container" data-component="micrometer" data-version="1.12.6">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.5</span>
+  <span class="version">1.12.6</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -405,7 +405,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.5/docs/modules/ROOT/pages/implementations/prometheus.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.6/docs/modules/ROOT/pages/implementations/prometheus.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -449,27 +449,6 @@
   </ul>
 </nav>
 <h1 id="page-title" class="page">Micrometer Prometheus</h1>
-<div id="toc" class="toc">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#implementations-installing">1. Installing</a></li>
-<li><a href="#_configuring">2. Configuring</a>
-<ul class="sectlevel2">
-<li><a href="#_scrape_format">2.1. Scrape Format</a></li>
-<li><a href="#_the_prometheus_rename_filter">2.2. The Prometheus Rename Filter</a></li>
-</ul>
-</li>
-<li><a href="#_graphing">3. Graphing</a>
-<ul class="sectlevel2">
-<li><a href="#_grafana_dashboard">3.1. Grafana Dashboard</a></li>
-<li><a href="#_counters">3.2. Counters</a></li>
-<li><a href="#_timers">3.3. Timers</a></li>
-<li><a href="#_long_task_timers">3.4. Long task timers</a></li>
-</ul>
-</li>
-<li><a href="#_limitation_on_same_name_with_different_set_of_tag_keys">4. Limitation on same name with different set of tag keys</a></li>
-</ul>
-</div>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
@@ -761,6 +740,59 @@ For example, you can register a meter registration failed listener that throws a
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_exemplars"><a class="anchor" href="#_exemplars"></a>5. Exemplars</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Exemplars are metadata that you can attach to the value of your time series. They can reference data outside of your metrics. A common use case is storing tracing information (<code>traceId</code>, <code>spanId</code>). Exemplars are not tags/dimensions (labels in Prometheus terminology), they will not increase cardinality since they belong to the values of the time series.</p>
+</div>
+<div class="paragraph">
+<p>In order to setup Exemplars for <code>PrometheusMeterRegistry</code>, you will need a component that provides you the tracing information: <code>SpanContextSupplier</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can set it up as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PrometheusMeterRegistry registry = new PrometheusMeterRegistry(
+    PrometheusConfig.DEFAULT,
+    new CollectorRegistry(),
+    Clock.SYSTEM,
+    new DefaultExemplarSampler(new MySpanContextSupplier()) <i class="conum" data-value="1"></i><b>(1)</b>
+);
+registry.counter("test").increment();
+System.out.println(registry.scrape(TextFormat.CONTENT_TYPE_OPENMETRICS_100));</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>You need to implement <code>MySpanContextSupplier</code> (<code>class MySpanContextSupplier implements SpanContextSupplier { &#8230;&#8203; }</code>) or use an implementation that already exists.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If your configuration is correct, you should get something like this, the <code># {span_id="321",trace_id="123"} &#8230;&#8203;</code> section is the Exempar right after the value:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs"># TYPE test counter
+# HELP test
+test_total 1.0 # {span_id="321",trace_id="123"} 1.0 1713310767.908
+# EOF</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Exemplars are only supported in the OpenMetrics format (they will not show up in the Prometheus text format). You might need to explicitly ask for the OpenMetrics format, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">curl --silent -H 'Accept: application/openmetrics-text; version=1.0.0' localhost:8080/prometheus</code></pre>
+</div>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="otlp.html">OpenTelemetry Protocol (OTLP)</a></span>
   <span class="next"><a href="signalFx.html">SignalFx</a></span>
@@ -793,12 +825,12 @@ For example, you can register a meter registration failed listener that throws a
                         </li>
                         <li class="version">
                           <a href="../1.12-SNAPSHOT/index.html">
-                            1.12.6-SNAPSHOT
+                            1.12.7-SNAPSHOT
                           </a>
                         </li>
                         <li class="version is-current is-latest">
                           <a href="../index.html">
-                            1.12.5<span class="current">current</span>
+                            1.12.6<span class="current">current</span>
                           </a>
                         </li>
                       </ul>
@@ -862,6 +894,6 @@ For example, you can register a meter registration failed listener that throws a
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.5" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.6" data-page-component="micrometer"></script>
   </body>
 </html>
