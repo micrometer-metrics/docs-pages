@@ -466,22 +466,60 @@
   </ul>
 </nav>
 <h1 id="page-title" class="page">Eclipse Jetty and Jersey Instrumentation</h1>
-<div id="preamble">
+<div class="sect1">
+<h2 id="_jetty"><a class="anchor" href="#_jetty"></a>Jetty</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer supports binding metrics to Jetty through <code>Connection.Listener</code>.</p>
 </div>
 <div class="paragraph">
-<p>You can collect metrics from Jetty by adding <code>JettyConnectionMetrics</code>, as follows:</p>
+<p>You can collect metrics from a Jetty <code>Connector</code> by configuring it with <code>JettyConnectionMetrics</code>, as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"> Server server = new Server(0);
- Connector connector = new ServerConnector(server);
- connector.addBean(new JettyConnectionMetrics(registry, connector, Tags.of("foo", "bar"));
+ NetworkTrafficServerConnector connector = new NetworkTrafficServerConnector(server);
+ JettyConnectionMetrics metrics = new JettyConnectionMetrics(registry, connector);
+ connector.addBean(metrics); <i class="conum" data-value="1"></i><b>(1)</b>
+ connector.setNetworkTrafficListener(metrics); <i class="conum" data-value="2"></i><b>(2)</b>
  server.setConnectors(new Connector[] { connector });</code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Register general connection metrics</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Registers metrics for bytes in/out on this connector</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can apply the metrics instrumentation to all connectors on a <code>Server</code> as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">JettyConnectionMetrics.addToAllConnectors(server, registry);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Connection metrics can be configured on a client as well, but bytes in/out will not be available when instrumenting a client.</p>
+</div>
+<div class="listingblock">
+<div class="title">Configure instrumentation for a Jetty client</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClient httpClient = new HttpClient();
+httpClient.addBean(new JettyConnectionMetrics(registry));</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_jersey"><a class="anchor" href="#_jersey"></a>Jersey</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer also supports binding metrics to Jersey through <code>ApplicationEventListener</code>.</p>
 </div>
