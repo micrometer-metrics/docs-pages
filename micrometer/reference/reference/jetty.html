@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Eclipse Jetty and Jersey Instrumentation :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/reference/jetty.html">
-    <link rel="prev" href="httpcomponents.html">
+    <link rel="prev" href="java-httpclient.html">
     <link rel="next" href="jvm.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.6">
+    <meta name="version" content="1.13.0">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.6">
+<div class="nav-container" data-component="micrometer" data-version="1.13.0">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.6</span>
+  <span class="version">1.13.0</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -277,6 +277,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="httpcomponents.html">HttpComponents Client</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="java-httpclient.html">Java HttpClient</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="jetty.html">Jetty and Jersey</a>
   </li>
@@ -405,7 +408,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.6/docs/modules/ROOT/pages/reference/jetty.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.13.0/docs/modules/ROOT/pages/reference/jetty.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -449,22 +452,60 @@
   </ul>
 </nav>
 <h1 id="page-title" class="page">Eclipse Jetty and Jersey Instrumentation</h1>
-<div id="preamble">
+<div class="sect1">
+<h2 id="_jetty"><a class="anchor" href="#_jetty"></a>Jetty</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer supports binding metrics to Jetty through <code>Connection.Listener</code>.</p>
 </div>
 <div class="paragraph">
-<p>You can collect metrics from Jetty by adding <code>JettyConnectionMetrics</code>, as follows:</p>
+<p>You can collect metrics from a Jetty <code>Connector</code> by configuring it with <code>JettyConnectionMetrics</code>, as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"> Server server = new Server(0);
- Connector connector = new ServerConnector(server);
- connector.addBean(new JettyConnectionMetrics(registry, connector, Tags.of("foo", "bar"));
+ NetworkTrafficServerConnector connector = new NetworkTrafficServerConnector(server);
+ JettyConnectionMetrics metrics = new JettyConnectionMetrics(registry, connector);
+ connector.addBean(metrics); <i class="conum" data-value="1"></i><b>(1)</b>
+ connector.setNetworkTrafficListener(metrics); <i class="conum" data-value="2"></i><b>(2)</b>
  server.setConnectors(new Connector[] { connector });</code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Register general connection metrics</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Registers metrics for bytes in/out on this connector</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can apply the metrics instrumentation to all connectors on a <code>Server</code> as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">JettyConnectionMetrics.addToAllConnectors(server, registry);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Connection metrics can be configured on a client as well, but bytes in/out will not be available when instrumenting a client.</p>
+</div>
+<div class="listingblock">
+<div class="title">Configure instrumentation for a Jetty client</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClient httpClient = new HttpClient();
+httpClient.addBean(new JettyConnectionMetrics(registry));</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_jersey"><a class="anchor" href="#_jersey"></a>Jersey</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer also supports binding metrics to Jersey through <code>ApplicationEventListener</code>.</p>
 </div>
@@ -501,7 +542,7 @@ config.register(listener);</code></pre>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="httpcomponents.html">HttpComponents Client</a></span>
+  <span class="prev"><a href="java-httpclient.html">Java HttpClient</a></span>
   <span class="next"><a href="jvm.html">JVM</a></span>
 </nav>
 </article>
@@ -521,13 +562,13 @@ config.register(listener);</code></pre>
                       <a class="title" href="../index.html">Micrometer</a>
                       <ul class="versions">
                         <li class="version">
-                          <a href="../1.13-SNAPSHOT/index.html">
-                            1.13.0-SNAPSHOT
+                          <a href="../1.14-SNAPSHOT/index.html">
+                            1.14.0-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version">
-                          <a href="../1.13/index.html">
-                            1.13.0-RC1
+                        <li class="version is-current is-latest">
+                          <a href="../index.html">
+                            1.13.0<span class="current">current</span>
                           </a>
                         </li>
                         <li class="version">
@@ -535,9 +576,9 @@ config.register(listener);</code></pre>
                             1.12.7-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version is-current is-latest">
-                          <a href="../index.html">
-                            1.12.6<span class="current">current</span>
+                        <li class="version">
+                          <a href="../1.12/index.html">
+                            1.12.6
                           </a>
                         </li>
                       </ul>
@@ -601,6 +642,6 @@ config.register(listener);</code></pre>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.6" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.13.0" data-page-component="micrometer"></script>
   </body>
 </html>

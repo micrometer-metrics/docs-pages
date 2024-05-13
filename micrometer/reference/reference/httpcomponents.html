@@ -6,7 +6,7 @@
     <title>Apache HttpComponents Client Instrumentation :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/reference/httpcomponents.html">
     <link rel="prev" href="grpc.html">
-    <link rel="next" href="jetty.html">
+    <link rel="next" href="java-httpclient.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.6">
+    <meta name="version" content="1.13.0">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.6">
+<div class="nav-container" data-component="micrometer" data-version="1.13.0">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.6</span>
+  <span class="version">1.13.0</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -278,6 +278,9 @@
     <a class="nav-link" href="httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="java-httpclient.html">Java HttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -405,7 +408,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.6/docs/modules/ROOT/pages/reference/httpcomponents.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.13.0/docs/modules/ROOT/pages/reference/httpcomponents.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -449,6 +452,8 @@
   </ul>
 </nav>
 <h1 id="page-title" class="page">Apache HttpComponents Client Instrumentation</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -462,11 +467,16 @@ This section requires usage of Apache HttpComponents Client at least in version 
 </table>
 </div>
 <div class="paragraph">
-<p><a href="https://hc.apache.org/index.html/">Apache HttpComponents Client</a> is an HTTP/1.1 compliant HTTP agent implementation.</p>
+<p><a href="https://hc.apache.org/index.html">Apache HttpComponents Client</a> is an HTTP/1.1 compliant HTTP agent implementation.</p>
 </div>
 <div class="paragraph">
 <p>Below you can find an example of how to instrument Apache HttpComponents Client with <a href="../observation.html" class="xref page">Micrometer Observation</a>. That means that depending on your Observation Handler configuration you instrument once, and can have multiple benefits out of it (e.g. metrics, distributed tracing).</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_instrumentation"><a class="anchor" href="#_instrumentation"></a>Instrumentation</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Example of classic, blocking HTTP client.</p>
 </div>
@@ -475,7 +485,8 @@ This section requires usage of Apache HttpComponents Client at least in version 
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation (you need to create a client from the builder)
 HttpClientBuilder clientBuilder = HttpClients.custom()
     .setRetryStrategy(retryStrategy)
-    .addExecInterceptorLast("micrometer", new ObservationExecChainHandler(observationRegistry))
+    .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
+            new ObservationExecChainHandler(observationRegistry))
     .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
         .setDefaultConnectionConfig(connectionConfig)
         .build());
@@ -498,7 +509,8 @@ assertThat(observationRegistry).hasObservationWithNameEqualTo(DEFAULT_METER_NAME
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation (you need to create a client from the builder)
 HttpAsyncClientBuilder clientBuilder = HttpAsyncClients.custom()
-    .addExecInterceptorLast("micrometer", new ObservationExecChainHandler(observationRegistry))
+    .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
+            new ObservationExecChainHandler(observationRegistry))
     .setRetryStrategy(retryStrategy)
     .setConnectionManager(PoolingAsyncClientConnectionManagerBuilder.create()
         .setDefaultConnectionConfig(connectionConfig)
@@ -516,9 +528,54 @@ assertThat(observationRegistry).hasObservationWithNameEqualTo(DEFAULT_METER_NAME
     .hasLowCardinalityKeyValue(METHOD.withValue("GET"));</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_retry_strategy_considerations"><a class="anchor" href="#_retry_strategy_considerations"></a>Retry Strategy Considerations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>HttpClient supports build-in request retry handling. Like micrometer observations, this functionality is implemented as an <code>ExecChainHandler</code> named <code>ChainElement.RETRY</code>. When instrumenting the client, you&#8217;ll have to decide whether to observe individual retries or not. If the <code>ObservationExecChainHandler</code> is placed <em>before</em> the retry handler, micrometer will see the initial request and the final outcome after the last retry. Elapsed time will account for any delays imposed by the retry handler. On the other hand, if micrometer is registered <em>after</em> the retry handler, it will be invoked for each individual retry. Elapsed time will measure the individual http requests, but <strong><em>without</em></strong> the backoff delay imposed by the retry handler. The described behaviour and related configuration are the same for both the classic and the async client - with one exception described in the following note.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When using the <strong>async client</strong>, placing micrometer <strong>before</strong> the retry handler requires at least version <strong>5.3.x</strong> of the HttpComponents Client library. The classic client has no further restrictions.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example instrumentation code.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Example: setup instrumentation to meter retries individually
+HttpClientBuilder clientBuilder = HttpClients.custom()
+    .setRetryStrategy(retryStrategy)
+    .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
+            new ObservationExecChainHandler(observationRegistry))
+    .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
+        .setDefaultConnectionConfig(connectionConfig)
+        .build());
+
+// Example: setup instrumentation to aggregate retries
+HttpAsyncClientBuilder clientBuilder = HttpAsyncClients.custom()
+    .addExecInterceptorFirst("micrometer", new ObservationExecChainHandler(observationRegistry))
+    .setRetryStrategy(retryStrategy)
+    .setConnectionManager(PoolingAsyncClientConnectionManagerBuilder.create()
+        .setDefaultConnectionConfig(connectionConfig)
+        .build());</code></pre>
+</div>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="grpc.html">gRPC</a></span>
-  <span class="next"><a href="jetty.html">Jetty and Jersey</a></span>
+  <span class="next"><a href="java-httpclient.html">Java HttpClient</a></span>
 </nav>
 </article>
   </div>
@@ -537,13 +594,13 @@ assertThat(observationRegistry).hasObservationWithNameEqualTo(DEFAULT_METER_NAME
                       <a class="title" href="../index.html">Micrometer</a>
                       <ul class="versions">
                         <li class="version">
-                          <a href="../1.13-SNAPSHOT/index.html">
-                            1.13.0-SNAPSHOT
+                          <a href="../1.14-SNAPSHOT/index.html">
+                            1.14.0-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version">
-                          <a href="../1.13/index.html">
-                            1.13.0-RC1
+                        <li class="version is-current is-latest">
+                          <a href="../index.html">
+                            1.13.0<span class="current">current</span>
                           </a>
                         </li>
                         <li class="version">
@@ -551,9 +608,9 @@ assertThat(observationRegistry).hasObservationWithNameEqualTo(DEFAULT_METER_NAME
                             1.12.7-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version is-current is-latest">
-                          <a href="../index.html">
-                            1.12.6<span class="current">current</span>
+                        <li class="version">
+                          <a href="../1.12/index.html">
+                            1.12.6
                           </a>
                         </li>
                       </ul>
@@ -617,6 +674,6 @@ assertThat(observationRegistry).hasObservationWithNameEqualTo(DEFAULT_METER_NAME
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.6" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.13.0" data-page-component="micrometer"></script>
   </body>
 </html>

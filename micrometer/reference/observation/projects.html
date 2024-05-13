@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.12.6">
+    <meta name="version" content="1.13.0">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -100,14 +100,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.6">
+<div class="nav-container" data-component="micrometer" data-version="1.13.0">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.6</span>
+  <span class="version">1.13.0</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -277,6 +277,9 @@
     <a class="nav-link" href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../reference/java-httpclient.html">Java HttpClient</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -404,7 +407,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.6/docs/modules/ROOT/pages/observation/projects.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.13.0/docs/modules/ROOT/pages/observation/projects.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -489,12 +492,12 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/apereo/cas/commit/f40491020d8c303d1611b010c9842ec33d25f2f3">Commit</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Armeria</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/line/armeria/pull/4980">PR</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Appsmith</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/appsmithorg/appsmith/commit/5e46a2f4b7bf184aba03b4b93038edce8a615366">Commit</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Armeria</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/line/armeria/pull/4980">PR</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Couchbase</p></td>
@@ -517,12 +520,12 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/micrometer-metrics/micrometer/blob/main/micrometer-core/src/main/java11/io/micrometer/core/instrument/binder/jdk/MicrometerHttpClient.java">Repo</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Jetty</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/micrometer-metrics/micrometer/pull/3416">PR</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Jersey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/eclipse-ee4j/jersey/pull/5391">PR</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jetty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/micrometer-metrics/micrometer/pull/3416">PR</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JMS</p></td>
@@ -549,20 +552,16 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/OpenFeign/feign/pull/1760">PR</a></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R2DBC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/r2dbc/r2dbc-proxy/issues/122">Issue</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">RabbitMQ</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/rabbitmq/rabbitmq-java-client/issues/952">Issue</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">RabbitMQ Stream</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/rabbitmq/rabbitmq-stream-java-client/pull/384">PR</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Resilience4j</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/resilience4j/resilience4j/pull/1698">PR</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R2DBC</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/r2dbc/r2dbc-proxy/issues/122">Issue</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Reactor</p></td>
@@ -574,8 +573,11 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Redisson</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/redisson/redisson/issues/4976">Issue</a>,
-<a href="https://github.com/redisson/redisson/wiki/16.-Observability#162-tracing">Docs</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/redisson/redisson/issues/4976">Issue</a>, <a href="https://github.com/redisson/redisson/wiki/16.-Observability#162-tracing">Docs</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resilience4j</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/resilience4j/resilience4j/pull/1698">PR</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Retrofit</p></td>
@@ -594,12 +596,12 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.spring.io/spring-batch/docs/current/reference/html/monitoring-and-metrics.html#tracing">Docs</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Spring Cloud Config</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.spring.io/spring-cloud-config/docs/current/reference/html/#observability">Docs</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spring Cloud CircuitBreaker</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/spring-cloud/spring-cloud-circuitbreaker/commit/4aa6883274a26b4c01b2c38e256d0b985978052e">Commit</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spring Cloud Config</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.spring.io/spring-cloud-config/docs/current/reference/html/#observability">Docs</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spring Cloud Function</p></td>
@@ -631,7 +633,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spring Data Redis</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.spring.io/spring-data-redis/docs/current/reference/html/#redis.observability">Docs</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.spring.io/spring-data/redis/reference/observability.html">Docs</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spring GraphQL</p></td>
@@ -643,11 +645,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spring Kafka</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.spring.io/spring-kafka/reference/html/#x30-obs">Docs</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Spring Security</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.spring.io/spring-security/reference/reactive/integrations/observability.html">Docs</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.spring.io/spring-kafka/reference/appendix/micrometer.html">Docs</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spring Modulith</p></td>
@@ -660,6 +658,10 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spring Pulsar</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.spring.io/spring-pulsar/docs/current/reference/html/#micrometer">Docs</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spring Security</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.spring.io/spring-security/reference/reactive/integrations/observability.html">Docs</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spring WebFlux</p></td>
@@ -690,13 +692,13 @@
                       <a class="title" href="../index.html">Micrometer</a>
                       <ul class="versions">
                         <li class="version">
-                          <a href="../1.13-SNAPSHOT/index.html">
-                            1.13.0-SNAPSHOT
+                          <a href="../1.14-SNAPSHOT/index.html">
+                            1.14.0-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version">
-                          <a href="../1.13/index.html">
-                            1.13.0-RC1
+                        <li class="version is-current is-latest">
+                          <a href="../index.html">
+                            1.13.0<span class="current">current</span>
                           </a>
                         </li>
                         <li class="version">
@@ -704,9 +706,9 @@
                             1.12.7-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version is-current is-latest">
-                          <a href="../index.html">
-                            1.12.6<span class="current">current</span>
+                        <li class="version">
+                          <a href="../1.12/index.html">
+                            1.12.6
                           </a>
                         </li>
                       </ul>
@@ -770,6 +772,6 @@
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.12.6" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.13.0" data-page-component="micrometer"></script>
   </body>
 </html>
