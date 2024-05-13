@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Supported Reporters :: Micrometer Tracing</title>
-    <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/reporters.html">
-    <link rel="prev" href="tracers.html">
-    <link rel="next" href="api.html">
+    <title>Tracing support :: Micrometer Tracing</title>
+    <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/index.html">
+    <link rel="next" href="glossary.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -20,7 +19,7 @@
     <link rel="stylesheet" href="../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.3.0">
+    <meta name="version" content="1.2.6">
     <meta name="component" content="tracing">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +100,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.3.0">
+<div class="nav-container" data-component="tracing" data-version="1.2.6">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.3.0-SNAPSHOT</span>
+  <span class="version">1.2.6</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -138,7 +137,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="index.html">Micrometer Tracing</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -147,7 +146,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="tracers.html">Supported Tracers</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="reporters.html">Supported Reporters</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -198,13 +197,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="Supported Reporters"
+      data-title="Tracing support"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/edit/main/docs/modules/ROOT/pages/reporters.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.2.6/docs/modules/ROOT/pages/index.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -248,7 +247,7 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../reporters.html">Micrometer Tracing 1.2.6</a>!</p>
+          <p> For the latest stable version, please use <a href="../index.html">Micrometer Tracing 1.3.0</a>!</p>
         </div>
       </td>
     </tr></tbody>
@@ -257,113 +256,81 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Micrometer Tracing</a></li>
-    <li><a href="reporters.html">Supported Reporters</a></li>
   </ul>
 </nav>
-<h1 id="page-title" class="page">Supported Reporters</h1>
-<div id="preamble">
+<h1 id="page-title" class="page">Tracing support</h1>
+<div class="sect1">
+<h2 id="tracing-purpose"><a class="anchor" href="#tracing-purpose"></a>Purpose</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer Tracing supports directly the following Reporters.</p>
+<p>The problem of tracing is not new.
+Application developers have been creating ways to track the state of their applications for a long time.
+For much of that time, developers had to create the necessary tracing framework themselves.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://tanzu.vmware.com/observability"><strong>Tanzu Observability by Wavefront</strong></a></p>
-</li>
-<li>
-<p><a href="https://zipkin.io"><strong>OpenZipkin Zipkin</strong></a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>In 2016, the Spring Cloud team created a tracing library that could help a lot of developers.
+It was called <a href="https://github.com/spring-cloud/spring-cloud-sleuth">Spring Cloud Sleuth</a>.
+The Spring team realized that tracing could be separated from Spring Cloud and created the Micrometer Tracing project, which is, essentially, a Spring-agnostic copy of Spring Cloud Sleuth.
+Micrometer Tracing had its 1.0.0 GA release in November 2022 and has been getting steadily better ever since.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/micrometer-metrics/tracing">Micrometer Tracing</a> provides a simple facade for the most popular tracer libraries, letting you instrument your JVM-based application code without vendor lock-in.
+It is designed to add little to no overhead to your tracing collection activity while maximizing the portability of your tracing effort.</p>
+</div>
+<div class="paragraph">
+<p>It also provides a tracing extension to Micrometer&#8217;s <code>ObservationHandler</code> (from Micrometer 1.10.0).
+Whenever an <code>Observation</code> is used, a corresponding span is created, started, stopped and reported.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h2>
+<h2 id="tracing-installing"><a class="anchor" href="#tracing-installing"></a>Installing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following example shows the required dependency in Gradle (assuming that Micrometer Tracing BOM has been added):</p>
+<p>Micrometer Tracing comes with a Bill of Materials (BOM), which is a project that contains all the project versions for you.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows the required dependency in Gradle:</p>
 </div>
 <div class="listingblock">
-<div class="title">Tanzu Observability by Wavefront</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-tracing-reporter-wavefront'</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">OpenZipkin Zipkin with Brave</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.zipkin.reporter2:zipkin-reporter-brave'</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">OpenZipkin Zipkin with OpenTelemetry</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.opentelemetry:opentelemetry-exporter-zipkin'</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">An OpenZipkin URL sender dependency to send out spans to Zipkin via a <code>URLConnectionSender</code></div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.zipkin.reporter2:zipkin-sender-urlconnection'</code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation platform('io.micrometer:micrometer-tracing-bom:latest.release')
+implementation 'io.micrometer:micrometer-tracing'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The following example shows the required dependency in Maven (assuming that Micrometer Tracing BOM has been added):</p>
+<p>The following example shows the required dependency in Maven:</p>
 </div>
 <div class="listingblock">
-<div class="title">Tanzu Observability by Wavefront</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
-    &lt;artifactId&gt;micrometer-tracing-reporter-wavefront&lt;/artifactId&gt;
-&lt;/dependency&gt;</code></pre>
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
+            &lt;artifactId&gt;micrometer-tracing-bom&lt;/artifactId&gt;
+            &lt;version&gt;${micrometer-tracing.version}&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
+      &lt;artifactId&gt;micrometer-tracing&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
 </div>
 </div>
-<div class="listingblock">
-<div class="title">OpenZipkin Zipkin with Brave</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.zipkin.reporter2&lt;/groupId&gt;
-    &lt;artifactId&gt;zipkin-reporter-brave&lt;/artifactId&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">OpenZipkin Zipkin with OpenTelemetry</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.opentelemetry&lt;/groupId&gt;
-    &lt;artifactId&gt;opentelemetry-exporter-zipkin&lt;/artifactId&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">An OpenZipkin URL sender dependency to send out spans to Zipkin via a <code>URLConnectionSender</code></div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.zipkin.reporter2&lt;/groupId&gt;
-    &lt;artifactId&gt;zipkin-sender-urlconnection&lt;/artifactId&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Remember that, by default, Brave adds Zipkin as a dependency. If you want to use only Wavefront and you use classpath dependent solutions, such as Spring Boot, you might be required to exclude the transitive dependency on Zipkin when using Brave (for example, by exlcuding the <code>io.zipkin.reporter2</code> group).
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>You should add a tracing bridge, such as <code>micrometer-tracing-bridge-brave</code> or <code>micrometer-tracing-bridge-otel</code> and span exporters / reporters.
+When you add a bridge, the <code>micrometer-tracing</code> library is added transitively.</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="tracers.html">Supported Tracers</a></span>
-  <span class="next"><a href="api.html">Micrometer Tracing API</a></span>
+  <span class="next"><a href="glossary.html">Glossary</a></span>
 </nav>
 </article>
   </div>
@@ -381,14 +348,14 @@ Remember that, by default, Brave adds Zipkin as a dependency. If you want to use
                     <li class="component is-current">
                       <a class="title" href="../index.html">Micrometer Tracing</a>
                       <ul class="versions">
-                        <li class="version is-current">
-                          <a href="index.html">
-                            1.3.0-SNAPSHOT
+                        <li class="version">
+                          <a href="../1.4-SNAPSHOT/index.html">
+                            1.4.0-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version">
-                          <a href="../1.3/index.html">
-                            1.3.0-RC1
+                        <li class="version is-latest">
+                          <a href="../index.html">
+                            1.3.0<span class="current">current</span>
                           </a>
                         </li>
                         <li class="version">
@@ -396,9 +363,9 @@ Remember that, by default, Brave adds Zipkin as a dependency. If you want to use
                             1.2.7-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version is-latest">
-                          <a href="../index.html">
-                            1.2.6<span class="current">current</span>
+                        <li class="version is-current">
+                          <a href="index.html">
+                            1.2.6
                           </a>
                         </li>
                       </ul>
@@ -462,6 +429,6 @@ Remember that, by default, Brave adds Zipkin as a dependency. If you want to use
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.3.0" data-page-component="tracing"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.2.6" data-page-component="tracing"></script>
   </body>
 </html>

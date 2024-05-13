@@ -1,91 +1,90 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-05-13T17:43:52.637Z",
+  "generated": "2024-05-13T17:47:59.374Z",
   "url": "https://docs.micrometer.io/tracing/reference",
   "components": {
     "tracing": {
       "title": "Micrometer Tracing",
-      "latest": "1.2.6",
+      "latest": "1.3.0",
       "versions": {
-        "1.3.0": {
+        "1.4.0": {
           "prerelease": true,
-          "displayVersion": "1.3.0-SNAPSHOT",
-          "url": "/1.3-SNAPSHOT/index.html",
+          "displayVersion": "1.4.0-SNAPSHOT",
+          "url": "/1.4-SNAPSHOT/index.html",
           "pages": [
             {
               "path": "index.adoc",
-              "url": "/1.3-SNAPSHOT/index.html",
+              "url": "/1.4-SNAPSHOT/index.html",
               "title": "Tracing support"
             },
             {
               "path": "api.adoc",
-              "url": "/1.3-SNAPSHOT/api.html",
+              "url": "/1.4-SNAPSHOT/api.html",
               "title": "Using Micrometer Tracing Directly"
             },
             {
               "path": "configuring.adoc",
-              "url": "/1.3-SNAPSHOT/configuring.html",
+              "url": "/1.4-SNAPSHOT/configuring.html",
               "title": "Configuring with Micrometer Observation"
             },
             {
               "path": "glossary.adoc",
-              "url": "/1.3-SNAPSHOT/glossary.html",
+              "url": "/1.4-SNAPSHOT/glossary.html",
               "title": "Glossary"
             },
             {
               "path": "reporters.adoc",
-              "url": "/1.3-SNAPSHOT/reporters.html",
+              "url": "/1.4-SNAPSHOT/reporters.html",
               "title": "Supported Reporters"
             },
             {
               "path": "testing.adoc",
-              "url": "/1.3-SNAPSHOT/testing.html",
+              "url": "/1.4-SNAPSHOT/testing.html",
               "title": "Testing"
             },
             {
               "path": "tracers.adoc",
-              "url": "/1.3-SNAPSHOT/tracers.html",
+              "url": "/1.4-SNAPSHOT/tracers.html",
               "title": "Supported Tracers"
             }
           ]
         },
-        "1.3.0-RC1": {
-          "prerelease": true,
-          "url": "/1.3/index.html",
+        "1.3.0": {
+          "url": "/index.html",
           "pages": [
             {
               "path": "index.adoc",
-              "url": "/1.3/index.html",
+              "url": "/index.html",
               "title": "Tracing support"
             },
             {
               "path": "api.adoc",
-              "url": "/1.3/api.html",
+              "url": "/api.html",
               "title": "Using Micrometer Tracing Directly"
             },
             {
               "path": "configuring.adoc",
-              "url": "/1.3/configuring.html",
+              "url": "/configuring.html",
               "title": "Configuring with Micrometer Observation"
             },
             {
               "path": "glossary.adoc",
-              "url": "/1.3/glossary.html",
+              "url": "/glossary.html",
               "title": "Glossary"
             },
             {
               "path": "reporters.adoc",
-              "url": "/1.3/reporters.html",
+              "url": "/reporters.html",
               "title": "Supported Reporters"
             },
             {
               "path": "testing.adoc",
-              "url": "/1.3/testing.html",
+              "url": "/testing.html",
               "title": "Testing"
             },
             {
               "path": "tracers.adoc",
-              "url": "/1.3/tracers.html",
+              "url": "/tracers.html",
               "title": "Supported Tracers"
             }
           ]
@@ -133,41 +132,41 @@
           ]
         },
         "1.2.6": {
-          "url": "/index.html",
+          "url": "/1.2/index.html",
           "pages": [
             {
               "path": "index.adoc",
-              "url": "/index.html",
+              "url": "/1.2/index.html",
               "title": "Tracing support"
             },
             {
               "path": "api.adoc",
-              "url": "/api.html",
+              "url": "/1.2/api.html",
               "title": "Using Micrometer Tracing Directly"
             },
             {
               "path": "configuring.adoc",
-              "url": "/configuring.html",
+              "url": "/1.2/configuring.html",
               "title": "Configuring with Micrometer Observation"
             },
             {
               "path": "glossary.adoc",
-              "url": "/glossary.html",
+              "url": "/1.2/glossary.html",
               "title": "Glossary"
             },
             {
               "path": "reporters.adoc",
-              "url": "/reporters.html",
+              "url": "/1.2/reporters.html",
               "title": "Supported Reporters"
             },
             {
               "path": "testing.adoc",
-              "url": "/testing.html",
+              "url": "/1.2/testing.html",
               "title": "Testing"
             },
             {
               "path": "tracers.adoc",
-              "url": "/tracers.html",
+              "url": "/1.2/tracers.html",
               "title": "Supported Tracers"
             }
           ]
