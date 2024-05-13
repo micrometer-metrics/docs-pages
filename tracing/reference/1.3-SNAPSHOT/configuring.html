@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Glossary :: Micrometer Tracing</title>
-    <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/glossary.html">
-    <link rel="prev" href="index.html">
-    <link rel="next" href="tracers.html">
+    <title>Configuring with Micrometer Observation :: Micrometer Tracing</title>
+    <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/configuring.html">
+    <link rel="prev" href="api.html">
+    <link rel="next" href="testing.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -15,15 +15,15 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
   localStorage && localStorage.getItem('nav-width'))
     </script>
-    <link rel="stylesheet" href="./_/css/site.css">
-    <link rel="stylesheet" href="./_/css/vendor/search.css">
-    <link rel="stylesheet" href="./_/css/vendor/page-search.css">
-    <link rel="stylesheet" href="./_/css/vendor/asciidoctor-tabs.css">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="stylesheet" href="../_/css/vendor/search.css">
+    <link rel="stylesheet" href="../_/css/vendor/page-search.css">
+    <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="version" content="1.3.0">
+    <meta name="version" content="1.3.1">
     <meta name="component" content="tracing">
-    <meta name="latest-version" content="true">
-    <link rel="icon" href="./_/img/favicon.ico" type="image/vnd.microsoft.icon">
+    <meta name="latest-version" content="false">
+    <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
   </head>
   <body class="article">
 <header class="header">
@@ -33,13 +33,13 @@
         <img
           id="springlogo"
           class="block light"
-          src="./_/img/micrometer-logo.svg"
+          src="../_/img/micrometer-logo.svg"
           alt="Micrometer"
         />
         <img
           id="springlogo"
           class="block dark"
-          src="./_/img/micrometer-logo-dark.svg"
+          src="../_/img/micrometer-logo-dark.svg"
           alt="Micrometer"
         />
       </a>
@@ -101,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.3.0">
+<div class="nav-container" data-component="tracing" data-version="1.3.1">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.3.0</span>
+  <span class="version">1.3.1-SNAPSHOT</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -141,7 +141,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="index.html">Micrometer Tracing</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="glossary.html">Glossary</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -153,7 +153,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="api.html">Micrometer Tracing API</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="configuring.html">Micrometer Observation Configuration</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -198,13 +198,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="Glossary"
+      data-title="Configuring with Micrometer Observation"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.3.0/docs/modules/ROOT/pages/glossary.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/edit/1.3.x/docs/modules/ROOT/pages/configuring.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -240,103 +240,212 @@
   </div>
 </aside>
 <article class="doc">
+<div class="admonitionblock important latest">
+  <table>
+    <tbody><tr>
+      <td class="icon">
+        <i class="fa icon-important" title="Important"></i>
+      </td>
+      <td class="content">
+        <div class="paragraph">
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../configuring.html">Micrometer Tracing 1.3.0</a>!</p>
+        </div>
+      </td>
+    </tr></tbody>
+  </table>
+</div>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Micrometer Tracing</a></li>
-    <li><a href="glossary.html">Glossary</a></li>
+    <li><a href="configuring.html">Micrometer Observation Configuration</a></li>
   </ul>
 </nav>
-<h1 id="page-title" class="page">Glossary</h1>
+<h1 id="page-title" class="page">Configuring with Micrometer Observation</h1>
+<div class="sect1">
+<h2 id="_handler_configuration"><a class="anchor" href="#_handler_configuration"></a>Handler Configuration</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer Tracing contains a core module with an instrumentation <a href="https://en.wikipedia.org/wiki/Service_provider_interface">SPI</a>, a set of modules containing bridges to various tracers, a set of modules containing dedicated span reporting mechanisms, and a test kit.
-You need to understand the following definitions for distributed tracing:</p>
-</div>
-<div class="paragraph">
-<p>Micrometer Tracing borrows <a href="https://research.google.com/pubs/pub36356.html">Dapper&#8217;s</a> terminology.</p>
-</div>
-<div class="paragraph">
-<p><strong>Span</strong>: The basic unit of work.
-For example, sending an RPC is a new span, as is sending a response to an RPC.
-Spans also have other data, such as descriptions, timestamped events, key-value annotations (tags), the ID of the span that caused them, and process IDs (normally IP addresses).</p>
-</div>
-<div class="paragraph">
-<p>Spans can be started and stopped, and they keep track of their timing information.
-Once you create a span, you must stop it at some point in the future.</p>
-</div>
-<div class="paragraph">
-<p><strong>Trace</strong>: A set of spans forming a tree-like structure.
-For example, if you run a distributed big-data store, a trace might be formed by a <code>PUT</code> request.</p>
-</div>
-<div class="paragraph">
-<p><strong>Annotation/Event</strong>: Used to record the existence of an event in time.</p>
-</div>
-<div class="paragraph">
-<p><strong>Tracer</strong>: A library that handles the lifecycle of a span.
-It can create, start, stop, and report spans to an external system via reporters / exporters.</p>
-</div>
-<div class="paragraph">
-<p><strong>Tracing context</strong>: For distributed tracing to work, the tracing context (trace identifier, span identifier, and so on) must be propagated through the process (for example, over threads) and over the network.</p>
-</div>
-<div class="paragraph">
-<p><strong>Log correlation</strong>: Parts of the tracing context (such as the trace identifier and the span identifier) can be populated to the logs of a given application.
-One can then collect all logs in a single storage and group them with a trace ID.
-That way, you can get all logs, for a single business operation (trace) from all services put in a chronological order.</p>
-</div>
-<div class="paragraph">
-<p><strong>Latency analysis tools</strong>: A tool that collects exported spans and visualizes the whole trace.
-Such a tool allows easy latency analysis.</p>
-</div>
-<div class="paragraph">
-<p>The following image shows how <strong>Span</strong> and <strong>Trace</strong> look in a system.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/tracing/trace-id.jpg" alt="Trace Info propagation">
-</div>
-</div>
-<div class="paragraph">
-<p>Each color of a note signifies a span (there are seven spans - from <strong>A</strong> to <strong>G</strong>).
-Consider the following note:</p>
+<p>For Micrometer Tracing to work with Micrometer Observation, you need to add a tracing-related <code>ObservationHandler</code>.
+The following example shows how to add and use a single <code>DefaultTracingObservationHandler</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">Trace Id = X
-Span Id = D
-Client Sent</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This note indicates that the current span has <strong>Trace Id</strong> set to <strong>X</strong> and <strong>Span Id</strong> set to <strong>D</strong>.
-Also, from the RPC perspective, the <code>Client Sent</code> event took place.</p>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s consider more notes:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">Trace Id = X
-Span Id = A
-(no custom span)
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Tracer tracer = Tracer.NOOP; // The real tracer will come from your tracer
+                             // implementation (Brave /
+// OTel)
+Propagator propagator = Propagator.NOOP; // The real propagator will come from
+                                         // your tracer implementation (Brave /
+                                         // OTel)
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
 
-Trace Id = X
-Span Id = C
-(custom span)</code></pre>
+ObservationRegistry registry = ObservationRegistry.create();
+registry.observationConfig()
+    // assuming that micrometer-core is on the classpath
+    .observationHandler(new DefaultMeterObservationHandler(meterRegistry))
+    // we set up a first matching handler that creates spans - it comes from
+    // Micrometer
+    // Tracing. We set up spans for sending and receiving data over the wire
+    // and a default one
+    .observationHandler(new ObservationHandler.FirstMatchingCompositeObservationHandler(
+            new PropagatingSenderTracingObservationHandler&lt;&gt;(tracer, propagator),
+            new PropagatingReceiverTracingObservationHandler&lt;&gt;(tracer, propagator),
+            new DefaultTracingObservationHandler(tracer)));
+
+// Creating and starting a new observation
+// via the `DefaultTracingObservationHandler` that will create a new Span and
+// start it
+Observation observation = Observation.start("my.operation", registry)
+    .contextualName("This name is more readable - we can reuse it for e.g. spans")
+    .lowCardinalityKeyValue("this.tag", "will end up as a meter tag and a span tag")
+    .highCardinalityKeyValue("but.this.tag", "will end up as a span tag only");
+
+// Put the observation in scope
+// This will result in making the previously created Span, the current Span - it's
+// in ThreadLocal
+try (Observation.Scope scope = observation.openScope()) {
+    // Run your code that you want to measure - still the attached Span is the
+    // current one
+    // This means that e.g. logging frameworks could inject to e.g. MDC tracing
+    // information
+    yourCodeToMeasure();
+}
+finally {
+    // The corresponding Span will no longer be in ThreadLocal due to
+    // try-with-resources block (Observation.Scope is an AutoCloseable)
+    // Stop the Observation
+    // The corresponding Span will be stopped and reported to an external system
+    observation.stop();
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can continue with a created span (example with <code>no custom span</code> indication), or you can create child spans manually (example with <code>custom span</code> indication).</p>
+<p>You can also use a shorter version to perform measurements by using the <code>observe</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ObservationRegistry registry = ObservationRegistry.create();
+
+Observation.createNotStarted("my.operation", registry)
+    .contextualName("This name is more readable - we can reuse it for e.g. spans")
+    .lowCardinalityKeyValue("this.tag", "will end up as a meter tag and a span tag")
+    .highCardinalityKeyValue("but.this.tag", "will end up as a span tag only")
+    .observe(this::yourCodeToMeasure);</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>The following image shows how the parent-child relationships of spans look:</p>
+<p>This will result in the following Micrometer Metrics:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Gathered the following metrics
+    Meter with name &lt;my.operation&gt; and type &lt;TIMER&gt; has the following measurements
+        &lt;[
+            Measurement{statistic='COUNT', value=1.0},
+            Measurement{statistic='TOTAL_TIME', value=1.011949454},
+            Measurement{statistic='MAX', value=1.011949454}
+        ]&gt;
+        and has the following tags &lt;[tag(this.tag=will end up as a meter tag and a span tag)]&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It also results in the following trace view in (for example) Zipkin:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/tracing/parents.jpg" alt="Parent child relationship">
+<img src="_images/tracing/zipkin.jpg" alt="Trace Info propagation">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ordered_handler_configuration"><a class="anchor" href="#_ordered_handler_configuration"></a>Ordered Handler Configuration</h3>
+<div class="paragraph">
+<p>Micrometer Tracing comes with multiple <code>ObservationHandler</code> implementations.
+To introduce ordering, you can use the <code>ObservationHandler.AllMatchingCompositeObservationHandler</code> to run logic for all <code>ObservationHandler</code> instances that match the given predicate and <code>ObservationHandler</code>. Use <code>FirstMatchingCompositeObservationHandler</code> to run logic only for the first <code>ObservationHandler</code> that matches the predicate.
+The former can group handlers and the latter can be chosen to (for example) run only one matching <code>TracingObservationHandler</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_context_propagation_with_micrometer_tracing"><a class="anchor" href="#_context_propagation_with_micrometer_tracing"></a>Context Propagation with Micrometer Tracing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To make <a href="https://docs.micrometer.io/context-propagation/reference/">Context Propagation</a> work with Micrometer Tracing, you need to manually register the proper <code>ThreadLocalAccessor</code>, as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContextRegistry.getInstance().registerThreadLocalAccessor(new ObservationAwareSpanThreadLocalAccessor(tracer));
+ContextRegistry.getInstance()
+    .registerThreadLocalAccessor(new ObservationAwareBaggageThreadLocalAccessor(registry, tracer));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ObservationAwareSpanThreadLocalAccessor</code> is required to propagate manually created spans (not the ones that are governed by Observations). The <code>ObservationAwareBaggageThreadLocalAccessor</code> is required to propagate baggage created by the user.</p>
+</div>
+<div class="paragraph">
+<p>With Project Reactor one should set the values of <code>Observation</code>, <code>Span</code> or <code>BaggageToPropagate</code> in the Reactor Context as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setup example
+ContextRegistry contextRegistry = ContextRegistry.getInstance();
+
+ObservationAwareSpanThreadLocalAccessor accessor;
+
+ObservationAwareBaggageThreadLocalAccessor observationAwareBaggageThreadLocalAccessor;
+
+
+accessor = new ObservationAwareSpanThreadLocalAccessor(observationRegistry, getTracer());
+observationAwareBaggageThreadLocalAccessor = new ObservationAwareBaggageThreadLocalAccessor(observationRegistry,
+        getTracer());
+contextRegistry.loadThreadLocalAccessors()
+    .registerThreadLocalAccessor(accessor)
+    .registerThreadLocalAccessor(observationAwareBaggageThreadLocalAccessor);
+Hooks.enableAutomaticContextPropagation();
+
+// Usage example
+Hooks.enableAutomaticContextPropagation();
+Observation observation = Observation.start("parent", observationRegistry);
+
+List&lt;String&gt; hello = Mono.just("hello")
+    .subscribeOn(Schedulers.single())
+    .flatMap(s -&gt; {
+        Mono&lt;List&lt;String&gt;&gt; mono = Mono.defer(() -&gt; Mono.just(Arrays.asList(
+            getTracer().getBaggage("tenant").get(),
+            getTracer().getBaggage("tenant2").get())
+        ));
+    return mono.subscribeOn(Schedulers.parallel())
+        .contextWrite(ReactorBaggage.append("tenant", s + ":baggage")); // Appends baggage to existing one (tenant2:baggage2)
+})
+    .contextWrite(Context.of(ObservationThreadLocalAccessor.KEY, observation, // Puts observation to Reactor Context
+            ObservationAwareBaggageThreadLocalAccessor.KEY, new BaggageToPropagate("tenant2", "baggage2") // Puts baggage to Reactor Context
+        ))
+    .block();</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exemplars"><a class="anchor" href="#_exemplars"></a>Exemplars</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To add support for <a href="https://grafana.com/docs/grafana/latest/fundamentals/exemplars/">exemplars</a> instead of using the <code>DefaultMeterObservationHandler</code> you should use the <code>TracingAwareMeterObservationHandler</code>, as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ObservationRegistry registry = ObservationRegistry.create();
+registry.observationConfig()
+    // Don't register the DefaultMeterObservationHandler...
+    // .observationHandler(new DefaultMeterObservationHandler(meterRegistry))
+    // ...instead register the tracing aware version
+    .observationHandler(new TracingAwareMeterObservationHandler&lt;&gt;(
+            new DefaultMeterObservationHandler(meterRegistry), tracer));</code></pre>
+</div>
+</div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="index.html">Micrometer Tracing</a></span>
-  <span class="next"><a href="tracers.html">Supported Tracers</a></span>
+  <span class="prev"><a href="api.html">Micrometer Tracing API</a></span>
+  <span class="next"><a href="testing.html">Testing</a></span>
 </nav>
 </article>
   </div>
@@ -352,30 +461,30 @@ Span Id = C
                 <div class="col-left">
                   <ul class="nav-versions">
                     <li class="component is-current">
-                      <a class="title" href="index.html">Micrometer Tracing</a>
+                      <a class="title" href="../index.html">Micrometer Tracing</a>
                       <ul class="versions">
                         <li class="version">
-                          <a href="1.4-SNAPSHOT/index.html">
+                          <a href="../1.4-SNAPSHOT/index.html">
                             1.4.0-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version">
-                          <a href="1.3-SNAPSHOT/index.html">
+                        <li class="version is-current">
+                          <a href="index.html">
                             1.3.1-SNAPSHOT
                           </a>
                         </li>
-                        <li class="version is-current is-latest">
-                          <a href="index.html">
+                        <li class="version is-latest">
+                          <a href="../index.html">
                             1.3.0<span class="current">current</span>
                           </a>
                         </li>
                         <li class="version">
-                          <a href="1.2-SNAPSHOT/index.html">
+                          <a href="../1.2-SNAPSHOT/index.html">
                             1.2.7-SNAPSHOT
                           </a>
                         </li>
                         <li class="version">
-                          <a href="1.2/index.html">
+                          <a href="../1.2/index.html">
                             1.2.6
                           </a>
                         </li>
@@ -404,8 +513,8 @@ Span Id = C
 </div></div>
 <footer class="footer flex">
     <div id="spring-links">
-        <img class="light" id="springlogo" src="./_/img/micrometer-logo.svg" alt="Micrometer">
-        <img class="dark" id="springlogo" src="./_/img/micrometer-logo-dark.svg" alt="Micrometer">
+        <img class="light" id="springlogo" src="../_/img/micrometer-logo.svg" alt="Micrometer">
+        <img class="dark" id="springlogo" src="../_/img/micrometer-logo-dark.svg" alt="Micrometer">
         <p class="smallest antialiased">© <script>var d = new Date();
         document.write(d.getFullYear());</script> <a href="https://www.vmware.com/">VMware</a>, Inc. or its affiliates. <a href="https://www.vmware.com/help/legal.html">Terms of Use</a> • <a href="https://www.vmware.com/help/privacy.html" rel="noopener noreferrer">Privacy</a></p>
     </div>
@@ -414,10 +523,10 @@ Span Id = C
         <a href="https://twitter.com/micrometerio" title="Twitter"><svg id="twitter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.93 75.93"><circle class="cls-1" cx="37.97" cy="37.97" r="37.97"/><path id="Twitter-2" data-name="Twitter" class="cls-2" d="M55.2,22.73a15.43,15.43,0,0,1-4.88,1.91,7.56,7.56,0,0,0-5.61-2.49A7.78,7.78,0,0,0,37,30a7.56,7.56,0,0,0,.2,1.79,21.63,21.63,0,0,1-15.84-8.23,8,8,0,0,0,2.37,10.52,7.66,7.66,0,0,1-3.48-1v.09A7.84,7.84,0,0,0,26.45,41a7.54,7.54,0,0,1-2,.28A7.64,7.64,0,0,1,23,41.09a7.71,7.71,0,0,0,7.18,5.47,15.21,15.21,0,0,1-9.55,3.37,15.78,15.78,0,0,1-1.83-.11,21.41,21.41,0,0,0,11.78,3.54c14.13,0,21.86-12,21.86-22.42,0-.34,0-.68,0-1a15.67,15.67,0,0,0,3.83-4.08,14.9,14.9,0,0,1-4.41,1.24A7.8,7.8,0,0,0,55.2,22.73Z"/></svg></a>
     </div>
 </footer>
-<script src="./_/js/vendor/import.js"></script>
-<script src="./_/js/site.js"></script>
-<script async src="./_/js/vendor/highlight.js"></script>
-<script async src="./_/js/vendor/asciidoctor-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
+<script src="../_/js/vendor/import.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+<script async src="../_/js/vendor/asciidoctor-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
 
 <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -427,8 +536,8 @@ Span Id = C
                 <div id="counter"></div>
                 <div class="search-by">
                     <a target="_blank" rel="noopener noreferrer" href="https://www.algolia.com/" aria-label="Search by Algolia">
-                        <img class="light" width="140" src="./_/img/algolia-light.svg" />
-                        <img class="dark" width="140" src="./_/img/algolia-dark.svg" />
+                        <img class="light" width="140" src="../_/img/algolia-light.svg" />
+                        <img class="dark" width="140" src="../_/img/algolia-dark.svg" />
                     </a>
                 </div>
                 <div id="hits"></div>
@@ -440,6 +549,6 @@ Span Id = C
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="./_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="./_/css/vendor/search.css" data-page-version="1.3.0" data-page-component="tracing"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.3.1" data-page-component="tracing"></script>
   </body>
 </html>
