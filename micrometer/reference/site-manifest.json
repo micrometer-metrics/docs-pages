@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-06-10T20:53:44.746Z",
+  "generated": "2024-06-10T21:01:32.243Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -1088,9 +1088,9 @@
             }
           ]
         },
-        "1.12.7": {
+        "1.12.8": {
           "prerelease": true,
-          "displayVersion": "1.12.7-SNAPSHOT",
+          "displayVersion": "1.12.8-SNAPSHOT",
           "url": "/1.12-SNAPSHOT/index.html",
           "pages": [
             {
@@ -1444,7 +1444,7 @@
             }
           ]
         },
-        "1.12.6": {
+        "1.12.7": {
           "url": "/1.12/index.html",
           "pages": [
             {
