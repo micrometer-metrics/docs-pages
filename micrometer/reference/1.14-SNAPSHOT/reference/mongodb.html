@@ -527,7 +527,7 @@ MongoClientSettings settings = MongoClientSettings.builder()
     .applyToClusterSettings(builder -&gt; builder.hosts(singletonList(new ServerAddress(host, port)))
         .addClusterListener(new ClusterListener() {
             @Override
-            public void clusterOpening(ClusterOpeningEvent event) {
+            public void clusterOpening(@NonNull ClusterOpeningEvent event) {
                 clusterId.set(event.getClusterId().getValue());
             }
         }))
@@ -542,6 +542,7 @@ Tags tags = Tags.of("cluster.id", clusterId.get(), "server.address", String.form
 
 assertThat(registry.get("mongodb.driver.pool.size").tags(tags).gauge().value()).isEqualTo(2);
 assertThat(registry.get("mongodb.driver.pool.checkedout").gauge().value()).isZero();
+assertThat(registry.get("mongodb.driver.pool.checkoutfailed").counter().count()).isZero();
 assertThat(registry.get("mongodb.driver.pool.waitqueuesize").gauge().value()).isZero();
 
 mongo.close();</code></pre>
