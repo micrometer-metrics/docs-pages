@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="ab6901c8a69c403cc2392e165de23a5b577a9eb6"> 
-    <meta name="version" content="1.3.3">
+    <meta name="version" content="1.4.0-M1">
     <meta name="component" content="tracing">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.3.3">
+<div class="nav-container" data-component="tracing" data-version="1.4.0-M1">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.3.3-SNAPSHOT</span>
+  <span class="version">1.4.0-M1</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -205,7 +205,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/edit/1.3.x/docs/modules/ROOT/pages/api.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.4.0-M1/docs/modules/ROOT/pages/api.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -545,6 +545,37 @@ For Brave, remember to set up the <code>PropagationFactory</code> so that it con
     .build();</code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_baggage_with_micrometer_observation_api"><a class="anchor" href="#_baggage_with_micrometer_observation_api"></a>Baggage with Micrometer Observation API</h3>
+<div class="paragraph">
+<p>If you&#8217;re using Micrometer Observation API, there&#8217;s no notion of baggage. If you set up a <code>BaggageManager</code> to have the baggage fields configured, we will assume that when the Observation gets put in scope, whatever low and high cardinality keys are set on the Observation will be put in scope as baggage (assuming that their names match with the configuration on the <code>BaggageManager</code>). Below you can find example of such setup with OpenTelemetry <code>BaggageManager</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// There will be 3 baggage keys in total, 2 for remote fields and 1 as tag field
+OtelBaggageManager otelBaggageManager = new OtelBaggageManager(otelCurrentTraceContext,
+        Arrays.asList(KEY_1, OBSERVATION_BAGGAGE_KEY), Collections.singletonList(TAG_KEY));
+
+
+// For automated baggage scope creation the tracing handler is required
+observationRegistry.observationConfig().observationHandler(new DefaultTracingObservationHandler(tracer));
+
+// An observation with low and high cardinality keys
+// with key names equal to baggage key entries set on the baggage manager
+Observation observation = Observation.start("foo", observationRegistry)
+    .lowCardinalityKeyValue(KEY_1, TAG_VALUE)
+    .highCardinalityKeyValue(OBSERVATION_BAGGAGE_KEY, OBSERVATION_BAGGAGE_VALUE);
+
+// There is no baggage here
+try (Scope scope = observation.openScope()) {
+    // Baggage here will be automatically put in scope
+    then(tracer.getBaggage(KEY_1).get()).isEqualTo(TAG_VALUE);
+    then(tracer.getBaggage(OBSERVATION_BAGGAGE_KEY).get()).isEqualTo(OBSERVATION_BAGGAGE_VALUE);
+}
+// There is no baggage here</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -764,7 +795,7 @@ span.end();</code></pre>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../1.4/index.html">
+    <a href="index.html">
       1.4.0-M1
     </a>
   </li>
@@ -783,7 +814,7 @@ span.end();</code></pre>
     </a>
   </li>
   <li class="version">
-    <a href="index.html">
+    <a href="../1.3-SNAPSHOT/index.html">
       1.3.3-SNAPSHOT
     </a>
   </li>
@@ -854,6 +885,6 @@ span.end();</code></pre>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.3.3" data-page-component="tracing"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.4.0-M1" data-page-component="tracing"></script>
   </body>
 </html>
