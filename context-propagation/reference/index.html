@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./_/css/vendor/page-search.css">
     <link rel="stylesheet" href="./_/css/vendor/asciidoctor-tabs.css">
 
+    <meta name="antora-ui-version" content="ab6901c8a69c403cc2392e165de23a5b577a9eb6"> 
     <meta name="version" content="1.1.1">
     <meta name="component" content="context-propagation">
     <meta name="latest-version" content="true">
@@ -125,7 +126,7 @@
           d="M384,224c-17.7,0-32,14.3-32,32s14.3,32,32,32s32-14.3,32-32S401.7,224,384,224L384,224z"
         ></path></g></svg>
   </button>
-</div><div class="search">
+  <div class="search">
   <button class="DocSearch-Button search-button">
     <svg enable-background="new 0 0 32 32" id="Glyph" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <path d="M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14  s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0  C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z" id="XMLID_223_"/>
@@ -134,20 +135,20 @@
     <span class="search-key"></span>
   </button>
 </div>
-<ul class="nav-list">
+</div><ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="index.html">Context Propagation support</a>
+    <a class="nav-link"  href="index.html">Context Propagation support</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="installing.html">Installing</a>
+    <a class="nav-link"  href="installing.html">Installing</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="purpose.html">Purpose</a>
+    <a class="nav-link"  href="purpose.html">Purpose</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="usage.html">Examples</a>
+    <a class="nav-link"  href="usage.html">Examples</a>
   </li>
 </ul>
   </li>
@@ -230,21 +231,21 @@
   </div>
 </aside>
 <article class="doc">
-<nav class="breadcrumbs" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="index.html">Micrometer Context Propagation</a></li>
-    <li><a href="index.html">Context Propagation support</a></li>
-  </ul>
-</nav>
-<h1 id="page-title" class="page">Context Propagation support</h1>
+<div class="breadcrumbs-container">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Micrometer Context Propagation</a></li>
+      <li><a href="index.html">Context Propagation support</a></li>
+    </ul>
+  </nav>
+</div><h1 id="page-title" class="page">Context Propagation support</h1>
 <div class="paragraph">
 <p>The <a href="https://github.com/micrometer-metrics/context-propagation">Context Propagation</a> library assists with context propagation across different types of context mechanisms, such as <code>ThreadLocal</code>, Reactor <a href="https://projectreactor.io/docs/core/release/reference/#context">Context</a>, and others.</p>
 </div>
 <nav class="pagination">
   <span class="next"><a href="installing.html">Installing</a></span>
 </nav>
-</article>
-  </div>
+</article>  </div>
 </main>
 <div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -255,27 +256,46 @@
               </button>
               <div class="colset">
                 <div class="col-left">
+
                   <ul class="nav-versions">
-                    <li class="component is-current">
-                      <a class="title" href="index.html">Micrometer Context Propagation</a>
-                      <ul class="versions">
-                        <li class="version">
-                          <a href="1.2-SNAPSHOT/index.html">
-                            1.2.0-SNAPSHOT
-                          </a>
-                        </li>
-                        <li class="version">
-                          <a href="1.1-SNAPSHOT/index.html">
-                            1.1.2-SNAPSHOT
-                          </a>
-                        </li>
-                        <li class="version is-current is-latest">
-                          <a href="index.html">
-                            1.1.1<span class="current">current</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
+                      <li class="component">
+                        <div>
+                          <a class="title" href="index.html">Micrometer Context Propagation</a>
+                        </div>                        <div class="version-item is-active">
+                          <div>
+                            <button class="version-toggle" type="button">
+                              <span></span>
+                              Stable
+                            </button>
+                          </div>
+                          <ul class="versions">
+  <li class="version">
+    <a href="index.html">
+      1.1.1
+    </a>
+  </li>
+</ul>                        </div>
+                        <div class="version-item">
+                          <div>
+                            <button class="version-toggle" type="button">
+                              <span></span>
+                              Snapshot
+                            </button>
+                          </div>
+                          <ul class="versions">
+  <li class="version">
+    <a href="1.2-SNAPSHOT/index.html">
+      1.2.0-SNAPSHOT
+    </a>
+  </li>
+  <li class="version">
+    <a href="1.1-SNAPSHOT/index.html">
+      1.1.2-SNAPSHOT
+    </a>
+  </li>
+</ul>                        </div>
+                        
+                      </li>
                   </ul>
                 </div>
                 <div class="col-right">
