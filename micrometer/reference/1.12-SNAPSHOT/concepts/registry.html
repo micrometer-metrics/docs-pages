@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Registry :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/concepts/registry.html">
-    <link rel="prev" href="implementations.html">
-    <link rel="next" href="meters.html">
+    <link rel="prev" href="meters.html">
+    <link rel="next" href="naming.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -152,11 +152,11 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="implementations.html">Supported Monitoring Systems</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link"  href="registry.html">Registry</a>
-  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="meters.html">Meters</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link"  href="registry.html">Registry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="naming.html">Naming Meters</a>
@@ -468,7 +468,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>A <code>Meter</code> is the interface for collecting a set of measurements (which we individually call metrics) about your application. Meters in Micrometer are created from and held in a <code>MeterRegistry</code>. Each supported monitoring system has an implementation of <code>MeterRegistry</code>. How a registry is created varies for each implementation.</p>
+<p>Meters in Micrometer are created from and held in a <code>MeterRegistry</code>. Each supported monitoring system has an implementation of <code>MeterRegistry</code>. How a registry is created varies for each implementation.</p>
 </div>
 <div class="paragraph">
 <p>Micrometer includes a <code>SimpleMeterRegistry</code> that holds the latest value of each meter in memory and does not export the data anywhere. If you do not yet have a preferred monitoring system, you can get started playing with metrics by using the simple registry:</p>
@@ -582,8 +582,8 @@ class MyApplication {
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="implementations.html">Supported Monitoring Systems</a></span>
-  <span class="next"><a href="meters.html">Meters</a></span>
+  <span class="prev"><a href="meters.html">Meters</a></span>
+  <span class="next"><a href="naming.html">Naming Meters</a></span>
 </nav>
 </article>  </div>
 </main>

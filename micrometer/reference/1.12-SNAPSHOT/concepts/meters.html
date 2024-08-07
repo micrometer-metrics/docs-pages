@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Meters :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/concepts/meters.html">
-    <link rel="prev" href="registry.html">
-    <link rel="next" href="naming.html">
+    <link rel="prev" href="implementations.html">
+    <link rel="next" href="registry.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -152,11 +152,11 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="implementations.html">Supported Monitoring Systems</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="registry.html">Registry</a>
-  </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link"  href="meters.html">Meters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="registry.html">Registry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="naming.html">Naming Meters</a>
@@ -466,14 +466,30 @@
 </div>
 <h1 id="page-title" class="page">Meters</h1>
 <div class="paragraph">
+<p>A <code>Meter</code> is the interface for collecting a set of measurements (which we individually call metrics) about your application.</p>
+</div>
+<div class="paragraph">
 <p>Micrometer supports a set of <code>Meter</code> primitives, including <code>Timer</code>, <code>Counter</code>, <code>Gauge</code>, <code>DistributionSummary</code>, <code>LongTaskTimer</code>, <code>FunctionCounter</code>, <code>FunctionTimer</code>, and <code>TimeGauge</code>. Different meter types result in a different number of time series metrics. For example, while there is a single metric that represents a <code>Gauge</code>, a <code>Timer</code> measures both the count of timed events and the total time of all timed events.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Recording a measurement for a <code>Meter</code> is expected to be a relatively cheap operation and should not throw any exception.
+If the <a href="registry.html" class="xref page">registry</a> supports publishing metrics to a monitoring system, this is done in a separate thread snd should not affect recording metrics.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>A meter is uniquely identified by its name and dimensions. We use the terms, &#8220;dimensions&#8221; and &#8220;tags,&#8221; interchangeably, and the Micrometer interface is <code>Tag</code> simply because it is shorter. As a general rule, it should be possible to use the name as a pivot. Dimensions let a particular named metric be sliced to drill down and reason about the data. This means that, if only the name is selected, you can drill down by using other dimensions and reason about the value being shown.</p>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="registry.html">Registry</a></span>
-  <span class="next"><a href="naming.html">Naming Meters</a></span>
+  <span class="prev"><a href="implementations.html">Supported Monitoring Systems</a></span>
+  <span class="next"><a href="registry.html">Registry</a></span>
 </nav>
 </article>  </div>
 </main>

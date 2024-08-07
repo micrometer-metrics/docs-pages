@@ -153,10 +153,10 @@
     <a class="nav-link"  href="../concepts/implementations.html">Supported Monitoring Systems</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/registry.html">Registry</a>
+    <a class="nav-link"  href="../concepts/meters.html">Meters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/meters.html">Meters</a>
+    <a class="nav-link"  href="../concepts/registry.html">Registry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="../concepts/naming.html">Naming Meters</a>
@@ -481,29 +481,30 @@ private final CommonsObjectPool2Metrics commonsObjectPool2Metrics = new CommonsO
 
 
 // Generic Pool instrumentation (with examples of created meters)
-try (GenericObjectPool&lt;Object&gt; p = createGenericObjectPool()) {
-    MeterRegistry registry = new SimpleMeterRegistry();
+try (GenericObjectPool&lt;Object&gt; ignored = createGenericObjectPool()) {
     commonsObjectPool2Metrics.bindTo(registry);
+    Tags tagsToMatch = tags.and("name", "pool", "type", "GenericObjectPool", "factoryType",
+            "io.micrometer.core.instrument.binder.commonspool2.CommonsObjectPool2MetricsTest$1&lt;java.lang.Object&gt;");
 
-    registry.get("commons.pool2.num.idle").tags(tags).gauge();
-    registry.get("commons.pool2.num.waiters").tags(tags).gauge();
+    registry.get("commons.pool2.num.idle").tags(tagsToMatch).gauge();
+    registry.get("commons.pool2.num.waiters").tags(tagsToMatch).gauge();
 
     Arrays
         .asList("commons.pool2.created", "commons.pool2.borrowed", "commons.pool2.returned",
                 "commons.pool2.destroyed", "commons.pool2.destroyed.by.evictor",
                 "commons.pool2.destroyed.by.borrow.validation")
-        .forEach(name -&gt; registry.get(name).tags(tags).functionCounter());
+        .forEach(name -&gt; registry.get(name).tags(tagsToMatch).functionCounter());
 
     Arrays
         .asList("commons.pool2.max.borrow.wait", "commons.pool2.mean.active", "commons.pool2.mean.idle",
                 "commons.pool2.mean.borrow.wait")
-        .forEach(name -&gt; registry.get(name).tags(tags).timeGauge());
+        .forEach(name -&gt; registry.get(name).tags(tagsToMatch).timeGauge());
 }
 
 // Generic Keyed Pool instrumentation (with examples of created meters)
-try (GenericKeyedObjectPool&lt;Object, Object&gt; p = createGenericKeyedObjectPool()) {
-    Tags tagsToMatch = tags.and("type", "GenericKeyedObjectPool");
+try (GenericKeyedObjectPool&lt;Object, Object&gt; ignored = createGenericKeyedObjectPool()) {
     commonsObjectPool2Metrics.bindTo(registry);
+    Tags tagsToMatch = tags.and("name", "pool", "type", "GenericKeyedObjectPool", "factoryType", "none");
 
     Arrays.asList("commons.pool2.num.idle", "commons.pool2.num.waiters")
         .forEach(name -&gt; registry.get(name).tags(tagsToMatch).gauge());
