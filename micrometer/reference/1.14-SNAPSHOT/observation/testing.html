@@ -553,6 +553,31 @@ void should_assert_your_observation() {
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="micrometer-observation-validator"><a class="anchor" href="#micrometer-observation-validator"></a>Observation Validator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you use <code>TestObservationRegistry</code>, an <code>ObservationHandler</code> called <code>ObservationValidator</code> is registered automatically. The purpose of this <code>ObservationHandler</code> is validating the order of the calls on an <code>Observation</code> (for example <code>stop</code> should not be called before <code>start</code> or neither of them should be called twice, etc). Please check <code>ObservationValidatorTests</code> for the list of invalid scenarios.</p>
+</div>
+<div class="paragraph">
+<p>If <code>ObservationValidator</code> detects such an issue, it will throw an <code>InvalidObservationException</code> which contains a validation message (explains why the <code>Observation</code> is invalid), the original <code>Observation.Context</code> and a history with the relevant stacktraces of the calls that were made on the <code>Observation</code>. These should help you to troubleshoot what went wrong with the instrumentation. The <code>toString()</code> method of the <code>InvalidObservationException</code> gives you the error message and a textual summary of the history, something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">io.micrometer.observation.tck.InvalidObservationException: Invalid error signal: Observation has already been stopped
+START: app//io.micrometer.observation.tck.ObservationValidatorTests.errorAfterStopShouldBeInvalid(ObservationValidatorTests.java:98)
+STOP: app//io.micrometer.observation.tck.ObservationValidatorTests.errorAfterStopShouldBeInvalid(ObservationValidatorTests.java:99)
+ERROR: app//io.micrometer.observation.tck.ObservationValidatorTests.errorAfterStopShouldBeInvalid(ObservationValidatorTests.java:100)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Based on this, it seems that <code>error</code> (in <code>ObservationValidatorTests.java</code>, line <code>#100</code>) was called after <code>stop</code> (in <code>ObservationValidatorTests.java</code>, line <code>#99</code>) which is an invalid scenario. If you view the error in an IDE, the locations (i.e.: <code>ObservationValidatorTests.java:98</code>) should be "links" and clicking them should make the IDE jump to that line.</p>
+</div>
+<div class="paragraph">
+<p>If you get an error like the above coming from the instrumentation of a third-party library, please open an issue/pull request for that project.</p>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="instrumenting.html">Instrumenting</a></span>
   <span class="next"><a href="projects.html">Instrumented Projects</a></span>
@@ -602,7 +627,7 @@ void should_assert_your_observation() {
                           <ul class="versions">
   <li class="version">
     <a href="../../1.14/index.html">
-      1.14.0-M1
+      1.14.0-M2
     </a>
   </li>
 </ul>                        </div>

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="ab6901c8a69c403cc2392e165de23a5b577a9eb6"> 
-    <meta name="version" content="1.14.0-M1">
+    <meta name="version" content="1.14.0-M2">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.14.0-M1">
+<div class="nav-container" data-component="micrometer" data-version="1.14.0-M2">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.14.0-M1</span>
+  <span class="version">1.14.0-M2</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -153,10 +153,10 @@
     <a class="nav-link"  href="../concepts/implementations.html">Supported Monitoring Systems</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/registry.html">Registry</a>
+    <a class="nav-link"  href="../concepts/meters.html">Meters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/meters.html">Meters</a>
+    <a class="nav-link"  href="../concepts/registry.html">Registry</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="../concepts/naming.html">Naming Meters</a>
@@ -409,7 +409,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.14.0-M1/docs/modules/ROOT/pages/implementations/otlp.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.14.0-M2/docs/modules/ROOT/pages/implementations/otlp.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -609,6 +609,9 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <p><a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#histogram" target="_blank" rel="noopener">Histogram</a></p>
 </li>
 <li>
+<p><a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#exponentialhistogram" target="_blank" rel="noopener">Exponential Histogram</a></p>
+</li>
+<li>
 <p><a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#summary-legacy" target="_blank" rel="noopener">Summary</a></p>
 </li>
 </ol>
@@ -637,7 +640,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Gauge, TimeGauge, MultiGauge</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Histogram</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Histogram/Exponential Histogram<sup>*</sup></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Timer, DistributionSummary, LongTaskTimer, FunctionTimer (only sum and count are set)</p></td>
 </tr>
 <tr>
@@ -646,6 +649,9 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><em>* - Histogram or Exponential Histogram is determined based on the configuration of the <code>OtlpMeterRegistry</code>. See below section for more info.</em></p>
+</div>
 <div class="paragraph">
 <p><strong>Note</strong>:</p>
 </div>
@@ -685,7 +691,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">publishPercentileHistogram</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Histogram</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Histogram/Exponential Histogram <sup>*</sup></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">serviceLevelObjectives</p></td>
@@ -698,7 +704,28 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Alternatively, if you use Spring Boot, you can use the <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.metrics.customizing.per-meter-properties" target="_blank" rel="noopener">per-meter properties</a> to configure this behavior.</p>
+<p><em>* The configuration <code>histogramFlavor</code> determines whether the OTLP DataPoint is a Histogram/Exponential Histogram.</em></p>
+</div>
+<div class="paragraph">
+<p><code>OtlpMeterRegistry</code> supports 2 types of Histogram implementations (1.Explicit Bucket Histogram (or simply called Histogram), 2. Exponential Histogram) when <code>publishPercentileHistogram</code> is configured. The choice is chosen by setting <code>histogramFlavor</code> in <code>OtlpConfig</code> used by registry. When the implementation is exponential histogram, it also supports 2 additional properties</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>maxScale used to cap the maximum <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#exponential-scale" target="_blank" rel="noopener">scale</a> used by the Exponential Histogram (defaults to 20).</p>
+</li>
+<li>
+<p>maxBuckets determines the maximum number of <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#exponential-buckets" target="_blank" rel="noopener">buckets</a> to be used for exponential histograms (defaults to 160).</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Since Exponential Histogram cannot have custom SLO&#8217;s specified, explicit bucket histogram is used whenever <code>serviceLevelObjectives</code> are added.</p>
+</div>
+<div class="sect2">
+<h3 id="_configuration_with_spring_boot"><a class="anchor" href="#_configuration_with_spring_boot"></a>4.1. Configuration with Spring Boot</h3>
+<div class="paragraph">
+<p>If you use Spring Boot, you can use the <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.metrics.customizing.per-meter-properties" target="_blank" rel="noopener">per-meter properties</a> to configure this behavior.</p>
 </div>
 <div class="paragraph">
 <p>If you want to generate a Histogram data point for a Timer with name <code>test.timer</code> and default buckets generated by Micrometer, use:</p>
@@ -722,6 +749,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">management.metrics.distribution.percentiles.test.timer=0.9,0.99</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -775,7 +803,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
                           <ul class="versions">
   <li class="version">
     <a href="../index.html">
-      1.14.0-M1
+      1.14.0-M2
     </a>
   </li>
 </ul>                        </div>
@@ -864,6 +892,6 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.14.0-M1" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.14.0-M2" data-page-component="micrometer"></script>
   </body>
 </html>
