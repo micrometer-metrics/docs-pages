@@ -567,7 +567,7 @@ The following image shows the miss ratio when it exceeds 10%:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
-LoadingCache&lt;String, String&gt; cache = Caffeine.newBuilder().build(key -&gt; "");
+LoadingCache&lt;String, String&gt; cache = Caffeine.newBuilder().recordStats().build(key -&gt; "");
 
 CaffeineCacheMetrics&lt;String, String, Cache&lt;String, String&gt;&gt; metrics = new CaffeineCacheMetrics&lt;&gt;(cache, "testCache",
         expectedTag);
@@ -608,8 +608,8 @@ EhCache2Metrics.monitor(meterRegistry, cache, expectedTag);</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
-LoadingCache&lt;String, String&gt; cache = CacheBuilder.newBuilder().build(new CacheLoader&lt;String, String&gt;() {
-    public String load(String key) throws Exception {
+LoadingCache&lt;String, String&gt; cache = CacheBuilder.newBuilder().recordStats().build(new CacheLoader&lt;&gt;() {
+    public String load(String key) {
         return "";
     }
 });
