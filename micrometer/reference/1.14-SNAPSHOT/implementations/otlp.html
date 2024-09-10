@@ -640,8 +640,12 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Gauge, TimeGauge, MultiGauge</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Histogram/Exponential Histogram<sup>*</sup></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Histogram</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Timer, DistributionSummary, LongTaskTimer, FunctionTimer (only sum and count are set)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exponential Histogram<sup>*</sup></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timer, DistributionSummary</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Summary</p></td>
@@ -694,11 +698,15 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Histogram/Exponential Histogram <sup>*</sup></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">publishPercentiles and publishPercentileHistogram</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Histogram/Exponential Histogram <sup>*</sup></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">serviceLevelObjectives</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Histogram</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">publishPercentiles and (publishPercentileHistogram/serviceLevelObjectives)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">publishPercentiles and serviceLevelObjectives</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Histogram</p></td>
 </tr>
 </tbody>
@@ -803,7 +811,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
                           <ul class="versions">
   <li class="version">
     <a href="../../1.14/index.html">
-      1.14.0-M2
+      1.14.0-M3
     </a>
   </li>
 </ul>                        </div>

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="ab6901c8a69c403cc2392e165de23a5b577a9eb6"> 
-    <meta name="version" content="1.14.0-M2">
+    <meta name="version" content="1.14.0-M3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.14.0-M2">
+<div class="nav-container" data-component="micrometer" data-version="1.14.0-M3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.14.0-M2</span>
+  <span class="version">1.14.0-M3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -409,7 +409,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.14.0-M2/docs/modules/ROOT/pages/observation/testing.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.14.0-M3/docs/modules/ROOT/pages/observation/testing.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -553,6 +553,31 @@ void should_assert_your_observation() {
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="micrometer-observation-validator"><a class="anchor" href="#micrometer-observation-validator"></a>Observation Validator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you use <code>TestObservationRegistry</code>, an <code>ObservationHandler</code> called <code>ObservationValidator</code> is registered automatically. The purpose of this <code>ObservationHandler</code> is validating the order of the calls on an <code>Observation</code> (for example <code>stop</code> should not be called before <code>start</code> or neither of them should be called twice, etc). Please check <code>ObservationValidatorTests</code> for the list of invalid scenarios.</p>
+</div>
+<div class="paragraph">
+<p>If <code>ObservationValidator</code> detects such an issue, it will throw an <code>InvalidObservationException</code> which contains a validation message (explains why the <code>Observation</code> is invalid), the original <code>Observation.Context</code> and a history with the relevant stacktraces of the calls that were made on the <code>Observation</code>. These should help you to troubleshoot what went wrong with the instrumentation. The <code>toString()</code> method of the <code>InvalidObservationException</code> gives you the error message and a textual summary of the history, something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">io.micrometer.observation.tck.InvalidObservationException: Invalid error signal: Observation has already been stopped
+START: app//io.micrometer.observation.tck.ObservationValidatorTests.errorAfterStopShouldBeInvalid(ObservationValidatorTests.java:98)
+STOP: app//io.micrometer.observation.tck.ObservationValidatorTests.errorAfterStopShouldBeInvalid(ObservationValidatorTests.java:99)
+ERROR: app//io.micrometer.observation.tck.ObservationValidatorTests.errorAfterStopShouldBeInvalid(ObservationValidatorTests.java:100)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Based on this, it seems that <code>error</code> (in <code>ObservationValidatorTests.java</code>, line <code>#100</code>) was called after <code>stop</code> (in <code>ObservationValidatorTests.java</code>, line <code>#99</code>) which is an invalid scenario. If you view the error in an IDE, the locations (i.e.: <code>ObservationValidatorTests.java:98</code>) should be "links" and clicking them should make the IDE jump to that line.</p>
+</div>
+<div class="paragraph">
+<p>If you get an error like the above coming from the instrumentation of a third-party library, please open an issue/pull request for that project.</p>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="instrumenting.html">Instrumenting</a></span>
   <span class="next"><a href="projects.html">Instrumented Projects</a></span>
@@ -602,7 +627,7 @@ void should_assert_your_observation() {
                           <ul class="versions">
   <li class="version">
     <a href="../index.html">
-      1.14.0-M2
+      1.14.0-M3
     </a>
   </li>
 </ul>                        </div>
@@ -691,6 +716,6 @@ void should_assert_your_observation() {
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.14.0-M2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.14.0-M3" data-page-component="micrometer"></script>
   </body>
 </html>
