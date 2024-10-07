@@ -1062,7 +1062,7 @@ ObservedService service = pf.getProxy();
 service.call();
 
 // assert that observation has been properly created
-TestObservationRegistryAssert.assertThat(registry)
+assertThat(registry)
         .hasSingleObservationThat()
         .hasBeenStopped()
         .hasNameEqualTo("test.call")

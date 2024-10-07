@@ -1193,15 +1193,13 @@ consumer.poll(Duration.ofMillis(1000));</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">TestObservationRegistryAssert.assertThat(registry)
-    .hasObservationWithNameEqualTo("kafka.send")
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">assertThat(registry).hasObservationWithNameEqualTo("kafka.send")
     .that()
     .hasBeenStarted()
     .hasBeenStopped()
     .hasLowCardinalityKeyValue("sent", "true");
 
-TestObservationRegistryAssert.assertThat(registry)
-    .hasObservationWithNameEqualTo("kafka.receive")
+assertThat(registry).hasObservationWithNameEqualTo("kafka.receive")
     .that()
     .hasBeenStarted()
     .hasBeenStopped()

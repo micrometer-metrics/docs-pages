@@ -506,7 +506,7 @@ SimpleResponse response = stub.unaryRpc(request);
 assertThat(response.getResponseMessage()).isEqualTo("Hello");
 
 // Observation outcome
-TestObservationRegistryAssert.assertThat(observationRegistry)
+assertThat(observationRegistry)
     .hasAnObservation(observationContextAssert -&gt; observationContextAssert.hasNameEqualTo("grpc.client"))
     .hasAnObservation(observationContextAssert -&gt; observationContextAssert.hasNameEqualTo("grpc.server"));</code></pre>
 </div>

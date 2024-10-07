@@ -525,7 +525,7 @@ void should_assert_your_observation() {
     new Example(registry).run();
 
     // check your observation
-    TestObservationRegistryAssert.assertThat(registry)
+    assertThat(registry)
             .doesNotHaveAnyRemainingCurrentObservation()
             .hasObservationWithNameEqualTo("foo")
             .that()
