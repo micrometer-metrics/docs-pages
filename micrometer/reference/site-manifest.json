@@ -1,11 +1,11 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-10-14T21:22:49.419Z",
+  "generated": "2024-10-14T21:43:44.606Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
       "title": "Micrometer",
-      "latest": "1.13.5",
+      "latest": "1.13.6",
       "versions": {
         "1.14.0": {
           "prerelease": true,
@@ -713,9 +713,9 @@
             }
           ]
         },
-        "1.13.6": {
+        "1.13.7": {
           "prerelease": true,
-          "displayVersion": "1.13.6-SNAPSHOT",
+          "displayVersion": "1.13.7-SNAPSHOT",
           "url": "/1.13-SNAPSHOT/index.html",
           "pages": [
             {
@@ -1059,7 +1059,7 @@
             }
           ]
         },
-        "1.13.5": {
+        "1.13.6": {
           "url": "/index.html",
           "pages": [
             {
@@ -1141,21 +1141,6 @@
               "path": "contextpropagation.adoc",
               "url": "/contextpropagation.html",
               "title": "Context Propagation support"
-            },
-            {
-              "path": "contextpropagation/installing.adoc",
-              "url": "/contextpropagation/installing.html",
-              "title": "Installing"
-            },
-            {
-              "path": "contextpropagation/purpose.adoc",
-              "url": "/contextpropagation/purpose.html",
-              "title": "Purpose"
-            },
-            {
-              "path": "contextpropagation/usage.adoc",
-              "url": "/contextpropagation/usage.html",
-              "title": "Usage Examples"
             },
             {
               "path": "guides.adoc",
