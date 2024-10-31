@@ -453,6 +453,8 @@
   </table>
 </div>
 <h1 id="page-title" class="page">JVM Metrics</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer provides several binders for monitoring the JVM:</p>
 </div>
@@ -462,7 +464,8 @@
 new JvmMemoryMetrics().bindTo(registry); <i class="conum" data-value="2"></i><b>(2)</b>
 new JvmGcMetrics().bindTo(registry); <i class="conum" data-value="3"></i><b>(3)</b>
 new ProcessorMetrics().bindTo(registry); <i class="conum" data-value="4"></i><b>(4)</b>
-new JvmThreadMetrics().bindTo(registry); <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+new JvmThreadMetrics().bindTo(registry); <i class="conum" data-value="5"></i><b>(5)</b>
+new JvmThreadDeadlockMetrics().bindTo(registry); <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -486,6 +489,10 @@ new JvmThreadMetrics().bindTo(registry); <i class="conum" data-value="5"></i><b>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
 <td>Gauges thread peak, the number of daemon threads, and live threads.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Gauges the number of threads that are deadlocked.</td>
 </tr>
 </table>
 </div>
@@ -544,6 +551,24 @@ another. The reported value underestimates the actual total number of steals whe
 <p><code>executor.pool.size</code> (<code>Gauge</code>): The current number of threads in the pool.</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_java_21_metrics"><a class="anchor" href="#_java_21_metrics"></a>Java 21 Metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Micrometer provides support for <a href="https://openjdk.org/jeps/444">virtual threads</a> released in Java 21. In order to utilize it, you need to add the <code>io.micrometer:micrometer-java21</code> dependency to your classpath to use the binder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">new VirtualThreadMetrics().bindTo(registry);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The binder measures the duration (and counts the number of events) of virtual threads being pinned; also counts the number of events when starting or unparking a virtual thread failed.</p>
+</div>
+</div>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="jetty.html">Jetty and Jersey</a></span>
