@@ -595,6 +595,69 @@ public class ExampleService {
 }</code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_metertag_on_method_parameters"><a class="anchor" href="#_metertag_on_method_parameters"></a>@MeterTag on Method Parameters</h3>
+<div class="paragraph">
+<p>To support using the <code>@MeterTag</code> annotation on method parameters, you need to configure the <code>@CountedAspect</code> to add the <code>CountedMeterTagAnnotationHandler</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ValueResolver valueResolver = parameter -&gt; "Value from myCustomTagValueResolver [" + parameter + "]";
+
+// Example of a ValueExpressionResolver that uses Spring Expression Language
+ValueExpressionResolver valueExpressionResolver = new SpelValueExpressionResolver();
+
+
+// Setting the handler on the aspect
+countedAspect.setMeterTagAnnotationHandler(
+        new CountedMeterTagAnnotationHandler(aClass -&gt; valueResolver, aClass -&gt; valueExpressionResolver));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume that we have the following interface.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">interface MeterTagClassInterface {
+
+    @Counted
+    void getAnnotationForTagValueResolver(@MeterTag(key = "test", resolver = ValueResolver.class) String test);
+
+    @Counted
+    void getAnnotationForTagValueExpression(
+            @MeterTag(key = "test", expression = "'hello' + ' characters'") String test);
+
+    @Counted
+    void getAnnotationForArgumentToString(@MeterTag("test") Long param);
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When its implementations would be called with different arguments (remember that the implementation needs to be annotated with <code>@Counted</code> annotation too), the following counters would be created:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Example for returning &lt;toString()&gt; on the parameter
+service.getAnnotationForArgumentToString(15L);
+
+assertThat(registry.get("method.counted").tag("test", "15").counter().count()).isEqualTo(1);
+
+// Example for calling the provided &lt;ValueResolver&gt; on the parameter
+service.getAnnotationForTagValueResolver("foo");
+
+assertThat(registry.get("method.counted")
+    .tag("test", "Value from myCustomTagValueResolver [foo]")
+    .counter()
+    .count()).isEqualTo(1);
+
+// Example for calling the provided &lt;ValueExpressionResolver&gt;
+service.getAnnotationForTagValueExpression("15L");
+
+assertThat(registry.get("method.counted").tag("test", "hello characters").counter().count()).isEqualTo(1);</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
