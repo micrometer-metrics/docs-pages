@@ -659,6 +659,11 @@ timedAspect.setMeterTagAnnotationHandler(
     @Timed
     void getAnnotationForArgumentToString(@MeterTag("test") Long param);
 
+    @Timed
+    void getMultipleAnnotationsForTagValueExpression(
+            @MeterTag(key = "value1", expression = "'value1: ' + value1") @MeterTag(key = "value2",
+                    expression = "'value2: ' + value2") DataHolder param);
+
 }</code></pre>
 </div>
 </div>
@@ -683,7 +688,15 @@ assertThat(registry.get("method.timed")
 // Example for calling the provided &lt;ValueExpressionResolver&gt;
 service.getAnnotationForTagValueExpression("15L");
 
-assertThat(registry.get("method.timed").tag("test", "hello characters").timer().count()).isEqualTo(1);</code></pre>
+assertThat(registry.get("method.timed").tag("test", "hello characters").timer().count()).isEqualTo(1);
+
+// Example for using multiple @MeterTag annotations on the same parameter
+// @MeterTags({ @MeterTag(...), @MeterTag(...) }) can be also used
+service.getMultipleAnnotationsForTagValueExpression(new DataHolder("zxe", "qwe"));
+
+assertThat(
+        registry.get("method.timed").tag("value1", "value1: zxe").tag("value2", "value2: qwe").timer().count())
+    .isEqualTo(1);</code></pre>
 </div>
 </div>
 </div>
