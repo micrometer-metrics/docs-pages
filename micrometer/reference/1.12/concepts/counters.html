@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="18093bc7d4dd7e1c5b3a0a5b2ec3580ee7e7057b"> 
-    <meta name="version" content="1.12.11">
+    <meta name="version" content="1.12.12">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.12.11">
+<div class="nav-container" data-component="micrometer" data-version="1.12.12">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.12.11</span>
+  <span class="version">1.12.12</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -406,7 +406,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.11/docs/modules/ROOT/pages/concepts/counters.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.12.12/docs/modules/ROOT/pages/concepts/counters.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -552,6 +552,64 @@ base units and description. You can register the counter as the last step of its
 </div>
 </div>
 <div class="sect1">
+<h2 id="_the_counted_annotation"><a class="anchor" href="#_the_counted_annotation"></a>The <code>@Counted</code> Annotation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>micrometer-core</code> module contains a <code>@Counted</code> annotation that frameworks can use to add counting support to either specific types of methods such as those serving web request endpoints or, more generally, to all methods.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Micrometer&#8217;s Spring Boot configuration does <em>not</em> recognize <code>@Counted</code> on arbitrary methods.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Also, an incubating AspectJ aspect is included in <code>micrometer-core</code>. You can use it in your application either through compile/load time AspectJ weaving or through framework facilities that interpret AspectJ aspects and proxy targeted methods in some other way, such as Spring AOP. Here is a sample Spring AOP configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Configuration
+public class CountedConfiguration {
+   @Bean
+   public CountedAspect countedAspect(MeterRegistry registry) {
+      return new CountedAspect(registry);
+   }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Applying <code>CountedAspect</code> makes <code>@Counted</code> usable on any arbitrary method in an AspectJ proxied instance, as the following example shows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Service
+public class ExampleService {
+
+  @Counted
+  public void sync() {
+    // @Counted will record the number of executions of this method
+    ...
+  }
+
+  @Async
+  @Counted
+  public CompletableFuture&lt;?&gt; async() {
+    // @Counted will record the number of executions of this method
+    return CompletableFuture.supplyAsync(...);
+  }
+
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_function_tracking_counters"><a class="anchor" href="#_function_tracking_counters"></a>Function-tracking Counters</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -638,7 +696,7 @@ FunctionCounter counter = FunctionCounter
   </li>
   <li class="version">
     <a href="../index.html">
-      1.12.11
+      1.12.12
     </a>
   </li>
 </ul>                        </div>
@@ -676,7 +734,7 @@ FunctionCounter counter = FunctionCounter
   </li>
   <li class="version">
     <a href="../../1.12-SNAPSHOT/index.html">
-      1.12.12-SNAPSHOT
+      1.12.13-SNAPSHOT
     </a>
   </li>
 </ul>                        </div>
@@ -741,6 +799,6 @@ FunctionCounter counter = FunctionCounter
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.12.11" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.12.12" data-page-component="micrometer"></script>
   </body>
 </html>
