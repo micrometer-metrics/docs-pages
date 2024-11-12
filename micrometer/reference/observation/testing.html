@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="18093bc7d4dd7e1c5b3a0a5b2ec3580ee7e7057b"> 
-    <meta name="version" content="1.13.7">
+    <meta name="version" content="1.14.0">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.13.7">
+<div class="nav-container" data-component="micrometer" data-version="1.14.0">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.13.7</span>
+  <span class="version">1.14.0</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -394,7 +394,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.13.7/docs/modules/ROOT/pages/observation/testing.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.14.0/docs/modules/ROOT/pages/observation/testing.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -511,7 +511,7 @@ void should_assert_your_observation() {
     new Example(registry).run();
 
     // check your observation
-    TestObservationRegistryAssert.assertThat(registry)
+    assertThat(registry)
             .doesNotHaveAnyRemainingCurrentObservation()
             .hasObservationWithNameEqualTo("foo")
             .that()
@@ -521,6 +521,31 @@ void should_assert_your_observation() {
             .hasBeenStopped();
 }</code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="micrometer-observation-validator"><a class="anchor" href="#micrometer-observation-validator"></a>Observation Validator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you use <code>TestObservationRegistry</code>, an <code>ObservationHandler</code> called <code>ObservationValidator</code> is registered automatically. The purpose of this <code>ObservationHandler</code> is validating the order of the calls on an <code>Observation</code> (for example <code>stop</code> should not be called before <code>start</code> or neither of them should be called twice, etc). Please check <code>ObservationValidatorTests</code> for the list of invalid scenarios.</p>
+</div>
+<div class="paragraph">
+<p>If <code>ObservationValidator</code> detects such an issue, it will throw an <code>InvalidObservationException</code> which contains a validation message (explains why the <code>Observation</code> is invalid), the original <code>Observation.Context</code> and a history with the relevant stacktraces of the calls that were made on the <code>Observation</code>. These should help you to troubleshoot what went wrong with the instrumentation. The <code>toString()</code> method of the <code>InvalidObservationException</code> gives you the error message and a textual summary of the history, something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">io.micrometer.observation.tck.InvalidObservationException: Invalid error signal: Observation has already been stopped
+START: app//io.micrometer.observation.tck.ObservationValidatorTests.errorAfterStopShouldBeInvalid(ObservationValidatorTests.java:98)
+STOP: app//io.micrometer.observation.tck.ObservationValidatorTests.errorAfterStopShouldBeInvalid(ObservationValidatorTests.java:99)
+ERROR: app//io.micrometer.observation.tck.ObservationValidatorTests.errorAfterStopShouldBeInvalid(ObservationValidatorTests.java:100)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Based on this, it seems that <code>error</code> (in <code>ObservationValidatorTests.java</code>, line <code>#100</code>) was called after <code>stop</code> (in <code>ObservationValidatorTests.java</code>, line <code>#99</code>) which is an invalid scenario. If you view the error in an IDE, the locations (i.e.: <code>ObservationValidatorTests.java:98</code>) should be "links" and clicking them should make the IDE jump to that line.</p>
+</div>
+<div class="paragraph">
+<p>If you get an error like the above coming from the instrumentation of a third-party library, please open an issue/pull request for that project.</p>
 </div>
 </div>
 </div>
@@ -554,6 +579,11 @@ void should_assert_your_observation() {
                           <ul class="versions">
   <li class="version">
     <a href="../index.html">
+      1.14.0
+    </a>
+  </li>
+  <li class="version">
+    <a href="../1.13/index.html">
       1.13.7
     </a>
   </li>
@@ -567,27 +597,13 @@ void should_assert_your_observation() {
                           <div>
                             <button class="version-toggle" type="button">
                               <span></span>
-                              Preview
-                            </button>
-                          </div>
-                          <ul class="versions">
-  <li class="version">
-    <a href="../1.14/index.html">
-      1.14.0-RC1
-    </a>
-  </li>
-</ul>                        </div>
-                        <div class="version-item">
-                          <div>
-                            <button class="version-toggle" type="button">
-                              <span></span>
                               Snapshot
                             </button>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../1.14-SNAPSHOT/index.html">
-      1.14.0-SNAPSHOT
+    <a href="../1.15-SNAPSHOT/index.html">
+      1.15.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -662,6 +678,6 @@ void should_assert_your_observation() {
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.13.7" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.14.0" data-page-component="micrometer"></script>
   </body>
 </html>

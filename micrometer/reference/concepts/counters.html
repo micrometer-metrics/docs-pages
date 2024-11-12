@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="18093bc7d4dd7e1c5b3a0a5b2ec3580ee7e7057b"> 
-    <meta name="version" content="1.13.7">
+    <meta name="version" content="1.14.0">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.13.7">
+<div class="nav-container" data-component="micrometer" data-version="1.14.0">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.13.7</span>
+  <span class="version">1.14.0</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -394,7 +394,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.13.7/docs/modules/ROOT/pages/concepts/counters.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.14.0/docs/modules/ROOT/pages/concepts/counters.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -581,6 +581,84 @@ public class ExampleService {
 }</code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_metertag_on_method_parameters"><a class="anchor" href="#_metertag_on_method_parameters"></a>@MeterTag on Method Parameters</h3>
+<div class="paragraph">
+<p>To support using the <code>@MeterTag</code> annotation on method parameters, you need to configure the <code>@CountedAspect</code> to add the <code>CountedMeterTagAnnotationHandler</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ValueResolver valueResolver = parameter -&gt; "Value from myCustomTagValueResolver [" + parameter + "]";
+
+// Example of a ValueExpressionResolver that uses Spring Expression Language
+ValueExpressionResolver valueExpressionResolver = new SpelValueExpressionResolver();
+
+
+// Setting the handler on the aspect
+countedAspect.setMeterTagAnnotationHandler(
+        new CountedMeterTagAnnotationHandler(aClass -&gt; valueResolver, aClass -&gt; valueExpressionResolver));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume that we have the following interface.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">interface MeterTagClassInterface {
+
+    @Counted
+    void getAnnotationForTagValueResolver(@MeterTag(key = "test", resolver = ValueResolver.class) String test);
+
+    @Counted
+    void getAnnotationForTagValueExpression(
+            @MeterTag(key = "test", expression = "'hello' + ' characters'") String test);
+
+    @Counted
+    void getAnnotationForArgumentToString(@MeterTag("test") Long param);
+
+    @Counted
+    void getMultipleAnnotationsForTagValueExpression(
+            @MeterTag(key = "value1", expression = "'value1: ' + value1") @MeterTag(key = "value2",
+                    expression = "'value2: ' + value2") DataHolder param);
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When its implementations would be called with different arguments (remember that the implementation needs to be annotated with <code>@Counted</code> annotation too), the following counters would be created:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Example for returning &lt;toString()&gt; on the parameter
+service.getAnnotationForArgumentToString(15L);
+
+assertThat(registry.get("method.counted").tag("test", "15").counter().count()).isEqualTo(1);
+
+// Example for calling the provided &lt;ValueResolver&gt; on the parameter
+service.getAnnotationForTagValueResolver("foo");
+
+assertThat(registry.get("method.counted")
+    .tag("test", "Value from myCustomTagValueResolver [foo]")
+    .counter()
+    .count()).isEqualTo(1);
+
+// Example for calling the provided &lt;ValueExpressionResolver&gt;
+service.getAnnotationForTagValueExpression("15L");
+
+assertThat(registry.get("method.counted").tag("test", "hello characters").counter().count()).isEqualTo(1);
+
+// Example for using multiple @MeterTag annotations on the same parameter
+// @MeterTags({ @MeterTag(...), @MeterTag(...) }) can be also used
+service.getMultipleAnnotationsForTagValueExpression(new DataHolder("zxe", "qwe"));
+
+assertThat(registry.get("method.counted")
+    .tag("value1", "value1: zxe")
+    .tag("value2", "value2: qwe")
+    .counter()
+    .count()).isEqualTo(1);</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -665,6 +743,11 @@ FunctionCounter counter = FunctionCounter
                           <ul class="versions">
   <li class="version">
     <a href="../index.html">
+      1.14.0
+    </a>
+  </li>
+  <li class="version">
+    <a href="../1.13/index.html">
       1.13.7
     </a>
   </li>
@@ -678,27 +761,13 @@ FunctionCounter counter = FunctionCounter
                           <div>
                             <button class="version-toggle" type="button">
                               <span></span>
-                              Preview
-                            </button>
-                          </div>
-                          <ul class="versions">
-  <li class="version">
-    <a href="../1.14/index.html">
-      1.14.0-RC1
-    </a>
-  </li>
-</ul>                        </div>
-                        <div class="version-item">
-                          <div>
-                            <button class="version-toggle" type="button">
-                              <span></span>
                               Snapshot
                             </button>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../1.14-SNAPSHOT/index.html">
-      1.14.0-SNAPSHOT
+    <a href="../1.15-SNAPSHOT/index.html">
+      1.15.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -773,6 +842,6 @@ FunctionCounter counter = FunctionCounter
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.13.7" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.14.0" data-page-component="micrometer"></script>
   </body>
 </html>
