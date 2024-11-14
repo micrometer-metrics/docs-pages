@@ -544,7 +544,7 @@ myGauge.set(11);</code></pre>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Attempting to construct a gauge with a primitive number or one of its <code>java.lang</code> object forms is always incorrect. These numbers are immutable. Thus, the gauge cannot ever be changed. Attempting to &#8220;re-register&#8221; the gauge with a different number does not work, as the registry maintains only one meter for each unique combination of name and tags.
+Attempting to construct a gauge with a primitive number or one of its <code>java.lang</code> object forms is always incorrect. These numbers are immutable. Thus, the gauge cannot ever be changed. Attempting to "re-register" the gauge with a different number does not work, as the registry maintains only one meter for each unique combination of name and tags. "Re-registering" a gauge can happen indirectly for example as the result of a <code>MeterFilter</code> modifying the name and/or the tags of two different gauges so that they will be the same after the filter is applied.
 </td>
 </tr>
 </table>
