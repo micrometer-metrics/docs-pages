@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="antora-ui-version" content="18093bc7d4dd7e1c5b3a0a5b2ec3580ee7e7057b"> 
+    <meta name="antora-ui-version" content="ec64e63c2f758aad657bb3ad6c964996cbdbd860"> 
     <meta name="version" content="1.12.13">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
@@ -556,7 +556,7 @@ myGauge.set(11);</code></pre>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Attempting to construct a gauge with a primitive number or one of its <code>java.lang</code> object forms is always incorrect. These numbers are immutable. Thus, the gauge cannot ever be changed. Attempting to &#8220;re-register&#8221; the gauge with a different number does not work, as the registry maintains only one meter for each unique combination of name and tags.
+Attempting to construct a gauge with a primitive number or one of its <code>java.lang</code> object forms is always incorrect. These numbers are immutable. Thus, the gauge cannot ever be changed. Attempting to "re-register" the gauge with a different number does not work, as the registry maintains only one meter for each unique combination of name and tags. "Re-registering" a gauge can happen indirectly for example as the result of a <code>MeterFilter</code> modifying the name and/or the tags of two different gauges so that they will be the same after the filter is applied.
 </td>
 </tr>
 </table>
@@ -684,17 +684,17 @@ statuses.register(
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../../index.html">
+    <a href="../../concepts/gauges.html">
       1.14.0
     </a>
   </li>
   <li class="version">
-    <a href="../../1.13/index.html">
+    <a href="../../1.13/concepts/gauges.html">
       1.13.7
     </a>
   </li>
   <li class="version">
-    <a href="../../1.12/index.html">
+    <a href="../../1.12/concepts/gauges.html">
       1.12.12
     </a>
   </li>
@@ -708,22 +708,22 @@ statuses.register(
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../../1.15-SNAPSHOT/index.html">
+    <a href="../../1.15-SNAPSHOT/concepts/gauges.html">
       1.15.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.14-SNAPSHOT/index.html">
+    <a href="../../1.14-SNAPSHOT/concepts/gauges.html">
       1.14.1-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.13-SNAPSHOT/index.html">
+    <a href="../../1.13-SNAPSHOT/concepts/gauges.html">
       1.13.8-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../index.html">
+    <a href="gauges.html">
       1.12.13-SNAPSHOT
     </a>
   </li>
