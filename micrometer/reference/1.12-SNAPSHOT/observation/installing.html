@@ -465,41 +465,64 @@
   </table>
 </div>
 <h1 id="page-title" class="page">Installing</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer comes with a Bill of Materials (BOM), which is a project that manages all the project versions for consistency.</p>
+<p>It is recommended to use the BOM provided by Micrometer (or your framework if any), you can see how to configure it <a href="../installing.html" class="xref page">here</a>. The examples below assume you are using a BOM.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gradle"><a class="anchor" href="#_gradle"></a>Gradle</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The following example shows the required dependency for Micrometer Observation in Gradle:</p>
+<p>After the BOM is <a href="../installing.html" class="xref page">configured</a>, add the following dependency:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation platform('io.micrometer:micrometer-bom:latest.release')
-implementation 'io.micrometer:micrometer-observation'</code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-observation'</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The version is not needed for this dependency since it is defined by the BOM.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_maven"><a class="anchor" href="#_maven"></a>Maven</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The following example shows the required dependency in Maven:</p>
+<p>After the BOM is <a href="../installing.html" class="xref page">configured</a>, add the following dependency:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
-            &lt;artifactId&gt;micrometer-bom&lt;/artifactId&gt;
-            &lt;version&gt;${micrometer.version}&lt;/version&gt;
-            &lt;type&gt;pom&lt;/type&gt;
-            &lt;scope&gt;import&lt;/scope&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/dependencyManagement&gt;
-
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
-      &lt;artifactId&gt;micrometer-observation&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;</code></pre>
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
+  &lt;artifactId&gt;micrometer-observation&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The version is not needed for this dependency since it is defined by the BOM.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <nav class="pagination">

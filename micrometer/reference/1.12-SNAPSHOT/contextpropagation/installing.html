@@ -464,6 +464,8 @@
   </table>
 </div>
 <h1 id="page-title" class="page">Installing</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>Snapshots are published to <a href="https://repo.spring.io/snapshot" class="bare">repo.spring.io/snapshot</a> for every successful build on the <code>main</code> branch and maintenance branches.</p>
 </div>
@@ -473,15 +475,40 @@ configuration to use milestone releases. Note that milestone releases are for te
 production use.</p>
 </div>
 <div class="paragraph">
-<p>The following example shows the required dependency in Gradle:</p>
+<p>It is recommended to use the BOM provided by Micrometer (or your framework if any), you can see how to configure it <a href="../installing.html" class="xref page">here</a>. The examples below assume you are using a BOM.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gradle"><a class="anchor" href="#_gradle"></a>Gradle</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After the BOM is <a href="../installing.html" class="xref page">configured</a>, the following example adds Context Propagation in Gradle:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:context-propagation:latest.integration'</code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:context-propagation'</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The version is not needed for this dependency since it is defined by the BOM.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_maven"><a class="anchor" href="#_maven"></a>Maven</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The following example shows the required dependency in Maven:</p>
+<p>After the BOM is <a href="../installing.html" class="xref page">configured</a>, the following example adds Context Propagation in Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -489,9 +516,22 @@ production use.</p>
     &lt;dependency&gt;
         &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
         &lt;artifactId&gt;context-propagation&lt;/artifactId&gt;
-        &lt;version&gt;${micrometer-context-propagation.version}&lt;/version&gt;
     &lt;/dependency&gt;
 &lt;/dependencies&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The version is not needed for this dependency since it is defined by the BOM.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <nav class="pagination">
