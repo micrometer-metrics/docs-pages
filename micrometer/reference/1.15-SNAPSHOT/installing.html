@@ -458,28 +458,104 @@
 <p>Micrometer contains a core library with the instrumentation SPI and an in-memory implementation that does not export data anywhere, a series of modules with implementations for various monitoring systems, and a test module.</p>
 </div>
 <div class="paragraph">
-<p>To use Micrometer, add the dependency for your monitoring system.</p>
+<p>To use Micrometer, add the dependency for your monitoring system. It is recommended to use the BOM provided by Micrometer, you can configure it as follows (you only need to declare it once in your project).</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you use a framework, it might have dependency management that defines Micrometer versions or imports the Micrometer BOM. You can defer to the framework&#8217;s dependency management instead of declaring the Micrometer BOM directly in that case.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gradle"><a class="anchor" href="#_gradle"></a>Gradle</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The following example adds Prometheus in Gradle:</p>
+<p>The following example configures the Micrometer BOM in Gradle:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-registry-prometheus:latest.release'</code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation platform('io.micrometer:micrometer-bom:1.15.0-SNAPSHOT')</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The following example adds Prometheus in Maven:</p>
+<p>After the BOM is configured, the following example adds Prometheus in Gradle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-registry-prometheus'</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The version is not needed for this dependency since it is defined by the BOM.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_maven"><a class="anchor" href="#_maven"></a>Maven</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following example configures the Micrometer BOM in Maven:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
+            &lt;artifactId&gt;micrometer-bom&lt;/artifactId&gt;
+            &lt;version&gt;1.15.0-SNAPSHOT&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After the BOM is configured, the following example adds Prometheus in Maven:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
   &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
   &lt;artifactId&gt;micrometer-registry-prometheus&lt;/artifactId&gt;
-  &lt;version&gt;${micrometer.version}&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The version is not needed for this dependency since it is defined by the BOM.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_multiple_monitoring_systems"><a class="anchor" href="#_multiple_monitoring_systems"></a>Multiple Monitoring Systems</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Through Micrometer&#8217;s composite meter registry (described in greater detail in <a href="concepts/registry.html#_composite_registries" class="xref page">"Concepts"</a>), you can configure more than one registry implementation if you intend to publish metrics to more than one monitoring system.</p>
 </div>
