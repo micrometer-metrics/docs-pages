@@ -496,7 +496,7 @@ Before you decide to instrument a project yourself, double-check whether that it
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Context propagation</strong> - We propagate existing context through threads or network. We use the <a href="../contextpropagation.html" class="xref page">Micrometer Context Propagation</a> library to define the context and to propagate it through threads. We use dedicated <code>SenderContext</code> and <code>ReceiverContext</code> objects, together with Micrometer Tracing handlers, to create Observations that propagate context over the wire.</p>
+<p><strong>Context propagation</strong> - We propagate existing context through threads or network. We use the <a href="https://docs.micrometer.io/context-propagation/reference/">Micrometer Context Propagation</a> library to define the context and to propagate it through threads. We use dedicated <code>SenderContext</code> and <code>ReceiverContext</code> objects, together with Micrometer Tracing handlers, to create Observations that propagate context over the wire.</p>
 </div>
 <div class="paragraph">
 <p><strong>Creation of Observations</strong> - We want to wrap an operation in an Observation to get measurements. We need to know if there previously has been a parent Observation to maintain the parent-child relationship of Observations.</p>

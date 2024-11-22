@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-11-22T01:03:25.465Z",
+  "generated": "2024-11-22T01:04:10.292Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -86,11 +86,6 @@
               "path": "concepts/timers.adoc",
               "url": "/1.15-SNAPSHOT/concepts/timers.html",
               "title": "Timers"
-            },
-            {
-              "path": "contextpropagation.adoc",
-              "url": "/1.15-SNAPSHOT/contextpropagation.html",
-              "title": "Context Propagation support"
             },
             {
               "path": "guides.adoc",
@@ -432,11 +427,6 @@
               "path": "concepts/timers.adoc",
               "url": "/1.14-SNAPSHOT/concepts/timers.html",
               "title": "Timers"
-            },
-            {
-              "path": "contextpropagation.adoc",
-              "url": "/1.14-SNAPSHOT/contextpropagation.html",
-              "title": "Context Propagation support"
             },
             {
               "path": "guides.adoc",
