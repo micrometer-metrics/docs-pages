@@ -535,7 +535,7 @@ The version is not needed for this dependency since it is defined by the BOM.
     }
 
     void run() {
-        final Observation observation = Observation.createNotStarted("foo", registry)
+        Observation observation = Observation.createNotStarted("foo", registry)
                 .lowCardinalityKeyValue("lowTag", "lowTagValue")
                 .highCardinalityKeyValue("highTag", "highTagValue");
         observation.observe(() -&gt; {
