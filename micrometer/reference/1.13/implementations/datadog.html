@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="ec64e63c2f758aad657bb3ad6c964996cbdbd860"> 
-    <meta name="version" content="1.13.8">
+    <meta name="version" content="1.13.9">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.13.8">
+<div class="nav-container" data-component="micrometer" data-version="1.13.9">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.13.8</span>
+  <span class="version">1.13.9</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -394,7 +394,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.13.8/docs/modules/ROOT/pages/implementations/datadog.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.13.9/docs/modules/ROOT/pages/implementations/datadog.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -479,27 +479,58 @@ If you encounter a rate limit problem with the Datadog API approach, try the Dog
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>It is recommended to use the BOM provided by Micrometer (or your framework if any), you can see how to configure it <a href="../installing.html" class="xref page">here</a>. The examples below assume you are using a BOM.</p>
+</div>
 <div class="sect2">
 <h3 id="_direct_to_datadog_api_approach"><a class="anchor" href="#_direct_to_datadog_api_approach"></a>1.1. Direct to Datadog API Approach</h3>
+<div class="sect3">
+<h4 id="_gradle"><a class="anchor" href="#_gradle"></a>1.1.1. Gradle</h4>
 <div class="paragraph">
-<p>For Gradle, add the following implementation:</p>
+<p>After the BOM is <a href="../installing.html" class="xref page">configured</a>, add the following dependency:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-registry-datadog:latest.release'</code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-registry-datadog'</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The version is not needed for this dependency since it is defined by the BOM.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_maven"><a class="anchor" href="#_maven"></a>1.1.2. Maven</h4>
 <div class="paragraph">
-<p>For Maven, add the following dependency:</p>
+<p>After the BOM is <a href="../installing.html" class="xref page">configured</a>, add the following dependency:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
   &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
   &lt;artifactId&gt;micrometer-registry-datadog&lt;/artifactId&gt;
-  &lt;version&gt;${micrometer.version}&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The version is not needed for this dependency since it is defined by the BOM.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Metrics are rate-aggregated and pushed to <code>datadoghq</code> on a periodic interval. Rate aggregation performed by the registry yields datasets that are similar to those produced by <code>dogstatsd</code>.</p>
@@ -559,27 +590,56 @@ To find your the correct <code>uri</code> for your account, do the following:</p
 <p>For example, for the <code>US5</code> site, the correct API endpoint is <code><a href="https://api.us5.datadoghq.com" class="bare">api.us5.datadoghq.com</a></code>. For the <code>US3</code> site, it is <code><a href="https://api.us3.datadoghq.com" class="bare">api.us3.datadoghq.com</a></code>.</p>
 </div>
 </div>
+</div>
 <div class="sect2">
 <h3 id="_through_dogstatsd_approach"><a class="anchor" href="#_through_dogstatsd_approach"></a>1.2. Through DogStatsD Approach</h3>
+<div class="sect3">
+<h4 id="_gradle_2"><a class="anchor" href="#_gradle_2"></a>1.2.1. Gradle</h4>
 <div class="paragraph">
-<p>For Gradle, add the following implementation:</p>
+<p>After the BOM is <a href="../installing.html" class="xref page">configured</a>, add the following dependency:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-registry-statsd:latest.release'</code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-registry-statsd'</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The version is not needed for this dependency since it is defined by the BOM.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_maven_2"><a class="anchor" href="#_maven_2"></a>1.2.2. Maven</h4>
 <div class="paragraph">
-<p>For Maven, add the following dependency:</p>
+<p>After the BOM is <a href="../installing.html" class="xref page">configured</a>d, add the following dependency:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
   &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
   &lt;artifactId&gt;micrometer-registry-statsd&lt;/artifactId&gt;
-  &lt;version&gt;${micrometer.version}&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The version is not needed for this dependency since it is defined by the BOM.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Metrics are immediately shipped to DogStatsD using Datadog&#8217;s flavor of the StatsD line protocol. <code>java-dogstatsd-client</code> is <em>not</em> needed on the classpath for this to work, as Micrometer uses its own implementation.</p>
@@ -624,6 +684,7 @@ You can make a <code>DistributionSummary</code> with <code>percentileHistogram</
 </div>
 </div>
 </div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="cloudwatch.html">CloudWatch</a></span>
   <span class="next"><a href="dynatrace.html">Dynatrace</a></span>
@@ -659,7 +720,7 @@ You can make a <code>DistributionSummary</code> with <code>percentileHistogram</
   </li>
   <li class="version">
     <a href="datadog.html">
-      1.13.8
+      1.13.9
     </a>
   </li>
   <li class="version">
@@ -688,7 +749,7 @@ You can make a <code>DistributionSummary</code> with <code>percentileHistogram</
   </li>
   <li class="version">
     <a href="../../1.13-SNAPSHOT/implementations/datadog.html">
-      1.13.9-SNAPSHOT
+      1.13.10-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -758,6 +819,6 @@ You can make a <code>DistributionSummary</code> with <code>percentileHistogram</
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.13.8" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.13.9" data-page-component="micrometer"></script>
   </body>
 </html>

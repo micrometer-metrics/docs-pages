@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2024-12-09T22:22:40.816Z",
+  "generated": "2024-12-10T09:09:47.159Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -1033,9 +1033,9 @@
             }
           ]
         },
-        "1.13.9": {
+        "1.13.10": {
           "prerelease": true,
-          "displayVersion": "1.13.9-SNAPSHOT",
+          "displayVersion": "1.13.10-SNAPSHOT",
           "url": "/1.13-SNAPSHOT/index.html",
           "pages": [
             {
@@ -1374,7 +1374,7 @@
             }
           ]
         },
-        "1.13.8": {
+        "1.13.9": {
           "url": "/1.13/index.html",
           "pages": [
             {
@@ -1451,11 +1451,6 @@
               "path": "concepts/timers.adoc",
               "url": "/1.13/concepts/timers.html",
               "title": "Timers"
-            },
-            {
-              "path": "contextpropagation.adoc",
-              "url": "/1.13/contextpropagation.html",
-              "title": "Context Propagation support"
             },
             {
               "path": "guides.adoc",
