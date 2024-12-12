@@ -571,18 +571,6 @@ sample.stop(registry.timer("my.timer", "response", response.status()));</code></
 <div class="paragraph">
 <p>The <code>micrometer-core</code> module contains a <code>@Timed</code> annotation that frameworks can use to add timing support to either specific types of methods such as those serving web request endpoints or, more generally, to all methods.</p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Micrometer&#8217;s Spring Boot configuration does <em>not</em> recognize <code>@Timed</code> on arbitrary methods.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>Also, an incubating AspectJ aspect is included in <code>micrometer-core</code>. You can use it in your application either through compile/load time AspectJ weaving or through framework facilities that interpret AspectJ aspects and proxy targeted methods in some other way, such as Spring AOP. Here is a sample Spring AOP configuration:</p>
 </div>
