@@ -730,21 +730,14 @@ The dashboards are maintained by the community in their external GitHub reposito
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>PrometheusMeterRegistry</code> doesn&#8217;t allow to create meters having the same name with a different set of tag keys, so you should guarantee that meters having the same name have the same set of tag keys.
-Otherwise, subsequent meters having the same name with a different set of tag keys will not be registered. This means that you should not do things like:</p>
+Otherwise, subsequent meters having the same name with a different set of tag keys will not be registered silently by default.
+This means that you should not do things like:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Please don't do this
 registry.counter("test", "first", "1").increment();
 registry.counter("test", "second", "2").increment();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will result in the following warning and the second <code>Meter</code> will not be registered:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">WARNING: The meter (MeterId{name='test', tags=[tag(second=2)]}) registration has failed: Prometheus requires that all meters with the same name have the same set of tag keys. There is already an existing meter named 'test' containing tag keys [first]. The meter you are attempting to register has keys [second]. Note that subsequent logs will be logged at debug level.</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -757,7 +750,7 @@ registry.counter("test", "first", "none", "second", "2").increment();</code></pr
 </div>
 </div>
 <div class="paragraph">
-<p>You can change the default warning behavior by registering a meter registration failed listener.
+<p>You can change the default behavior by registering a meter registration failed listener.
 For example, you can register a meter registration failed listener that throws an exception as follows:</p>
 </div>
 <div class="listingblock">
