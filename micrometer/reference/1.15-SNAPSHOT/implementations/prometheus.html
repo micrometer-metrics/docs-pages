@@ -850,7 +850,8 @@ The dashboards are maintained by the community in their external GitHub reposito
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>PrometheusMeterRegistry</code> doesn&#8217;t allow to create meters having the same name with a different set of tag keys, so you should guarantee that meters having the same name have the same set of tag keys.
-Otherwise, subsequent meters having the same name with a different set of tag keys will not be registered. This means that you should not do things like:</p>
+Otherwise, subsequent meters having the same name with a different set of tag keys will not be registered.
+This means that you should not do things like:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -877,8 +878,7 @@ registry.counter("test", "first", "none", "second", "2").increment();</code></pr
 </div>
 </div>
 <div class="paragraph">
-<p>You can change the default warning behavior by registering a meter registration failed listener.
-For example, you can register a meter registration failed listener that throws an exception as follows:</p>
+<p>You can change the default warning behavior by registering a meter registration failed listener:</p>
 </div>
 <div class="listingblock">
 <div class="content">
