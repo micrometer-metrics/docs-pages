@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2025-01-13T13:41:56.314Z",
+  "generated": "2025-01-13T15:47:30.179Z",
   "url": "https://docs.micrometer.io/tracing/reference",
   "components": {
     "tracing": {
@@ -45,6 +45,47 @@
             {
               "path": "tracers.adoc",
               "url": "/1.5-SNAPSHOT/tracers.html",
+              "title": "Supported Tracers"
+            }
+          ]
+        },
+        "1.5.0-M1": {
+          "prerelease": true,
+          "url": "/1.5/index.html",
+          "pages": [
+            {
+              "path": "index.adoc",
+              "url": "/1.5/index.html",
+              "title": "Tracing support"
+            },
+            {
+              "path": "api.adoc",
+              "url": "/1.5/api.html",
+              "title": "Using Micrometer Tracing Directly"
+            },
+            {
+              "path": "configuring.adoc",
+              "url": "/1.5/configuring.html",
+              "title": "Configuring with Micrometer Observation"
+            },
+            {
+              "path": "glossary.adoc",
+              "url": "/1.5/glossary.html",
+              "title": "Glossary"
+            },
+            {
+              "path": "reporters.adoc",
+              "url": "/1.5/reporters.html",
+              "title": "Supported Reporters"
+            },
+            {
+              "path": "testing.adoc",
+              "url": "/1.5/testing.html",
+              "title": "Testing"
+            },
+            {
+              "path": "tracers.adoc",
+              "url": "/1.5/tracers.html",
               "title": "Supported Tracers"
             }
           ]
