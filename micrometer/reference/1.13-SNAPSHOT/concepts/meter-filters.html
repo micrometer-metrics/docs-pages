@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/page-search.css">
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
-    <meta name="antora-ui-version" content="ec64e63c2f758aad657bb3ad6c964996cbdbd860"> 
+    <meta name="antora-ui-version" content="f331c2982402ddfabfc747848a025406c835e9c9"> 
     <meta name="version" content="1.13.11">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
@@ -621,6 +621,26 @@
 <div class="paragraph">
 <p>This filter adds a name prefix and an additional tag conditionally to meters starting with a name of <code>test</code>.</p>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title"><code>MeterFilter</code> implementations of <code>map</code> should be "static"</div>
+<div class="paragraph">
+<p>The <code>id</code> parameter is the only dynamic input that changes over the lifecycle of the <code>MeterFilter</code> on which they should depend.
+Use cases where dynamic behavior is desired, such as defining tags based on the context of a request etc., should be implemented in the instrumentation itself rather than in a <code>MeterFilter</code>.
+For example, see <code>MongoMetricsCommandListener</code> and the <code>MongoCommandTagsProvider</code> it takes in a constructor argument as well as the default implementation <code>DefaultMongoCommandTagsProvider</code>.
+See also <a href="../observation/components.html#micrometer-observation-predicates-filters" class="xref page">ObservationFilter</a> which allows dynamic implementations.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_convenience_methods_2"><a class="anchor" href="#_convenience_methods_2"></a>Convenience Methods</h3>
 <div class="paragraph">
 <p><code>MeterFilter</code> provides convenience builders for many common transformation cases:</p>
 </div>
@@ -640,6 +660,7 @@ too high cardinality and starts stressing your monitoring system or costing too 
 <p><code>renameTag(String meterNamePrefix, String fromTagKey, String toTagKey)</code>: Rename a tag key for every metric that begins with a given prefix.</p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>
