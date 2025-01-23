@@ -666,14 +666,6 @@ management.metrics.tags.application=${spring.application.name}</code></pre>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_graalvm_native_image_compilation"><a class="anchor" href="#_graalvm_native_image_compilation"></a>5. GraalVM native image compilation</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To compile an application by using <code>micrometer-registry-stackdriver</code> to a <a href="https://www.graalvm.org/reference-manual/native-image/">native image using GraalVM</a>, add the <a href="https://github.com/GoogleCloudPlatform/native-image-support-java">native-image-support-java</a> library as a dependency. Doing so ensures that the correct native image configuration is available and avoids errors like <code>Classes that should be initialized at run time got initialized during image building</code>.</p>
-</div>
-</div>
-</div>
 <nav class="pagination">
   <span class="prev"><a href="signalFx.html">SignalFx</a></span>
   <span class="next"><a href="statsD.html">statsD</a></span>
