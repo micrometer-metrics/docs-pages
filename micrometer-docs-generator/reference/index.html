@@ -317,14 +317,6 @@ limitations under the License.
 				&lt;enabled&gt;false&lt;/enabled&gt;
 			&lt;/releases&gt;
 		&lt;/repository&gt;
-		&lt;repository&gt;
-			&lt;id&gt;spring-milestones&lt;/id&gt;
-			&lt;name&gt;Spring Milestones&lt;/name&gt;
-			&lt;url&gt;https://repo.spring.io/milestone&lt;/url&gt;  &lt;!-- For Milestones --&gt;
-			&lt;snapshots&gt;
-				&lt;enabled&gt;false&lt;/enabled&gt;
-			&lt;/snapshots&gt;
-		&lt;/repository&gt;
 	&lt;/repositories&gt;
 &lt;/project&gt;</code></pre>
 </div>
@@ -337,8 +329,7 @@ limitations under the License.
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">repositories {
 	maven { url 'https://repo.spring.io/snapshot' } // for snapshots
-	maven { url 'https://repo.spring.io/milestone' } // for milestones
-	mavenCentral() // for GA
+	mavenCentral() // for GA and milestones
 }
 
 ext {
