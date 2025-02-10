@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="f331c2982402ddfabfc747848a025406c835e9c9"> 
-    <meta name="version" content="1.14.3">
+    <meta name="version" content="1.14.4">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.14.3">
+<div class="nav-container" data-component="micrometer" data-version="1.14.4">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.14.3</span>
+  <span class="version">1.14.4</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -394,7 +394,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.14.3/docs/modules/ROOT/pages/concepts/meter-filters.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.14.4/docs/modules/ROOT/pages/concepts/meter-filters.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -607,6 +607,26 @@
 <div class="paragraph">
 <p>This filter adds a name prefix and an additional tag conditionally to meters starting with a name of <code>test</code>.</p>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title"><code>MeterFilter</code> implementations of <code>map</code> should be "static"</div>
+<div class="paragraph">
+<p>The <code>id</code> parameter is the only dynamic input that changes over the lifecycle of the <code>MeterFilter</code> on which they should depend.
+Use cases where dynamic behavior is desired, such as defining tags based on the context of a request etc., should be implemented in the instrumentation itself rather than in a <code>MeterFilter</code>.
+For example, see <code>MongoMetricsCommandListener</code> and the <code>MongoCommandTagsProvider</code> it takes in a constructor argument as well as the default implementation <code>DefaultMongoCommandTagsProvider</code>.
+See also <a href="../observation/components.html#micrometer-observation-predicates-filters" class="xref page">ObservationFilter</a> which allows dynamic implementations.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_convenience_methods_2"><a class="anchor" href="#_convenience_methods_2"></a>Convenience Methods</h3>
 <div class="paragraph">
 <p><code>MeterFilter</code> provides convenience builders for many common transformation cases:</p>
 </div>
@@ -626,6 +646,7 @@ too high cardinality and starts stressing your monitoring system or costing too 
 <p><code>renameTag(String meterNamePrefix, String fromTagKey, String toTagKey)</code>: Rename a tag key for every metric that begins with a given prefix.</p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -706,7 +727,7 @@ too high cardinality and starts stressing your monitoring system or costing too 
                           <ul class="versions">
   <li class="version">
     <a href="meter-filters.html">
-      1.14.3
+      1.14.4
     </a>
   </li>
   <li class="version">
@@ -749,7 +770,7 @@ too high cardinality and starts stressing your monitoring system or costing too 
   </li>
   <li class="version">
     <a href="../1.14-SNAPSHOT/concepts/meter-filters.html">
-      1.14.4-SNAPSHOT
+      1.14.5-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -824,6 +845,6 @@ too high cardinality and starts stressing your monitoring system or costing too 
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.14.3" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.14.4" data-page-component="micrometer"></script>
   </body>
 </html>
