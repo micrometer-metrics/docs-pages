@@ -613,7 +613,38 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_supported_metrics"><a class="anchor" href="#_supported_metrics"></a>3. Supported metrics</h2>
+<h2 id="_customize_metrics_sender"><a class="anchor" href="#_customize_metrics_sender"></a>3. Customize metrics sender</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>OtlpMeterRegistry</code> has an <code>OtlpMetricsSender</code> abstraction for sending batches of metrics in OTLP protobuf format.</p>
+</div>
+<div class="paragraph">
+<p>By default, metrics from the OTLP registry are sent via HTTP to the URL specified by <code>OtlpConfig#url</code> using an <code>HttpUrlConnectionSender</code>.
+You may use a different <code>HttpSender</code> implementation by creating and configuring an instance of <code>OtlpHttpMetricsSender</code> such as in the following example using the <code>OkHttpSender</code> instead of the default <code>HttpUrlConnectionSender</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">OtlpConfig config = OtlpConfig.DEFAULT;
+OtlpHttpMetricsSender httpMetricsSender = new OtlpHttpMetricsSender(new OkHttpSender(), config);
+OtlpMeterRegistry meterRegistry = OtlpMeterRegistry.builder(config).metricsSender(httpMetricsSender).build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also provide a custom implementation of <code>OtlpMetricsSender</code> that does not use HTTP at all.
+For instance, if you made a gRPC implementation, you could configure it in the following way.
+Micrometer does not currently provide a gRPC implementation of <code>OtlpMetricsSender</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">OtlpConfig config = OtlpConfig.DEFAULT;
+OtlpMetricsSender metricsSender = new OtlpGrpcMetricsSender();
+OtlpMeterRegistry meterRegistry = OtlpMeterRegistry.builder(config).metricsSender(metricsSender).build();</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_metrics"><a class="anchor" href="#_supported_metrics"></a>4. Supported metrics</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#metric-points" target="_blank" rel="noopener">Metric points</a> define the different data points that are supported in OTLP. Micrometer supports exporting the below data points in OTLP format,</p>
@@ -693,7 +724,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_histograms_and_percentiles"><a class="anchor" href="#_histograms_and_percentiles"></a>4. Histograms and Percentiles</h2>
+<h2 id="_histograms_and_percentiles"><a class="anchor" href="#_histograms_and_percentiles"></a>5. Histograms and Percentiles</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer <code>Timer</code> and <code>DistributionSummary</code> support configuring <a href="../concepts/histogram-quantiles.html" class="xref page">client-side percentiles and percentile histograms</a>. The OTLP specification terms the Summary data point (client-side percentiles) as legacy and not recommended for new applications. The Summary data point also cannot have min/max associated with it. Due to these reasons, Micrometer prefers exporting Timers and DistributionSummary as a Histogram data point. By default, a Timer/DistributionSummary without any additional percentile/histogram config is exported as a Histogram data point. However, by configuring the timer to generate only client-side percentiles, by using <code>publishPercentiles</code>, you can change this to a Summary data point that exports pre-calculated percentiles. When both <code>publishPercentiles</code> and (<code>publishPercentileHistogram</code> or <code>serviceLevelObjectives</code>) are configured, the Histogram data point is preferred and pre-calculated percentiles are <strong>not</strong> generated. The following table describes which data point is used with different configurations:</p>
@@ -752,7 +783,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <p>Since Exponential Histogram cannot have custom SLO&#8217;s specified, explicit bucket histogram is used whenever <code>serviceLevelObjectives</code> are added.</p>
 </div>
 <div class="sect2">
-<h3 id="_configuration_with_spring_boot"><a class="anchor" href="#_configuration_with_spring_boot"></a>4.1. Configuration with Spring Boot</h3>
+<h3 id="_configuration_with_spring_boot"><a class="anchor" href="#_configuration_with_spring_boot"></a>5.1. Configuration with Spring Boot</h3>
 <div class="paragraph">
 <p>If you use Spring Boot, you can use the <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.metrics.customizing.per-meter-properties" target="_blank" rel="noopener">per-meter properties</a> to configure this behavior.</p>
 </div>
