@@ -630,7 +630,8 @@
 <td class="content">
 <div class="title"><code>MeterFilter</code> implementations of <code>map</code> should be "static"</div>
 <div class="paragraph">
-<p>The <code>id</code> parameter is the only dynamic input that changes over the lifecycle of the <code>MeterFilter</code> on which they should depend.
+<p>The <code>id</code> parameter is the only dynamic input that changes over the lifecycle of the <code>MeterFilter</code> on which <code>MeterFilter</code> implementations should depend.
+Depending on a value that will be fixed at runtime such as an instance ID or hostname is fine because it does not change after application start-up.
 Use cases where dynamic behavior is desired, such as defining tags based on the context of a request etc., should be implemented in the instrumentation itself rather than in a <code>MeterFilter</code>.
 For example, see <code>MongoMetricsCommandListener</code> and the <code>MongoCommandTagsProvider</code> it takes in a constructor argument as well as the default implementation <code>DefaultMongoCommandTagsProvider</code>.
 See also <a href="../observation/components.html#micrometer-observation-predicates-filters" class="xref page">ObservationFilter</a> which allows dynamic implementations.</p>
