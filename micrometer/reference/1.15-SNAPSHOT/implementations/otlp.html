@@ -558,7 +558,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>url</code> - The URL to which data is reported. Environment variables <code>OTEL_EXPORTER_OTLP_METRICS_ENDPOINT</code> and <code>OTEL_EXPORTER_OTLP_ENDPOINT</code> are also supported in the default implementation. If a value is not provided, it defaults to <code><a href="http://localhost:4318/v1/metrics" class="bare">localhost:4318/v1/metrics</a></code></p>
+<p><code>url</code> - The address to which metrics are published. Environment variables <code>OTEL_EXPORTER_OTLP_METRICS_ENDPOINT</code> and <code>OTEL_EXPORTER_OTLP_ENDPOINT</code> are also supported in the default implementation. If a value is not provided, it defaults to <code><a href="http://localhost:4318/v1/metrics" class="bare">localhost:4318/v1/metrics</a></code></p>
 </li>
 <li>
 <p><code>batchSize</code> - number of <code>Meter</code>s to include in a single payload sent to the backend. The default is 10,000.</p>
@@ -625,12 +625,12 @@ You may use a different <code>HttpSender</code> implementation by creating and c
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">OtlpConfig config = OtlpConfig.DEFAULT;
-OtlpHttpMetricsSender httpMetricsSender = new OtlpHttpMetricsSender(new OkHttpSender(), config);
+OtlpHttpMetricsSender httpMetricsSender = new OtlpHttpMetricsSender(new OkHttpSender());
 OtlpMeterRegistry meterRegistry = OtlpMeterRegistry.builder(config).metricsSender(httpMetricsSender).build();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can also provide a custom implementation of <code>OtlpMetricsSender</code> that does not use HTTP at all.
+<p>You can also provide a custom implementation of <code>OtlpMetricsSender</code> that does not use <code>HttpSender</code> at all. <code>OtlpConfig#url</code> will be used as the address when the sender is called in the <code>OtlpMeterRegistry</code> <code>publish</code> method.
 For instance, if you made a gRPC implementation, you could configure it in the following way.
 Micrometer does not currently provide a gRPC implementation of <code>OtlpMetricsSender</code>.</p>
 </div>
