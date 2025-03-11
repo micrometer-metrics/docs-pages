@@ -764,23 +764,28 @@ OtlpMeterRegistry meterRegistry = OtlpMeterRegistry.builder(config).metricsSende
 </tbody>
 </table>
 <div class="paragraph">
-<p><em>* The configuration <code>histogramFlavor</code> determines whether the OTLP DataPoint is a Histogram/Exponential Histogram.</em></p>
+<p><em>* The configuration <code>histogramFlavorPerMeter</code> and <code>histogramFlavor</code> determine whether the OTLP DataPoint is a Histogram/Exponential Histogram.</em></p>
 </div>
 <div class="paragraph">
-<p><code>OtlpMeterRegistry</code> supports 2 types of Histogram implementations (1.Explicit Bucket Histogram (or simply called Histogram), 2. Exponential Histogram) when <code>publishPercentileHistogram</code> is configured. The choice is chosen by setting <code>histogramFlavor</code> in <code>OtlpConfig</code> used by registry. When the implementation is exponential histogram, it also supports 2 additional properties</p>
+<p><code>OtlpMeterRegistry</code> supports 2 types of Histogram implementations (1.Explicit Bucket Histogram (or simply called Histogram), 2. Exponential Histogram) when <code>publishPercentileHistogram</code> is configured.
+The type is determined by <code>histogramFlavorPerMeter</code> and <code>histogramFlavor</code> in <code>OtlpConfig</code> used by the registry.
+When the implementation is the exponential histogram, additional configuration applies:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>maxScale used to cap the maximum <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#exponential-scale" target="_blank" rel="noopener">scale</a> used by the Exponential Histogram (defaults to 20).</p>
+<p><code>maxScale</code> used to cap the maximum <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#exponential-scale" target="_blank" rel="noopener">scale</a> used by the Exponential Histogram (defaults to 20).</p>
 </li>
 <li>
-<p>maxBuckets determines the maximum number of <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#exponential-buckets" target="_blank" rel="noopener">buckets</a> to be used for exponential histograms (defaults to 160).</p>
+<p><code>maxBuckets</code> determines the maximum number of <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#exponential-buckets" target="_blank" rel="noopener">buckets</a> to be used for exponential histograms (defaults to 160).</p>
+</li>
+<li>
+<p><code>maxBucketsPerMeter</code> overrides <code>maxBuckets</code> for specific meter names, giving more fine-grained configurability.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Since Exponential Histogram cannot have custom SLO&#8217;s specified, explicit bucket histogram is used whenever <code>serviceLevelObjectives</code> are added.</p>
+<p>Since Exponential Histogram cannot have custom SLO&#8217;s specified, an explicit bucket histogram is used whenever <code>serviceLevelObjectives</code> are configured.</p>
 </div>
 <div class="sect2">
 <h3 id="_configuration_with_spring_boot"><a class="anchor" href="#_configuration_with_spring_boot"></a>5.1. Configuration with Spring Boot</h3>
