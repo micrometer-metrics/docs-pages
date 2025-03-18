@@ -552,6 +552,25 @@ another. The reported value underestimates the actual total number of steals whe
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>To use the following <code>ExecutorService</code> instances, <code>--add-opens java.base/java.util.concurrent=ALL-UNNAMED</code> is required:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Executors.newSingleThreadScheduledExecutor()</code></p>
+</li>
+<li>
+<p><code>Executors.newSingleThreadExecutor()</code></p>
+</li>
+<li>
+<p><code>Executors.newThreadPerTaskExecutor()</code></p>
+</li>
+<li>
+<p><code>Executors.newVirtualThreadPerTaskExecutor()</code></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
