@@ -576,8 +576,10 @@ another. The reported value underestimates the actual total number of steals whe
 <div class="sect1">
 <h2 id="_java_21_metrics"><a class="anchor" href="#_java_21_metrics"></a>Java 21 Metrics</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_virtual_threads"><a class="anchor" href="#_virtual_threads"></a>Virtual Threads</h3>
 <div class="paragraph">
-<p>Micrometer provides support for <a href="https://openjdk.org/jeps/444">virtual threads</a> released in Java 21. In order to utilize it, you need to add the <code>io.micrometer:micrometer-java21</code> dependency to your classpath to use the binder:</p>
+<p>Micrometer provides metrics for <a href="https://openjdk.org/jeps/444">virtual threads</a> released in Java 21. In order to utilize it, you need to add the <code>io.micrometer:micrometer-java21</code> dependency to your classpath to use the binder:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -585,7 +587,56 @@ another. The reported value underestimates the actual total number of steals whe
 </div>
 </div>
 <div class="paragraph">
-<p>The binder measures the duration (and counts the number of events) of virtual threads being pinned; also counts the number of events when starting or unparking a virtual thread failed.</p>
+<p>The binder measures the duration (and counts the number of events) of virtual threads being pinned; it also counts the number of events when starting or unparking a virtual thread failed.</p>
+</div>
+<div class="paragraph">
+<p>If you are running your application with Java 24 or later on a JVM that has <code>jdk.management.VirtualThreadSchedulerMXBean</code> provided as a platform MXBean, the following additional virtual thread metrics will be provided.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Meter name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Tag(s)</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jvm.threads.virtual.parallelism</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gauge</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Virtual thread scheduler&#8217;s target parallelism</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jvm.threads.virtual.pool.size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gauge</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Current number of platform threads that the scheduler has started but have not terminated; -1 if not known.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jvm.threads.virtual.live</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gauge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scheduling.status</code> = <code>mounted</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Approximate current number of virtual threads that are unfinished and mounted to a platform thread by the scheduler</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>jvm.threads.virtual.live</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gauge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scheduling.status</code> = <code>queued</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Approximate current number of virtual threads that are unfinished and queued waiting to be scheduled</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Note that aggregating the values of <code>jvm.threads.virtual.live</code> across the different tags gives the total number of virtual threads started but not ended.</p>
+</div>
 </div>
 </div>
 </div>
