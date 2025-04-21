@@ -285,6 +285,9 @@
     <a class="nav-link"  href="jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="jms.html">JMS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="jvm.html">JVM</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -597,6 +600,7 @@ EhCache2Metrics.monitor(meterRegistry, cache, expectedTag);</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
 LoadingCache&lt;String, String&gt; cache = CacheBuilder.newBuilder().recordStats().build(new CacheLoader&lt;&gt;() {
+    @Override
     public String load(String key) {
         return "";
     }

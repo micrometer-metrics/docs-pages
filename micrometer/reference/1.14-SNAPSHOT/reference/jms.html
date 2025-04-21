@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Micrometer Wavefront :: Micrometer</title>
-    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/implementations/wavefront.html">
-    <link rel="prev" href="statsD.html">
-    <link rel="next" href="../reference.html">
+    <title>JMS Instrumentation :: Micrometer</title>
+    <link rel="prev" href="jetty.html">
+    <link rel="next" href="jvm.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -21,7 +20,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.15.0">
+    <meta name="version" content="1.14.7">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.15.0">
+<div class="nav-container" data-component="micrometer" data-version="1.14.7">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.15.0-SNAPSHOT</span>
+  <span class="version">1.14.7-SNAPSHOT</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -195,67 +194,67 @@
     <a class="nav-link"  href="../implementations.html">Implementations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="appOptics.html">AppOptics</a>
+    <a class="nav-link"  href="../implementations/appOptics.html">AppOptics</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="atlas.html">Atlas</a>
+    <a class="nav-link"  href="../implementations/atlas.html">Atlas</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="azure-monitor.html">Azure Monitor</a>
+    <a class="nav-link"  href="../implementations/azure-monitor.html">Azure Monitor</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="cloudwatch.html">CloudWatch</a>
+    <a class="nav-link"  href="../implementations/cloudwatch.html">CloudWatch</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="datadog.html">Datadog</a>
+    <a class="nav-link"  href="../implementations/datadog.html">Datadog</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="dynatrace.html">Dynatrace</a>
+    <a class="nav-link"  href="../implementations/dynatrace.html">Dynatrace</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="elastic.html">Elasticsearch</a>
+    <a class="nav-link"  href="../implementations/elastic.html">Elasticsearch</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="ganglia.html">Ganglia</a>
+    <a class="nav-link"  href="../implementations/ganglia.html">Ganglia</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="graphite.html">Graphite</a>
+    <a class="nav-link"  href="../implementations/graphite.html">Graphite</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="humio.html">Humio</a>
+    <a class="nav-link"  href="../implementations/humio.html">Humio</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="influx.html">Influx</a>
+    <a class="nav-link"  href="../implementations/influx.html">Influx</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="instana.html">Instana</a>
+    <a class="nav-link"  href="../implementations/instana.html">Instana</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="jmx.html">JMX</a>
+    <a class="nav-link"  href="../implementations/jmx.html">JMX</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="kairos.html">KairosDB</a>
+    <a class="nav-link"  href="../implementations/kairos.html">KairosDB</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="new-relic.html">New Relic</a>
+    <a class="nav-link"  href="../implementations/new-relic.html">New Relic</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="otlp.html">OpenTelemetry Protocol (OTLP)</a>
+    <a class="nav-link"  href="../implementations/otlp.html">OpenTelemetry Protocol (OTLP)</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="prometheus.html">Prometheus</a>
+    <a class="nav-link"  href="../implementations/prometheus.html">Prometheus</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="signalFx.html">SignalFx</a>
+    <a class="nav-link"  href="../implementations/signalFx.html">SignalFx</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="stackdriver.html">Stackdriver</a>
+    <a class="nav-link"  href="../implementations/stackdriver.html">Stackdriver</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="statsD.html">statsD</a>
+    <a class="nav-link"  href="../implementations/statsD.html">statsD</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link"  href="wavefront.html">Wavefront</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../implementations/wavefront.html">Wavefront</a>
   </li>
 </ul>
   </li>
@@ -264,52 +263,52 @@
     <a class="nav-link"  href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/cache.html">Cache</a>
+    <a class="nav-link"  href="cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/commons-pool.html">Commons Pool</a>
+    <a class="nav-link"  href="commons-pool.html">Commons Pool</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/db.html">Database</a>
+    <a class="nav-link"  href="db.html">Database</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/grpc.html">gRPC</a>
+    <a class="nav-link"  href="grpc.html">gRPC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/httpcomponents.html">HttpComponents Client</a>
+    <a class="nav-link"  href="httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/java-httpclient.html">Java HttpClient</a>
+    <a class="nav-link"  href="java-httpclient.html">Java HttpClient</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/jetty.html">Jetty and Jersey</a>
+    <a class="nav-link"  href="jetty.html">Jetty and Jersey</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link"  href="jms.html">JMS</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/jms.html">JMS</a>
+    <a class="nav-link"  href="jvm.html">JVM</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/jvm.html">JVM</a>
+    <a class="nav-link"  href="kafka.html">Kafka</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/kafka.html">Kafka</a>
+    <a class="nav-link"  href="logging.html">Logging</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/logging.html">Logging</a>
+    <a class="nav-link"  href="mongodb.html">MongoDB</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/mongodb.html">MongoDB</a>
+    <a class="nav-link"  href="netty.html">Netty</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/netty.html">Netty</a>
+    <a class="nav-link"  href="okhttpclient.html">OkHttpClient</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link"  href="system.html">System</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/system.html">System</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/tomcat.html">Tomcat</a>
+    <a class="nav-link"  href="tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -391,13 +390,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="Micrometer Wavefront"
+      data-title="JMS Instrumentation"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/edit/main/docs/modules/ROOT/pages/implementations/wavefront.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/edit/1.14.x/docs/modules/ROOT/pages/reference/jms.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -437,8 +436,8 @@
   <nav class="breadcrumbs" aria-label="breadcrumbs">
     <ul>
       <li><a href="../index.html">Micrometer</a></li>
-      <li><a href="../implementations.html">Implementations</a></li>
-      <li><a href="wavefront.html">Wavefront</a></li>
+      <li><a href="../reference.html">Reference Instrumentations</a></li>
+      <li><a href="jms.html">JMS</a></li>
     </ul>
   </nav>
 </div><div class="admonitionblock important latest">
@@ -449,34 +448,34 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../implementations/wavefront.html">Micrometer 1.14.6</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../index.html">Micrometer 1.14.6</a>!</p>
         </div>
       </td>
     </tr></tbody>
   </table>
 </div>
-<h1 id="page-title" class="page">Micrometer Wavefront</h1>
+<h1 id="page-title" class="page">JMS Instrumentation</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Wavefront is a dimensional monitoring system offered as a SaaS with a full UI, custom query language, and advanced math operations. Wavefront operates on a push model. Metrics can be pushed either through a sidecar process running on the same host (called the Wavefront proxy) or directly to the Wavefront API.</p>
+<p>Micrometer provides JMS instrumentation.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="installing-micrometer-registry-wavefront"><a class="anchor" href="#installing-micrometer-registry-wavefront"></a>1. Installing micrometer-registry-wavefront</h2>
+<h2 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>It is recommended to use the BOM provided by Micrometer (or your framework if any), you can see how to configure it <a href="../installing.html" class="xref page">here</a>. The examples below assume you are using a BOM.</p>
 </div>
 <div class="sect2">
-<h3 id="_gradle"><a class="anchor" href="#_gradle"></a>1.1. Gradle</h3>
+<h3 id="_gradle"><a class="anchor" href="#_gradle"></a>Gradle</h3>
 <div class="paragraph">
 <p>After the BOM is <a href="../installing.html" class="xref page">configured</a>, add the following dependency:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-registry-wavefront'</code></pre>
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-jakarta9'</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -493,7 +492,7 @@ The version is not needed for this dependency since it is defined by the BOM.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_maven"><a class="anchor" href="#_maven"></a>1.2. Maven</h3>
+<h3 id="_maven"><a class="anchor" href="#_maven"></a>Maven</h3>
 <div class="paragraph">
 <p>After the BOM is <a href="../installing.html" class="xref page">configured</a>, add the following dependency:</p>
 </div>
@@ -501,7 +500,7 @@ The version is not needed for this dependency since it is defined by the BOM.
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
   &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
-  &lt;artifactId&gt;micrometer-registry-wavefront&lt;/artifactId&gt;
+  &lt;artifactId&gt;micrometer-jakarta9&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
@@ -521,222 +520,191 @@ The version is not needed for this dependency since it is defined by the BOM.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_configuring"><a class="anchor" href="#_configuring"></a>2. Configuring</h2>
+<h2 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes how to configure Wavefront when you send data:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#configuring-directly-to-wavefront">Directly to Wavefront</a></p>
-</li>
-<li>
-<p><a href="#configuring-through-a-wavefront-proxy-sidecar">Through a Wavefront Proxy Sidecar</a></p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="configuring-directly-to-wavefront"><a class="anchor" href="#configuring-directly-to-wavefront"></a>2.1. Directly to Wavefront</h3>
-<div class="paragraph">
-<p>The following example configures sending directly to Wavefront:</p>
+<p>Here is how an existing JMS <code>Session</code> instance can be instrumented for observability:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">WavefrontConfig config = new WavefrontConfig() {
-    @Override
-    public String uri() {
-        return "https://longboard.wavefront.com"; <i class="conum" data-value="1"></i><b>(1)</b>
-    }
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><span class="fold-block is-hidden-folded">import io.micrometer.jakarta9.instrument.jms.JmsInstrumentation;
 
-    @Override
-    public String apiToken() {
-        return "MYAPIKEY"; <i class="conum" data-value="2"></i><b>(2)</b>
-    }
+</span><span class="fold-block">Session original = ...
+ObservationRegistry registry = ...
+Session session = JmsInstrumentation.instrumentSession(original, registry);
 
-    @Override
-    public String get(String key) {
-        return null; <i class="conum" data-value="3"></i><b>(3)</b>
-    }
-};
-MeterRegistry registry = new WavefrontMeterRegistry(config, Clock.SYSTEM);</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><code>longboard</code> is the name of the co-tenant instance on which most organizations start. Once you reach a sufficient scale, Wavefront may move you
-to a dedicated host.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>This is required when pushing directly to Wavefront&#8217;s API.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Accept the rest of the defaults.</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="configuring-through-a-wavefront-proxy-sidecar"><a class="anchor" href="#configuring-through-a-wavefront-proxy-sidecar"></a>2.2. Through a Wavefront Proxy Sidecar</h3>
-<div class="paragraph">
-<p>The following example configures sending through a Wavefront proxy sidecar:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">MeterRegistry registry = new WavefrontMeterRegistry(WavefrontConfig.DEFAULT_PROXY, Clock.SYSTEM);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The default proxy configuration pushes metrics and histogram distributions to a Wavefront proxy sitting on <code>localhost:2878</code>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If publishing metrics to a Wavefront proxy, the URI must be expressed in the form of <code>proxy://HOST:PORT</code>.
-</td>
-</tr>
-</table>
+Topic topic = session.createTopic("micrometer.test.topic");
+MessageProducer producer = session.createProducer(topic);
+// this operation will create a "jms.message.publish" observation
+producer.send(session.createMessage("test message content"));
+
+MessageConsumer consumer = session.createConsumer(topic);
+// when a message is processed by the listener,
+// a "jms.message.process" observation is created
+consumer.setMessageListener(message -&gt; consumeMessage(message));</span></code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_graphing"><a class="anchor" href="#_graphing"></a>3. Graphing</h2>
+<h2 id="_observations"><a class="anchor" href="#_observations"></a>Observations</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section serves as a quick start to rendering useful representations in Wavefront for metrics originating in Micrometer. See the <a href="https://docs.wavefront.com/query_language_getting_started.html">Wavefront docs</a> for a far more complete reference of what is possible in Wavefront.</p>
-</div>
-<div class="sect2">
-<h3 id="_counters"><a class="anchor" href="#_counters"></a>3.1. Counters</h3>
-<div class="paragraph">
-<p>The query that generates a graph for a random-walk counter is <code>rate(ts(counter))</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/implementations/wavefront-counter-rate.png" alt="Wavefront-rendered counter">
-</div>
-<div class="title">Figure 1. A Wavefront rendered graph of the random walk counter.</div>
-</div>
-<div class="paragraph">
-<p>Representing a counter without rate normalization over some time window is rarely useful, as the
-representation is a function of both the rapidity with which the counter is incremented and the
-longevity of the service. It is generally most useful to rate-normalize these time series to
-reason about them.</p>
-</div>
-<div class="paragraph">
-<p>Because Wavefront keeps track of cumulative counts across all time, it has the
-advantage of allowing for the selection of a particular time function at query time (for example,
-<code>rate(ts(counter))</code> to compute the per-second rate of change).</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_timers"><a class="anchor" href="#_timers"></a>3.2. Timers</h3>
-<div class="paragraph">
-<p>The Wavefront <code>Timer</code> produces different time series depending on whether or not
-<code>publishPercentileHistogram</code> is enabled.</p>
-</div>
-<div class="paragraph">
-<p>If <code>publishPercentileHistogram</code> is enabled, the Wavefront <code>Timer</code> produces histogram distributions
-that let you query for the latency at any percentile using <code>hs()</code> queries. For example, you can
-visualize latency at the 95th percentile (<code>percentile(95, hs(timer.m))</code>) or the 99.9th percentile
-(<code>percentile(99.9, hs(timer.m))</code>). For more information on histogram distributions, see
-<a href="#wavefront-histograms">Wavefront Histograms</a>, later in this section.</p>
-</div>
-<div class="paragraph">
-<p>If <code>publishPercentileHistogram</code> is disabled, the Wavefront <code>Timer</code> produces several
-time series:</p>
+<p>This instrumentation will create 2 types of observations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>${name}.avg</code>: Mean latency across all calls.</p>
+<p><code>"jms.message.publish"</code> when a JMS message is sent to the broker via <code>send</code>* method calls on <code>MessageProducer</code>.</p>
 </li>
 <li>
-<p><code>${name}.count</code>: Total number of all calls.</p>
-</li>
-<li>
-<p><code>${name}.sum</code>: Total time of all calls.</p>
-</li>
-<li>
-<p><code>${name}.max</code>: Max latency over the publishing interval.</p>
-</li>
-<li>
-<p><code>${name}.percentiles</code>: Micrometer-calculated percentiles for the publishing interval. These
-cannot be aggregated across dimensions.</p>
+<p><code>"jms.message.process"</code> when a JMS message is processed via <code>MessageConsumer.setMessageListener</code>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>You can use these time series to generate a quick view of latency in Wavefront:</p>
+<p>By default, both observations share the same set of possible <code>KeyValues</code>:</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/implementations/wavefront-timer-latency.png" alt="Wavefront-rendered timer">
-</div>
-<div class="title">Figure 2. Timer latency.</div>
-</div>
-<div class="paragraph">
-<p>The preceding chart shows the average latency (<code>rate(ts(timer.sum))/rate(ts(timer.count))</code> in
-green), 95th percentile (<code>ts(timer.percentile, phi="0.95")</code> in orange), and max (<code>ts(timer.max)</code>
-in blue).</p>
-</div>
-<div class="paragraph">
-<p>Additionally, <code>rate(ts(timer.count))</code> represents a rate/second throughput of events being timed:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/implementations/wavefront-timer-throughput.png" alt="Wavefront-rendered timer throughput">
-</div>
-<div class="title">Figure 3. Timer throughput.</div>
-</div>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Low cardinality Keys</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>error</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Class name of the exception thrown during the messaging operation (or "none").</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>exception</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Duplicates the <code>error</code> key.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>messaging.destination.temporary</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether the destination (queue or topic) is temporary.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>messaging.operation</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the JMS operation being performed (values: <code>"publish"</code> or <code>"process"</code>).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. High cardinality Keys</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>messaging.message.conversation_id</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The correlation ID of the JMS message.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>messaging.destination.name</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the destination the current message was sent to.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>messaging.message.id</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Value used by the messaging system as an identifier for the message.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="sect2">
-<h3 id="wavefront-histograms"><a class="anchor" href="#wavefront-histograms"></a>3.3. Wavefront Histograms</h3>
+<h3 id="_messaging_destination_name_as_a_low_cardinality_key"><a class="anchor" href="#_messaging_destination_name_as_a_low_cardinality_key"></a><code>messaging.destination.name</code> as a low-cardinality key</h3>
 <div class="paragraph">
-<p>Wavefront&#8217;s histogram implementation stores an actual distribution of metrics, as opposed to single metrics. This lets you apply any percentile and aggregation function on the distribution at query time without having to specify specific percentiles and metrics to keep during metric collection.</p>
+<p>Initially the <code>messaging.destination.name</code> key was classified as a high-cardinality key because
+a <code>TemporaryQueue</code> can be a destination. But <code>TemporaryQueue</code> has a great number of possible values of
+names.</p>
 </div>
 <div class="paragraph">
-<p>Wavefront histogram distributions are collected and reported for any <code>Timer</code> or <code>DistributionSummary</code> that has <code>publishPercentileHistogram</code> enabled.</p>
+<p>However, many applications don&#8217;t use `TemporaryQueue`s. In such cases it might be helpful to treat the key as
+low-cardinality key (e.g. to retrieve its values via Spring Boot Actuator).</p>
 </div>
 <div class="paragraph">
-<p>By default, distributions that are reported to Wavefront get aggregated by the minute, providing you with a histogram distribution for each minute. You also have the option of aggregating by hour or day. You can customize this with the following configuration options:</p>
+<p>To achieve this you need to use the below <code>HighToLowCardinalityObservationFilter</code></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>reportMinuteDistribution</code>: Boolean specifying whether to aggregate by minute. Enabled by default. Metric name in Wavefront has <code>.m</code> suffix.</p>
-</li>
-<li>
-<p><code>reportHourDistribution</code>: Boolean specifying whether to aggregate by hour. Disabled by default. Metric name in Wavefront has <code>.h</code> suffix.</p>
-</li>
-<li>
-<p><code>reportDayDistribution</code>: Boolean specifying whether to aggregate by day. Disabled by default. Metric name in Wavefront has <code>.d</code> suffix.</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">final class HighToLowCardinalityObservationFilter implements ObservationFilter {
+    private final String key;
+
+    HighToLowCardinalityObservationFilter(String key) {
+        this.key = key;
+    }
+
+    @Override
+    public Observation.Context map(Observation.Context context) {
+        Optional.ofNullable(context.getHighCardinalityKeyValue(this.key))
+            .ifPresent(keyValue -&gt; {
+                context.removeHighCardinalityKeyValue(keyValue.getKey());
+                context.addLowCardinalityKeyValue(keyValue);
+            });
+        return context;
+    }
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>If you are sending to a Wavefront proxy, by default, both metrics and histogram distributions are published to the same port: 2878 in the default proxy configuration. If your proxy is configured to listen for histogram distributions on a different port, you can specify the port to which to publish by using the <code>distributionPort</code> configuration option.</p>
+<p>Registration of the filter:</p>
 </div>
-<div class="paragraph">
-<p>You can query histogram distributions in Wavefront by using <code>hs()</code> queries. For example, <code>percentile(98, hs(${name}.m))</code> returns the 98th percentile for a particular histogram aggregated over each minute. Each histogram metric name has a suffix (<code>.m</code>, <code>.h</code>, or <code>.d</code>), depending on the histogram&#8217;s aggregation interval.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ObservationRegistry registry = observationRegistry();
+registry.observationConfig().observationFilter(new HighToLowCardinalityObservationFilter("jms.message.process.messaging.destination.name"));</code></pre>
 </div>
-<div class="paragraph">
-<p>See the <a href="https://docs.wavefront.com/proxies_histograms.html">Wavefront Histograms documentation</a> for more information.</p>
 </div>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="statsD.html">statsD</a></span>
-  <span class="next"><a href="../reference.html">Reference Instrumentations</a></span>
+  <span class="prev"><a href="jetty.html">Jetty and Jersey</a></span>
+  <span class="next"><a href="jvm.html">JVM</a></span>
 </nav>
 </article>  </div>
 </main>
@@ -763,17 +731,17 @@ in blue).</p>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../../implementations/wavefront.html">
+    <a href="../../index.html">
       1.14.6
     </a>
   </li>
   <li class="version">
-    <a href="../../1.13/implementations/wavefront.html">
+    <a href="../../1.13/index.html">
       1.13.13
     </a>
   </li>
   <li class="version">
-    <a href="../../1.12/implementations/wavefront.html">
+    <a href="../../1.12/index.html">
       1.12.13
     </a>
   </li>
@@ -787,7 +755,7 @@ in blue).</p>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../../1.15/implementations/wavefront.html">
+    <a href="../../1.15/index.html">
       1.15.0-RC1
     </a>
   </li>
@@ -801,22 +769,22 @@ in blue).</p>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="wavefront.html">
+    <a href="../../1.15-SNAPSHOT/reference/jms.html">
       1.15.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.14-SNAPSHOT/implementations/wavefront.html">
+    <a href="jms.html">
       1.14.7-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.13-SNAPSHOT/implementations/wavefront.html">
+    <a href="../../1.13-SNAPSHOT/reference/jms.html">
       1.13.14-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.12-SNAPSHOT/implementations/wavefront.html">
+    <a href="../../1.12-SNAPSHOT/index.html">
       1.12.14-SNAPSHOT
     </a>
   </li>
@@ -882,6 +850,6 @@ in blue).</p>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.15.0" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.14.7" data-page-component="micrometer"></script>
   </body>
 </html>
