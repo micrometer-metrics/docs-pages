@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Custom Meter Registry :: Micrometer</title>
-    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/guides/custom-meter-registry.html">
-    <link rel="prev" href="http-sender-resilience4j-retry.html">
-    <link rel="next" href="../observation.html">
+    <title>JMS Instrumentation :: Micrometer</title>
+    <link rel="prev" href="jetty.html">
+    <link rel="next" href="jvm.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -264,52 +263,52 @@
     <a class="nav-link"  href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/cache.html">Cache</a>
+    <a class="nav-link"  href="cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/commons-pool.html">Commons Pool</a>
+    <a class="nav-link"  href="commons-pool.html">Commons Pool</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/db.html">Database</a>
+    <a class="nav-link"  href="db.html">Database</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/grpc.html">gRPC</a>
+    <a class="nav-link"  href="grpc.html">gRPC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/httpcomponents.html">HttpComponents Client</a>
+    <a class="nav-link"  href="httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/java-httpclient.html">Java HttpClient</a>
+    <a class="nav-link"  href="java-httpclient.html">Java HttpClient</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/jetty.html">Jetty and Jersey</a>
+    <a class="nav-link"  href="jetty.html">Jetty and Jersey</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link"  href="jms.html">JMS</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/jms.html">JMS</a>
+    <a class="nav-link"  href="jvm.html">JVM</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/jvm.html">JVM</a>
+    <a class="nav-link"  href="kafka.html">Kafka</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/kafka.html">Kafka</a>
+    <a class="nav-link"  href="logging.html">Logging</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/logging.html">Logging</a>
+    <a class="nav-link"  href="mongodb.html">MongoDB</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/mongodb.html">MongoDB</a>
+    <a class="nav-link"  href="netty.html">Netty</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/netty.html">Netty</a>
+    <a class="nav-link"  href="okhttpclient.html">OkHttpClient</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link"  href="system.html">System</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/system.html">System</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../reference/tomcat.html">Tomcat</a>
+    <a class="nav-link"  href="tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -318,13 +317,13 @@
     <a class="nav-link"  href="../guides.html">Guides</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="console-reporter.html">Passing through to Dropwizard&#8217;s console reporter</a>
+    <a class="nav-link"  href="../guides/console-reporter.html">Passing through to Dropwizard&#8217;s console reporter</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="http-sender-resilience4j-retry.html">HttpSender with Resilience4j retry</a>
+    <a class="nav-link"  href="../guides/http-sender-resilience4j-retry.html">HttpSender with Resilience4j retry</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link"  href="custom-meter-registry.html">Custom meter registry</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../guides/custom-meter-registry.html">Custom meter registry</a>
   </li>
 </ul>
   </li>
@@ -391,13 +390,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="Custom Meter Registry"
+      data-title="JMS Instrumentation"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/edit/1.13.x/docs/modules/ROOT/pages/guides/custom-meter-registry.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/edit/1.13.x/docs/modules/ROOT/pages/reference/jms.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -437,8 +436,8 @@
   <nav class="breadcrumbs" aria-label="breadcrumbs">
     <ul>
       <li><a href="../index.html">Micrometer</a></li>
-      <li><a href="../guides.html">Guides</a></li>
-      <li><a href="custom-meter-registry.html">Custom meter registry</a></li>
+      <li><a href="../reference.html">Reference Instrumentations</a></li>
+      <li><a href="jms.html">JMS</a></li>
     </ul>
   </nav>
 </div><div class="admonitionblock important latest">
@@ -449,93 +448,263 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../guides/custom-meter-registry.html">Micrometer 1.14.6</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../index.html">Micrometer 1.14.6</a>!</p>
         </div>
       </td>
     </tr></tbody>
   </table>
 </div>
-<h1 id="page-title" class="page">Custom Meter Registry</h1>
+<h1 id="page-title" class="page">JMS Instrumentation</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Micrometer includes support for popular meter registries, so you should check those first.
-For an existing meter registry, if you think that your requirements are generally useful, consider creating an issue or PR against the Micrometer issue tracker.
-For a non-existent meter registry, if it is widely-used, consider creating an issue or PR for it.</p>
+<p>Micrometer provides JMS instrumentation.</p>
 </div>
-<div class="paragraph">
-<p>If you need to create your own custom meter registry, you can create it by extending one of the base classes for meter registries: <code>MeterRegistry</code>, <code>PushMeterRegistry</code>, or <code>StepMeterRegistry</code>.</p>
 </div>
-<div class="paragraph">
-<p>The most common way is to extend <code>StepMeterRegistry</code>.
-You can create your own custom <code>StepMeterRegistry</code>.</p>
 </div>
+<div class="sect1">
+<h2 id="_installing"><a class="anchor" href="#_installing"></a>Installing</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>First, define your own meter registry configuration by extending <code>StepRegistryConfig</code>, as follows:</p>
+<p>It is recommended to use the BOM provided by Micrometer (or your framework if any), you can see how to configure it <a href="../installing.html" class="xref page">here</a>. The examples below assume you are using a BOM.</p>
+</div>
+<div class="sect2">
+<h3 id="_gradle"><a class="anchor" href="#_gradle"></a>Gradle</h3>
+<div class="paragraph">
+<p>After the BOM is <a href="../installing.html" class="xref page">configured</a>, add the following dependency:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public interface CustomRegistryConfig extends StepRegistryConfig {
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-jakarta9'</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The version is not needed for this dependency since it is defined by the BOM.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_maven"><a class="anchor" href="#_maven"></a>Maven</h3>
+<div class="paragraph">
+<p>After the BOM is <a href="../installing.html" class="xref page">configured</a>, add the following dependency:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
+  &lt;artifactId&gt;micrometer-jakarta9&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The version is not needed for this dependency since it is defined by the BOM.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here is how an existing JMS <code>Session</code> instance can be instrumented for observability:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><span class="fold-block is-hidden-folded">import io.micrometer.jakarta9.instrument.jms.JmsInstrumentation;
 
-	CustomRegistryConfig DEFAULT = k -&gt; null;
+</span><span class="fold-block">Session original = ...
+ObservationRegistry registry = ...
+Session session = JmsInstrumentation.instrumentSession(original, registry);
 
-	@Override
-	default String prefix() {
-		return "custom";
-	}
+Topic topic = session.createTopic("micrometer.test.topic");
+MessageProducer producer = session.createProducer(topic);
+// this operation will create a "jms.message.publish" observation
+producer.send(session.createMessage("test message content"));
 
+MessageConsumer consumer = session.createConsumer(topic);
+// when a message is processed by the listener,
+// a "jms.message.process" observation is created
+consumer.setMessageListener(message -&gt; consumeMessage(message));</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_observations"><a class="anchor" href="#_observations"></a>Observations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This instrumentation will create 2 types of observations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"jms.message.publish"</code> when a JMS message is sent to the broker via <code>send</code>* method calls on <code>MessageProducer</code>.</p>
+</li>
+<li>
+<p><code>"jms.message.process"</code> when a JMS message is processed via <code>MessageConsumer.setMessageListener</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>By default, both observations share the same set of possible <code>KeyValues</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Low cardinality Keys</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>error</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Class name of the exception thrown during the messaging operation (or "none").</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>exception</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Duplicates the <code>error</code> key.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>messaging.destination.temporary</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Whether the destination (queue or topic) is temporary.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>messaging.operation</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the JMS operation being performed (values: <code>"publish"</code> or <code>"process"</code>).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. High cardinality Keys</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>messaging.message.conversation_id</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The correlation ID of the JMS message.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>messaging.destination.name</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The name of the destination the current message was sent to.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>messaging.message.id</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Value used by the messaging system as an identifier for the message.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_messaging_destination_name_as_a_low_cardinality_key"><a class="anchor" href="#_messaging_destination_name_as_a_low_cardinality_key"></a><code>messaging.destination.name</code> as a low-cardinality key</h3>
+<div class="paragraph">
+<p>Initially the <code>messaging.destination.name</code> key was classified as a high-cardinality key because
+a <code>TemporaryQueue</code> can be a destination. But <code>TemporaryQueue</code> has a great number of possible values of
+names.</p>
+</div>
+<div class="paragraph">
+<p>However, many applications don&#8217;t use `TemporaryQueue`s. In such cases it might be helpful to treat the key as
+low-cardinality key (e.g. to retrieve its values via Spring Boot Actuator).</p>
+</div>
+<div class="paragraph">
+<p>To achieve this you need to use the below <code>HighToLowCardinalityObservationFilter</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">final class HighToLowCardinalityObservationFilter implements ObservationFilter {
+    private final String key;
+
+    HighToLowCardinalityObservationFilter(String key) {
+        this.key = key;
+    }
+
+    @Override
+    public Observation.Context map(Observation.Context context) {
+        Optional.ofNullable(context.getHighCardinalityKeyValue(this.key))
+            .ifPresent(keyValue -&gt; {
+                context.removeHighCardinalityKeyValue(keyValue.getKey());
+                context.addLowCardinalityKeyValue(keyValue);
+            });
+        return context;
+    }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Second, define your own meter registry by extending <code>StepMeterRegistry</code>, as follows:</p>
+<p>Registration of the filter:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class CustomMeterRegistry extends StepMeterRegistry {
-
-	public CustomMeterRegistry(CustomRegistryConfig config, Clock clock) {
-		super(config, clock);
-
-		start(new NamedThreadFactory("custom-metrics-publisher"));
-	}
-
-	@Override
-	protected void publish() {
-		getMeters().stream().forEach(meter -&gt; System.out.println("Publishing " + meter.getId()));
-	}
-
-	@Override
-	protected TimeUnit getBaseTimeUnit() {
-		return TimeUnit.MILLISECONDS;
-	}
-
-}</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ObservationRegistry registry = observationRegistry();
+registry.observationConfig().observationFilter(new HighToLowCardinalityObservationFilter("jms.message.process.messaging.destination.name"));</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Finally, create the meter registry configuration and the meter registry.
-If you use Spring Boot, you can do so as follows:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Configuration
-public class MetricsConfig {
-
-	@Bean
-	public CustomRegistryConfig customRegistryConfig() {
-		return CustomRegistryConfig.DEFAULT;
-	}
-
-	@Bean
-	public CustomMeterRegistry customMeterRegistry(CustomRegistryConfig customRegistryConfig, Clock clock) {
-		return new CustomMeterRegistry(customRegistryConfig, clock);
-	}
-
-}</code></pre>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="http-sender-resilience4j-retry.html">HttpSender with Resilience4j retry</a></span>
-  <span class="next"><a href="../observation.html">Micrometer Observation</a></span>
+  <span class="prev"><a href="jetty.html">Jetty and Jersey</a></span>
+  <span class="next"><a href="jvm.html">JVM</a></span>
 </nav>
 </article>  </div>
 </main>
@@ -562,17 +731,17 @@ public class MetricsConfig {
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../../guides/custom-meter-registry.html">
+    <a href="../../index.html">
       1.14.6
     </a>
   </li>
   <li class="version">
-    <a href="../../1.13/guides/custom-meter-registry.html">
+    <a href="../../1.13/index.html">
       1.13.13
     </a>
   </li>
   <li class="version">
-    <a href="../../1.12/guides/custom-meter-registry.html">
+    <a href="../../1.12/index.html">
       1.12.13
     </a>
   </li>
@@ -586,7 +755,7 @@ public class MetricsConfig {
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../../1.15/guides/custom-meter-registry.html">
+    <a href="../../1.15/index.html">
       1.15.0-RC1
     </a>
   </li>
@@ -600,22 +769,22 @@ public class MetricsConfig {
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../../1.15-SNAPSHOT/guides/custom-meter-registry.html">
+    <a href="../../1.15-SNAPSHOT/index.html">
       1.15.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.14-SNAPSHOT/guides/custom-meter-registry.html">
+    <a href="../../1.14-SNAPSHOT/index.html">
       1.14.7-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="custom-meter-registry.html">
+    <a href="jms.html">
       1.13.14-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.12-SNAPSHOT/guides/custom-meter-registry.html">
+    <a href="../../1.12-SNAPSHOT/index.html">
       1.12.14-SNAPSHOT
     </a>
   </li>
