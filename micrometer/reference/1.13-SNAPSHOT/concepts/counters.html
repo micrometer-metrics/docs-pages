@@ -657,7 +657,7 @@ FunctionCounter counter = FunctionCounter
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Attempting to construct a function-tracking counter with a primitive number or one of its <code>java.lang</code> object forms is always incorrect. These numbers are immutable. Thus, the function-tracking counter cannot ever be changed. Attempting to "re-register" the function-tracking counter with a different number does not work, as the registry maintains only one meter for each unique combination of name and tags. "Re-registering" a function-tracking counter can happen indirectly for example as the result of a <code>MeterFilter</code> modifying the name and/or the tags of two different function-tracking counter so that they will be the same after the filter is applied.
+Attempting to construct a function-tracking counter with a primitive number or one of its <code>java.lang</code> object forms is always incorrect. These numbers are immutable. Thus, the function-tracking counter cannot ever be changed. Attempting to "re-register" the function-tracking counter with a different number does not work, as the registry maintains only one meter for each unique combination of name and tags. "Re-registering" a function-tracking counter can happen indirectly for example as the result of a <code>MeterFilter</code> modifying the name and/or the tags of two different function-tracking counters so that they will be the same after the filter is applied.
 </td>
 </tr>
 </table>
