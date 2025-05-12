@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2025-05-12T03:12:19.133Z",
+  "generated": "2025-05-12T06:48:57.712Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -1378,9 +1378,9 @@
             }
           ]
         },
-        "1.13.14": {
+        "1.13.15": {
           "prerelease": true,
-          "displayVersion": "1.13.14-SNAPSHOT",
+          "displayVersion": "1.13.15-SNAPSHOT",
           "url": "/1.13-SNAPSHOT/index.html",
           "pages": [
             {
@@ -1724,7 +1724,7 @@
             }
           ]
         },
-        "1.13.13": {
+        "1.13.14": {
           "url": "/1.13/index.html",
           "pages": [
             {
@@ -2020,6 +2020,11 @@
               "path": "reference/jetty.adoc",
               "url": "/1.13/reference/jetty.html",
               "title": "Eclipse Jetty and Jersey Instrumentation"
+            },
+            {
+              "path": "reference/jms.adoc",
+              "url": "/1.13/reference/jms.html",
+              "title": "JMS Instrumentation"
             },
             {
               "path": "reference/jvm.adoc",

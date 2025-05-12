@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.13.13">
+    <meta name="version" content="1.13.14">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.13.13">
+<div class="nav-container" data-component="micrometer" data-version="1.13.14">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.13.13</span>
+  <span class="version">1.13.14</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -285,6 +285,9 @@
     <a class="nav-link"  href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../reference/jms.html">JMS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="../reference/jvm.html">JVM</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -394,7 +397,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.13.13/docs/modules/ROOT/pages/concepts/counters.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.13.14/docs/modules/ROOT/pages/concepts/counters.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -654,7 +657,7 @@ FunctionCounter counter = FunctionCounter
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Attempting to construct a function-tracking counter with a primitive number or one of its <code>java.lang</code> object forms is always incorrect. These numbers are immutable. Thus, the function-tracking counter cannot ever be changed. Attempting to "re-register" the function-tracking counter with a different number does not work, as the registry maintains only one meter for each unique combination of name and tags. "Re-registering" a function-tracking counter can happen indirectly for example as the result of a <code>MeterFilter</code> modifying the name and/or the tags of two different function-tracking counter so that they will be the same after the filter is applied.
+Attempting to construct a function-tracking counter with a primitive number or one of its <code>java.lang</code> object forms is always incorrect. These numbers are immutable. Thus, the function-tracking counter cannot ever be changed. Attempting to "re-register" the function-tracking counter with a different number does not work, as the registry maintains only one meter for each unique combination of name and tags. "Re-registering" a function-tracking counter can happen indirectly for example as the result of a <code>MeterFilter</code> modifying the name and/or the tags of two different function-tracking counters so that they will be the same after the filter is applied.
 </td>
 </tr>
 </table>
@@ -704,7 +707,7 @@ Attempting to construct a function-tracking counter with a primitive number or o
   </li>
   <li class="version">
     <a href="counters.html">
-      1.13.13
+      1.13.14
     </a>
   </li>
   <li class="version">
@@ -747,7 +750,7 @@ Attempting to construct a function-tracking counter with a primitive number or o
   </li>
   <li class="version">
     <a href="../../1.13-SNAPSHOT/concepts/counters.html">
-      1.13.14-SNAPSHOT
+      1.13.15-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -817,6 +820,6 @@ Attempting to construct a function-tracking counter with a primitive number or o
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.13.13" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.13.14" data-page-component="micrometer"></script>
   </body>
 </html>
