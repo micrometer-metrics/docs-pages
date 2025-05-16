@@ -693,7 +693,7 @@ finally {
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">/**
  * A dedicated {@link Observation.Context} used for taxing.
  */
-class TaxContext extends Observation.Context {
+static class TaxContext extends Observation.Context {
 
     private final String taxType;
 
@@ -718,7 +718,7 @@ class TaxContext extends Observation.Context {
  * An example of an {@link ObservationFilter} that will add the key-values to all
  * observations.
  */
-class CloudObservationFilter implements ObservationFilter {
+static class CloudObservationFilter implements ObservationFilter {
 
     @Override
     public Observation.Context map(Observation.Context context) {
@@ -746,7 +746,7 @@ class CloudObservationFilter implements ObservationFilter {
  * If you need to add some key-values regardless of the used
  * {@link ObservationConvention} you should use an {@link ObservationFilter}.
  */
-class GlobalTaxObservationConvention implements GlobalObservationConvention&lt;TaxContext&gt; {
+static class GlobalTaxObservationConvention implements GlobalObservationConvention&lt;TaxContext&gt; {
 
     // this will be applicable for all tax contexts - it will rename all the tax
     // contexts
@@ -776,7 +776,7 @@ interface TaxObservationConvention extends ObservationConvention&lt;TaxContext&g
  * Default convention of tags related to calculating tax. If no user one or global
  * convention will be provided then this one will be picked.
  */
-class DefaultTaxObservationConvention implements TaxObservationConvention {
+static class DefaultTaxObservationConvention implements TaxObservationConvention {
 
     @Override
     public KeyValues getLowCardinalityKeyValues(TaxContext context) {
@@ -857,7 +857,7 @@ enum TaxObservationDocumentation implements ObservationDocumentation {
 /**
  * Our business logic that we want to observe.
  */
-class TaxCalculator {
+static class TaxCalculator {
 
     private final ObservationRegistry observationRegistry;
 
@@ -892,7 +892,7 @@ class TaxCalculator {
 /**
  * Example of user changing the default conventions.
  */
-class CustomTaxObservationConvention extends DefaultTaxObservationConvention {
+static class CustomTaxObservationConvention extends DefaultTaxObservationConvention {
 
     @Override
     public KeyValues getLowCardinalityKeyValues(TaxContext context) {
