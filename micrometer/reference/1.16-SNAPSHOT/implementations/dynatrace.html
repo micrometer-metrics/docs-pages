@@ -544,8 +544,7 @@ In this case, there is no need to configure anything, so you can use the followi
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">DynatraceConfig dynatraceConfig = new DynatraceConfig() {
     @Override
-    @Nullable
-    public String get(String k) {
+    public @Nullable String get(String k) {
         // This method of the interface is used by the other configuration methods and needs to be
         // implemented here. Returning null accepts the defaults for the other configuration items.
         return null;
@@ -575,8 +574,7 @@ For example, you can specify the exporter version, which defaults to <code>v2</c
     }
 
     @Override
-    @Nullable
-    public String get(String k) {
+    public @Nullable String get(String k) {
         return null; // accept the rest of the defaults
     }
 };
@@ -642,8 +640,7 @@ We recommend limiting scope to only this permission.</p>
     }
 
     @Override
-    @Nullable
-    public String get(String k) {
+    public @Nullable String get(String k) {
         return null; // accept the rest of the defaults
     }
 };
@@ -789,8 +786,7 @@ We recommend limiting the scope to only this permission.</p>
     }
 
     @Override
-    @Nullable
-    public String get(String k) {
+    public @Nullable String get(String k) {
         return null; // accept the rest of the defaults
     }
 };</code></pre>
@@ -882,8 +878,7 @@ The reported metrics are assigned to <a href="https://docs.dynatrace.com/docs/sh
     }
 
     @Override
-    @Nullable
-    public String get(String k) {
+    public @Nullable String get(String k) {
         return null; // accept the rest of the defaults
     }
 };

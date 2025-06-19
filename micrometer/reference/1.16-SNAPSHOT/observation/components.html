@@ -863,8 +863,7 @@ static class TaxCalculator {
 
     // If the user wants to override the default they can override this. Otherwise,
     // it will be {@code null}.
-    @Nullable
-    private final TaxObservationConvention observationConvention;
+    private final @Nullable TaxObservationConvention observationConvention;
 
     TaxCalculator(ObservationRegistry observationRegistry,
             @Nullable TaxObservationConvention observationConvention) {
