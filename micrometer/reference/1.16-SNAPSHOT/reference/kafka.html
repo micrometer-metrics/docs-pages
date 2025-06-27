@@ -499,8 +499,8 @@ producerKafkaMetrics.bindTo(registry);</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up, binding instrumentation and usage example
-try (KafkaStreams kafkaStreams = createStreams()) {
-    metrics = new KafkaStreamsMetrics(kafkaStreams);
+try (KafkaStreams kafkaStreams = createStreams();
+        KafkaStreamsMetrics metrics = new KafkaStreamsMetrics(kafkaStreams)) {
     MeterRegistry registry = new SimpleMeterRegistry();
 
     metrics.bindTo(registry);

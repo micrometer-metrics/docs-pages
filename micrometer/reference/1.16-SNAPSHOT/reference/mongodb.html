@@ -496,6 +496,7 @@ mongo = MongoClients.create(settings);
 // Usage example
 mongo.getDatabase("test").getCollection("testCol").insertOne(new Document("testDoc", new Date()));
 
+assertThat(clusterId.get()).isNotNull();
 Tags tags = Tags.of("cluster.id", clusterId.get(), "server.address", String.format("%s:%s", host, port),
         "command", "insert", "database", "test", "collection", "testCol", "status", "SUCCESS");
 assertThat(registry.get("mongodb.driver.commands").tags(tags).timer().count()).isEqualTo(1);</code></pre>
@@ -527,6 +528,7 @@ MongoClient mongo = MongoClients.create(settings);
 // Usage example
 mongo.getDatabase("test").createCollection("testCol");
 
+assertThat(clusterId.get()).isNotNull();
 Tags tags = Tags.of("cluster.id", clusterId.get(), "server.address", String.format("%s:%s", host, port),
         "my.custom.connection.pool.identifier", "custom");
 
