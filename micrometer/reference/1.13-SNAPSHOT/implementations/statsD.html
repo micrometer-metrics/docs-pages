@@ -662,6 +662,18 @@ MeterRegistry registry = StatsdMeterRegistry.builder(StatsdConfig.DEFAULT) <i cl
 </tr>
 </table>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>StatsdMeterRegistry</code> doesn&#8217;t wait for a connection to the backend to be established, so metrics could be lost until the connection is ready.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <nav class="pagination">
