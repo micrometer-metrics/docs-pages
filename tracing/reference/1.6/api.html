@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.2.13">
+    <meta name="version" content="1.6.0-M1">
     <meta name="component" content="tracing">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.2.13">
+<div class="nav-container" data-component="tracing" data-version="1.6.0-M1">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.2.13-SNAPSHOT</span>
+  <span class="version">1.6.0-M1</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -205,7 +205,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/edit/1.2.x/docs/modules/ROOT/pages/api.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.6.0-M1/docs/modules/ROOT/pages/api.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -362,8 +362,8 @@ newSpan.end();</code></pre>
 // in a Zipkin format to the provided location via the UrlConnectionSender
 // (through the &lt;io.zipkin.reporter2:zipkin-sender-urlconnection&gt; dependency)
 // Another option could be to use a TestSpanHandler for testing purposes.
-SpanHandler spanHandler = ZipkinSpanHandler
-    .create(AsyncReporter.create(URLConnectionSender.create("http://localhost:9411/api/v2/spans")));
+AsyncZipkinSpanHandler spanHandler = AsyncZipkinSpanHandler
+    .create(URLConnectionSender.create("http://localhost:9411/api/v2/spans"));
 
 // [Brave component] CurrentTraceContext is a Brave component that allows you to
 // retrieve the current TraceContext.
@@ -543,6 +543,37 @@ For Brave, remember to set up the <code>PropagationFactory</code> so that it con
     .sampler(Sampler.ALWAYS_SAMPLE)
     .addSpanHandler(this.spanHandler)
     .build();</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_baggage_with_micrometer_observation_api"><a class="anchor" href="#_baggage_with_micrometer_observation_api"></a>Baggage with Micrometer Observation API</h3>
+<div class="paragraph">
+<p>If you&#8217;re using Micrometer Observation API, there&#8217;s no notion of baggage. If you set up a <code>BaggageManager</code> to have the baggage fields configured, we will assume that when the Observation gets put in scope, whatever low and high cardinality keys are set on the Observation will be put in scope as baggage (assuming that their names match with the configuration on the <code>BaggageManager</code>). Below you can find example of such setup with OpenTelemetry <code>BaggageManager</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// There will be 3 baggage keys in total, 2 for remote fields and 1 as tag field
+OtelBaggageManager otelBaggageManager = new OtelBaggageManager(otelCurrentTraceContext,
+        Arrays.asList(KEY_1, OBSERVATION_BAGGAGE_KEY), Collections.singletonList(TAG_KEY));
+
+
+// For automated baggage scope creation the tracing handler is required
+observationRegistry.observationConfig().observationHandler(new DefaultTracingObservationHandler(tracer));
+
+// An observation with low and high cardinality keys
+// with key names equal to baggage key entries set on the baggage manager
+Observation observation = Observation.start("foo", observationRegistry)
+    .lowCardinalityKeyValue(KEY_1, TAG_VALUE)
+    .highCardinalityKeyValue(OBSERVATION_BAGGAGE_KEY, OBSERVATION_BAGGAGE_VALUE);
+
+// There is no baggage here
+try (Scope scope = observation.openScope()) {
+    // Baggage here will be automatically put in scope
+    then(tracer.getBaggage(KEY_1).get()).isEqualTo(TAG_VALUE);
+    then(tracer.getBaggage(OBSERVATION_BAGGAGE_KEY).get()).isEqualTo(OBSERVATION_BAGGAGE_VALUE);
+}
+// There is no baggage here</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -774,7 +805,7 @@ span.end();</code></pre>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../1.6/api.html">
+    <a href="api.html">
       1.6.0-M1
     </a>
   </li>
@@ -808,7 +839,7 @@ span.end();</code></pre>
     </a>
   </li>
   <li class="version">
-    <a href="api.html">
+    <a href="../1.2-SNAPSHOT/api.html">
       1.2.13-SNAPSHOT
     </a>
   </li>
@@ -874,6 +905,6 @@ span.end();</code></pre>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.2.13" data-page-component="tracing"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.6.0-M1" data-page-component="tracing"></script>
   </body>
 </html>
