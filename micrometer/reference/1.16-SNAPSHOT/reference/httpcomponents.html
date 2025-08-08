@@ -490,7 +490,7 @@ This section requires usage of Apache HttpComponents Client at least in version 
 HttpClientBuilder clientBuilder = HttpClients.custom()
     .setRetryStrategy(retryStrategy)
     .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
-            new ObservationExecChainHandler(observationRegistry))
+            new ObservationExecChainHandler(observationRegistry)) <i class="conum" data-value="1"></i><b>(1)</b>
     .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
         .setDefaultConnectionConfig(connectionConfig)
         .build());
@@ -532,6 +532,35 @@ assertThat(observationRegistry).hasObservationWithNameEqualTo(DEFAULT_METER_NAME
     .hasLowCardinalityKeyValue(METHOD.withValue("GET"));</code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_configure_a_custom_convention"><a class="anchor" href="#_configure_a_custom_convention"></a>Configure a custom convention</h3>
+<div class="paragraph">
+<p>You can pass an instance of <code>ApacheHttpClientObservationConvention</code> to customize the convention used by the instrumentation to something other than the default convention.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can pass the instance of <code>OpenTelemetryApacheHttpClientObservationConvention</code> to use the <a href="https://github.com/open-telemetry/semantic-conventions/blob/v1.36.0/docs/http/http-metrics.md#http-client">OpenTelemetry Semantic Conventions for HTTP Clients based on version 1.36.0</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClientBuilder clientBuilder = HttpClients.custom()
+    .setRetryStrategy(retryStrategy)
+    .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
+            new ObservationExecChainHandler(observationRegistry,
+                    OpenTelemetryApacheHttpClientObservationConvention.INSTANCE))
+    .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
+        .setDefaultConnectionConfig(connectionConfig)
+        .build());</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Pass <code>OpenTelemetryApacheHttpClientObservationConvention.INSTANCE</code> to the <code>ObservationExecChainHandler</code> constructor</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -561,7 +590,7 @@ When using the <strong>async client</strong>, placing micrometer <strong>before<
 HttpClientBuilder clientBuilder = HttpClients.custom()
     .setRetryStrategy(retryStrategy)
     .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
-            new ObservationExecChainHandler(observationRegistry))
+            new ObservationExecChainHandler(observationRegistry)) <i class="conum" data-value="1"></i><b>(1)</b>
     .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
         .setDefaultConnectionConfig(connectionConfig)
         .build());
