@@ -1,11 +1,11 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2025-08-11T19:39:33.453Z",
+  "generated": "2025-08-11T19:50:10.156Z",
   "url": "https://docs.micrometer.io/tracing/reference",
   "components": {
     "tracing": {
       "title": "Micrometer Tracing",
-      "latest": "1.5.2",
+      "latest": "1.5.3",
       "versions": {
         "1.6.0": {
           "prerelease": true,
@@ -90,9 +90,9 @@
             }
           ]
         },
-        "1.5.3": {
+        "1.5.4": {
           "prerelease": true,
-          "displayVersion": "1.5.3-SNAPSHOT",
+          "displayVersion": "1.5.4-SNAPSHOT",
           "url": "/1.5-SNAPSHOT/index.html",
           "pages": [
             {
@@ -132,7 +132,7 @@
             }
           ]
         },
-        "1.5.2": {
+        "1.5.3": {
           "url": "/index.html",
           "pages": [
             {
