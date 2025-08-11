@@ -490,7 +490,7 @@ This section requires usage of Apache HttpComponents Client at least in version 
 HttpClientBuilder clientBuilder = HttpClients.custom()
     .setRetryStrategy(retryStrategy)
     .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
-            new ObservationExecChainHandler(observationRegistry)) <i class="conum" data-value="1"></i><b>(1)</b>
+            new ObservationExecChainHandler(observationRegistry))
     .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
         .setDefaultConnectionConfig(connectionConfig)
         .build());
@@ -546,7 +546,7 @@ assertThat(observationRegistry).hasObservationWithNameEqualTo(DEFAULT_METER_NAME
     .setRetryStrategy(retryStrategy)
     .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
             new ObservationExecChainHandler(observationRegistry,
-                    OpenTelemetryApacheHttpClientObservationConvention.INSTANCE))
+                    OpenTelemetryApacheHttpClientObservationConvention.INSTANCE)) <i class="conum" data-value="1"></i><b>(1)</b>
     .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
         .setDefaultConnectionConfig(connectionConfig)
         .build());</code></pre>
@@ -590,7 +590,7 @@ When using the <strong>async client</strong>, placing micrometer <strong>before<
 HttpClientBuilder clientBuilder = HttpClients.custom()
     .setRetryStrategy(retryStrategy)
     .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
-            new ObservationExecChainHandler(observationRegistry)) <i class="conum" data-value="1"></i><b>(1)</b>
+            new ObservationExecChainHandler(observationRegistry))
     .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
         .setDefaultConnectionConfig(connectionConfig)
         .build());
