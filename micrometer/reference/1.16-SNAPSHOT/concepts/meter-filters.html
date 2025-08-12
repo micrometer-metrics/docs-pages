@@ -715,6 +715,32 @@ too high cardinality and starts stressing your monitoring system or costing too 
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_apply_meterfilters_conditionally"><a class="anchor" href="#_apply_meterfilters_conditionally"></a>Apply MeterFilters conditionally</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It is a common use-case to apply MeterFilters only for a selection of Meters (for example for ones that has a certain name or starts with a given prefix).
+In order to do this, Micrometer provides a convenience method <code>forMeters(Predicate&lt;Meter.Id&gt; predicate, MeterFilter delegate)</code> that enables the provided (delegate) filter for the Meters selected by the predicate.</p>
+</div>
+<div class="paragraph">
+<p>See the following example:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.config()
+    .meterFilter(MeterFilter.forMeters(startsWith("prefix"), MeterFilter.ignoreTags("extra")));
+
+Predicate&lt;Meter.Id&gt; startsWith(String prefix) {
+    return id -&gt; id.getName().startsWith(prefix);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="naming.html">Naming Meters</a></span>
   <span class="next"><a href="rate-aggregation.html">Rate Aggregation</a></span>
