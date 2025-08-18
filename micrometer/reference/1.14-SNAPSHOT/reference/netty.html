@@ -480,14 +480,14 @@ The fllowing example shows how to lazily create instrumentation:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Override
-protected void initChannel(SocketChannel channel) throws Exception {
+protected void initChannel(SocketChannel channel) {
     EventLoop eventLoop = channel.eventLoop();
     if (!isEventLoopInstrumented(eventLoop)) {
         new NettyEventExecutorMetrics(eventLoop).bindTo(this.meterRegistry);
     }
     ByteBufAllocator allocator = channel.alloc();
-    if (!isAllocatorInstrumented(allocator) &amp;&amp; allocator instanceof ByteBufAllocatorMetricProvider) {
-        ByteBufAllocatorMetricProvider allocatorMetric = (ByteBufAllocatorMetricProvider) allocator;
+    if (!isAllocatorInstrumented(allocator)
+            &amp;&amp; allocator instanceof ByteBufAllocatorMetricProvider allocatorMetric) {
         new NettyAllocatorMetrics(allocatorMetric).bindTo(this.meterRegistry);
     }
 }</code></pre>
