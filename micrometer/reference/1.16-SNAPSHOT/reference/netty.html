@@ -456,6 +456,8 @@
   </table>
 </div>
 <h1 id="page-title" class="page">Netty Instrumentation</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>Micrometer supports binding metrics to Netty.</p>
 </div>
@@ -504,6 +506,43 @@ If you use lazy instrumentation, you must ensure that you do not bind metrics fo
 </td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_eventexecutor_metrics"><a class="anchor" href="#_eventexecutor_metrics"></a>EventExecutor Metrics</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>NettyEventExecutorMetrics</code> binder collects metrics from Netty&#8217;s <code>EventExecutor</code> instances:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. EventExecutor metrics</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Metric</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>eventexecutor.workers</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gauge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of event executor workers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>eventexecutor.tasks.pending</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gauge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of pending tasks in individual event executors</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="mongodb.html">MongoDB</a></span>
