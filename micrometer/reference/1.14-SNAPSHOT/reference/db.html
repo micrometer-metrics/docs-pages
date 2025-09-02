@@ -524,6 +524,33 @@ jooq.tag("name", "selectAllAuthors").execute("SELECT * FROM author");
 assertThat(meterRegistry.get("jooq.query").tag("name", "selectAllAuthors").timer().count()).isEqualTo(1);</code></pre>
 </div>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Compatibility note for jOOQ versions.</strong></p>
+</div>
+<div class="paragraph">
+<p>Some newly added jOOQ overloads (for example, <code>DefaultDSLContext#fetchValue(SelectField)</code>) may internally delegate to <code>select(&#8230;&#8203;)</code>. When using builder-level instrumentation with <code>MetricsDSLContext</code>, such delegation can lead to <strong>double instrumentation</strong> and <strong>tag loss</strong> on the <code>jooq.query</code> timer.</p>
+</div>
+<div class="paragraph">
+<p><strong>Recommendations</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use only the APIs <strong>overridden by <code>MetricsDSLContext</code></strong> for building/executing queries (i.e., prefer methods explicitly overridden by <code>MetricsDSLContext</code>) so each query is timed exactly once with consistent tags. And, avoid relying on newer jOOQ overloads that may delegate to <code>select(&#8230;&#8203;)</code>.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
