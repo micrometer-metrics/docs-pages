@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2025-09-08T07:53:57.900Z",
+  "generated": "2025-09-08T07:59:07.518Z",
   "url": "https://docs.micrometer.io/tracing/reference",
   "components": {
     "tracing": {
@@ -90,9 +90,9 @@
             }
           ]
         },
-        "1.5.4": {
+        "1.5.5": {
           "prerelease": true,
-          "displayVersion": "1.5.4-SNAPSHOT",
+          "displayVersion": "1.5.5-SNAPSHOT",
           "url": "/1.5-SNAPSHOT/index.html",
           "pages": [
             {
