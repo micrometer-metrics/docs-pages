@@ -188,6 +188,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="../concepts/meter-provider.html">Meter Provider</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../concepts/meter-convention.html">Meter Convention</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -573,6 +576,58 @@ another. The reported value underestimates the actual total number of steals whe
 <p><code>Executors.newVirtualThreadPerTaskExecutor()</code></p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="meter-conventions"><a class="anchor" href="#meter-conventions"></a>Meter Conventions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>See also the general <a href="../concepts/meter-convention.html" class="xref page">Meter Conventions</a> documentation.</p>
+</div>
+<div class="paragraph">
+<p>The following <code>MeterBinder</code> implementations have a constructor to customize the convention used for some or all of the meters they produce.
+This can be used as an alternative to customizing the Meter names and tags with a <code>MeterFilter</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ClassLoaderMetrics</code></p>
+</li>
+<li>
+<p><code>JvmMemoryMetrics</code></p>
+</li>
+<li>
+<p><code>JvmThreadMetrics</code></p>
+</li>
+<li>
+<p><code>ProcessorMetrics</code></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_opentelemetry_semantic_conventions"><a class="anchor" href="#_opentelemetry_semantic_conventions"></a>OpenTelemetry Semantic Conventions</h3>
+<div class="paragraph">
+<p>We provide <code>MeterConvention</code> implementations of the applicable <a href="https://opentelemetry.io/docs/specs/semconv/runtime/jvm-metrics/">OpenTelemetry semantic conventions for JVM metrics</a> that have been marked stable as of the version 1.37.0.
+These can be passed to the constructors of the above binders to change the convention from the default.
+Use the following classes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>OpenTelemetryJvmClassLoadingMeterConventions</code></p>
+</li>
+<li>
+<p><code>OpenTelemetryJvmMemoryMeterConventions</code></p>
+</li>
+<li>
+<p><code>OpenTelemetryJvmThreadMeterConventions</code></p>
+</li>
+<li>
+<p><code>OpenTelemetryJvmCpuMeterConventions</code></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>

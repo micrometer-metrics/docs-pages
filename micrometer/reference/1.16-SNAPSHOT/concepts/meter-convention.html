@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>gRPC Instrumentation :: Micrometer</title>
-    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/reference/grpc.html">
-    <link rel="prev" href="db.html">
-    <link rel="next" href="httpcomponents.html">
+    <title>Meter Convention :: Micrometer</title>
+    <link rel="prev" href="meter-provider.html">
+    <link rel="next" href="../implementations.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -150,46 +149,46 @@
     <a class="nav-link"  href="../concepts.html">Concepts</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/implementations.html">Supported Monitoring Systems</a>
+    <a class="nav-link"  href="implementations.html">Supported Monitoring Systems</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/meters.html">Meters</a>
+    <a class="nav-link"  href="meters.html">Meters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/registry.html">Registry</a>
+    <a class="nav-link"  href="registry.html">Registry</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/naming.html">Naming Meters</a>
+    <a class="nav-link"  href="naming.html">Naming Meters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/meter-filters.html">Meter Filters</a>
+    <a class="nav-link"  href="meter-filters.html">Meter Filters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/rate-aggregation.html">Rate Aggregation</a>
+    <a class="nav-link"  href="rate-aggregation.html">Rate Aggregation</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/counters.html">Counters</a>
+    <a class="nav-link"  href="counters.html">Counters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/gauges.html">Gauges</a>
+    <a class="nav-link"  href="gauges.html">Gauges</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/timers.html">Timers</a>
+    <a class="nav-link"  href="timers.html">Timers</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/distribution-summaries.html">Distribution Summaries</a>
+    <a class="nav-link"  href="distribution-summaries.html">Distribution Summaries</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/long-task-timers.html">Long Task Timers</a>
+    <a class="nav-link"  href="long-task-timers.html">Long Task Timers</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/histogram-quantiles.html">Histograms and Percentiles</a>
+    <a class="nav-link"  href="histogram-quantiles.html">Histograms and Percentiles</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/meter-provider.html">Meter Provider</a>
+    <a class="nav-link"  href="meter-provider.html">Meter Provider</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/meter-convention.html">Meter Convention</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link"  href="meter-convention.html">Meter Convention</a>
   </li>
 </ul>
   </li>
@@ -267,52 +266,52 @@
     <a class="nav-link"  href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="cache.html">Cache</a>
+    <a class="nav-link"  href="../reference/cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="commons-pool.html">Commons Pool</a>
+    <a class="nav-link"  href="../reference/commons-pool.html">Commons Pool</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="db.html">Database</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link"  href="grpc.html">gRPC</a>
+    <a class="nav-link"  href="../reference/db.html">Database</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="httpcomponents.html">HttpComponents Client</a>
+    <a class="nav-link"  href="../reference/grpc.html">gRPC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="java-httpclient.html">Java HttpClient</a>
+    <a class="nav-link"  href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="jetty.html">Jetty and Jersey</a>
+    <a class="nav-link"  href="../reference/java-httpclient.html">Java HttpClient</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="jms.html">JMS</a>
+    <a class="nav-link"  href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="jvm.html">JVM</a>
+    <a class="nav-link"  href="../reference/jms.html">JMS</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="kafka.html">Kafka</a>
+    <a class="nav-link"  href="../reference/jvm.html">JVM</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="logging.html">Logging</a>
+    <a class="nav-link"  href="../reference/kafka.html">Kafka</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="mongodb.html">MongoDB</a>
+    <a class="nav-link"  href="../reference/logging.html">Logging</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="netty.html">Netty</a>
+    <a class="nav-link"  href="../reference/mongodb.html">MongoDB</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link"  href="../reference/netty.html">Netty</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="system.html">System</a>
+    <a class="nav-link"  href="../reference/okhttpclient.html">OkHttpClient</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="tomcat.html">Tomcat</a>
+    <a class="nav-link"  href="../reference/system.html">System</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../reference/tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -394,13 +393,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="gRPC Instrumentation"
+      data-title="Meter Convention"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/edit/main/docs/modules/ROOT/pages/reference/grpc.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/edit/main/docs/modules/ROOT/pages/concepts/meter-convention.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -440,8 +439,8 @@
   <nav class="breadcrumbs" aria-label="breadcrumbs">
     <ul>
       <li><a href="../index.html">Micrometer</a></li>
-      <li><a href="../reference.html">Reference Instrumentations</a></li>
-      <li><a href="grpc.html">gRPC</a></li>
+      <li><a href="../concepts.html">Concepts</a></li>
+      <li><a href="meter-convention.html">Meter Convention</a></li>
     </ul>
   </nav>
 </div><div class="admonitionblock important latest">
@@ -452,78 +451,23 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../reference/grpc.html">Micrometer 1.15.4</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../index.html">Micrometer 1.15.4</a>!</p>
         </div>
       </td>
     </tr></tbody>
   </table>
 </div>
-<h1 id="page-title" class="page">gRPC Instrumentation</h1>
+<h1 id="page-title" class="page">Meter Convention</h1>
 <div class="paragraph">
-<p><a href="https://grpc.io/">gRPC</a> is a modern open source high performance Remote Procedure Call (RPC) framework that can run in any environment.</p>
-</div>
-<div class="paragraph">
-<p>Below you can find an example of how to instrument gRPC with <a href="../observation.html" class="xref page">Micrometer Observation</a>. That means that depending on your Observation Handler configuration you instrument once, and can have multiple benefits out of it (e.g. metrics, distributed tracing).</p>
+<p>While <code>MeterFilter</code> can be used to customize the name and tags (collectively, the convention) of Meters in any instrumentation, it can be more convenient and robust to customize the convention for a common instrumentation more directly.
+This is the purpose of the <code>MeterConvention</code>.</p>
 </div>
 <div class="paragraph">
-<p>First, client and server side interceptors need to be setup.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up interceptors
-ObservationGrpcServerInterceptor serverInterceptor;
-
-ObservationGrpcClientInterceptor clientInterceptor;
-
-
-this.serverInterceptor = new ObservationGrpcServerInterceptor(observationRegistry);
-this.clientInterceptor = new ObservationGrpcClientInterceptor(observationRegistry);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Next, server and channels need to have the interceptors added.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Adding them to the server and client side
-EchoService echoService = new EchoService();
-server = InProcessServerBuilder.forName("sample")
-    .addService(echoService)
-    .intercept(new ServerHeaderInterceptor())
-    .intercept(serverInterceptor)
-    .build();
-server.start();
-
-channel = InProcessChannelBuilder.forName("sample")
-    .intercept(new ClientHeaderInterceptor(), clientInterceptor)
-    .build();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Below you have an example of usage with the result assertions.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Usage example
-SimpleServiceBlockingStub stub = SimpleServiceGrpc.newBlockingStub(channel);
-
-SimpleRequest request = SimpleRequest.newBuilder().setRequestMessage("Hello").build();
-SimpleResponse response = stub.unaryRpc(request);
-assertThat(response.getResponseMessage()).isEqualTo("Hello");
-
-// Observation outcome
-assertThat(observationRegistry).hasAnObservation(observationContextAssert -&gt; {
-    observationContextAssert.hasNameEqualTo("grpc.client");
-    assertCommonKeyValueNames(observationContextAssert);
-}).hasAnObservation(observationContextAssert -&gt; {
-    observationContextAssert.hasNameEqualTo("grpc.server");
-    assertCommonKeyValueNames(observationContextAssert);
-});</code></pre>
-</div>
+<p>For examples of its usage in instrumentation provided by Micrometer as well as examples of different implementations of a convention for an instrumentation, see the <a href="../reference/jvm.html#meter-conventions" class="xref page">JVM metrics</a>.</p>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="db.html">Database</a></span>
-  <span class="next"><a href="httpcomponents.html">HttpComponents Client</a></span>
+  <span class="prev"><a href="meter-provider.html">Meter Provider</a></span>
+  <span class="next"><a href="../implementations.html">Implementations</a></span>
 </nav>
 </article>  </div>
 </main>
@@ -550,22 +494,22 @@ assertThat(observationRegistry).hasAnObservation(observationContextAssert -&gt; 
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../../reference/grpc.html">
+    <a href="../../index.html">
       1.15.4
     </a>
   </li>
   <li class="version">
-    <a href="../../1.14/reference/grpc.html">
+    <a href="../../1.14/index.html">
       1.14.11
     </a>
   </li>
   <li class="version">
-    <a href="../../1.13/reference/grpc.html">
+    <a href="../../1.13/index.html">
       1.13.15
     </a>
   </li>
   <li class="version">
-    <a href="../../1.12/reference/grpc.html">
+    <a href="../../1.12/index.html">
       1.12.13
     </a>
   </li>
@@ -579,7 +523,7 @@ assertThat(observationRegistry).hasAnObservation(observationContextAssert -&gt; 
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../../1.16/reference/grpc.html">
+    <a href="../../1.16/index.html">
       1.16.0-M2
     </a>
   </li>
@@ -593,27 +537,27 @@ assertThat(observationRegistry).hasAnObservation(observationContextAssert -&gt; 
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="grpc.html">
+    <a href="meter-convention.html">
       1.16.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.15-SNAPSHOT/reference/grpc.html">
+    <a href="../../1.15-SNAPSHOT/index.html">
       1.15.5-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.14-SNAPSHOT/reference/grpc.html">
+    <a href="../../1.14-SNAPSHOT/index.html">
       1.14.12-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.13-SNAPSHOT/reference/grpc.html">
+    <a href="../../1.13-SNAPSHOT/index.html">
       1.13.16-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.12-SNAPSHOT/reference/grpc.html">
+    <a href="../../1.12-SNAPSHOT/index.html">
       1.12.14-SNAPSHOT
     </a>
   </li>
