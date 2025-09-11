@@ -722,7 +722,7 @@ too high cardinality and starts stressing your monitoring system or costing too 
 <h2 id="_apply_meterfilters_conditionally"><a class="anchor" href="#_apply_meterfilters_conditionally"></a>Apply MeterFilters conditionally</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>It is a common use-case to apply MeterFilters only for a selection of Meters (for example for ones that has a certain name or starts with a given prefix).
+<p>It is a common use-case to apply MeterFilters only for a selection of Meters (for example, for ones that have a certain name or start with a given prefix).
 In order to do this, Micrometer provides a convenience method <code>forMeters(Predicate&lt;Meter.Id&gt; predicate, MeterFilter delegate)</code> that enables the provided (delegate) filter for the Meters selected by the predicate.</p>
 </div>
 <div class="paragraph">
