@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Apache Tomcat Metrics Instrumentation :: Micrometer</title>
-    <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/reference/tomcat.html">
-    <link rel="prev" href="system.html">
-    <link rel="next" href="../guides.html">
+    <title>High Cardinality Tags Detector :: Micrometer</title>
+    <link rel="prev" href="meter-provider.html">
+    <link rel="next" href="../implementations.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -21,7 +20,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.14.13">
+    <meta name="version" content="1.15.6">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +101,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.14.13">
+<div class="nav-container" data-component="micrometer" data-version="1.15.6">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.14.13-SNAPSHOT</span>
+  <span class="version">1.15.6-SNAPSHOT</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -150,46 +149,46 @@
     <a class="nav-link"  href="../concepts.html">Concepts</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/implementations.html">Supported Monitoring Systems</a>
+    <a class="nav-link"  href="implementations.html">Supported Monitoring Systems</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/meters.html">Meters</a>
+    <a class="nav-link"  href="meters.html">Meters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/registry.html">Registry</a>
+    <a class="nav-link"  href="registry.html">Registry</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/naming.html">Naming Meters</a>
+    <a class="nav-link"  href="naming.html">Naming Meters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/meter-filters.html">Meter Filters</a>
+    <a class="nav-link"  href="meter-filters.html">Meter Filters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/rate-aggregation.html">Rate Aggregation</a>
+    <a class="nav-link"  href="rate-aggregation.html">Rate Aggregation</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/counters.html">Counters</a>
+    <a class="nav-link"  href="counters.html">Counters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/gauges.html">Gauges</a>
+    <a class="nav-link"  href="gauges.html">Gauges</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/timers.html">Timers</a>
+    <a class="nav-link"  href="timers.html">Timers</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/distribution-summaries.html">Distribution Summaries</a>
+    <a class="nav-link"  href="distribution-summaries.html">Distribution Summaries</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/long-task-timers.html">Long Task Timers</a>
+    <a class="nav-link"  href="long-task-timers.html">Long Task Timers</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/histogram-quantiles.html">Histograms and Percentiles</a>
+    <a class="nav-link"  href="histogram-quantiles.html">Histograms and Percentiles</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/meter-provider.html">Meter Provider</a>
+    <a class="nav-link"  href="meter-provider.html">Meter Provider</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../concepts/high-cardinality-tags-detector.html">High Cardinality Tags Detector</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link"  href="high-cardinality-tags-detector.html">High Cardinality Tags Detector</a>
   </li>
 </ul>
   </li>
@@ -267,52 +266,52 @@
     <a class="nav-link"  href="../reference.html">Reference Instrumentations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="cache.html">Cache</a>
+    <a class="nav-link"  href="../reference/cache.html">Cache</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="commons-pool.html">Commons Pool</a>
+    <a class="nav-link"  href="../reference/commons-pool.html">Commons Pool</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="db.html">Database</a>
+    <a class="nav-link"  href="../reference/db.html">Database</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="grpc.html">gRPC</a>
+    <a class="nav-link"  href="../reference/grpc.html">gRPC</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="httpcomponents.html">HttpComponents Client</a>
+    <a class="nav-link"  href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="java-httpclient.html">Java HttpClient</a>
+    <a class="nav-link"  href="../reference/java-httpclient.html">Java HttpClient</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="jetty.html">Jetty and Jersey</a>
+    <a class="nav-link"  href="../reference/jetty.html">Jetty and Jersey</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="jms.html">JMS</a>
+    <a class="nav-link"  href="../reference/jms.html">JMS</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="jvm.html">JVM</a>
+    <a class="nav-link"  href="../reference/jvm.html">JVM</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="kafka.html">Kafka</a>
+    <a class="nav-link"  href="../reference/kafka.html">Kafka</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="logging.html">Logging</a>
+    <a class="nav-link"  href="../reference/logging.html">Logging</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="mongodb.html">MongoDB</a>
+    <a class="nav-link"  href="../reference/mongodb.html">MongoDB</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="netty.html">Netty</a>
+    <a class="nav-link"  href="../reference/netty.html">Netty</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="okhttpclient.html">OkHttpClient</a>
+    <a class="nav-link"  href="../reference/okhttpclient.html">OkHttpClient</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="system.html">System</a>
+    <a class="nav-link"  href="../reference/system.html">System</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link"  href="tomcat.html">Tomcat</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../reference/tomcat.html">Tomcat</a>
   </li>
 </ul>
   </li>
@@ -394,13 +393,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="Apache Tomcat Metrics Instrumentation"
+      data-title="High Cardinality Tags Detector"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/edit/1.14.x/docs/modules/ROOT/pages/reference/tomcat.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/edit/1.15.x/docs/modules/ROOT/pages/concepts/high-cardinality-tags-detector.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -440,8 +439,8 @@
   <nav class="breadcrumbs" aria-label="breadcrumbs">
     <ul>
       <li><a href="../index.html">Micrometer</a></li>
-      <li><a href="../reference.html">Reference Instrumentations</a></li>
-      <li><a href="tomcat.html">Tomcat</a></li>
+      <li><a href="../concepts.html">Concepts</a></li>
+      <li><a href="high-cardinality-tags-detector.html">High Cardinality Tags Detector</a></li>
     </ul>
   </nav>
 </div><div class="admonitionblock important latest">
@@ -452,37 +451,409 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../reference/tomcat.html">Micrometer 1.15.5</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../index.html">Micrometer 1.15.5</a>!</p>
         </div>
       </td>
     </tr></tbody>
   </table>
 </div>
-<h1 id="page-title" class="page">Apache Tomcat Metrics Instrumentation</h1>
+<h1 id="page-title" class="page">High Cardinality Tags Detector</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>The <a href="https://tomcat.apache.org/">Apache Tomcat</a> software is an open source implementation of the Jakarta Servlet, Jakarta Server Pages, Jakarta Expression Language, Jakarta WebSocket, Jakarta Annotations and Jakarta Authentication specifications.</p>
+<p>High cardinality tags can cause memory and performance issues in your application and your metrics backend. When tag values are unbounded (for example userID, requestID, traceID), each unique combination creates a new Meter, potentially leading to millions of time series and excessive memory consumption.</p>
+</div>
+<div class="paragraph">
+<p><code>HighCardinalityTagsDetector</code> helps you to identify Meters that may have high cardinality tags by monitoring the number of Meters that share the same name. When the count exceeds a configurable threshold, it indicates that the <code>Meter</code> likely has high cardinality tags.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>HighCardinalityTagsDetector</code> detects potential high cardinality tags by counting Meters with the same name. It does not detect other issues, such as appending random values to Meter names. Its sole purpose is detecting the potential presence of high cardinality tags.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_understand_high_cardinality"><a class="anchor" href="#_understand_high_cardinality"></a>Understand High Cardinality</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>High cardinality occurs when a tag has an unbounded or large number of possible values that does not fit in memory. Common examples include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>UserID, Email, RequestID, SessionID, TraceID</p>
+</li>
+<li>
+<p>Timestamps</p>
+</li>
+<li>
+<p>Full URLs (<code>/users/123</code>)</p>
+</li>
+<li>
+<p>Any user input that is not validated/normalized</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In contrast, low cardinality tags have a bounded, typically "small" set of values:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>HTTP methods (<code>method=GET</code>)</p>
+</li>
+<li>
+<p>HTTP status codes (<code>status=200</code>)</p>
+</li>
+<li>
+<p>Application names (<code>application=payments-app</code>)</p>
+</li>
+<li>
+<p>Environment names (<code>env=prod</code>)</p>
+</li>
+<li>
+<p>Templated URLs (<code>/users/{id}</code>)</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For more information on tag naming best practices, see <a href="naming.html#_tag_naming" class="xref page">Tag Naming</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_it_works"><a class="anchor" href="#_how_it_works"></a>How It Works</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The detector works by:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Counting how many meters exist with the same name in the registry</p>
+</li>
+<li>
+<p>Comparing this count against a threshold</p>
+</li>
+<li>
+<p>Notifying you (via logging or custom consumer) when the threshold is exceeded</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage"><a class="anchor" href="#_usage"></a>Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can configure the detector through the <code>MeterRegistry</code>. In this case, the detector is automatically started and managed by the registry:</p>
+</div>
+<div class="sect2">
+<h3 id="_configure_with_the_defaults"><a class="anchor" href="#_configure_with_the_defaults"></a>Configure with the defaults</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.config().withHighCardinalityTagsDetector();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configure_with_a_factory"><a class="anchor" href="#_configure_with_a_factory"></a>Configure with a Factory</h3>
+<div class="paragraph">
+<p>You can provide your own <code>Function&lt;MeterRegistry, HighCardinalityTagsDetector&gt;</code> that receives a registry and returns a detector:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
-SimpleMeterRegistry registry = new SimpleMeterRegistry(SimpleConfig.DEFAULT, new MockClock());
-
-
-Iterable&lt;Tag&gt; tags = Tags.of("metricTag", "val1");
-TomcatMetrics.monitor(registry, manager, tags);
-
-// Example of Tomcat metrics
-assertThat(registry.get("tomcat.sessions.active.max").tags(tags).gauge().value()).isEqualTo(3.0);
-assertThat(registry.get("tomcat.sessions.active.current").tags(tags).gauge().value()).isEqualTo(2.0);
-assertThat(registry.get("tomcat.sessions.expired").tags(tags).functionCounter().count()).isEqualTo(1.0);
-assertThat(registry.get("tomcat.sessions.rejected").tags(tags).functionCounter().count()).isEqualTo(1.0);
-assertThat(registry.get("tomcat.sessions.created").tags(tags).functionCounter().count()).isEqualTo(3.0);
-assertThat(registry.get("tomcat.sessions.alive.max").tags(tags).timeGauge().value()).isGreaterThan(1.0);</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.config().withHighCardinalityTagsDetector(HighCardinalityTagsDetector::new);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_config_params"><a class="anchor" href="#_config_params"></a>Config params</h3>
+<div class="paragraph">
+<p>Constructors of <code>HighCardinalityTagsDetector</code> can be used to set parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.config().withHighCardinalityTagsDetector(r -&gt;
+    new HighCardinalityTagsDetector(
+        r,
+        1000, // 1000 different meters with the same name
+        Duration.ofMinutes(5), // check ~every 5 minutes
+        name -&gt; alert("High cardinality meter: " + name)
+    )
+);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_one_time_check"><a class="anchor" href="#_one_time_check"></a>One-Time Check</h3>
+<div class="paragraph">
+<p>You can perform a one-time check to see if any meters exceed the threshold:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">try (HighCardinalityTagsDetector detector = new HighCardinalityTagsDetector(registry, 10,
+        Duration.ofMinutes(1))) {
+    // Create meters with a high cardinality tag (uid)
+    for (int i = 0; i &lt; 15; i++) {
+        registry.counter("requests", "uid", String.valueOf(i)).increment();
+    }
+    assertThat(detector.findFirst()).isNotEmpty().get().isEqualTo("requests");
+}
+// detector.close() is implicit here but don't forget to close it otherwise!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This approach can be useful for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ad-hoc investigation of potential issues</p>
+</li>
+<li>
+<p>Tests to verify your instrumentation</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_scheduled_monitoring"><a class="anchor" href="#_scheduled_monitoring"></a>Scheduled Monitoring</h3>
+<div class="paragraph">
+<p>For continuous monitoring in production, you don&#8217;t need to create a scheduled job that periodically calls the detector. The detector has a built in scheduler, but you don&#8217;t need to manage that one either (by calling <code>start()</code> and <code>close()</code>). Instead you can configure the detector through the <code>MeterRegistry</code> so that the detector is automatically started and managed by the registry for you. See the various configuration options with the registry above.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_custom_consumer"><a class="anchor" href="#_custom_consumer"></a>Custom Consumer</h3>
+<div class="paragraph">
+<p>Instead of the default logging behavior, you can provide a <code>Consumer&lt;String&gt;</code> to handle high cardinality notifications:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.config().withHighCardinalityTagsDetector(r -&gt;
+    new HighCardinalityTagsDetector(r, 10, Duration.ofMinutes(1), this::recordHighCardinalityEvent)
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And here&#8217;s an example implementation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void recordHighCardinalityEvent(String name) {
+    alert("High cardinality meter: " + name);
+    registry.counter("highCardinality.detections").increment();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This can be useful for:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Custom logging or reporting</p>
+</li>
+<li>
+<p>Publishing alerts</p>
+</li>
+<li>
+<p>Collecting metrics about high cardinality detections</p>
+</li>
+<li>
+<p>Triggering any kind of custom actions</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_preventing_high_cardinality"><a class="anchor" href="#_preventing_high_cardinality"></a>Preventing High Cardinality</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the detector identifies high cardinality tags, consider the following possible solutions:</p>
+</div>
+<div class="sect2">
+<h3 id="_remove_problematic_tags"><a class="anchor" href="#_remove_problematic_tags"></a>Remove Problematic Tags</h3>
+<div class="paragraph">
+<p>If a tag provides little value but high cardinality, you should remove it. If you control the instrumentation, you should update it to not add the high cardinality tag. If you don&#8217;t control the instrumentation, you can remove the tag using a <code>MeterFilter</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.config().meterFilter(MeterFilter.ignoreTags("userId"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="meter-filters.html" class="xref page">Meter Filters</a> for more information and configuration options.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_normalize_tag_values"><a class="anchor" href="#_normalize_tag_values"></a>Normalize Tag Values</h3>
+<div class="paragraph">
+<p>Instead of using "raw" values, normalize them to reduce cardinality:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use templated URLs instead of actual URLs: <code>/users/{id}</code> instead of <code>/users/123</code></p>
+</li>
+<li>
+<p>Group values into ranges: <code>age.group=20-30</code> instead of <code>age=25</code></p>
+</li>
+<li>
+<p>Use categories: <code>outcome=CLIENT_ERROR</code> (or <code>status=4xx</code>) instead of <code>status=404</code></p>
+</li>
+<li>
+<p>Limit unknown/unexpected values to known values: <code>status=OTHER</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>age</code> and <code>status</code> are not necessarily high cardinality data since they are usually fall into a finite set of values (except if input is not validated and <code>age=12345</code> and <code>status=54321</code> are possible to send to the app). The normalization techniques to reduce cardinality are still valid though.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_use_high_cardinality_data_with_the_observation_api"><a class="anchor" href="#_use_high_cardinality_data_with_the_observation_api"></a>Use High Cardinality data with the Observation API</h3>
+<div class="paragraph">
+<p>If you are using Micrometer&#8217;s Observation API, you can mark certain metadata as high cardinality. These key-values should not be used for recording metrics. Typically they are only used in outputs that can handle high cardinality (for example: distributed tracing systems, logs):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">observation.highCardinalityKeyValue("userId", userId);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="../observation/introduction.html" class="xref page">Observation API</a> for more information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_use_meterfilters_to_set_bounds"><a class="anchor" href="#_use_meterfilters_to_set_bounds"></a>Use MeterFilters to Set Bounds</h3>
+<div class="paragraph">
+<p>If none of the above works, you can use <code>maximumAllowableTags</code> and <code>maximumAllowableMetrics</code> as a last resort to protect your application and your monitoring system. They are for situations in which you cannot fix the cardinality problem, for example with an HTTP client instrumentation that does not offer a way to tag the URI with a template (low cardinality) instead of the expanded URI (high cardinality). You can use <code>MeterFilter</code> to prevent high cardinality before it becomes a problem:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.config().meterFilter(MeterFilter.maximumAllowableTags("http.requests", "uri", 100, MeterFilter.deny()));</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+In the code above, instead of <code>MeterFilter.deny()</code>, you can implement your own logic that not only denies the registration of the <code>Meter</code> but also logs the event out. These logs can be overwhelming, it&#8217;s a good idea to limit them.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>See <a href="meter-filters.html" class="xref page">Meter Filters</a> for more information.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_best_practices"><a class="anchor" href="#_best_practices"></a>Best Practices</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Enable in Production</strong>: Run the detector in production to catch issues that may not appear in testing.</p>
+</li>
+<li>
+<p><strong>Monitor Regularly</strong>: Use the scheduled monitoring mode rather than one-time checks.</p>
+</li>
+<li>
+<p><strong>Act on Warnings</strong>: When high cardinality is detected, investigate and fix the root cause rather than just increasing the threshold.</p>
+</li>
+<li>
+<p><strong>Set Appropriate Thresholds</strong>: The default threshold might work for most applications, but adjust it based on your monitoring system&#8217;s capabilities and your application&#8217;s scale as needed.</p>
+</li>
+<li>
+<p><strong>Test Your Instrumentation</strong>: Use the detector in integration tests to verify that your custom instrumentation doesn&#8217;t introduce high cardinality.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_limitations"><a class="anchor" href="#_limitations"></a>Limitations</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>The detector only identifies high cardinality by counting Meters with the same name. It cannot detect:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Random values appended to <code>Meter</code> names</p>
+</li>
+<li>
+<p>Memory leaks from other sources</p>
+</li>
+<li>
+<p>High cardinality that hasn&#8217;t yet exceeded the threshold</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The detector examines the first meter that exceeds the threshold. If multiple meters have high cardinality, you&#8217;ll need to fix them iteratively.</p>
+</li>
+<li>
+<p>The threshold is a heuristic based on memory and may need adjustment for your specific use case.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_see_also"><a class="anchor" href="#_see_also"></a>See Also</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="meter-filters.html" class="xref page">Meter Filters</a>: Using filters to control meter registration and tag cardinality</p>
+</li>
+<li>
+<p><a href="../observation/introduction.html" class="xref page">Observation API</a>: Using high- and low cardinality tags with Observations</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="system.html">System</a></span>
-  <span class="next"><a href="../guides.html">Guides</a></span>
+  <span class="prev"><a href="meter-provider.html">Meter Provider</a></span>
+  <span class="next"><a href="../implementations.html">Implementations</a></span>
 </nav>
 </article>  </div>
 </main>
@@ -509,22 +880,22 @@ assertThat(registry.get("tomcat.sessions.alive.max").tags(tags).timeGauge().valu
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../../reference/tomcat.html">
+    <a href="../../index.html">
       1.15.5
     </a>
   </li>
   <li class="version">
-    <a href="../../1.14/reference/tomcat.html">
+    <a href="../../1.14/index.html">
       1.14.12
     </a>
   </li>
   <li class="version">
-    <a href="../../1.13/reference/tomcat.html">
+    <a href="../../1.13/index.html">
       1.13.15
     </a>
   </li>
   <li class="version">
-    <a href="../../1.12/reference/tomcat.html">
+    <a href="../../1.12/index.html">
       1.12.13
     </a>
   </li>
@@ -538,7 +909,7 @@ assertThat(registry.get("tomcat.sessions.alive.max").tags(tags).timeGauge().valu
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../../1.16/reference/tomcat.html">
+    <a href="../../1.16/index.html">
       1.16.0-RC1
     </a>
   </li>
@@ -552,27 +923,27 @@ assertThat(registry.get("tomcat.sessions.alive.max").tags(tags).timeGauge().valu
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../../1.16-SNAPSHOT/reference/tomcat.html">
+    <a href="../../1.16-SNAPSHOT/index.html">
       1.16.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.15-SNAPSHOT/reference/tomcat.html">
+    <a href="high-cardinality-tags-detector.html">
       1.15.6-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="tomcat.html">
+    <a href="../../1.14-SNAPSHOT/concepts/high-cardinality-tags-detector.html">
       1.14.13-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.13-SNAPSHOT/reference/tomcat.html">
+    <a href="../../1.13-SNAPSHOT/index.html">
       1.13.16-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../../1.12-SNAPSHOT/reference/tomcat.html">
+    <a href="../../1.12-SNAPSHOT/index.html">
       1.12.14-SNAPSHOT
     </a>
   </li>
@@ -638,6 +1009,6 @@ assertThat(registry.get("tomcat.sessions.alive.max").tags(tags).timeGauge().valu
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.14.13" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.15.6" data-page-component="micrometer"></script>
   </body>
 </html>
