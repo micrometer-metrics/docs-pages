@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2025-10-31T20:26:50.244Z",
+  "generated": "2025-10-31T20:31:20.834Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -36,6 +36,11 @@
               "path": "concepts/gauges.adoc",
               "url": "/1.16-SNAPSHOT/concepts/gauges.html",
               "title": "Gauges"
+            },
+            {
+              "path": "concepts/high-cardinality-tags-detector.adoc",
+              "url": "/1.16-SNAPSHOT/concepts/high-cardinality-tags-detector.html",
+              "title": "High Cardinality Tags Detector"
             },
             {
               "path": "concepts/histogram-quantiles.adoc",
