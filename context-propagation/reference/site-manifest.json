@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2025-11-06T16:41:22.510Z",
+  "generated": "2025-11-06T16:52:29.656Z",
   "url": "https://docs.micrometer.io/context-propagation/reference",
   "components": {
     "context-propagation": {
@@ -30,6 +30,33 @@
             {
               "path": "usage.adoc",
               "url": "/1.3-SNAPSHOT/usage.html",
+              "title": "Examples"
+            }
+          ]
+        },
+        "1.2.1": {
+          "prerelease": true,
+          "displayVersion": "1.2.1-SNAPSHOT",
+          "url": "/1.2-SNAPSHOT/index.html",
+          "pages": [
+            {
+              "path": "index.adoc",
+              "url": "/1.2-SNAPSHOT/index.html",
+              "title": "Context Propagation support"
+            },
+            {
+              "path": "installing.adoc",
+              "url": "/1.2-SNAPSHOT/installing.html",
+              "title": "Installing"
+            },
+            {
+              "path": "purpose.adoc",
+              "url": "/1.2-SNAPSHOT/purpose.html",
+              "title": "Purpose"
+            },
+            {
+              "path": "usage.adoc",
+              "url": "/1.2-SNAPSHOT/usage.html",
               "title": "Examples"
             }
           ]
