@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.15.6">
+    <meta name="version" content="1.16.0">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.15.6">
+<div class="nav-container" data-component="micrometer" data-version="1.16.0">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.15.6</span>
+  <span class="version">1.16.0</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -187,6 +187,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="../concepts/meter-provider.html">Meter Provider</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../concepts/meter-convention.html">Meter Convention</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="../concepts/high-cardinality-tags-detector.html">High Cardinality Tags Detector</a>
@@ -400,7 +403,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.15.6/docs/modules/ROOT/pages/reference/httpcomponents.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.0/docs/modules/ROOT/pages/reference/httpcomponents.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -521,6 +524,35 @@ assertThat(observationRegistry).hasObservationWithNameEqualTo(DEFAULT_METER_NAME
     .hasLowCardinalityKeyValue(METHOD.withValue("GET"));</code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_configure_a_custom_convention"><a class="anchor" href="#_configure_a_custom_convention"></a>Configure a custom convention</h3>
+<div class="paragraph">
+<p>You can pass an instance of <code>ApacheHttpClientObservationConvention</code> to customize the convention used by the instrumentation to something other than the default convention.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can pass the instance of <code>OpenTelemetryApacheHttpClientObservationConvention</code> to use the <a href="https://github.com/open-telemetry/semantic-conventions/blob/v1.36.0/docs/http/http-metrics.md#http-client">OpenTelemetry Semantic Conventions for HTTP Clients based on version 1.36.0</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">HttpClientBuilder clientBuilder = HttpClients.custom()
+    .setRetryStrategy(retryStrategy)
+    .addExecInterceptorAfter(ChainElement.RETRY.name(), "micrometer",
+            new ObservationExecChainHandler(observationRegistry,
+                    OpenTelemetryApacheHttpClientObservationConvention.INSTANCE)) <i class="conum" data-value="1"></i><b>(1)</b>
+    .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
+        .setDefaultConnectionConfig(connectionConfig)
+        .build());</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Pass <code>OpenTelemetryApacheHttpClientObservationConvention.INSTANCE</code> to the <code>ObservationExecChainHandler</code> constructor</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -596,6 +628,11 @@ HttpAsyncClientBuilder clientBuilder = HttpAsyncClients.custom()
                           <ul class="versions">
   <li class="version">
     <a href="httpcomponents.html">
+      1.16.0
+    </a>
+  </li>
+  <li class="version">
+    <a href="../1.15/reference/httpcomponents.html">
       1.15.6
     </a>
   </li>
@@ -619,27 +656,13 @@ HttpAsyncClientBuilder clientBuilder = HttpAsyncClients.custom()
                           <div>
                             <button class="version-toggle" type="button">
                               <span></span>
-                              Preview
-                            </button>
-                          </div>
-                          <ul class="versions">
-  <li class="version">
-    <a href="../1.16/reference/httpcomponents.html">
-      1.16.0-RC1
-    </a>
-  </li>
-</ul>                        </div>
-                        <div class="version-item">
-                          <div>
-                            <button class="version-toggle" type="button">
-                              <span></span>
                               Snapshot
                             </button>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../1.16-SNAPSHOT/reference/httpcomponents.html">
-      1.16.0-SNAPSHOT
+    <a href="../1.17-SNAPSHOT/reference/httpcomponents.html">
+      1.17.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -724,6 +747,6 @@ HttpAsyncClientBuilder clientBuilder = HttpAsyncClients.custom()
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.15.6" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.16.0" data-page-component="micrometer"></script>
   </body>
 </html>

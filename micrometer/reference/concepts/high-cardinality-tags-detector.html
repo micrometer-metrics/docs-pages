@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>High Cardinality Tags Detector :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/concepts/high-cardinality-tags-detector.html">
-    <link rel="prev" href="meter-provider.html">
+    <link rel="prev" href="meter-convention.html">
     <link rel="next" href="../implementations.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.15.6">
+    <meta name="version" content="1.16.0">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.15.6">
+<div class="nav-container" data-component="micrometer" data-version="1.16.0">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.15.6</span>
+  <span class="version">1.16.0</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -187,6 +187,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="meter-provider.html">Meter Provider</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="meter-convention.html">Meter Convention</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link"  href="high-cardinality-tags-detector.html">High Cardinality Tags Detector</a>
@@ -400,7 +403,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.15.6/docs/modules/ROOT/pages/concepts/high-cardinality-tags-detector.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.0/docs/modules/ROOT/pages/concepts/high-cardinality-tags-detector.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -572,19 +575,18 @@ For more information on tag naming best practices, see <a href="naming.html#_tag
 </div>
 </div>
 <div class="sect2">
-<h3 id="_config_params"><a class="anchor" href="#_config_params"></a>Config params</h3>
+<h3 id="_configure_with_a_builder"><a class="anchor" href="#_configure_with_a_builder"></a>Configure with a Builder</h3>
 <div class="paragraph">
-<p>Constructors of <code>HighCardinalityTagsDetector</code> can be used to set parameters:</p>
+<p><code>HighCardinalityTagsDetector.Builder</code> can be used to conveniently set parameters:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.config().withHighCardinalityTagsDetector(r -&gt;
-    new HighCardinalityTagsDetector(
-        r,
-        1000, // 1000 different meters with the same name
-        Duration.ofMinutes(5), // check ~every 5 minutes
-        name -&gt; alert("High cardinality meter: " + name)
-    )
+    new HighCardinalityTagsDetector.Builder(r)
+        .threshold(1000) // 1000 different meters with the same name
+        .delay(Duration.ofMinutes(5)) // check ~every 5 minutes
+        .highCardinalityMeterInfoConsumer(info -&gt; alert("Nooo!"))
+        .build()
 );</code></pre>
 </div>
 </div>
@@ -596,13 +598,19 @@ For more information on tag naming best practices, see <a href="naming.html#_tag
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">try (HighCardinalityTagsDetector detector = new HighCardinalityTagsDetector(registry, 10,
-        Duration.ofMinutes(1))) {
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">try (HighCardinalityTagsDetector detector = new HighCardinalityTagsDetector.Builder(registry).threshold(10)
+    .build()) {
     // Create meters with a high cardinality tag (uid)
     for (int i = 0; i &lt; 15; i++) {
         registry.counter("requests", "uid", String.valueOf(i)).increment();
     }
+
     assertThat(detector.findFirst()).isNotEmpty().get().isEqualTo("requests");
+    assertThat(detector.findFirstHighCardinalityMeterInfo()).isNotEmpty().get().satisfies(info -&gt; {
+        assertThat(info.getName()).isEqualTo("requests");
+        assertThat(info.getCount()).isEqualTo(15);
+    });
+
 }
 // detector.close() is implicit here but don't forget to close it otherwise!</code></pre>
 </div>
@@ -630,12 +638,14 @@ For more information on tag naming best practices, see <a href="naming.html#_tag
 <div class="sect2">
 <h3 id="_custom_consumer"><a class="anchor" href="#_custom_consumer"></a>Custom Consumer</h3>
 <div class="paragraph">
-<p>Instead of the default logging behavior, you can provide a <code>Consumer&lt;String&gt;</code> to handle high cardinality notifications:</p>
+<p>Instead of the default logging behavior, you can provide a <code>Consumer&lt;HighCardinalityMeterInfo&gt;</code> to handle high cardinality notifications:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.config().withHighCardinalityTagsDetector(r -&gt;
-    new HighCardinalityTagsDetector(r, 10, Duration.ofMinutes(1), this::recordHighCardinalityEvent)
+    new HighCardinalityTagsDetector.Builder(r).threshold(10)
+        .highCardinalityMeterInfoConsumer(this::recordHighCardinalityEvent)
+        .build()
 );</code></pre>
 </div>
 </div>
@@ -644,9 +654,9 @@ For more information on tag naming best practices, see <a href="naming.html#_tag
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void recordHighCardinalityEvent(String name) {
-    alert("High cardinality meter: " + name);
-    registry.counter("highCardinality.detections").increment();
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void recordHighCardinalityEvent(HighCardinalityTagsDetector.HighCardinalityMeterInfo info) {
+    alert("High cardinality detected in " + info.getName() + " with " + info.getCount() + " meters!");
+    registry.counter("highCardinality.detections", "meter", info.getName()).increment();
 }</code></pre>
 </div>
 </div>
@@ -839,7 +849,7 @@ In the code above, instead of <code>MeterFilter.deny()</code>, you can implement
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="meter-provider.html">Meter Provider</a></span>
+  <span class="prev"><a href="meter-convention.html">Meter Convention</a></span>
   <span class="next"><a href="../implementations.html">Implementations</a></span>
 </nav>
 </article>  </div>
@@ -868,6 +878,11 @@ In the code above, instead of <code>MeterFilter.deny()</code>, you can implement
                           <ul class="versions">
   <li class="version">
     <a href="high-cardinality-tags-detector.html">
+      1.16.0
+    </a>
+  </li>
+  <li class="version">
+    <a href="../1.15/concepts/high-cardinality-tags-detector.html">
       1.15.6
     </a>
   </li>
@@ -891,27 +906,13 @@ In the code above, instead of <code>MeterFilter.deny()</code>, you can implement
                           <div>
                             <button class="version-toggle" type="button">
                               <span></span>
-                              Preview
-                            </button>
-                          </div>
-                          <ul class="versions">
-  <li class="version">
-    <a href="../1.16/index.html">
-      1.16.0-RC1
-    </a>
-  </li>
-</ul>                        </div>
-                        <div class="version-item">
-                          <div>
-                            <button class="version-toggle" type="button">
-                              <span></span>
                               Snapshot
                             </button>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../1.16-SNAPSHOT/concepts/high-cardinality-tags-detector.html">
-      1.16.0-SNAPSHOT
+    <a href="../1.17-SNAPSHOT/concepts/high-cardinality-tags-detector.html">
+      1.17.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -996,6 +997,6 @@ In the code above, instead of <code>MeterFilter.deny()</code>, you can implement
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.15.6" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.16.0" data-page-component="micrometer"></script>
   </body>
 </html>
