@@ -483,7 +483,8 @@
 It does not require any third-party (non-Micrometer) dependencies on the classpath at compile time for applications that use Micrometer, except for <a href="https://jspecify.dev/">JSpecify</a>.</p>
 </div>
 <div class="paragraph">
-<p>Use of the <a href="concepts/timers.html#pause-detection" class="xref page">pause detection</a> feature requires the <a href="https://github.com/LatencyUtils/LatencyUtils">LatencyUtils</a> dependency to be available on the classpath at runtime. If your application does not use the pause detection feature, you can exclude LatencyUtils from your runtime classpath.</p>
+<p>Use of the <a href="concepts/timers.html#pause-detection" class="xref page">pause detection</a> feature requires the <a href="https://github.com/LatencyUtils/LatencyUtils">LatencyUtils</a> dependency (<code>org.latencyutils:LatencyUtils</code>) to be available on the classpath at runtime.
+Micrometer does not include LatencyUtils on the runtime classpath by default because pause detection is turned off by default.</p>
 </div>
 <div class="paragraph">
 <p>If you use <a href="concepts/histogram-quantiles.html" class="xref page">client-side percentiles</a>, you need <a href="https://github.com/HdrHistogram/HdrHistogram">HdrHistogram</a> on the classpath at runtime. If you do not use client-side percentiles, you may exclude HdrHistogram from your application&#8217;s runtime classpath.</p>
