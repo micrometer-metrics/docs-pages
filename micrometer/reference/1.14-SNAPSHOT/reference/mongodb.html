@@ -483,24 +483,17 @@ To add more capabilities such as distributed tracing, please consider using <a h
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
-registry = new SimpleMeterRegistry();
 MongoClientSettings settings = MongoClientSettings.builder()
     .addCommandListener(new MongoMetricsCommandListener(registry))
-    .applyToClusterSettings(builder -&gt; builder.hosts(singletonList(new ServerAddress(host, port)))
-        .addClusterListener(new ClusterListener() {
-            @Override
-            public void clusterOpening(ClusterOpeningEvent event) {
-                clusterId.set(event.getClusterId().getValue());
-            }
-        }))
     .build();
-mongo = MongoClients.create(settings);
+
+MongoClient mongo = MongoClients.create(settings);
 
 // Usage example
 mongo.getDatabase("test").getCollection("testCol").insertOne(new Document("testDoc", new Date()));
 
-Tags tags = Tags.of("cluster.id", clusterId.get(), "server.address", String.format("%s:%s", host, port),
-        "command", "insert", "database", "test", "collection", "testCol", "status", "SUCCESS");
+Tags tags = Tags.of("cluster.id", clusterId, "server.address", String.format("%s:%s", host, port), "command",
+        "insert", "database", "test", "collection", "testCol", "status", "SUCCESS");
 assertThat(registry.get("mongodb.driver.commands").tags(tags).timer().count()).isEqualTo(1);</code></pre>
 </div>
 </div>
