@@ -557,6 +557,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
         url: "https://otlp.example.com:4318/v1/metrics"
         batchSize: 15000
         aggregationTemporality: "cumulative"
+        compressionMode: "gzip"
         headers:
           header1: value1
         step: 30s
@@ -574,6 +575,9 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </li>
 <li>
 <p><code>aggregationTemporality</code> - <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality" target="_blank" rel="noopener">Aggregation temporality</a> determines how the additive quantities are expressed, in relation to time. The environment variable <code>OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE</code> is supported by the default implementation. The supported values are <code>cumulative</code> or <code>delta</code>. Defaults to <code>cumulative</code>.</p>
+</li>
+<li>
+<p><code>compressionMode</code> - Compression mode for metrics payload. The environment variables <code>OTEL_EXPORTER_OTLP_METRICS_COMPRESSION</code> and <code>OTEL_EXPORTER_OTLP_COMPRESSION</code> are supported by the default implementation. If both are set, <code>OTEL_EXPORTER_OTLP_METRICS_COMPRESSION</code> takes precedence. The supported values are <code>gzip</code> or <code>none</code>. Defaults to <code>none</code>.</p>
 </li>
 <li>
 <p><code>headers</code> - Additional headers to send with exported metrics. This can be used for authorization headers. By default, headers are loaded from the config. If that is not set, they can be taken from the environment variables <code>OTEL_EXPORTER_OTLP_HEADERS</code> and <code>OTEL_EXPORTER_OTLP_METRICS_HEADERS</code>. If a header is set in both the environmental variables, the header in the latter overrides the former.</p>
