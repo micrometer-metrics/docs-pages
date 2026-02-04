@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2026-01-13T02:17:55.276Z",
+  "generated": "2026-02-04T22:47:32.914Z",
   "url": "https://docs.micrometer.io/context-propagation/reference",
   "components": {
     "context-propagation": {
