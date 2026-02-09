@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.16.2">
+    <meta name="version" content="1.16.3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.16.2">
+<div class="nav-container" data-component="micrometer" data-version="1.16.3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.16.2</span>
+  <span class="version">1.16.3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -403,7 +403,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.2/docs/modules/ROOT/pages/reference/jvm.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.3/docs/modules/ROOT/pages/reference/jvm.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -496,8 +496,22 @@ new JvmThreadDeadlockMetrics().bindTo(registry); <i class="conum" data-value="6"
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">new ExecutorServiceMetrics(executor, executorServiceName, tags).bindTo(registry);</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">new ExecutorServiceMetrics(executorService, executorServiceName, tags).bindTo(registry); <i class="conum" data-value="1"></i><b>(1)</b>
+// or (there are many overloads of the monitor method)
+Executor monitoredExecutor = ExecutorServiceMetrics.monitor(registry, executor, executorName, tags) <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Provides basic meters for executor activity (see below).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Provides the same meters and timers for tasks (see below).</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Metrics created from the binder vary based on the type of <code>ExecutorService</code>.</p>
@@ -508,6 +522,12 @@ new JvmThreadDeadlockMetrics().bindTo(registry); <i class="conum" data-value="6"
 <div class="ulist">
 <ul>
 <li>
+<p><code>executor</code> (<code>Timer</code>): Records the duration of task execution.</p>
+</li>
+<li>
+<p><code>executor.idle</code> (<code>Timer</code>): Records the duration tasks spend in the queue before execution.</p>
+</li>
+<li>
 <p><code>executor.completed</code> (<code>FunctionCounter</code>): The approximate total number of tasks that have completed execution.</p>
 </li>
 <li>
@@ -517,7 +537,16 @@ new JvmThreadDeadlockMetrics().bindTo(registry); <i class="conum" data-value="6"
 <p><code>executor.queued</code> (<code>Gauge</code>): The approximate number of tasks that are queued for execution.</p>
 </li>
 <li>
+<p><code>executor.queue.remaining</code> (<code>Gauge</code>): The number of additional elements that this queue can ideally accept without blocking.</p>
+</li>
+<li>
 <p><code>executor.pool.size</code> (<code>Gauge</code>): The current number of threads in the pool.</p>
+</li>
+<li>
+<p><code>executor.pool.core</code> (<code>Gauge</code>): The core number of threads for the pool.</p>
+</li>
+<li>
+<p><code>executor.pool.max</code> (<code>Gauge</code>): The maximum allowed number of threads in the pool.</p>
 </li>
 </ul>
 </div>
@@ -527,14 +556,20 @@ new JvmThreadDeadlockMetrics().bindTo(registry); <i class="conum" data-value="6"
 <div class="ulist">
 <ul>
 <li>
-<p><code>executor.steals</code> (<code>FunctionCounter</code>): Estimate of the total number of tasks stolen from one thread&#8217;s work queue by
-another. The reported value underestimates the actual total number of steals when the pool is not quiescent.</p>
+<p><code>executor</code> (<code>Timer</code>): Records the duration of task execution.</p>
 </li>
 <li>
-<p><code>executor.queued</code> (<code>Gauge</code>): An estimate of the total number of tasks currently held in queues by worker threads.</p>
+<p><code>executor.idle</code> (<code>Timer</code>): Records the duration tasks spend in the queue before execution.</p>
 </li>
 <li>
 <p><code>executor.active</code> (<code>Gauge</code>): An estimate of the number of threads that are currently stealing or running tasks.</p>
+</li>
+<li>
+<p><code>executor.queued</code> (<code>Gauge</code>): The approximate number of tasks that are queued for execution.</p>
+</li>
+<li>
+<p><code>executor.steals</code> (<code>FunctionCounter</code>): Estimate of the total number of tasks stolen from one thread&#8217;s work queue by
+another. The reported value underestimates the actual total number of steals when the pool is not quiescent.</p>
 </li>
 <li>
 <p><code>executor.running</code> (<code>Gauge</code>): An estimate of the number of worker threads that are not blocked but are waiting to join tasks or for other managed synchronization threads.</p>
@@ -717,7 +752,7 @@ Use the following classes:</p>
                           <ul class="versions">
   <li class="version">
     <a href="jvm.html">
-      1.16.2
+      1.16.3
     </a>
   </li>
   <li class="version">
@@ -770,7 +805,7 @@ Use the following classes:</p>
   </li>
   <li class="version">
     <a href="../1.16-SNAPSHOT/reference/jvm.html">
-      1.16.3-SNAPSHOT
+      1.16.4-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -855,6 +890,6 @@ Use the following classes:</p>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.16.2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.16.3" data-page-component="micrometer"></script>
   </body>
 </html>
