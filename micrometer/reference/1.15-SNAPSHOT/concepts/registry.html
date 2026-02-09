@@ -511,18 +511,21 @@ composite.add(simple); <i class="conum" data-value="2"></i><b>(2)</b>
 compositeCounter.increment(); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Increments are NOOP&#8217;d until there is a registry in the composite. The counter&#8217;s count still yields 0 at this point.</p>
-</li>
-<li>
-<p>A counter named <code>counter</code> is registered to the simple registry.</p>
-</li>
-<li>
-<p>The simple registry counter is incremented, along with counters for any other registries in the composite.</p>
-</li>
-</ol>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Increments are NOOP&#8217;d until there is a registry in the composite. The counter&#8217;s count still yields 0 at this point.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>A counter named <code>counter</code> is registered to the simple registry.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The simple registry counter is incremented, along with counters for any other registries in the composite.</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -558,18 +561,21 @@ class MyApplication {
 }</code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Wherever possible (and especially where instrumentation performance is critical), store <code>Meter</code> instances in fields to avoid a lookup on their name or tags on each use.</p>
-</li>
-<li>
-<p>When tags need to be determined from local context, you have no choice but to construct or lookup the Meter inside your method body. The lookup cost is just a single hash lookup, so it is acceptable for most use cases.</p>
-</li>
-<li>
-<p>It is OK to add registries <em>after</em> meters have been created with code like <code>Metrics.counter(&#8230;&#8203;)</code>. These meters are added to each registry, as it is bound to the global composite.</p>
-</li>
-</ol>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Wherever possible (and especially where instrumentation performance is critical), store <code>Meter</code> instances in fields to avoid a lookup on their name or tags on each use.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>When tags need to be determined from local context, you have no choice but to construct or lookup the Meter inside your method body. The lookup cost is just a single hash lookup, so it is acceptable for most use cases.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>It is OK to add registries <em>after</em> meters have been created with code like <code>Metrics.counter(&#8230;&#8203;)</code>. These meters are added to each registry, as it is bound to the global composite.</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
