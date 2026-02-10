@@ -852,6 +852,18 @@ No action is needed from users upgrading to 1.9.0. If there is a discrepancy in 
 </div>
 <div class="sect2">
 <h3 id="bookmark-apiv1"><a class="anchor" href="#bookmark-apiv1"></a>3.2. API v1 (Legacy)</h3>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The Dynatrace v1 API is deprecated. It will be removed in the future. Please use the v2 API instead. See <a href="https://docs.dynatrace.com/docs/discover-dynatrace/references/dynatrace-api/environment-api/metric-v1">Dynatrace API Docs</a>.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>When the <code>apiVersion</code> is configured to be <code>v1</code>, the registry sends data by using the <a href="https://docs.dynatrace.com/docs/shortlink/api-custom-metrics">Dynatrace Timeseries API v1 for Custom Metrics</a>.
 If a <code>deviceId</code> is specified, it defaults to <code>v1</code> for backwards compatibility with earlier setups.
