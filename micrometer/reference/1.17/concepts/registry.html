@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.17.0-M1">
+    <meta name="version" content="1.17.0-M2">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.17.0-M1">
+<div class="nav-container" data-component="micrometer" data-version="1.17.0-M2">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.17.0-M1</span>
+  <span class="version">1.17.0-M2</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -403,7 +403,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.17.0-M1/docs/modules/ROOT/pages/concepts/registry.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.17.0-M2/docs/modules/ROOT/pages/concepts/registry.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -514,18 +514,21 @@ composite.add(simple); <i class="conum" data-value="2"></i><b>(2)</b>
 compositeCounter.increment(); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Increments are NOOP&#8217;d until there is a registry in the composite. The counter&#8217;s count still yields 0 at this point.</p>
-</li>
-<li>
-<p>A counter named <code>counter</code> is registered to the simple registry.</p>
-</li>
-<li>
-<p>The simple registry counter is incremented, along with counters for any other registries in the composite.</p>
-</li>
-</ol>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Increments are NOOP&#8217;d until there is a registry in the composite. The counter&#8217;s count still yields 0 at this point.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>A counter named <code>counter</code> is registered to the simple registry.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The simple registry counter is incremented, along with counters for any other registries in the composite.</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -561,18 +564,21 @@ class MyApplication {
 }</code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Wherever possible (and especially where instrumentation performance is critical), store <code>Meter</code> instances in fields to avoid a lookup on their name or tags on each use.</p>
-</li>
-<li>
-<p>When tags need to be determined from local context, you have no choice but to construct or lookup the Meter inside your method body. The lookup cost is just a single hash lookup, so it is acceptable for most use cases.</p>
-</li>
-<li>
-<p>It is OK to add registries <em>after</em> meters have been created with code like <code>Metrics.counter(&#8230;&#8203;)</code>. These meters are added to each registry, as it is bound to the global composite.</p>
-</li>
-</ol>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Wherever possible (and especially where instrumentation performance is critical), store <code>Meter</code> instances in fields to avoid a lookup on their name or tags on each use.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>When tags need to be determined from local context, you have no choice but to construct or lookup the Meter inside your method body. The lookup cost is just a single hash lookup, so it is acceptable for most use cases.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>It is OK to add registries <em>after</em> meters have been created with code like <code>Metrics.counter(&#8230;&#8203;)</code>. These meters are added to each registry, as it is bound to the global composite.</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -642,7 +648,7 @@ class MyApplication {
                           <ul class="versions">
   <li class="version">
     <a href="registry.html">
-      1.17.0-M1
+      1.17.0-M2
     </a>
   </li>
 </ul>                        </div>
@@ -746,6 +752,6 @@ class MyApplication {
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.17.0-M1" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.17.0-M2" data-page-component="micrometer"></script>
   </body>
 </html>
