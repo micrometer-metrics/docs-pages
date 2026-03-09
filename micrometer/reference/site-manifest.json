@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2026-03-09T02:42:45.955Z",
+  "generated": "2026-03-09T04:25:05.767Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -1046,6 +1046,11 @@
               "path": "reference/logging.adoc",
               "url": "/1.16-SNAPSHOT/reference/logging.html",
               "title": "Logging Metrics Instrumentation"
+            },
+            {
+              "path": "reference/mail.adoc",
+              "url": "/1.16-SNAPSHOT/reference/mail.html",
+              "title": "Jakarta Mail Instrumentation"
             },
             {
               "path": "reference/mongodb.adoc",
