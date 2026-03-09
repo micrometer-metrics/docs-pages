@@ -1,11 +1,11 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2026-03-09T07:13:54.556Z",
+  "generated": "2026-03-09T09:21:48.689Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
       "title": "Micrometer",
-      "latest": "1.16.3",
+      "latest": "1.16.4",
       "versions": {
         "1.17.0": {
           "prerelease": true,
@@ -723,9 +723,9 @@
             }
           ]
         },
-        "1.16.4": {
+        "1.16.5": {
           "prerelease": true,
-          "displayVersion": "1.16.4-SNAPSHOT",
+          "displayVersion": "1.16.5-SNAPSHOT",
           "url": "/1.16-SNAPSHOT/index.html",
           "pages": [
             {
@@ -1084,7 +1084,7 @@
             }
           ]
         },
-        "1.16.3": {
+        "1.16.4": {
           "url": "/index.html",
           "pages": [
             {
@@ -1410,6 +1410,11 @@
               "path": "reference/logging.adoc",
               "url": "/reference/logging.html",
               "title": "Logging Metrics Instrumentation"
+            },
+            {
+              "path": "reference/mail.adoc",
+              "url": "/reference/mail.html",
+              "title": "Jakarta Mail Instrumentation"
             },
             {
               "path": "reference/mongodb.adoc",
