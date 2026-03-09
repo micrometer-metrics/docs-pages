@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.15.9">
+    <meta name="version" content="1.15.10">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.15.9">
+<div class="nav-container" data-component="micrometer" data-version="1.15.10">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.15.9</span>
+  <span class="version">1.15.10</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -400,7 +400,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.15.9/docs/modules/ROOT/pages/observation/components.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.15.10/docs/modules/ROOT/pages/observation/components.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -471,6 +471,9 @@
 </li>
 <li>
 <p><a href="#micrometer-observation-handler">Observation Handler</a></p>
+</li>
+<li>
+<p><a href="#micrometer-observation-default-meter-handler">DefaultMeterObservationHandler</a></p>
 </li>
 <li>
 <p><a href="#micrometer-observation-events">Signaling Errors and Arbitrary Events</a></p>
@@ -652,6 +655,98 @@ catch (Exception ex) {
 finally {
     observation.stop();
 }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="micrometer-observation-default-meter-handler"><a class="anchor" href="#micrometer-observation-default-meter-handler"></a>DefaultMeterObservationHandler</h3>
+<div class="paragraph">
+<p>Micrometer provides <code>DefaultMeterObservationHandler</code>, an <code>ObservationHandler</code> implementation that automatically creates metrics from Observations.
+When registered on an <code>ObservationRegistry</code>, it translates Observation lifecycle events into the following meter types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Timer</strong> (<code>&lt;observation-name&gt;</code>)&#8201;&#8212;&#8201;Created on <code>stop</code>. Records the duration between <code>start</code> and <code>stop</code>. Tagged with all low cardinality key values and an <code>error</code> tag (set to the exception class name if an error was recorded, or <code>none</code> otherwise).</p>
+</li>
+<li>
+<p><strong>LongTaskTimer</strong> (<code>&lt;observation-name&gt;.active</code>)&#8201;&#8212;&#8201;Created on <code>start</code>. Tracks the duration of in-progress observations. Stopped when the observation is stopped. Only tagged with low cardinality key values that are available at the time of <code>start</code>.</p>
+</li>
+<li>
+<p><strong>Counter</strong> (<code>&lt;observation-name&gt;.&lt;event-name&gt;</code>)&#8201;&#8212;&#8201;Incremented when an event is signaled via <code>Observation.event(Event)</code>. Tagged with all low cardinality key values available at the time of the event.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only low cardinality key values are used as meter tags. High cardinality key values are not included in meters because they can cause a cardinality explosion in the metrics backend.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Since the <code>LongTaskTimer</code> is created in the <code>onStart</code> method, it can only contain tags that are available by that time. Any low cardinality key values added after calling <code>start</code> on the <code>Observation</code> will not be included as tags on the <code>LongTaskTimer</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following example shows how to register <code>DefaultMeterObservationHandler</code> and the metrics it creates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">MeterRegistry meterRegistry = new SimpleMeterRegistry();
+ObservationRegistry registry = ObservationRegistry.create();
+// Register DefaultMeterObservationHandler to create metrics from observations
+registry.observationConfig().observationHandler(new DefaultMeterObservationHandler(meterRegistry));
+
+// Perform an observation
+Observation observation = Observation.createNotStarted("my.operation", registry)
+    .lowCardinalityKeyValue("region", "us-east-1");
+observation.start(); // LongTaskTimer "my.operation.active" starts here
+observation.event(Observation.Event.of("my.event")); // Counter
+                                                     // "my.operation.my.event"
+                                                     // incremented
+observation.stop(); // Timer "my.operation" and LongTaskTimer stop
+
+// Verify metrics were created:
+// Timer: my.operation (with tags: region=us-east-1, error=none)
+assertThat(meterRegistry.get("my.operation").timer().count()).isEqualTo(1);
+// Counter: my.operation.my.event (with tags: region=us-east-1)
+assertThat(meterRegistry.get("my.operation.my.event").counter().count()).isEqualTo(1);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you do not need the <code>LongTaskTimer</code> (for example, to reduce the number of created meters), you can disable it using <code>IgnoredMeters</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">MeterRegistry meterRegistry = new SimpleMeterRegistry();
+ObservationRegistry registry = ObservationRegistry.create();
+// You can disable the LongTaskTimer if you don't need it
+registry.observationConfig()
+    .observationHandler(new DefaultMeterObservationHandler(meterRegistry,
+            DefaultMeterObservationHandler.IgnoredMeters.LONG_TASK_TIMER));
+
+Observation.createNotStarted("my.operation", registry)
+    .lowCardinalityKeyValue("region", "us-east-1")
+    .start()
+    .stop();
+
+// Timer is created, but no LongTaskTimer
+assertThat(meterRegistry.get("my.operation").timer().count()).isEqualTo(1);
+assertThat(meterRegistry.find("my.operation.active").longTaskTimer()).isNull();</code></pre>
 </div>
 </div>
 </div>
@@ -1116,7 +1211,7 @@ assertThat(registry)
   </li>
   <li class="version">
     <a href="components.html">
-      1.15.9
+      1.15.10
     </a>
   </li>
   <li class="version">
@@ -1169,7 +1264,7 @@ assertThat(registry)
   </li>
   <li class="version">
     <a href="../../1.15-SNAPSHOT/observation/components.html">
-      1.15.10-SNAPSHOT
+      1.15.11-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -1249,6 +1344,6 @@ assertThat(registry)
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.15.9" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.15.10" data-page-component="micrometer"></script>
   </body>
 </html>
