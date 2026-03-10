@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.17.0-M2">
+    <meta name="version" content="1.17.0-M3">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.17.0-M2">
+<div class="nav-container" data-component="micrometer" data-version="1.17.0-M3">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.17.0-M2</span>
+  <span class="version">1.17.0-M3</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -285,6 +285,9 @@
     <a class="nav-link"  href="../reference/httpcomponents.html">HttpComponents Client</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../reference/mail.html">Jakarta Mail</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="../reference/java-httpclient.html">Java HttpClient</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -403,7 +406,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.17.0-M2/docs/modules/ROOT/pages/implementations/otlp.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.17.0-M3/docs/modules/ROOT/pages/implementations/otlp.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -832,6 +835,48 @@ When the implementation is the exponential histogram, additional configuration a
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_exemplars"><a class="anchor" href="#_exemplars"></a>6. Exemplars</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Exemplars are metadata that you can attach to the value of your metrics time series.
+They can reference data outside of your metrics.
+A common use case is cross-referencing tracing information (<code>traceId</code>, <code>spanId</code>) but any arbitrary key-value pairs can be attached.
+Exemplars are not tags/dimensions (attributes in OTLP terminology); they will not increase cardinality since they belong to the values of the time series. Using them allows you to correlate metrics with traces/spans (or other concepts).</p>
+</div>
+<div class="paragraph">
+<p>Micrometer supports exemplars for <code>Counter</code>, <code>Timer</code>, and <code>DistributionSummary</code>.</p>
+</div>
+<div class="paragraph">
+<p>To enable exemplars, you need to provide an <code>ExemplarContextProvider</code> to the <code>OtlpMeterRegistry</code> using its builder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">OtlpConfig config = OtlpConfig.DEFAULT;
+ExemplarContextProvider contextProvider = new TracingExemplarContextProvider();
+OtlpMeterRegistry meterRegistry = OtlpMeterRegistry.builder(config)
+    .exemplarContextProvider(contextProvider)
+    .build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The implementation of <code>ExemplarContextProvider</code> is responsible for providing an <code>OtlpExemplarContext</code> which contains the necessary information (traceId, spanId, and arbitrary key-value pairs) to be attached to the exemplar.
+If the exemplar information is not available (there is no current Span or the Span is not sampled) or the implementor does not want this particular Span to be used as an exemplar, the <code>ExemplarContextProvider</code> should return <code>null</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>traceId</code> and <code>spanId</code> passed to <code>OtlpExemplarContext</code> must be case-insensitive hex-encoded strings.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="new-relic.html">New Relic</a></span>
   <span class="next"><a href="prometheus.html">Prometheus</a></span>
@@ -896,7 +941,7 @@ When the implementation is the exponential histogram, additional configuration a
                           <ul class="versions">
   <li class="version">
     <a href="otlp.html">
-      1.17.0-M2
+      1.17.0-M3
     </a>
   </li>
 </ul>                        </div>
@@ -1000,6 +1045,6 @@ When the implementation is the exponential histogram, additional configuration a
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.17.0-M2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.17.0-M3" data-page-component="micrometer"></script>
   </body>
 </html>
