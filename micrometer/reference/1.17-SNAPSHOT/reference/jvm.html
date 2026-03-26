@@ -492,7 +492,7 @@ new JvmThreadDeadlockMetrics().bindTo(registry); <i class="conum" data-value="6"
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Gauges max and live data size, promotion and allocation rates, and the number of times the GC pauses (or concurrent phase time in the case of CMS).</td>
+<td>Gauges max and live data size, promotion and allocation rates, and the number of times the GC pauses (or concurrent phase time in the case of CMS). If you are running Java 26 or later, it also tracks the accumulated CPU time for GC related activity.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
