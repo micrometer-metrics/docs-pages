@@ -496,13 +496,16 @@ Request request = new Request.Builder().url(server.baseUrl()).build();
 makeACall(client, request);
 
 assertThat(registry.get("okhttp.requests")
-    .tags("foo", "bar", "status", "200", "uri", URI_EXAMPLE_VALUE, "target.host", "localhost", "target.port",
-            String.valueOf(server.port()), "target.scheme", "http")
+    .tags("foo", "bar", "method", "GET", "status", "200", "outcome", "SUCCESS", "uri", URI_EXAMPLE_VALUE,
+            "target.host", "localhost", "target.port", String.valueOf(server.port()), "target.scheme", "http",
+            "error", "none")
     .timer()
     .count()).isEqualTo(1L);
 assertThat(testHandler.context).isNotNull();
 assertThat(testHandler.context.getAllKeyValues()).contains(KeyValue.of("foo", "bar"),
-        KeyValue.of("status", "200"));</code></pre>
+        KeyValue.of("method", "GET"), KeyValue.of("status", "200"), KeyValue.of("outcome", "SUCCESS"),
+        KeyValue.of("uri", "uriExample"), KeyValue.of("target.host", "localhost"),
+        KeyValue.of("target.port", String.valueOf(server.port())), KeyValue.of("target.scheme", "http"));</code></pre>
 </div>
 </div>
 <div class="paragraph">
