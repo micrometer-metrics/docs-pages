@@ -818,7 +818,7 @@ The dashboards are maintained by the community in their external GitHub reposito
 </ul>
 </div>
 <div class="paragraph">
-<p>Calling <code>publishPercentileHistogram()</code> on the builder adds <code>${name}_seconds_bucket</code> time series; the count, sum, and max series are unchanged.</p>
+<p>Enabling <a href="../concepts/histogram-quantiles.html" class="xref page">percentile histograms</a> adds a <code>${name}_seconds_bucket</code> time series; the count, sum, and max series are unchanged.</p>
 </div>
 <div class="paragraph">
 <p>Again, representing a counter without rate normalization over some time window is rarely useful, as the representation is a function of both the rapidity with which the counter is incremented and the longevity of the service.</p>
@@ -860,24 +860,25 @@ This differs from a <code>Timer</code>, which records completed events.</p>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Default Prometheus output</th>
-<th class="tableblock halign-left valign-top">With <code>publishPercentileHistogram()</code></th>
+<th class="tableblock halign-left valign-top">With percentile histograms enabled</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${name}_seconds_count</code>, <code>${name}_seconds_sum</code>, and <code>${name}_seconds_max</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${name}_seconds_gcount</code>, <code>${name}_seconds_gsum</code>, <code>${name}_seconds_bucket</code>, and <code>${name}_seconds_max</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${name}_seconds_count</code>, <code>${name}_seconds_sum</code>,  <code>${name}_seconds_max</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${name}_seconds_gcount</code>, <code>${name}_seconds_gsum</code>, <code>${name}_seconds_bucket</code>, <code>${name}_seconds_max</code></p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>The gauge-histogram series are defined in <a href="https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md#gaugehistogram">GaugeHistogram</a> in the OpenMetrics specification.</p>
+<p>The time series with <a href="../concepts/histogram-quantiles.html" class="xref page">percentile histograms</a> enabled are defined by the <a href="https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md#gaugehistogram">GaugeHistogram</a> in the OpenMetrics specification.</p>
 </div>
 <div class="paragraph">
-<p>In the Prometheus Java Client 1.x registry, <code>${name}_seconds_max</code> is always exposed as a separate metric family.</p>
+<p>With the <code>micrometer-registry-prometheus</code> module, <code>${name}_seconds_max</code> is exposed as a separate metric family.
+With the <code>micrometer-registry-prometheus-simpleclient</code> module, it is part of the same metric family as the other time series.</p>
 </div>
 <div class="paragraph">
-<p>A <code>LongTaskTimer</code> only samples tasks that are running at scrape time, so its values return to zero when no tasks are in progress. If you need bucket-based queries such as <code>histogram_quantile()</code> over in-progress task duration, or if alert rules need histogram buckets, enable percentile histograms by calling <code>publishPercentileHistogram()</code> on the builder.</p>
+<p>A <code>LongTaskTimer</code> only samples tasks that are running at scrape time, so its values return to zero when no tasks are in progress. If you need bucket-based queries such as <code>histogram_quantile()</code> over in-progress task duration, or if alert rules need histogram buckets, enable <a href="../concepts/histogram-quantiles.html" class="xref page">percentile histograms</a>.</p>
 </div>
 <div class="paragraph">
 <p>For a serial task, <code>long_task_timer_seconds_sum</code> plots the current cumulative duration of in-progress tasks. In Grafana, we can set an alert threshold at some fixed point.</p>
