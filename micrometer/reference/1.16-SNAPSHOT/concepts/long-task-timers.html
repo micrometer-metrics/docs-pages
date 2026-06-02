@@ -530,6 +530,9 @@ void scrapeResources() {
     .register(registry);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>The exact series exposed by a long task timer depend on the registry. For example, the Prometheus registry exposes a different set of series when <code>publishPercentileHistogram()</code> is enabled; see the <a href="../implementations/prometheus.html#_long_task_timers" class="xref page">Long task timers section of the Prometheus implementation docs</a> for details.</p>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="distribution-summaries.html">Distribution Summaries</a></span>
   <span class="next"><a href="histogram-quantiles.html">Histograms and Percentiles</a></span>
