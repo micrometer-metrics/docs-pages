@@ -802,17 +802,23 @@ The dashboards are maintained by the community in their external GitHub reposito
 <div class="sect2">
 <h3 id="_timers"><a class="anchor" href="#_timers"></a>4.3. Timers</h3>
 <div class="paragraph">
-<p>The Prometheus <code>Timer</code> produces two counter time series with different names:</p>
+<p>The Prometheus <code>Timer</code> produces the following time series:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>${name}_count</code>: Total number of all calls.</p>
+<p><code>${name}_seconds_count</code>: Total number of all calls.</p>
 </li>
 <li>
-<p><code>${name}_sum</code>: Total time of all calls.</p>
+<p><code>${name}_seconds_sum</code>: Total time of all calls.</p>
+</li>
+<li>
+<p><code>${name}_seconds_max</code>: Maximum recorded value within a configurable time window.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Calling <code>publishPercentileHistogram()</code> on the builder adds <code>${name}_seconds_bucket</code> time series; the count, sum, and max series are unchanged.</p>
 </div>
 <div class="paragraph">
 <p>Again, representing a counter without rate normalization over some time window is rarely useful, as the representation is a function of both the rapidity with which the counter is incremented and the longevity of the service.</p>
@@ -823,10 +829,10 @@ The dashboards are maintained by the community in their external GitHub reposito
 <div class="ulist">
 <ul>
 <li>
-<p>Average latency: <code>rate(timer_sum[10s])/rate(timer_count[10s])</code></p>
+<p>Average latency: <code>rate(timer_seconds_sum[10s])/rate(timer_seconds_count[10s])</code></p>
 </li>
 <li>
-<p>Throughput (requests per second): <code>rate(timer_count[10s])</code></p>
+<p>Throughput (requests per second): <code>rate(timer_seconds_count[10s])</code></p>
 </li>
 </ul>
 </div>
@@ -840,7 +846,41 @@ The dashboards are maintained by the community in their external GitHub reposito
 <div class="sect2">
 <h3 id="_long_task_timers"><a class="anchor" href="#_long_task_timers"></a>4.4. Long task timers</h3>
 <div class="paragraph">
-<p>The following example shows a Prometheus query to plot the duration of a long task timer for a serial task is <code>long_task_timer_sum</code>. In Grafana, we can set an alert threshold at some fixed point.</p>
+<p>Long task timers measure tasks that are still running when Prometheus scrapes the registry.
+This differs from a <code>Timer</code>, which records completed events.</p>
+</div>
+<div class="paragraph">
+<p>The exposed Prometheus series depend on whether <code>publishPercentileHistogram()</code> is enabled:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Default Prometheus output</th>
+<th class="tableblock halign-left valign-top">With <code>publishPercentileHistogram()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${name}_seconds_count</code>, <code>${name}_seconds_sum</code>, and <code>${name}_seconds_max</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${name}_seconds_gcount</code>, <code>${name}_seconds_gsum</code>, <code>${name}_seconds_bucket</code>, and <code>${name}_seconds_max</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The gauge-histogram series are defined in <a href="https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md#gaugehistogram">GaugeHistogram</a> in the OpenMetrics specification.</p>
+</div>
+<div class="paragraph">
+<p>In the Prometheus Java Client 1.x registry, <code>${name}_seconds_max</code> is always exposed as a separate metric family.</p>
+</div>
+<div class="paragraph">
+<p>A <code>LongTaskTimer</code> only samples tasks that are running at scrape time, so its values return to zero when no tasks are in progress. If you need bucket-based queries such as <code>histogram_quantile()</code> over in-progress task duration, or if alert rules need histogram buckets, enable percentile histograms by calling <code>publishPercentileHistogram()</code> on the builder.</p>
+</div>
+<div class="paragraph">
+<p>For a serial task, <code>long_task_timer_seconds_sum</code> plots the current cumulative duration of in-progress tasks. In Grafana, we can set an alert threshold at some fixed point.</p>
 </div>
 <div class="imageblock">
 <div class="content">
