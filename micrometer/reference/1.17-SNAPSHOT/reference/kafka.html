@@ -465,6 +465,8 @@
   </table>
 </div>
 <h1 id="page-title" class="page">Apache Kafka Metrics</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://kafka.apache.org/">Apache Kafka</a> is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.</p>
 </div>
@@ -517,6 +519,25 @@ try (KafkaStreams kafkaStreams = createStreams();
         .extracting(meter -&gt; meter.getId().getName())
         .allMatch(s -&gt; s.startsWith(METRIC_NAME_PREFIX));
 }</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="lifecycle"><a class="anchor" href="#lifecycle"></a>Lifecycle</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>KafkaClientMetrics</code> and <code>KafkaStreamsMetrics</code> implement <code>AutoCloseable</code>. When used outside a lifecycle-aware container, call <code>close()</code> on application shutdown so the binder can clean up the resources it registered or started, such as listeners, schedulers, or meters.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <nav class="pagination">
