@@ -681,6 +681,23 @@ another. The reported value underestimates the actual total number of steals whe
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="lifecycle"><a class="anchor" href="#lifecycle"></a>Lifecycle</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>JvmGcMetrics</code> and <code>JvmHeapPressureMetrics</code> implement <code>AutoCloseable</code>. When used outside a lifecycle-aware container, call <code>close()</code> on application shutdown so the binder can clean up the resources it registered or started, such as listeners, schedulers, or meters.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="jms.html">JMS</a></span>
   <span class="next"><a href="kafka.html">Kafka</a></span>

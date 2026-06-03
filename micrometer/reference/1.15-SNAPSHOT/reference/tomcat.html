@@ -459,6 +459,8 @@
   </table>
 </div>
 <h1 id="page-title" class="page">Apache Tomcat Metrics Instrumentation</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>The <a href="https://tomcat.apache.org/">Apache Tomcat</a> software is an open source implementation of the Jakarta Servlet, Jakarta Server Pages, Jakarta Expression Language, Jakarta WebSocket, Jakarta Annotations and Jakarta Authentication specifications.</p>
 </div>
@@ -478,6 +480,25 @@ assertThat(registry.get("tomcat.sessions.expired").tags(tags).functionCounter().
 assertThat(registry.get("tomcat.sessions.rejected").tags(tags).functionCounter().count()).isEqualTo(1.0);
 assertThat(registry.get("tomcat.sessions.created").tags(tags).functionCounter().count()).isEqualTo(3.0);
 assertThat(registry.get("tomcat.sessions.alive.max").tags(tags).timeGauge().value()).isGreaterThan(1.0);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="lifecycle"><a class="anchor" href="#lifecycle"></a>Lifecycle</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>TomcatMetrics</code> implements <code>AutoCloseable</code>. When used outside a lifecycle-aware container, call <code>close()</code> on application shutdown so the binder can clean up the resources it registered or started, such as listeners, schedulers, or meters.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <nav class="pagination">

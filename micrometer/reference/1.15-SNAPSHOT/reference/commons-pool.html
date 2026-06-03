@@ -459,6 +459,8 @@
   </table>
 </div>
 <h1 id="page-title" class="page">Apache Commons Pool Instrumentation</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://commons.apache.org/proper/commons-pool/">Apache Commons Pool</a> is an open source software library provides an object-pooling API and a number of object pool implementations.</p>
 </div>
@@ -511,6 +513,25 @@ try (GenericKeyedObjectPool&lt;Object, Object&gt; ignored = createGenericKeyedOb
                 "commons.pool2.mean.borrow.wait")
         .forEach(name -&gt; registry.get(name).tags(tagsToMatch).timeGauge());
 }</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="lifecycle"><a class="anchor" href="#lifecycle"></a>Lifecycle</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>CommonsObjectPool2Metrics</code> implements <code>AutoCloseable</code>. When used outside a lifecycle-aware container, call <code>close()</code> on application shutdown so the binder can clean up the resources it registered or started, such as listeners, schedulers, or meters.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <nav class="pagination">
