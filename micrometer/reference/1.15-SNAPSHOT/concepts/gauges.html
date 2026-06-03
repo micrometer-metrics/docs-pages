@@ -655,6 +655,12 @@ statuses.register(
 );</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>The <code>overwrite</code> argument controls how rows with the same set of tags are handled on subsequent registrations.
+Use <code>overwrite=true</code> when each registration represents a new snapshot and previously registered rows should be replaced with the latest values.
+Use <code>overwrite=false</code> when existing rows should remain unchanged on later registrations with the same tags.
+Rows that are no longer present in the new registration are removed.</p>
+</div>
 </div>
 </div>
 <nav class="pagination">
