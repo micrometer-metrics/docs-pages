@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.16.5">
+    <meta name="version" content="1.17.0">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.16.5">
+<div class="nav-container" data-component="micrometer" data-version="1.17.0">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.16.5</span>
+  <span class="version">1.17.0</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -406,7 +406,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.5/docs/modules/ROOT/pages/implementations/otlp.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.17.0/docs/modules/ROOT/pages/implementations/otlp.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -546,6 +546,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
         url: "https://otlp.example.com:4318/v1/metrics"
         batchSize: 15000
         aggregationTemporality: "cumulative"
+        compressionMode: "gzip"
         headers:
           header1: value1
         step: 30s
@@ -563,6 +564,9 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </li>
 <li>
 <p><code>aggregationTemporality</code> - <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality" target="_blank" rel="noopener">Aggregation temporality</a> determines how the additive quantities are expressed, in relation to time. The environment variable <code>OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE</code> is supported by the default implementation. The supported values are <code>cumulative</code> or <code>delta</code>. Defaults to <code>cumulative</code>.</p>
+</li>
+<li>
+<p><code>compressionMode</code> - Compression mode for metrics payload. The environment variables <code>OTEL_EXPORTER_OTLP_METRICS_COMPRESSION</code> and <code>OTEL_EXPORTER_OTLP_COMPRESSION</code> are supported by the default implementation. If both are set, <code>OTEL_EXPORTER_OTLP_METRICS_COMPRESSION</code> takes precedence. The supported values are <code>gzip</code> or <code>none</code>. Defaults to <code>none</code>.</p>
 </li>
 <li>
 <p><code>headers</code> - Additional headers to send with exported metrics. This can be used for authorization headers. By default, headers are loaded from the config. If that is not set, they can be taken from the environment variables <code>OTEL_EXPORTER_OTLP_HEADERS</code> and <code>OTEL_EXPORTER_OTLP_METRICS_HEADERS</code>. If a header is set in both the environmental variables, the header in the latter overrides the former.</p>
@@ -817,6 +821,48 @@ When the implementation is the exponential histogram, additional configuration a
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_exemplars"><a class="anchor" href="#_exemplars"></a>6. Exemplars</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Exemplars are metadata that you can attach to the value of your metrics time series.
+They can reference data outside of your metrics.
+A common use case is cross-referencing tracing information (<code>traceId</code>, <code>spanId</code>) but any arbitrary key-value pairs can be attached.
+Exemplars are not tags/dimensions (attributes in OTLP terminology); they will not increase cardinality since they belong to the values of the time series. Using them allows you to correlate metrics with traces/spans (or other concepts).</p>
+</div>
+<div class="paragraph">
+<p>Micrometer supports exemplars for <code>Counter</code>, <code>Timer</code>, and <code>DistributionSummary</code>.</p>
+</div>
+<div class="paragraph">
+<p>To enable exemplars, you need to provide an <code>ExemplarContextProvider</code> to the <code>OtlpMeterRegistry</code> using its builder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">OtlpConfig config = OtlpConfig.DEFAULT;
+ExemplarContextProvider contextProvider = new TracingExemplarContextProvider();
+OtlpMeterRegistry meterRegistry = OtlpMeterRegistry.builder(config)
+    .exemplarContextProvider(contextProvider)
+    .build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The implementation of <code>ExemplarContextProvider</code> is responsible for providing an <code>OtlpExemplarContext</code> which contains the necessary information (traceId, spanId, and arbitrary key-value pairs) to be attached to the exemplar.
+If the exemplar information is not available (there is no current Span or the Span is not sampled) or the implementor does not want this particular Span to be used as an exemplar, the <code>ExemplarContextProvider</code> should return <code>null</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>traceId</code> and <code>spanId</code> passed to <code>OtlpExemplarContext</code> must be case-insensitive hex-encoded strings.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="new-relic.html">New Relic</a></span>
   <span class="next"><a href="prometheus.html">Prometheus</a></span>
@@ -847,7 +893,12 @@ When the implementation is the exponential histogram, additional configuration a
                           <ul class="versions">
   <li class="version">
     <a href="otlp.html">
-      1.16.5
+      1.17.0
+    </a>
+  </li>
+  <li class="version">
+    <a href="../1.16/implementations/otlp.html">
+      1.16.6
     </a>
   </li>
   <li class="version">
@@ -875,32 +926,18 @@ When the implementation is the exponential histogram, additional configuration a
                           <div>
                             <button class="version-toggle" type="button">
                               <span></span>
-                              Preview
-                            </button>
-                          </div>
-                          <ul class="versions">
-  <li class="version">
-    <a href="../1.17/implementations/otlp.html">
-      1.17.0-RC1
-    </a>
-  </li>
-</ul>                        </div>
-                        <div class="version-item">
-                          <div>
-                            <button class="version-toggle" type="button">
-                              <span></span>
                               Snapshot
                             </button>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../1.17-SNAPSHOT/implementations/otlp.html">
-      1.17.0-SNAPSHOT
+    <a href="../1.18-SNAPSHOT/implementations/otlp.html">
+      1.18.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
     <a href="../1.16-SNAPSHOT/implementations/otlp.html">
-      1.16.6-SNAPSHOT
+      1.16.7-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -985,6 +1022,6 @@ When the implementation is the exponential histogram, additional configuration a
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.16.5" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.17.0" data-page-component="micrometer"></script>
   </body>
 </html>

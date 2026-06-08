@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.16.5">
+    <meta name="version" content="1.17.0">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.16.5">
+<div class="nav-container" data-component="micrometer" data-version="1.17.0">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.16.5</span>
+  <span class="version">1.17.0</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -406,7 +406,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.5/docs/modules/ROOT/pages/reference/jvm.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.17.0/docs/modules/ROOT/pages/reference/jvm.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -478,7 +478,7 @@ new JvmThreadDeadlockMetrics().bindTo(registry); <i class="conum" data-value="6"
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Gauges max and live data size, promotion and allocation rates, and the number of times the GC pauses (or concurrent phase time in the case of CMS).</td>
+<td>Gauges max and live data size, promotion and allocation rates, and the number of times the GC pauses (or concurrent phase time in the case of CMS). If you are running Java 26 or later, it also tracks the accumulated CPU time for GC related activity.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
@@ -582,6 +582,9 @@ another. The reported value underestimates the actual total number of steals whe
 </li>
 <li>
 <p><code>executor.pool.size</code> (<code>Gauge</code>): The current number of threads in the pool.</p>
+</li>
+<li>
+<p><code>executor.delayed</code> (<code>Gauge</code>): An estimate of the number of delayed (including periodic) tasks scheduled but not yet ready for execution. Available on Java 25+.</p>
 </li>
 </ul>
 </div>
@@ -725,6 +728,23 @@ Use the following classes:</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="lifecycle"><a class="anchor" href="#lifecycle"></a>Lifecycle</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>JvmGcMetrics</code> and <code>JvmHeapPressureMetrics</code> implement <code>AutoCloseable</code>. When used outside a lifecycle-aware container, call <code>close()</code> on application shutdown so the binder can clean up the resources it registered or started, such as listeners, schedulers, or meters.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="jms.html">JMS</a></span>
   <span class="next"><a href="kafka.html">Kafka</a></span>
@@ -755,7 +775,12 @@ Use the following classes:</p>
                           <ul class="versions">
   <li class="version">
     <a href="jvm.html">
-      1.16.5
+      1.17.0
+    </a>
+  </li>
+  <li class="version">
+    <a href="../1.16/reference/jvm.html">
+      1.16.6
     </a>
   </li>
   <li class="version">
@@ -783,32 +808,18 @@ Use the following classes:</p>
                           <div>
                             <button class="version-toggle" type="button">
                               <span></span>
-                              Preview
-                            </button>
-                          </div>
-                          <ul class="versions">
-  <li class="version">
-    <a href="../1.17/reference/jvm.html">
-      1.17.0-RC1
-    </a>
-  </li>
-</ul>                        </div>
-                        <div class="version-item">
-                          <div>
-                            <button class="version-toggle" type="button">
-                              <span></span>
                               Snapshot
                             </button>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../1.17-SNAPSHOT/reference/jvm.html">
-      1.17.0-SNAPSHOT
+    <a href="../1.18-SNAPSHOT/reference/jvm.html">
+      1.18.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
     <a href="../1.16-SNAPSHOT/reference/jvm.html">
-      1.16.6-SNAPSHOT
+      1.16.7-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -893,6 +904,6 @@ Use the following classes:</p>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.16.5" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.17.0" data-page-component="micrometer"></script>
   </body>
 </html>

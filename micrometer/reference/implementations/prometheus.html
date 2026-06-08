@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.16.5">
+    <meta name="version" content="1.17.0">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.16.5">
+<div class="nav-container" data-component="micrometer" data-version="1.17.0">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.16.5</span>
+  <span class="version">1.17.0</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -406,7 +406,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.5/docs/modules/ROOT/pages/implementations/prometheus.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.17.0/docs/modules/ROOT/pages/implementations/prometheus.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -794,17 +794,23 @@ The dashboards are maintained by the community in their external GitHub reposito
 <div class="sect2">
 <h3 id="_timers"><a class="anchor" href="#_timers"></a>4.3. Timers</h3>
 <div class="paragraph">
-<p>The Prometheus <code>Timer</code> produces two counter time series with different names:</p>
+<p>The Prometheus <code>Timer</code> produces the following time series:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>${name}_count</code>: Total number of all calls.</p>
+<p><code>${name}_seconds_count</code>: Total number of all calls.</p>
 </li>
 <li>
-<p><code>${name}_sum</code>: Total time of all calls.</p>
+<p><code>${name}_seconds_sum</code>: Total time of all calls.</p>
+</li>
+<li>
+<p><code>${name}_seconds_max</code>: Maximum recorded value within a configurable time window.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Enabling <a href="../concepts/histogram-quantiles.html" class="xref page">percentile histograms</a> adds a <code>${name}_seconds_bucket</code> time series; the count, sum, and max series are unchanged.</p>
 </div>
 <div class="paragraph">
 <p>Again, representing a counter without rate normalization over some time window is rarely useful, as the representation is a function of both the rapidity with which the counter is incremented and the longevity of the service.</p>
@@ -815,10 +821,10 @@ The dashboards are maintained by the community in their external GitHub reposito
 <div class="ulist">
 <ul>
 <li>
-<p>Average latency: <code>rate(timer_sum[10s])/rate(timer_count[10s])</code></p>
+<p>Average latency: <code>rate(timer_seconds_sum[10s])/rate(timer_seconds_count[10s])</code></p>
 </li>
 <li>
-<p>Throughput (requests per second): <code>rate(timer_count[10s])</code></p>
+<p>Throughput (requests per second): <code>rate(timer_seconds_count[10s])</code></p>
 </li>
 </ul>
 </div>
@@ -832,7 +838,42 @@ The dashboards are maintained by the community in their external GitHub reposito
 <div class="sect2">
 <h3 id="_long_task_timers"><a class="anchor" href="#_long_task_timers"></a>4.4. Long task timers</h3>
 <div class="paragraph">
-<p>The following example shows a Prometheus query to plot the duration of a long task timer for a serial task is <code>long_task_timer_sum</code>. In Grafana, we can set an alert threshold at some fixed point.</p>
+<p>Long task timers measure tasks that are still running when Prometheus scrapes the registry.
+This differs from a <code>Timer</code>, which records completed events.</p>
+</div>
+<div class="paragraph">
+<p>The exposed Prometheus series depend on whether <code>publishPercentileHistogram()</code> is enabled:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Default Prometheus output</th>
+<th class="tableblock halign-left valign-top">With percentile histograms enabled</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${name}_seconds_count</code>, <code>${name}_seconds_sum</code>,  <code>${name}_seconds_max</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${name}_seconds_gcount</code>, <code>${name}_seconds_gsum</code>, <code>${name}_seconds_bucket</code>, <code>${name}_seconds_max</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The time series with <a href="../concepts/histogram-quantiles.html" class="xref page">percentile histograms</a> enabled are defined by the <a href="https://github.com/prometheus/OpenMetrics/blob/main/specification/OpenMetrics.md#gaugehistogram">GaugeHistogram</a> in the OpenMetrics specification.</p>
+</div>
+<div class="paragraph">
+<p>With the <code>micrometer-registry-prometheus</code> module, <code>${name}_seconds_max</code> is exposed as a separate metric family.
+With the <code>micrometer-registry-prometheus-simpleclient</code> module, it is part of the same metric family as the other time series.</p>
+</div>
+<div class="paragraph">
+<p>A <code>LongTaskTimer</code> only samples tasks that are running at scrape time, so its values return to zero when no tasks are in progress. If you need bucket-based queries such as <code>histogram_quantile()</code> over in-progress task duration, or if alert rules need histogram buckets, enable <a href="../concepts/histogram-quantiles.html" class="xref page">percentile histograms</a>.</p>
+</div>
+<div class="paragraph">
+<p>For a serial task, <code>long_task_timer_seconds_sum</code> plots the current cumulative duration of in-progress tasks. In Grafana, we can set an alert threshold at some fixed point.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -844,12 +885,13 @@ The dashboards are maintained by the community in their external GitHub reposito
 </div>
 </div>
 <div class="sect1">
-<h2 id="_limitation_on_same_name_with_different_set_of_tag_keys"><a class="anchor" href="#_limitation_on_same_name_with_different_set_of_tag_keys"></a>5. Limitation on same name with different set of tag keys</h2>
+<h2 id="_warning_on_same_name_with_different_set_of_tag_keys"><a class="anchor" href="#_warning_on_same_name_with_different_set_of_tag_keys"></a>5. Warning on same name with different set of tag keys</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>PrometheusMeterRegistry</code> doesn&#8217;t allow to create meters having the same name with a different set of tag keys, so you should guarantee that meters having the same name have the same set of tag keys.
-Otherwise, subsequent meters having the same name with a different set of tag keys will not be registered.
-This means that you should not do things like:</p>
+<p>Prometheus <a href="https://prometheus.io/docs/instrumenting/writing_clientlibs/#labels:">strongly discourages</a> users from creating meters having the same name with a different set of tag keys. You should register meters with the same name with a consistent set of tag keys.</p>
+</div>
+<div class="paragraph">
+<p>This means that you should avoid the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -859,38 +901,12 @@ registry.counter("test", "second", "2").increment();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This will result in the following warning and the second <code>Meter</code> will not be registered:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">WARNING: The meter (MeterId{name='test', tags=[tag(second=2)]}) registration has failed: Prometheus requires that all meters with the same name have the same set of tag keys. There is already an existing meter named 'test' containing tag keys [first]. The meter you are attempting to register has keys [second]. Note that subsequent logs will be logged at debug level.</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Instead you can do something like this:</p>
+<p>Instead, you should prefer doing the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.counter("test", "first", "1", "second", "none").increment();
 registry.counter("test", "first", "none", "second", "2").increment();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In addition to the warning, you can register a meter registration failed listener to handle the failure:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.config().onMeterRegistrationFailed((id, reason) -&gt; {
-    throw new IllegalArgumentException(reason);
-});</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Actually, the <code>PrometheusMeterRegistry</code> has a shortcut for this, so you can do the following to achieve the same:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">registry.throwExceptionOnRegistrationFailure();</code></pre>
 </div>
 </div>
 </div>
@@ -1001,7 +1017,12 @@ test_total 1.0 # {span_id="321",trace_id="123"} 1.0 1713310767.908
                           <ul class="versions">
   <li class="version">
     <a href="prometheus.html">
-      1.16.5
+      1.17.0
+    </a>
+  </li>
+  <li class="version">
+    <a href="../1.16/implementations/prometheus.html">
+      1.16.6
     </a>
   </li>
   <li class="version">
@@ -1029,32 +1050,18 @@ test_total 1.0 # {span_id="321",trace_id="123"} 1.0 1713310767.908
                           <div>
                             <button class="version-toggle" type="button">
                               <span></span>
-                              Preview
-                            </button>
-                          </div>
-                          <ul class="versions">
-  <li class="version">
-    <a href="../1.17/implementations/prometheus.html">
-      1.17.0-RC1
-    </a>
-  </li>
-</ul>                        </div>
-                        <div class="version-item">
-                          <div>
-                            <button class="version-toggle" type="button">
-                              <span></span>
                               Snapshot
                             </button>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../1.17-SNAPSHOT/implementations/prometheus.html">
-      1.17.0-SNAPSHOT
+    <a href="../1.18-SNAPSHOT/implementations/prometheus.html">
+      1.18.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
     <a href="../1.16-SNAPSHOT/implementations/prometheus.html">
-      1.16.6-SNAPSHOT
+      1.16.7-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -1139,6 +1146,6 @@ test_total 1.0 # {span_id="321",trace_id="123"} 1.0 1713310767.908
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.16.5" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.17.0" data-page-component="micrometer"></script>
   </body>
 </html>

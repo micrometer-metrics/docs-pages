@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.16.5">
+    <meta name="version" content="1.17.0">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.16.5">
+<div class="nav-container" data-component="micrometer" data-version="1.17.0">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.16.5</span>
+  <span class="version">1.17.0</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -406,7 +406,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.5/docs/modules/ROOT/pages/concepts/timers.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.17.0/docs/modules/ROOT/pages/concepts/timers.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -788,10 +788,23 @@ Attempting to construct a function-tracking timer with a primitive number or one
 <p>Micrometer uses the <code>LatencyUtils</code> package to compensate for <a href="https://highscalability.com/blog/2015/10/5/your-load-generator-is-probably-lying-to-you-take-the-red-pi.html">coordinated omission</a>&#8201;&#8212;&#8201;extra latency arising from system and VM pauses that skew your latency statistics downward. Distribution statistics, such as percentiles and SLO counts, are influenced by a pause detector implementation that adds additional latency here and there to compensate for pauses.</p>
 </div>
 <div class="paragraph">
-<p>Micrometer supports two pause detector implementations: a clock-drift based detector and a no-op detector. Before Micrometer 1.0.10/1.1.4/1.2.0, a clock-drift detector was configured by default to report as-accurate-as-possible metrics without further configuration. Since 1.0.10/1.1.4/1.2.0, the no-op detector is configured by default, but the clock-drift detector can be configured as shown in the next example.</p>
+<p>Micrometer supports two pause detector implementations: a clock-drift based detector and a no-op detector. The no-op detector is configured by default, but the clock-drift detector can be configured as shown in the next example.</p>
 </div>
 <div class="paragraph">
 <p>The clock-drift based detector has a configurable sleep interval and pause threshold. CPU consumption is inversely proportional to <code>sleepInterval</code>, as is pause detection accuracy. 100ms for both values is a reasonable default to offer decent detection of long pause events while consuming a negligible amount of CPU time.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You need to add LatencyUtils(<code>org.latencyutils:LatencyUtils</code>) to your runtime classpath to use the <code>ClockDriftPauseDetector</code>.
+Without it on the runtime classpath, a warning will be logged and no pause detection will happen.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>You can customize the pause detector as follows:</p>
@@ -960,7 +973,12 @@ For Prometheus, specifically, R is <em>always</em> equal to 1, regardless of how
                           <ul class="versions">
   <li class="version">
     <a href="timers.html">
-      1.16.5
+      1.17.0
+    </a>
+  </li>
+  <li class="version">
+    <a href="../1.16/concepts/timers.html">
+      1.16.6
     </a>
   </li>
   <li class="version">
@@ -988,32 +1006,18 @@ For Prometheus, specifically, R is <em>always</em> equal to 1, regardless of how
                           <div>
                             <button class="version-toggle" type="button">
                               <span></span>
-                              Preview
-                            </button>
-                          </div>
-                          <ul class="versions">
-  <li class="version">
-    <a href="../1.17/concepts/timers.html">
-      1.17.0-RC1
-    </a>
-  </li>
-</ul>                        </div>
-                        <div class="version-item">
-                          <div>
-                            <button class="version-toggle" type="button">
-                              <span></span>
                               Snapshot
                             </button>
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../1.17-SNAPSHOT/concepts/timers.html">
-      1.17.0-SNAPSHOT
+    <a href="../1.18-SNAPSHOT/concepts/timers.html">
+      1.18.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
     <a href="../1.16-SNAPSHOT/concepts/timers.html">
-      1.16.6-SNAPSHOT
+      1.16.7-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -1098,6 +1102,6 @@ For Prometheus, specifically, R is <em>always</em> equal to 1, regardless of how
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.16.5" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.17.0" data-page-component="micrometer"></script>
   </body>
 </html>
