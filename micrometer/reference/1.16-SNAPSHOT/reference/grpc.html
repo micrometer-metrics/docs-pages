@@ -521,9 +521,11 @@ assertThat(response.getResponseMessage()).isEqualTo("Hello");
 assertThat(observationRegistry).hasAnObservation(observationContextAssert -&gt; {
     observationContextAssert.hasNameEqualTo("grpc.client");
     assertCommonKeyValueNames(observationContextAssert);
+    assertClientKeyValues(observationContextAssert);
 }).hasAnObservation(observationContextAssert -&gt; {
     observationContextAssert.hasNameEqualTo("grpc.server");
     assertCommonKeyValueNames(observationContextAssert);
+    assertServerKeyValues(observationContextAssert);
 });</code></pre>
 </div>
 </div>
