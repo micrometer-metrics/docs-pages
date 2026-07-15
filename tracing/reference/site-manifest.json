@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2026-07-15T23:59:14.393Z",
+  "generated": "2026-07-15T23:59:40.231Z",
   "url": "https://docs.micrometer.io/tracing/reference",
   "components": {
     "tracing": {
