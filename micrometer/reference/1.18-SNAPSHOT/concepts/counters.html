@@ -737,6 +737,19 @@ FunctionCounter counter = FunctionCounter
     .register(registry);</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>If the function tracks a time value, you can specify the time unit of the value returned by the function when calling <code>FunctionCounter.builder(&#8230;&#8203;)</code>. This creates a <code>FunctionCounter</code> that automatically scales its time-based count to the registry&#8217;s base time unit. This is analogous to how <code>TimeGauge</code> works, and provides a way to register monotonically increasing time values (e.g. <code>RuntimeMXBean::getUptime</code>) in a way that automatically scales to the preferred time unit of the metrics backend.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">MyCounterState state = ...;
+
+FunctionCounter.builder("counter.time", state, state -&gt; state.totalTime(), TimeUnit.NANOSECONDS)
+    .description("a description of what this counter does") // optional
+    .tags("region", "test") // optional
+    .register(registry);</code></pre>
+</div>
+</div>
 <div class="admonitionblock warning">
 <table>
 <tr>
