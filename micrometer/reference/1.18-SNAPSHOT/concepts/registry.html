@@ -508,12 +508,10 @@ A <code>SimpleMeterRegistry</code> is autowired for you in Spring-based applicat
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">CompositeMeterRegistry composite = new CompositeMeterRegistry();
 
-Counter compositeCounter = composite.counter("counter");
-compositeCounter.increment(); <i class="conum" data-value="1"></i><b>(1)</b>
-
 SimpleMeterRegistry simple = new SimpleMeterRegistry();
-composite.add(simple); <i class="conum" data-value="2"></i><b>(2)</b>
+composite.add(simple); <i class="conum" data-value="1"></i><b>(1)</b>
 
+Counter compositeCounter = composite.counter("counter"); <i class="conum" data-value="2"></i><b>(2)</b>
 compositeCounter.increment(); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
 </div>
@@ -521,7 +519,7 @@ compositeCounter.increment(); <i class="conum" data-value="3"></i><b>(3)</b></co
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Increments are NOOP&#8217;d until there is a registry in the composite. The counter&#8217;s count still yields 0 at this point.</td>
+<td>You can add multiple registries to a composite.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -534,6 +532,18 @@ compositeCounter.increment(); <i class="conum" data-value="3"></i><b>(3)</b></co
 </table>
 </div>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Meters should be registered <em>after</em> registry configuration is completed (after all registries and filters have been added). Recordings are NOOP&#8217;d until there is a registry in the composite. Also, if a <code>MeterRegistry</code> is added to the <code>CompositeMeterRegistry</code> that already has registered meters, meter recordings that occurred before the registry was added will not be reflected in the newly added registry.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
