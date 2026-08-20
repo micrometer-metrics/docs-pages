@@ -603,6 +603,42 @@ Attempting to construct a gauge with a primitive number or one of its <code>java
 </div>
 </div>
 <div class="sect1">
+<h2 id="_nullable_state_objects"><a class="anchor" href="#_nullable_state_objects"></a>Nullable state objects</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It can happen that you have a nullable object that you want to measure with a <code>Gauge</code>. You should avoid passing nullable state objects to Micrometer, but if you have one, there are multiple solutions, depending on your scenario:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Check if the state object is <code>null</code> and do not register a <code>Gauge</code> if so (the time series will be missing).</p>
+</li>
+<li>
+<p>Check if the state object is <code>null</code> and, instead, register a <code>Gauge</code> that reports a value signaling the nullness, for example: <code>Gauge.builder("gauge", () -&gt; Double.NaN).register(registry);</code>.</p>
+</li>
+<li>
+<p>Wrap your state object in a non-null, immutable wrapper (you need to write one) and use the wrapper as your state object. Your <code>ToDoubleFunction</code> needs to handle the case where the wrapped value is <code>null</code>.</p>
+</li>
+<li>
+<p>Similarly, you can wrap your nullable state object in a (mutable) <code>AtomicReference</code>. Your <code>ToDoubleFunction</code> needs to handle the case where <code>AtomicReference#get()</code> returns <code>null</code>. This solution also handles the case where the nullness is temporary: you can set a non-null value on the <code>AtomicReference</code> later, once one becomes available.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The same applies to other function-based meter registrations: <code>TimeGauge</code>, <code>FunctionTimer</code>, and <code>FunctionCounter</code>, since their state object has the same non-null requirement.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_timegauge"><a class="anchor" href="#_timegauge"></a><code>TimeGauge</code></h2>
 <div class="sectionbody">
 <div class="paragraph">
