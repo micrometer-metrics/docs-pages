@@ -1,11 +1,11 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2026-07-31T22:59:32.514Z",
+  "generated": "2026-08-20T20:21:34.234Z",
   "url": "https://docs.micrometer.io/tracing/reference",
   "components": {
     "tracing": {
       "title": "Micrometer Tracing",
-      "latest": "1.7.0",
+      "latest": "1.7.1",
       "versions": {
         "1.8.0": {
           "prerelease": true,
@@ -49,9 +49,50 @@
             }
           ]
         },
-        "1.7.1": {
+        "1.8.0-M1": {
           "prerelease": true,
-          "displayVersion": "1.7.1-SNAPSHOT",
+          "url": "/1.8/index.html",
+          "pages": [
+            {
+              "path": "index.adoc",
+              "url": "/1.8/index.html",
+              "title": "Tracing support"
+            },
+            {
+              "path": "api.adoc",
+              "url": "/1.8/api.html",
+              "title": "Using Micrometer Tracing Directly"
+            },
+            {
+              "path": "configuring.adoc",
+              "url": "/1.8/configuring.html",
+              "title": "Configuring with Micrometer Observation"
+            },
+            {
+              "path": "glossary.adoc",
+              "url": "/1.8/glossary.html",
+              "title": "Glossary"
+            },
+            {
+              "path": "reporters.adoc",
+              "url": "/1.8/reporters.html",
+              "title": "Supported Reporters"
+            },
+            {
+              "path": "testing.adoc",
+              "url": "/1.8/testing.html",
+              "title": "Testing"
+            },
+            {
+              "path": "tracers.adoc",
+              "url": "/1.8/tracers.html",
+              "title": "Supported Tracers"
+            }
+          ]
+        },
+        "1.7.2": {
+          "prerelease": true,
+          "displayVersion": "1.7.2-SNAPSHOT",
           "url": "/1.7-SNAPSHOT/index.html",
           "pages": [
             {
@@ -91,7 +132,7 @@
             }
           ]
         },
-        "1.7.0": {
+        "1.7.1": {
           "url": "/index.html",
           "pages": [
             {
@@ -131,9 +172,9 @@
             }
           ]
         },
-        "1.6.7": {
+        "1.6.8": {
           "prerelease": true,
-          "displayVersion": "1.6.7-SNAPSHOT",
+          "displayVersion": "1.6.8-SNAPSHOT",
           "url": "/1.6-SNAPSHOT/index.html",
           "pages": [
             {
@@ -173,7 +214,7 @@
             }
           ]
         },
-        "1.6.6": {
+        "1.6.7": {
           "url": "/1.6/index.html",
           "pages": [
             {
