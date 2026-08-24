@@ -636,6 +636,8 @@ GuavaCacheMetrics.monitor(meterRegistry, cache, "testCache", expectedTag);</code
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setting up instrumentation
 static IMap&lt;String, String&gt; cache;
 
+static IMap&lt;String, String&gt; statsDisabledCache;
+
 HazelcastCacheMetrics metrics = new HazelcastCacheMetrics(cache, expectedTag);
 
 
