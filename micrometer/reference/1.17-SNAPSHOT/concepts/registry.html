@@ -540,7 +540,7 @@ compositeCounter.increment(); <i class="conum" data-value="3"></i><b>(3)</b></co
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Meters should be registered <em>after</em> registry configuration is completed (after all registries and filters have been added). Recordings are NOOP&#8217;d until there is a registry in the composite. Also, if a <code>MeterRegistry</code> is added to the <code>CompositeMeterRegistry</code> that already has registered meters, meter recordings that occurred before the registry was added will not be reflected in the newly added registry.
+Meters should be registered <em>after</em> registry configuration is completed (after all registries and filters have been added). Recordings have no effect until there is a non-composite registry in the composite. Also, if a <code>MeterRegistry</code> is added to the <code>CompositeMeterRegistry</code> that already has registered meters, meter recordings that occurred before the registry was added will not be reflected in the newly added registry.
 </td>
 </tr>
 </table>
