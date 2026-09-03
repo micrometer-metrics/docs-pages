@@ -591,7 +591,22 @@ Micrometer&#8217;s Spring Boot configuration does <em>not</em> recognize these a
 </table>
 </div>
 <div class="paragraph">
-<p>An AspectJ aspect is included. You can use it in your application, either through compile/load time AspectJ weaving or through framework facilities that interpret AspectJ aspects and proxy targeted methods in some other way, such as Spring AOP. Here is a sample Spring AOP configuration:</p>
+<p>An AspectJ aspect is included. You can use it in your application, either through compile/load time AspectJ weaving or through framework facilities that interpret AspectJ aspects and proxy targeted methods in some other way, such as Spring AOP.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>SpanAspect</code> requires AspectJ (such as <code>org.aspectj:aspectjweaver</code>) and an AOP Alliance implementation (such as <code>org.springframework:spring-aop</code> or <code>aopalliance:aopalliance</code>). Both are optional dependencies of <code>micrometer-tracing</code> and must be provided on your application&#8217;s classpath.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Here is a sample Spring AOP configuration:</p>
 </div>
 <div class="listingblock">
 <div class="content">
