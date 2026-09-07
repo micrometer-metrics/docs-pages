@@ -385,18 +385,6 @@ Support for the OTel Zipkin Exporter has been deprecated because <code>opentelem
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Remember that, by default, Brave adds Zipkin as a dependency. If you want to use only Wavefront and you use classpath dependent solutions, such as Spring Boot, you might be required to exclude the transitive dependency on Zipkin when using Brave (for example, by excluding the <code>io.zipkin.reporter2</code> group).
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <nav class="pagination">
