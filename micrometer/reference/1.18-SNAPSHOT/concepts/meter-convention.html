@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Meter Convention :: Micrometer</title>
+    <title>Meter Conventions :: Micrometer</title>
     <link rel="canonical" href="https://docs.micrometer.io/micrometer/reference/concepts/meter-convention.html">
     <link rel="prev" href="meter-provider.html">
     <link rel="next" href="high-cardinality-tags-detector.html">
@@ -189,7 +189,7 @@
     <a class="nav-link"  href="meter-provider.html">Meter Provider</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link"  href="meter-convention.html">Meter Convention</a>
+    <a class="nav-link"  href="meter-convention.html">Meter Conventions</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="high-cardinality-tags-detector.html">High Cardinality Tags Detector</a>
@@ -400,7 +400,7 @@
   <div class="content">
     <div
       class="toc"
-      data-title="Meter Convention"
+      data-title="Meter Conventions"
       data-levels="2"
     >
       <div class="toc-menu"></div>
@@ -447,7 +447,7 @@
     <ul>
       <li><a href="../index.html">Micrometer</a></li>
       <li><a href="../concepts.html">Concepts</a></li>
-      <li><a href="meter-convention.html">Meter Convention</a></li>
+      <li><a href="meter-convention.html">Meter Conventions</a></li>
     </ul>
   </nav>
 </div><div class="admonitionblock important latest">
@@ -464,13 +464,110 @@
     </tr></tbody>
   </table>
 </div>
-<h1 id="page-title" class="page">Meter Convention</h1>
+<h1 id="page-title" class="page">Meter Conventions</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>While <code>MeterFilter</code> can be used to customize the name and tags (collectively, the convention) of Meters in any instrumentation, it can be more convenient and robust to customize the convention for a common instrumentation more directly.
-This is the purpose of the <code>MeterConvention</code>.</p>
+<p>While <code>MeterFilter</code> can be used to customize the name and tags (collectively, the convention) of meters in any instrumentation, configuring meter conventions directly on binders allows you to customize the meters before registration.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A meter convention interface defines the canonical name and tags for a specific meter.
+Each meter has a dedicated convention interface (such as <code>JvmMemoryUsedMeterConvention</code> or <code>JvmClassCountMeterConvention</code>).</p>
 </div>
 <div class="paragraph">
-<p>For examples of its usage in instrumentation provided by Micrometer as well as examples of different implementations of a convention for an instrumentation, see the <a href="../reference/jvm.html#meter-conventions" class="xref page">JVM metrics</a>.</p>
+<p><code>MeterBinder</code> implementations that support meter conventions provide a <code>builder()</code> API to configure:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Individual meter conventions</p>
+</li>
+<li>
+<p>Common or extra tags applied across all meters produced by the binder</p>
+</li>
+<li>
+<p>Standard convention presets (such as OpenTelemetry semantic conventions)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_customizing_meter_conventions"><a class="anchor" href="#_customizing_meter_conventions"></a>Customizing Meter Conventions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Convention interfaces may provide static <code>of(&#8230;&#8203;)</code> factory methods to conveniently create custom conventions inline without implementing full classes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ClassLoaderMetrics metrics = ClassLoaderMetrics.builder()
+    .classCountConvention(JvmClassCountMeterConvention.of("custom.class.count", Tags.of("type", "count")))
+    .classLoadedConvention(JvmClassLoadedMeterConvention.of("custom.class.loaded"))
+    .classUnloadedConvention(JvmClassUnloadedMeterConvention.of("custom.class.unloaded"))
+    .build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For conventions that derive tags from a runtime context object (such as <code>MemoryPoolMXBean</code> or <code>Thread.State</code>), the <code>of(&#8230;&#8203;)</code> factory method accepts a function that maps the context to <code>Tags</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">JvmMemoryMetrics metrics = JvmMemoryMetrics.builder()
+    .memoryUsedConvention(JvmMemoryUsedMeterConvention.of("custom.memory.used",
+            pool -&gt; Tags.of("custom.pool", pool.getName())))
+    .build();</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_semantic_conventions"><a class="anchor" href="#_semantic_conventions"></a>Semantic Conventions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Micrometer provides convention implementations, including defaults based on historical Micrometer conventions and implementations following OpenTelemetry semantic conventions.</p>
+</div>
+<div class="paragraph">
+<p>For examples of available conventions and OpenTelemetry configuration, see <a href="../reference/jvm.html#meter-conventions" class="xref page">JVM metrics</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_relationship_with_naming_conventions"><a class="anchor" href="#_relationship_with_naming_conventions"></a>Relationship with Naming Conventions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A meter convention is distinct from a <a href="naming.html" class="xref page">Naming Convention</a>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Meter Convention</strong>: Defines the canonical metric name and semantic tag keys and values for a specific meter before it is registered (for example, <code>jvm.memory.used</code> with tag <code>jvm.memory.type=heap</code>).</p>
+</li>
+<li>
+<p><strong>Naming Convention (<code>NamingConvention</code>)</strong>: Transforms that canonical name and tag keys into the syntax and format required by a specific monitoring system (for example, <code>jvm_memory_used_bytes</code> for Prometheus vs. <code>jvmMemoryUsed</code> for Atlas).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_when_to_use_meter_conventions_vs_observation_conventions"><a class="anchor" href="#_when_to_use_meter_conventions_vs_observation_conventions"></a>When to Use Meter Conventions vs. Observation Conventions</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Use <strong>Meter Conventions</strong> for instrumentation instrumented directly with the metrics API, such as gauges, state-derived function counters, or resource meters (for example, JVM memory, thread states, CPU load).</p>
+</li>
+<li>
+<p>If you are timing an operation or instrumenting a request lifecycle, use the <a href="../observation/introduction.html" class="xref page">Observation API</a> and <a href="../observation/components.html#micrometer-observation-convention-example" class="xref page">Observation Conventions</a> instead.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="meter-provider.html">Meter Provider</a></span>
