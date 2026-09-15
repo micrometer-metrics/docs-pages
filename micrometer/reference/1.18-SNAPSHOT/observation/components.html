@@ -679,10 +679,10 @@ When registered on an <code>ObservationRegistry</code>, it translates Observatio
 <p><strong>Timer</strong> (<code>&lt;observation-name&gt;</code>)&#8201;&#8212;&#8201;Created on <code>stop</code>. Records the duration between <code>start</code> and <code>stop</code>. Tagged with all low cardinality key values and an <code>error</code> tag (set to the exception class name if an error was recorded, or <code>none</code> otherwise).</p>
 </li>
 <li>
-<p><strong>LongTaskTimer</strong> (<code>&lt;observation-name&gt;.active</code>)&#8201;&#8212;&#8201;Created on <code>start</code>. Tracks the duration of in-progress observations. Stopped when the observation is stopped. Only tagged with low cardinality key values that are available at the time of <code>start</code>.</p>
+<p><strong>Counter</strong> (<code>&lt;observation-name&gt;.&lt;event-name&gt;</code>)&#8201;&#8212;&#8201;Incremented when an event is signaled via <code>Observation.event(Event)</code>. Tagged with all low cardinality key values available at the time of the event.</p>
 </li>
 <li>
-<p><strong>Counter</strong> (<code>&lt;observation-name&gt;.&lt;event-name&gt;</code>)&#8201;&#8212;&#8201;Incremented when an event is signaled via <code>Observation.event(Event)</code>. Tagged with all low cardinality key values available at the time of the event.</p>
+<p><strong>LongTaskTimer</strong> (<code>&lt;observation-name&gt;.active</code>)&#8201;&#8212;&#8201;<em>Opt-in; not created by default.</em> When included, created on <code>start</code> to track the duration of in-progress observations, and stopped when the observation is stopped. Only tagged with low cardinality key values that are available at the time of <code>start</code>.</p>
 </li>
 </ul>
 </div>
@@ -698,6 +698,60 @@ Only low cardinality key values are used as meter tags. High cardinality key val
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>The following example shows how to register <code>DefaultMeterObservationHandler</code> and the metrics it creates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">MeterRegistry meterRegistry = new SimpleMeterRegistry();
+ObservationRegistry registry = ObservationRegistry.create();
+// Register DefaultMeterObservationHandler to create metrics from observations
+registry.observationConfig().observationHandler(DefaultMeterObservationHandler.builder(meterRegistry).build());
+
+// Perform an observation
+Observation observation = Observation.createNotStarted("my.operation", registry)
+    .lowCardinalityKeyValue("region", "us-east-1");
+observation.start();
+observation.event(Observation.Event.of("my.event")); // Counter
+                                                     // "my.operation.my.event"
+                                                     // incremented
+observation.stop(); // Timer "my.operation" is recorded here
+
+// Verify metrics were created:
+// Timer: my.operation (with tags: region=us-east-1, error=none)
+assertThat(meterRegistry.get("my.operation").timer().count()).isEqualTo(1);
+// Counter: my.operation.my.event (with tags: region=us-east-1)
+assertThat(meterRegistry.get("my.operation.my.event").counter().count()).isEqualTo(1);
+// No LongTaskTimer, since it is not included by default
+assertThat(meterRegistry.find("my.operation.active").longTaskTimer()).isNull();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to track in-progress observations, you can opt in to the <code>LongTaskTimer</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">MeterRegistry meterRegistry = new SimpleMeterRegistry();
+ObservationRegistry registry = ObservationRegistry.create();
+// Opt in to the LongTaskTimer that tracks in-progress observations
+registry.observationConfig()
+    .observationHandler(DefaultMeterObservationHandler.builder(meterRegistry)
+        .includeActiveObservationLongTaskTimer(true)
+        .build());
+
+Observation observation = Observation.createNotStarted("my.operation", registry)
+    .lowCardinalityKeyValue("region", "us-east-1")
+    .start(); // LongTaskTimer "my.operation.active" starts here
+
+// While the observation is in progress, it is tracked as an active task
+assertThat(meterRegistry.get("my.operation.active").longTaskTimer().activeTasks()).isEqualTo(1);
+
+observation.stop(); // Timer "my.operation" and LongTaskTimer stop
+
+assertThat(meterRegistry.get("my.operation").timer().count()).isEqualTo(1);
+assertThat(meterRegistry.get("my.operation.active").longTaskTimer().activeTasks()).isZero();</code></pre>
+</div>
+</div>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -709,54 +763,6 @@ Since the <code>LongTaskTimer</code> is created in the <code>onStart</code> meth
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>The following example shows how to register <code>DefaultMeterObservationHandler</code> and the metrics it creates:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">MeterRegistry meterRegistry = new SimpleMeterRegistry();
-ObservationRegistry registry = ObservationRegistry.create();
-// Register DefaultMeterObservationHandler to create metrics from observations
-registry.observationConfig().observationHandler(new DefaultMeterObservationHandler(meterRegistry));
-
-// Perform an observation
-Observation observation = Observation.createNotStarted("my.operation", registry)
-    .lowCardinalityKeyValue("region", "us-east-1");
-observation.start(); // LongTaskTimer "my.operation.active" starts here
-observation.event(Observation.Event.of("my.event")); // Counter
-                                                     // "my.operation.my.event"
-                                                     // incremented
-observation.stop(); // Timer "my.operation" and LongTaskTimer stop
-
-// Verify metrics were created:
-// Timer: my.operation (with tags: region=us-east-1, error=none)
-assertThat(meterRegistry.get("my.operation").timer().count()).isEqualTo(1);
-// Counter: my.operation.my.event (with tags: region=us-east-1)
-assertThat(meterRegistry.get("my.operation.my.event").counter().count()).isEqualTo(1);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you do not need the <code>LongTaskTimer</code> (for example, to reduce the number of created meters), you can disable it using <code>IgnoredMeters</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">MeterRegistry meterRegistry = new SimpleMeterRegistry();
-ObservationRegistry registry = ObservationRegistry.create();
-// You can disable the LongTaskTimer if you don't need it
-registry.observationConfig()
-    .observationHandler(new DefaultMeterObservationHandler(meterRegistry,
-            DefaultMeterObservationHandler.IgnoredMeters.LONG_TASK_TIMER));
-
-Observation.createNotStarted("my.operation", registry)
-    .lowCardinalityKeyValue("region", "us-east-1")
-    .start()
-    .stop();
-
-// Timer is created, but no LongTaskTimer
-assertThat(meterRegistry.get("my.operation").timer().count()).isEqualTo(1);
-assertThat(meterRegistry.find("my.operation.active").longTaskTimer()).isNull();</code></pre>
-</div>
 </div>
 </div>
 </div>
@@ -1046,7 +1052,8 @@ static class CloudUtils {
 ObservationRegistry observationRegistry = ObservationRegistry.create();
 // add metrics
 SimpleMeterRegistry registry = new SimpleMeterRegistry();
-observationRegistry.observationConfig().observationHandler(new DefaultMeterObservationHandler(registry));
+observationRegistry.observationConfig()
+    .observationHandler(DefaultMeterObservationHandler.builder(registry).build());
 observationRegistry.observationConfig().observationConvention(new GlobalTaxObservationConvention());
 // This will be applied to all observations
 observationRegistry.observationConfig().observationFilter(new CloudObservationFilter());
@@ -1109,7 +1116,7 @@ registry.observationConfig()
         return context;
     })
     // Example of using metrics
-    .observationHandler(new DefaultMeterObservationHandler(meterRegistry));
+    .observationHandler(DefaultMeterObservationHandler.builder(meterRegistry).build());
 
 // Observation will be ignored because of the name
 then(Observation.start("to.ignore", () -&gt; new MyContext("don't ignore"), registry).isNoop()).isTrue();
