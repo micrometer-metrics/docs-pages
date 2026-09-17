@@ -551,6 +551,29 @@ MessageConsumer consumer = session.createConsumer(topic);
 consumer.setMessageListener(message -&gt; consumeMessage(message));</span></code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_customizing_the_observations"><a class="anchor" href="#_customizing_the_observations"></a>Customizing the observations</h3>
+<div class="paragraph">
+<p>By default, the observations are created with the <code>DefaultJmsPublishObservationConvention</code> and
+<code>DefaultJmsProcessObservationConvention</code> conventions. If you need to change the observation name,
+the contextual name or the <code>KeyValues</code> that are recorded, you can provide your own conventions:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><span class="fold-block is-hidden-folded">import io.micrometer.jakarta9.instrument.jms.JmsInstrumentation;
+
+</span><span class="fold-block">Session original = ...
+ObservationRegistry registry = ...
+JmsPublishObservationConvention publishConvention = ...
+JmsProcessObservationConvention processConvention = ...
+Session session = JmsInstrumentation.instrumentSession(original, registry, publishConvention, processConvention);</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Passing <code>null</code> for either convention makes the instrumentation fall back to the default one, so you can
+customize only the observations you are interested in.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
