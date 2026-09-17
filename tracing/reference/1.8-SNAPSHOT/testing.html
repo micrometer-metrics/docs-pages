@@ -281,9 +281,6 @@ It:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Sets it up with Tanzu Observability by Wavefront Reporter</p>
-</li>
-<li>
 <p>Sets it up with OpenZipkin Zipkin Reporter</p>
 </li>
 </ul>
@@ -294,9 +291,6 @@ It:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Sets it up with Tanzu Observability by Wavefront Exporter</p>
-</li>
-<li>
 <p>Sets it up with OpenZipkin Zipkin Exporter</p>
 </li>
 </ul>
@@ -306,18 +300,6 @@ It:</p>
 <p>Runs all the combinations above against the user code and running infrastructure</p>
 </li>
 </ul>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-The Wavefront Reporter and its test support have been deprecated because <a href="https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/release-announcements/0/25153">Wavefront&#8217;s End of Life Announcement</a>.
-</td>
-</tr>
-</table>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -470,9 +452,6 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
 <p>By asserting spans that were stored without emitting them to a reporting system</p>
 </li>
 <li>
-<p>Against running Tanzu Observability by Wavefront instance (this option turns on when you have passed the Wavefront related configuration in the constructor - otherwise the test will be disabled)</p>
-</li>
-<li>
 <p>Against running Zipkin instance (this option turns on when Zipkin is running - otherwise the test will be disabled)</p>
 </li>
 </ul>
@@ -482,9 +461,7 @@ testImplementation 'io.micrometer:micrometer-tracing-integration-test' // for in
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">class ObservabilitySmokeTest extends SampleTestRunner {
 
     ObservabilitySmokeTest() {
-        super(SampleRunnerConfig.builder().wavefrontApplicationName("my-app").wavefrontServiceName("my-service")
-                .wavefrontToken("...")
-                .wavefrontUrl("...")
+        super(SampleRunnerConfig.builder()
                 .zipkinUrl("...") // defaults to localhost:9411
                 .build());
     }

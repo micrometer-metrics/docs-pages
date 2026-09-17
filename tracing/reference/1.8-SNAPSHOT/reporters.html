@@ -271,24 +271,9 @@
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://tanzu.vmware.com/observability"><strong>Tanzu Observability by Wavefront</strong></a></p>
-</li>
-<li>
 <p><a href="https://zipkin.io"><strong>OpenZipkin Zipkin</strong></a></p>
 </li>
 </ul>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-The Wavefront Reporter has been deprecated because <a href="https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/release-announcements/0/25153">Wavefront&#8217;s End of Life Announcement</a>.
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -297,12 +282,6 @@ The Wavefront Reporter has been deprecated because <a href="https://support.broa
 <div class="sectionbody">
 <div class="paragraph">
 <p>The following example shows the required dependency in Gradle (assuming that Micrometer Tracing BOM has been added):</p>
-</div>
-<div class="listingblock">
-<div class="title">Tanzu Observability by Wavefront</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">implementation 'io.micrometer:micrometer-tracing-reporter-wavefront'</code></pre>
-</div>
 </div>
 <div class="listingblock">
 <div class="title">OpenZipkin Zipkin with Brave</div>
@@ -336,15 +315,6 @@ Support for the OTel Zipkin Exporter has been deprecated because <code>opentelem
 </div>
 <div class="paragraph">
 <p>The following example shows the required dependency in Maven (assuming that Micrometer Tracing BOM has been added):</p>
-</div>
-<div class="listingblock">
-<div class="title">Tanzu Observability by Wavefront</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
-    &lt;groupId&gt;io.micrometer&lt;/groupId&gt;
-    &lt;artifactId&gt;micrometer-tracing-reporter-wavefront&lt;/artifactId&gt;
-&lt;/dependency&gt;</code></pre>
-</div>
 </div>
 <div class="listingblock">
 <div class="title">OpenZipkin Zipkin with Brave</div>
