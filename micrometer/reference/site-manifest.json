@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2026-09-17T00:00:20.024Z",
+  "generated": "2026-09-17T06:22:50.607Z",
   "url": "https://docs.micrometer.io/micrometer/reference",
   "components": {
     "micrometer": {
@@ -225,11 +225,6 @@
               "path": "implementations/statsD.adoc",
               "url": "/1.18-SNAPSHOT/implementations/statsD.html",
               "title": "Micrometer StatsD"
-            },
-            {
-              "path": "implementations/wavefront.adoc",
-              "url": "/1.18-SNAPSHOT/implementations/wavefront.html",
-              "title": "Micrometer Wavefront"
             },
             {
               "path": "installing.adoc",

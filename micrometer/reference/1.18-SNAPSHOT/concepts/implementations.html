@@ -260,9 +260,6 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="../implementations/statsD.html">statsD</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../implementations/wavefront.html">Wavefront</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -488,7 +485,7 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AppOptics, Atlas, Azure Monitor, Cloudwatch, Datadog, Datadog StatsD, Dynatrace, Elastic, Humio, Influx, KairosDB, New Relic, Prometheus, SignalFx, Sysdig StatsD, Telegraf StatsD, Wavefront</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AppOptics, Atlas, Azure Monitor, Cloudwatch, Datadog, Datadog StatsD, Dynatrace, Elastic, Humio, Influx, KairosDB, New Relic, Prometheus, SignalFx, Sysdig StatsD, Telegraf StatsD</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Graphite, Ganglia, JMX, Etsy StatsD</p></td>
 </tr>
 </tbody>
@@ -514,7 +511,7 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">AppOptics, Atlas, Azure Monitor, Datadog, Dynatrace, Elastic, Graphite, Ganglia, Humio, Influx, JMX, Kairos, New Relic, all StatsD flavors, SignalFx</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Prometheus, Wavefront <sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Prometheus</p></td>
 </tr>
 </tbody>
 </table>
@@ -538,19 +535,13 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AppOptics, Atlas, Azure Monitor, Datadog, Dynatrace, Elastic, Graphite, Ganglia, Humio, Influx, JMX, Kairos, New Relic, SignalFx, Wavefront</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AppOptics, Atlas, Azure Monitor, Datadog, Dynatrace, Elastic, Graphite, Ganglia, Humio, Influx, JMX, Kairos, New Relic, SignalFx</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Prometheus, all StatsD flavors</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
 <p>There are other, more minor, variations in expectations from one monitoring system to another, such as their conception of base units of measurement (particularly time) and the canonical naming convention for metrics. Micrometer customizes your metrics to meet these demands on a per-registry basis.</p>
-</div>
-<div id="footnotes">
-<hr>
-<div class="footnote" id="_footnotedef_1">
-<a href="#_footnoteref_1">1</a>. As of 1.2.0, Micrometer sends cumulative values to Wavefront.
-</div>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="../concepts.html">Concepts</a></span>
