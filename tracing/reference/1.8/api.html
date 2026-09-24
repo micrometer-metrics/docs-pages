@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.8.0-M1">
+    <meta name="version" content="1.8.0-M2">
     <meta name="component" content="tracing">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.8.0-M1">
+<div class="nav-container" data-component="tracing" data-version="1.8.0-M2">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.8.0-M1</span>
+  <span class="version">1.8.0-M2</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -205,7 +205,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.8.0-M1/docs/modules/ROOT/pages/api.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.8.0-M2/docs/modules/ROOT/pages/api.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -409,20 +409,14 @@ Tracer tracer = new BraveTracer(this.braveTracer, this.bridgeContext, new BraveB
 <p>In this subsection, we set up Micrometer Tracing with OpenTelemetry (OTel).</p>
 </div>
 <div class="paragraph">
-<p>The following example shows how to create a Micrometer Tracing <code>Tracer</code> by using OTel components that would send completed spans to Zipkin:</p>
+<p>The following example shows how to create a Micrometer Tracing <code>Tracer</code> by using OTel&#8217;s in-memory exporter that does not send spans anywhere but shows the integration point with the OTel <code>SpanExporter</code> interface:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// [OTel component] Example of using a SpanExporter. SpanExporter is a component
 // that gets called when a span is finished. Here we have an example of setting it
-// up with sending spans
-// in a Zipkin format to the provided location via the UrlConnectionSender
-// (through the &lt;io.opentelemetry:opentelemetry-exporter-zipkin&gt; and
-// &lt;io.zipkin.reporter2:zipkin-sender-urlconnection&gt; dependencies)
-// Another option could be to use an ArrayListSpanProcessor for testing purposes
-SpanExporter spanExporter = new ZipkinSpanExporterBuilder()
-    .setSender(URLConnectionSender.create("http://localhost:9411/api/v2/spans"))
-    .build();
+// up with an in-memory exporter that should be used for testing purposes only.
+SpanExporter spanExporter = InMemorySpanExporter.create();
 
 // [OTel component] SdkTracerProvider is an SDK implementation for TracerProvider
 SdkTracerProvider sdkTracerProvider = SdkTracerProvider.builder()
@@ -597,7 +591,22 @@ Micrometer&#8217;s Spring Boot configuration does <em>not</em> recognize these a
 </table>
 </div>
 <div class="paragraph">
-<p>An AspectJ aspect is included. You can use it in your application, either through compile/load time AspectJ weaving or through framework facilities that interpret AspectJ aspects and proxy targeted methods in some other way, such as Spring AOP. Here is a sample Spring AOP configuration:</p>
+<p>An AspectJ aspect is included. You can use it in your application, either through compile/load time AspectJ weaving or through framework facilities that interpret AspectJ aspects and proxy targeted methods in some other way, such as Spring AOP.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>SpanAspect</code> requires AspectJ (such as <code>org.aspectj:aspectjweaver</code>) and an AOP Alliance implementation (such as <code>org.springframework:spring-aop</code> or <code>aopalliance:aopalliance</code>). Both are optional dependencies of <code>micrometer-tracing</code> and must be provided on your application&#8217;s classpath.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Here is a sample Spring AOP configuration:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -816,7 +825,7 @@ span.end();</code></pre>
                           <ul class="versions">
   <li class="version">
     <a href="api.html">
-      1.8.0-M1
+      1.8.0-M2
     </a>
   </li>
 </ul>                        </div>
@@ -925,6 +934,6 @@ span.end();</code></pre>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.8.0-M1" data-page-component="tracing"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.8.0-M2" data-page-component="tracing"></script>
   </body>
 </html>
