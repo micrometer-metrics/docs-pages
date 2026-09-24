@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.18.0-M1">
+    <meta name="version" content="1.18.0-M2">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.18.0-M1">
+<div class="nav-container" data-component="micrometer" data-version="1.18.0-M2">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.18.0-M1</span>
+  <span class="version">1.18.0-M2</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -189,7 +189,7 @@
     <a class="nav-link"  href="meter-provider.html">Meter Provider</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="meter-convention.html">Meter Convention</a>
+    <a class="nav-link"  href="meter-convention.html">Meter Conventions</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="high-cardinality-tags-detector.html">High Cardinality Tags Detector</a>
@@ -259,9 +259,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="../implementations/statsD.html">statsD</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../implementations/wavefront.html">Wavefront</a>
   </li>
 </ul>
   </li>
@@ -406,7 +403,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.18.0-M1/docs/modules/ROOT/pages/concepts/histogram-quantiles.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.18.0-M2/docs/modules/ROOT/pages/concepts/histogram-quantiles.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -471,7 +468,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Percentile histograms</strong>: Micrometer accumulates values to an underlying histogram and ships a predetermined set of buckets to the monitoring system. The monitoring system&#8217;s query language is responsible for calculating percentiles off of this histogram. Currently, only Prometheus, Atlas, and Wavefront support histogram-based percentile approximations, through <code>histogram_quantile</code>, <code>:percentile</code>, and <code>hs()</code>, respectively. If you target Prometheus, Atlas, or Wavefront, prefer this approach, since you can aggregate the histograms across dimensions (by summing the values of the buckets across a set of dimensions) and derive an aggregable percentile from the histogram.</p>
+<p><strong>Percentile histograms</strong>: Micrometer accumulates values to an underlying histogram and ships a predetermined set of buckets to the monitoring system. The monitoring system&#8217;s query language is responsible for calculating percentiles off of this histogram. Currently, only Prometheus and Atlas support histogram-based percentile approximations, through <code>histogram_quantile</code> and <code>:percentile</code>, respectively. If you target Prometheus or Atlas, prefer this approach, since you can aggregate the histograms across dimensions (by summing the values of the buckets across a set of dimensions) and derive an aggregable percentile from the histogram.</p>
 </li>
 <li>
 <p><strong>Client-side percentiles</strong>: Micrometer computes a percentile approximation for each meter ID (set of name and tags) and ships the percentile value to the monitoring system. This is not as flexible as a percentile histogram because it is not possible to aggregate percentile approximations across tags. Nevertheless, it provides some level of insight into percentile distributions for monitoring systems that do not support server-side percentile calculation based on a histogram.</p>
@@ -499,7 +496,7 @@
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><code>publishPercentileHistogram</code>: Used to publish a histogram suitable for computing aggregable (across dimensions) percentile approximations in Prometheus (by using <code>histogram_quantile</code>), Atlas (by using <code>:percentile</code>), and Wavefront (by using <code>hs()</code>). For Prometheus and Atlas, the buckets in the resulting histogram are preset by Micrometer based on a generator that has been determined empirically by Netflix to yield a reasonable error bound on most real world timers and distribution summaries. By default, the generator yields 276 buckets, but Micrometer includes only those that are within the range set by <code>minimumExpectedValue</code> and <code>maximumExpectedValue</code>, inclusive. Micrometer clamps timers by default to a range of 1 millisecond to 1 minute, yielding 73 histogram buckets per timer dimension. <code>publishPercentileHistogram</code> has no effect on systems that do not support aggregable percentile approximations. No histogram is shipped for these systems.</td>
+<td><code>publishPercentileHistogram</code>: Used to publish a histogram suitable for computing aggregable (across dimensions) percentile approximations in Prometheus (by using <code>histogram_quantile</code>) and Atlas (by using <code>:percentile</code>). For Prometheus and Atlas, the buckets in the resulting histogram are preset by Micrometer based on a generator that has been determined empirically by Netflix to yield a reasonable error bound on most real world timers and distribution summaries. By default, the generator yields 276 buckets, but Micrometer includes only those that are within the range set by <code>minimumExpectedValue</code> and <code>maximumExpectedValue</code>, inclusive. Micrometer clamps timers by default to a range of 1 millisecond to 1 minute, yielding 73 histogram buckets per timer dimension. <code>publishPercentileHistogram</code> has no effect on systems that do not support aggregable percentile approximations. No histogram is shipped for these systems.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -624,7 +621,7 @@ registry.timer("myservice.db.requests").record(..);</code></pre>
                           <ul class="versions">
   <li class="version">
     <a href="histogram-quantiles.html">
-      1.18.0-M1
+      1.18.0-M2
     </a>
   </li>
 </ul>                        </div>
@@ -733,6 +730,6 @@ registry.timer("myservice.db.requests").record(..);</code></pre>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.18.0-M1" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.18.0-M2" data-page-component="micrometer"></script>
   </body>
 </html>
