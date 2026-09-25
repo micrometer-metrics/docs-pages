@@ -592,10 +592,35 @@ public class ExampleService {
 }</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>CountedAspect</code> doesn&#8217;t support meta-annotations with <code>@Counted</code>.
+</td>
+</tr>
+</table>
+</div>
 <div class="sect2">
-<h3 id="_metertag_on_method_parameters"><a class="anchor" href="#_metertag_on_method_parameters"></a>@MeterTag on Method Parameters</h3>
+<h3 id="_the_metertag_annotation"><a class="anchor" href="#_the_metertag_annotation"></a>The <code>@MeterTag</code> Annotation</h3>
 <div class="paragraph">
-<p>To support using the <code>@MeterTag</code> annotation on method parameters, you need to configure the <code>@CountedAspect</code> to add the <code>CountedMeterTagAnnotationHandler</code>.</p>
+<p>The <code>@MeterTag</code> annotation can be used on:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Method parameters (to add information about the given parameter)</p>
+</li>
+<li>
+<p>Methods (to add information about the returned value/object of the given method)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To support using the <code>@MeterTag</code> annotation, you need to configure the <code>@CountedAspect</code> to add the <code>CountedMeterTagAnnotationHandler</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -610,29 +635,30 @@ countedAspect.setMeterTagAnnotationHandler(
         new CountedMeterTagAnnotationHandler(aClass -&gt; valueResolver, aClass -&gt; valueExpressionResolver));</code></pre>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_metertag_on_method_parameters"><a class="anchor" href="#_metertag_on_method_parameters"></a><code>@MeterTag</code> on Method Parameters</h4>
 <div class="paragraph">
-<p>Let&#8217;s assume that we have the following interface.</p>
+<p>When the <code>@MeterTag</code> annotation is placed on a method parameter, it enables you to add one or more <code>Tag</code> to the <code>Counter</code> created by <code>@Counted</code> using the given method parameter.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume we have an interface with the following methods:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">interface MeterTagClassInterface {
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Counted
+void getAnnotationForArgumentToString(@MeterTag("test") Long param);
 
-    @Counted
-    void getAnnotationForTagValueResolver(@MeterTag(key = "test", resolver = ValueResolver.class) String test);
+@Counted
+void getAnnotationForTagValueResolver(@MeterTag(key = "test", resolver = ValueResolver.class) String test);
 
-    @Counted
-    void getAnnotationForTagValueExpression(
-            @MeterTag(key = "test", expression = "'hello' + ' characters'") String test);
+@Counted
+void getAnnotationForTagValueExpression(
+        @MeterTag(key = "test", expression = "'hello' + ' characters'") String test);
 
-    @Counted
-    void getAnnotationForArgumentToString(@MeterTag("test") Long param);
-
-    @Counted
-    void getMultipleAnnotationsForTagValueExpression(
-            @MeterTag(key = "value1", expression = "'value1: ' + value1") @MeterTag(key = "value2",
-                    expression = "'value2: ' + value2") DataHolder param);
-
-}</code></pre>
+@Counted
+void getMultipleAnnotationsForTagValueExpression(
+        @MeterTag(key = "value1", expression = "'value1: ' + value1") @MeterTag(key = "value2",
+                expression = "'value2: ' + value2") DataHolder param);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -642,12 +668,10 @@ countedAspect.setMeterTagAnnotationHandler(
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Example for returning &lt;toString()&gt; on the parameter
 service.getAnnotationForArgumentToString(15L);
-
 assertThat(registry.get("method.counted").tag("test", "15").counter().count()).isEqualTo(1);
 
 // Example for calling the provided &lt;ValueResolver&gt; on the parameter
 service.getAnnotationForTagValueResolver("foo");
-
 assertThat(registry.get("method.counted")
     .tag("test", "Value from myCustomTagValueResolver [foo]")
     .counter()
@@ -655,13 +679,11 @@ assertThat(registry.get("method.counted")
 
 // Example for calling the provided &lt;ValueExpressionResolver&gt;
 service.getAnnotationForTagValueExpression("15L");
-
 assertThat(registry.get("method.counted").tag("test", "hello characters").counter().count()).isEqualTo(1);
 
 // Example for using multiple @MeterTag annotations on the same parameter
 // @MeterTags({ @MeterTag(...), @MeterTag(...) }) can be also used
 service.getMultipleAnnotationsForTagValueExpression(new DataHolder("zxe", "qwe"));
-
 assertThat(registry.get("method.counted")
     .tag("value1", "value1: zxe")
     .tag("value2", "value2: qwe")
@@ -669,17 +691,59 @@ assertThat(registry.get("method.counted")
     .count()).isEqualTo(1);</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<code>CountedAspect</code> doesn&#8217;t support meta-annotations with <code>@Counted</code>.
+Please make sure that the attached <code>Tag</code> values are sanitized/normalized so that they are low-cardinality values.
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_metertag_on_methods"><a class="anchor" href="#_metertag_on_methods"></a><code>@MeterTag</code> on Methods</h4>
+<div class="paragraph">
+<p>When the <code>@MeterTag</code> annotation is placed on a method, it enables you to add one or more <code>Tag</code> to the <code>Counter</code> created by <code>@Counted</code> using the returned value/object of the given method.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume we have an interface with the following method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Counted
+@MeterTag("returnValue")
+String getAnnotationForReturnValueToString();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When its implementations would be called (remember that the implementation needs to be annotated with <code>@Counted</code> annotation too), the following counter would be created:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Example for returning &lt;toString()&gt; on the returned value/object
+String returnValue = service.getAnnotationForReturnValueToString();
+assertThat(registry.get("method.counted").tag("returnValue", returnValue).counter().count()).isEqualTo(1);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The previous examples (using a resolver, defining an expression, or using multiple annotations) also work when <code>@MeterTag</code> is placed on a method.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Please make sure that the attached <code>Tag</code> values are sanitized/normalized so that they are low-cardinality values.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>

@@ -548,6 +548,45 @@ The version is not needed for this dependency since it is defined by the BOM.
 </div>
 </div>
 <div class="paragraph">
+<p>When using an <code>ObservationRegistry</code>, you can customize the tags produced by the instrumentation with an <code>HttpClientObservationConvention</code>.
+Extend <code>DefaultHttpClientObservationConvention</code> and add to its low-cardinality key values to retain the default tags.
+For example, the following convention adds the request host as a low-cardinality <code>clientName</code> tag.
+Only use the request host as a low-cardinality tag when the client calls a bounded set of hosts.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static class ClientNameObservationConvention extends DefaultHttpClientObservationConvention {
+
+    @Override
+    public KeyValues getLowCardinalityKeyValues(HttpClientContext context) {
+        HttpRequest.Builder requestBuilder = context.getCarrier();
+        if (requestBuilder == null) {
+            return super.getLowCardinalityKeyValues(context);
+        }
+        String host = requestBuilder.build().uri().getHost();
+        return super.getLowCardinalityKeyValues(context).and("clientName", host != null ? host : "UNKNOWN");
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pass the custom convention to the instrumentation builder together with the <code>ObservationRegistry</code>.
+The following example creates a registry and registers a <code>DefaultMeterObservationHandler</code> to record metrics.
+If your framework already provides an <code>ObservationRegistry</code> configured to record metrics, you can use that registry instead.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ObservationRegistry observationRegistry = ObservationRegistry.create();
+observationRegistry.observationConfig().observationHandler(new DefaultMeterObservationHandler(meterRegistry));
+
+HttpClient observedClient = MicrometerHttpClient.instrumentationBuilder(httpClient, meterRegistry)
+    .observationRegistry(observationRegistry)
+    .customObservationConvention(new ClientNameObservationConvention())
+    .build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>Alternatively, if you are not using an <code>ObservationRegistry</code>, you can instrument with only a <code>MeterRegistry</code> as follows:</p>
 </div>
 <div class="listingblock">
