@@ -629,14 +629,26 @@ public class ExampleService {
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ValueResolver valueResolver = parameter -&gt; "Value from myCustomTagValueResolver [" + parameter + "]";
 
-// Example of a ValueExpressionResolver that uses Spring Expression Language
-ValueExpressionResolver valueExpressionResolver = new SpelValueExpressionResolver();
+// Example of a custom ValueExpressionResolver
+ValueExpressionResolver valueExpressionResolver = new CustomValueExpressionResolver();
 
 
 // Setting the handler on the aspect
 countedAspect.setMeterTagAnnotationHandler(
         new CountedMeterTagAnnotationHandler(aClass -&gt; valueResolver, aClass -&gt; valueExpressionResolver));</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>CustomValueExpressionResolver</code> is a sample implementation of <code>ValueExpressionResolver</code> for documentation purposes. Micrometer does not provide this class. An implementation is required to use <code>@MeterTag</code> expressions.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_metertag_on_method_parameters"><a class="anchor" href="#_metertag_on_method_parameters"></a><code>@MeterTag</code> on Method Parameters</h4>

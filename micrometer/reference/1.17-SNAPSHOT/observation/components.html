@@ -1217,7 +1217,7 @@ registry.observationConfig().observationHandler(new ObservationTextPublisher());
 AspectJProxyFactory pf = new AspectJProxyFactory(new ObservedServiceWithParameter());
 ObservedAspect observedAspect = new ObservedAspect(registry);
 ValueResolver valueResolver = parameter -&gt; "Value from myCustomValueResolver [" + parameter + "]";
-ValueExpressionResolver valueExpressionResolver = new SpelValueExpressionResolver();
+ValueExpressionResolver valueExpressionResolver = new CustomValueExpressionResolver();
 observedAspect.setObservationKeyValueAnnotationHandler(
     new ObservationKeyValueAnnotationHandler(
         aClass -&gt; valueResolver, aClass -&gt; valueExpressionResolver)
