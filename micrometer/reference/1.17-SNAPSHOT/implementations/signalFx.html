@@ -474,7 +474,7 @@
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-This module has been deprecated in favor of the <a href="otlp.html" class="xref page">OTLP Registry</a> because the <a href="https://github.com/signalfx/signalfx-java">SignalFX Java client library</a> that this module depends on has been deprecated.
+This module has been deprecated in favor of the <a href="otlp.html" class="xref page">OTLP Registry</a> because the <a href="https://github.com/signalfx/signalfx-java">SignalFx Java client library</a> that this module depends on has been deprecated.
 </td>
 </tr>
 </table>
@@ -568,7 +568,7 @@ MeterRegistry registry = new SignalFxMeterRegistry(signalFxConfig, Clock.SYSTEM)
 <p>There are two distinct sources of API keys in SignalFx.</p>
 </div>
 <div class="paragraph">
-<p><code>SignalFxConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you  instead bind it to a property source, you can override the default configuration. For example, Micrometer&#8217;s Spring Boot support binds properties that are prefixed with <code>management.metrics.export.signalfx</code> directly to the <code>SignalFxConfig</code>:</p>
+<p><code>SignalFxConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration. For example, Micrometer&#8217;s Spring Boot support binds properties that are prefixed with <code>management.metrics.export.signalfx</code> directly to the <code>SignalFxConfig</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">

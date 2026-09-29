@@ -575,7 +575,7 @@ MeterRegistry registry = new NewRelicMeterRegistry(newRelicConfig, Clock.SYSTEM)
 <p>There are two distinct sources of API keys in New Relic.</p>
 </div>
 <div class="paragraph">
-<p><code>NewRelicConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you  instead bind it to a property source, you can override the default configuration. For example, Micrometer&#8217;s Spring Boot support binds properties that are prefixed with <code>management.metrics.export.newrelic</code> directly to the <code>NewRelicConfig</code>:</p>
+<p><code>NewRelicConfig</code> is an interface with a set of default methods. If, in the implementation of <code>get(String k)</code>, rather than returning <code>null</code>, you instead bind it to a property source, you can override the default configuration. For example, Micrometer&#8217;s Spring Boot support binds properties that are prefixed with <code>management.metrics.export.newrelic</code> directly to the <code>NewRelicConfig</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">

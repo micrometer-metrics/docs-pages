@@ -583,7 +583,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <p><code>compressionMode</code> - Compression mode for metrics payload. The environment variables <code>OTEL_EXPORTER_OTLP_METRICS_COMPRESSION</code> and <code>OTEL_EXPORTER_OTLP_COMPRESSION</code> are supported by the default implementation. If both are set, <code>OTEL_EXPORTER_OTLP_METRICS_COMPRESSION</code> takes precedence. The supported values are <code>gzip</code> or <code>none</code>. Defaults to <code>none</code>.</p>
 </li>
 <li>
-<p><code>headers</code> - Additional headers to send with exported metrics. This can be used for authorization headers. By default, headers are loaded from the config. If that is not set, they can be taken from the environment variables <code>OTEL_EXPORTER_OTLP_HEADERS</code> and <code>OTEL_EXPORTER_OTLP_METRICS_HEADERS</code>. If a header is set in both the environmental variables, the header in the latter overrides the former.</p>
+<p><code>headers</code> - Additional headers to send with exported metrics. This can be used for authorization headers. By default, headers are loaded from the config. If that is not set, they can be taken from the environment variables <code>OTEL_EXPORTER_OTLP_HEADERS</code> and <code>OTEL_EXPORTER_OTLP_METRICS_HEADERS</code>. If a header is set in both the environment variables, the header in the latter overrides the former.</p>
 </li>
 <li>
 <p><code>step</code> - the interval at which metrics will be published. The environment variable <code>OTEL_METRIC_EXPORT_INTERVAL</code> is supported by the default implementation. If a value is not provided, defaults to 1 minute.</p>
@@ -624,7 +624,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </tbody>
 </table>
 <div class="paragraph">
-<p>If this config is empty, resource attributes are loaded from the <code>OTEL_RESOURCE_ATTRIBUTES</code> environmental variable. You can override <code>service.name</code> by setting the <code>OTEL_SERVICE_NAME</code> environmental variable, and this takes precedence over other configs.</p>
+<p>If this config is empty, resource attributes are loaded from the <code>OTEL_RESOURCE_ATTRIBUTES</code> environment variable. You can override <code>service.name</code> by setting the <code>OTEL_SERVICE_NAME</code> environment variable, and this takes precedence over other configs.</p>
 </div>
 </div>
 </div>
@@ -801,7 +801,7 @@ When the implementation is the exponential histogram, additional configuration a
 </ol>
 </div>
 <div class="paragraph">
-<p>Since Exponential Histogram cannot have custom SLO&#8217;s specified, an explicit bucket histogram is used whenever <code>serviceLevelObjectives</code> are configured.</p>
+<p>Since Exponential Histogram cannot have custom SLOs specified, an explicit bucket histogram is used whenever <code>serviceLevelObjectives</code> are configured.</p>
 </div>
 <div class="sect2">
 <h3 id="_configuration_with_spring_boot"><a class="anchor" href="#_configuration_with_spring_boot"></a>5.1. Configuration with Spring Boot</h3>
