@@ -468,7 +468,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section we will describe main components related to Micrometer Observation.</p>
+<p>In this section we will describe the main components related to Micrometer Observation.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -534,7 +534,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p><code>Observation</code> through <code>ObservationRegistry</code> gets created with a mutable <code>Observation.Context</code>. To allow name and key-value customization, an <code>ObservationConvention</code> can be used instead of direct name setting. List of <code>ObservationPredicate</code> is run to verify if an <code>Observation</code> should be created instead of a no-op version. On each <a href="introduction.html" class="xref page">Micrometer Observation lifecycle</a> action (e.g. <code>start()</code>) a corresponding <code>ObservationHandler</code> method is called (e.g. <code>onStart</code>) with the mutable <code>Observation.Context</code> as argument. On <code>Observation</code> stop, before calling the <code>ObservationHandler</code> <code>onStop</code> methods, list of <code>ObservationFilter</code> is called to optionally further modify the <code>Observation.Context</code>.</p>
+<p><code>Observation</code> through <code>ObservationRegistry</code> gets created with a mutable <code>Observation.Context</code>. To allow name and key-value customization, an <code>ObservationConvention</code> can be used instead of direct name setting. A list of <code>ObservationPredicate</code> is run to verify if an <code>Observation</code> should be created instead of a no-op version. On each <a href="introduction.html" class="xref page">Micrometer Observation lifecycle</a> action (e.g. <code>start()</code>) a corresponding <code>ObservationHandler</code> method is called (e.g. <code>onStart</code>) with the mutable <code>Observation.Context</code> as argument. On <code>Observation</code> stop, before calling the <code>ObservationHandler</code> <code>onStop</code> methods, a list of <code>ObservationFilter</code> is called to optionally further modify the <code>Observation.Context</code>.</p>
 </div>
 </div>
 </div>
@@ -550,10 +550,10 @@
 <h2 id="micrometer-observation-handler"><a class="anchor" href="#micrometer-observation-handler"></a>Observation Handler</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Observation Handler allows adding capabilities to existing instrumentations (i.e. you instrument code once and depending on the Observation Handler setup, different actions, such as create spans, metrics, logs will happen). In other words, if you have instrumented code and want to add metrics around it, it&#8217;s enough for you to register an Observation Handler in the Observation Registry to add that behaviour.</p>
+<p>Observation Handler allows adding capabilities to existing instrumentations (i.e. you instrument code once and depending on the Observation Handler setup, different actions, such as create spans, metrics, logs will happen). In other words, if you have instrumented code and want to add metrics around it, it&#8217;s enough for you to register an Observation Handler in the Observation Registry to add that behavior.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the following example of adding a timer behaviour to an existing instrumentation.</p>
+<p>Let&#8217;s look at the following example of adding a timer behavior to an existing instrumentation.</p>
 </div>
 <div class="paragraph">
 <p>A popular way to record Observations is storing the start state in a <code>Timer.Sample</code> instance and stopping it when the event has ended.
@@ -1182,7 +1182,7 @@ assertThat(registry)
 </div>
 </div>
 <div class="paragraph">
-<p>Also, you can use <code>@ObservationKeyValue</code> annotation to add key-values via method parameters.</p>
+<p>Also, you can use the <code>@ObservationKeyValue</code> annotation to add key-values via method parameters.</p>
 </div>
 <div class="paragraph">
 <p>The following example shows an <code>ObservedServiceWithParameter</code> that has an annotation on a method:</p>

@@ -496,7 +496,7 @@
 <p>Whenever any of these methods is called, an <code>ObservationHandler</code> method (such as <code>onStart(T extends Observation.Context ctx)</code>, <code>onStop(T extends Observation.Context ctx)</code>, and so on) is called. To pass state between the handler methods, you can use the <code>Observation.Context</code>.</p>
 </div>
 <div class="paragraph">
-<p>This is how the Observation state diagram looks like:</p>
+<p>This is what the Observation state diagram looks like:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -506,7 +506,7 @@ Created ----------&gt; Started ----------&gt; Stopped</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This is how the Observation Scope state diagram looks like:</p>
+<p>This is what the Observation Scope state diagram looks like:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -577,7 +577,7 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
 <h2 id="micrometer-observation-building-blocks"><a class="anchor" href="#micrometer-observation-building-blocks"></a>Building Blocks</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section we will describe a high overview of Micrometer Observation components. You can read more about those in <a href="components.html" class="xref page">this part of the documentation</a>.</p>
+<p>In this section we will describe a high-level overview of Micrometer Observation components. You can read more about those in <a href="components.html" class="xref page">this part of the documentation</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="micrometer-observation-glossary"><a class="anchor" href="#micrometer-observation-glossary"></a>Glossary</h3>
@@ -599,7 +599,7 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
 <p><code>Context</code> (actually <code>Observation.Context</code>) - a mutable map attached to an <code>Observation</code>, passed between handlers (that way you can pass state without doing any thread locals)</p>
 </li>
 <li>
-<p><code>ObservationConvention</code> - mean to separate Observation lifecycle (starting, stopping, opening scopes) from adding metadata (such as observation name, key-value pairs). That way the naming of observations and metadata handling becomes a configuration problem (e.g. adding key-values does not require changing instrumentation code, but changing the convention)</p>
+<p><code>ObservationConvention</code> - a means to separate Observation lifecycle (starting, stopping, opening scopes) from adding metadata (such as observation name, key-value pairs). That way the naming of observations and metadata handling becomes a configuration problem (e.g. adding key-values does not require changing instrumentation code, but changing the convention)</p>
 </li>
 </ul>
 </div>

@@ -631,7 +631,7 @@ registry.config().commonTags(Arrays.asList(Tag.of("stack", "prod"), Tag.of("regi
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Beware of the potential for tag values coming from user-supplied sources to blow up the cardinality of a metric. You should always carefully normalize and add bounds to user-supplied input. Sometimes, the cause is sneaky. Consider the URI tag for recording HTTP requests on service endpoints. If we do not constrain 404&#8217;s to a value like NOT_FOUND, the dimensionality of the metric would grow with each resource that cannot be found.
+Beware of the potential for tag values coming from user-supplied sources to blow up the cardinality of a metric. You should always carefully normalize and add bounds to user-supplied input. Sometimes, the cause is sneaky. Consider the URI tag for recording HTTP requests on service endpoints. If we do not constrain 404s to a value like NOT_FOUND, the dimensionality of the metric would grow with each resource that cannot be found.
 </td>
 </tr>
 </table>
