@@ -568,7 +568,7 @@ MeterRegistry registry = StackdriverMeterRegistry.builder(stackdriverConfig).bui
 <div class="paragraph">
 <p>For most environments, you need to create and configure credentials to push metrics to Stackdriver Monitoring.
 In most cases, you should create a service account with Stackdriver Monitoring permissions and configure a
-<code>GOOGLE_APPLICATION_CREDENTIALS</code> environmental variable to the path of the service account key file.
+<code>GOOGLE_APPLICATION_CREDENTIALS</code> environment variable to the path of the service account key file.
 The following example shows how to do so:</p>
 </div>
 <div class="listingblock">
@@ -594,7 +594,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=$HOME/$APP_NAME-key.json</code></pre>
 </div>
 <div class="paragraph">
 <p>When running in managed environments (such as Google App Engine, Google Cloud Run, and Google Cloud Function),
-you need not configure this environmental variable. In those environments, a service account is
+you need not configure this environment variable. In those environments, a service account is
 automatically associated with the application instance. The underlying Stackdriver Monitoring client
 library can automatically detect and use those credentials.</p>
 </div>

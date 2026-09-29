@@ -868,7 +868,7 @@ This differs from a <code>Timer</code>, which records completed events.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${name}_seconds_count</code>, <code>${name}_seconds_sum</code>,  <code>${name}_seconds_max</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${name}_seconds_count</code>, <code>${name}_seconds_sum</code>, <code>${name}_seconds_max</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>${name}_seconds_gcount</code>, <code>${name}_seconds_gsum</code>, <code>${name}_seconds_bucket</code>, <code>${name}_seconds_max</code></p></td>
 </tr>
 </tbody>
@@ -929,10 +929,10 @@ registry.counter("test", "first", "none", "second", "2").increment();</code></pr
 <p>Exemplars are metadata that you can attach to the value of your time series. They can reference data outside of your metrics. A common use case is storing tracing information (<code>traceId</code>, <code>spanId</code>). Exemplars are not tags/dimensions (labels in Prometheus terminology), they will not increase cardinality since they belong to the values of the time series.</p>
 </div>
 <div class="paragraph">
-<p>In order to setup Exemplars for <code>PrometheusMeterRegistry</code>, you will need a component that provides you the tracing information. If you use the "new" client (<code>micrometer-registry-prometheus</code>), this component is the <code>io.prometheus.metrics.tracer.common.SpanContext</code> while if you use the "legacy" client (<code>micrometer-registry-prometheus-simpleclient</code>), it is the <code>SpanContextSupplier</code>.</p>
+<p>In order to set up Exemplars for <code>PrometheusMeterRegistry</code>, you will need a component that provides you the tracing information. If you use the "new" client (<code>micrometer-registry-prometheus</code>), this component is the <code>io.prometheus.metrics.tracer.common.SpanContext</code> while if you use the "legacy" client (<code>micrometer-registry-prometheus-simpleclient</code>), it is the <code>SpanContextSupplier</code>.</p>
 </div>
 <div class="paragraph">
-<p>Setting them up are somewhat similar, if you use the "new" client (<code>micrometer-registry-prometheus</code>):</p>
+<p>Setting them up is somewhat similar, if you use the "new" client (<code>micrometer-registry-prometheus</code>):</p>
 </div>
 <div class="listingblock">
 <div class="content">

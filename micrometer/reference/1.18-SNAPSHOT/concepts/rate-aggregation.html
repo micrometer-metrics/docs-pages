@@ -468,7 +468,7 @@
 <p>Micrometer is aware of whether a particular monitoring system expects rate aggregation to happen client-side before metrics are published or ad-hoc as part of the query on the server. It accumulates metrics according to which style the monitoring system expects.</p>
 </div>
 <div class="paragraph">
-<p>Not all measurements are reported or best viewed as a rate. For example, gauge values and the active task count long task timers are not rates.</p>
+<p>Not all measurements are reported or best viewed as a rate. For example, gauge values and the active task count of long task timers are not rates.</p>
 </div>
 </div>
 </div>
@@ -558,7 +558,7 @@ For most production purposes, whether it be alerting, automated canary analysis,
 <p><code>totalTime / count</code> = 2 seconds / 20 requests = 0.1 seconds / request = 100 ms / request</p>
 </div>
 <div class="paragraph">
-<p>This is a useful measure of <em>average latency</em>. When the same idea is applied to the <code>totalAmount</code> and <code>count</code> emanating from distribution summaries, the measure is called a <em>distribution average</em>. Average latency is just the distribution average for a distribution summary measured in time (a timer). Some monitoring systems (such as Atlas) provide facilities for computing the distribution average from these statistics, and Micrometer includes <code>totalTime</code> and <code>count</code> as separate statistics. Others, (such as Datadog) do not have this kind of operation built-in, and Micrometer calculates the distribution average client-side and ships that.</p>
+<p>This is a useful measure of <em>average latency</em>. When the same idea is applied to the <code>totalAmount</code> and <code>count</code> emanating from distribution summaries, the measure is called a <em>distribution average</em>. Average latency is just the distribution average for a distribution summary measured in time (a timer). Some monitoring systems (such as Atlas) provide facilities for computing the distribution average from these statistics, and Micrometer includes <code>totalTime</code> and <code>count</code> as separate statistics. Others (such as Datadog) do not have this kind of operation built-in, and Micrometer calculates the distribution average client-side and ships that.</p>
 </div>
 <div class="paragraph">
 <p>Shipping the rate for the publishing interval is sufficient to reason about the rate over any time window greater than or equal to the publishing interval. In our example, if a service continues to receive 20 requests that each take 100ms for every 10 second interval in a given minute, we could say:</p>

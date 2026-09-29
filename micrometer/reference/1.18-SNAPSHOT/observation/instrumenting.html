@@ -486,7 +486,7 @@ This section of the documentation is targeted to users who want to add instrumen
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Before you decide to instrument a project yourself, double-check whether that it has not already been instrumented!
+Before you decide to instrument a project yourself, double-check that it has not already been instrumented!
 </td>
 </tr>
 </table>
@@ -647,7 +647,7 @@ Before you decide to instrument a project yourself, double-check whether that it
 </div>
 </li>
 <li>
-<p>Wrap the &lt;6&gt; code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
+<p>Wrap the &lt;7&gt; code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
 </li>
 </ul>
 </div>
@@ -943,7 +943,7 @@ try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
 </div>
 </li>
 <li>
-<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;6&gt; <code>ObservationConvention</code> with the receiver context</p>
+<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;5&gt; <code>ObservationConvention</code> with the receiver context</p>
 <div class="ulist">
 <ul>
 <li>
