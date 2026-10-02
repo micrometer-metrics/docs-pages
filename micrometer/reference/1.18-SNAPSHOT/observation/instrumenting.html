@@ -1190,7 +1190,7 @@ consumerConfigs.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 Consumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(consumerConfigs, new StringDeserializer(),
         new StringDeserializer());
 
-// Consumer scubscribes to the topic
+// Consumer subscribes to the topic
 consumer.subscribe(Collections.singletonList(topic));
 
 // Consumer polls for a message
