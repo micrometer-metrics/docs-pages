@@ -1194,7 +1194,7 @@ Consumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(consumerConf
 consumer.subscribe(Collections.singletonList(topic));
 
 // Consumer polls for a message
-consumer.poll(Duration.ofMillis(1000));</code></pre>
+consumer.poll(Duration.ofSeconds(1));</code></pre>
 </div>
 </div>
 <div class="paragraph">

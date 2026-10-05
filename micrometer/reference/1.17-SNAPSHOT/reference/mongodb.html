@@ -496,7 +496,7 @@ MongoClientSettings settings = MongoClientSettings.builder()
 MongoClient mongo = MongoClients.create(settings);
 
 // Usage example
-mongo.getDatabase("test").getCollection("testCol").insertOne(new Document("testDoc", new Date()));
+mongo.getDatabase("test").getCollection("testCol").insertOne(new Document("testDoc", "test"));
 
 Tags tags = Tags.of("cluster.id", clusterId, "server.address", String.format("%s:%s", host, port), "command",
         "insert", "database", "test", "collection", "testCol", "status", "SUCCESS");

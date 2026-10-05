@@ -484,7 +484,7 @@ private OkHttpClient client = new OkHttpClient.Builder().addInterceptor(defaultI
 private OkHttpObservationInterceptor.Builder defaultInterceptorBuilder() {
     return OkHttpObservationInterceptor.builder(observationRegistry, "okhttp.requests")
         .tags(KeyValues.of("foo", "bar"))
-        .uriMapper(URI_MAPPER);
+        .uriMapper(OkHttpObservationInterceptorTest::uriMapper);
 }
 
 // Usage example
