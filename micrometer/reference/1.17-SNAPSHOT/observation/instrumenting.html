@@ -1238,6 +1238,7 @@ ExecutorService executor = Executors.newCachedThreadPool();
 
 // This snippet shows an example of how to wrap in an observation code that would
 // be executed in a separate thread
+ContextSnapshotFactory contextSnapshotFactory = ContextSnapshotFactory.builder().build();
 
 // Let's assume that we have a parent observation
 Observation parent = Observation.createNotStarted("parent", registry);
@@ -1247,7 +1248,7 @@ Future&lt;Boolean&gt; child = parent.observe(() -&gt; {
     then(registry.getCurrentObservation()).isSameAs(parent);
     // [Thread 1] We're wrapping the executor in a Context Propagating version.
     // &lt;ContextExecutorService&gt; comes from Context Propagation library
-    return ContextExecutorService.wrap(executor).submit(() -&gt; {
+    return ContextExecutorService.wrap(executor, contextSnapshotFactory).submit(() -&gt; {
         // [Thread 2] Current Observation is same as &lt;parent&gt; - context got
         // propagated
         then(registry.getCurrentObservation()).isSameAs(parent);
@@ -1405,6 +1406,7 @@ parent.stop();</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// This snippet shows an example of how to wrap code that is using Reactor
+ContextSnapshotFactory contextSnapshotFactory = ContextSnapshotFactory.builder().build();
 
 // Let's assume that we have a parent observation
 Observation parent = Observation.start("parent", registry);
@@ -1436,7 +1438,7 @@ Integer block = Mono.just(1)
     .flatMap(integer -&gt; Mono.just(integer).map(monoInteger -&gt; monoInteger + 1))
     // Example of retrieving ThreadLocal entries via ReactorContext
     .transformDeferredContextual((integerMono, contextView) -&gt; integerMono.doOnNext(integer -&gt; {
-        try (ContextSnapshot.Scope scope = ContextSnapshot.setAllThreadLocalsFrom(contextView)) {
+        try (ContextSnapshot.Scope scope = contextSnapshotFactory.setThreadLocalsFrom(contextView)) {
             log.info(
                     "We're retrieving thread locals from Reactor Context - there will be Observation in thread local here ["
                             + registry.getCurrentObservation() + "]");
