@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.17.1">
+    <meta name="version" content="1.17.2">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.17.1">
+<div class="nav-container" data-component="micrometer" data-version="1.17.2">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.17.1</span>
+  <span class="version">1.17.2</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -406,7 +406,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.17.1/docs/modules/ROOT/pages/observation/introduction.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.17.2/docs/modules/ROOT/pages/observation/introduction.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -482,7 +482,7 @@
 <p>Whenever any of these methods is called, an <code>ObservationHandler</code> method (such as <code>onStart(T extends Observation.Context ctx)</code>, <code>onStop(T extends Observation.Context ctx)</code>, and so on) is called. To pass state between the handler methods, you can use the <code>Observation.Context</code>.</p>
 </div>
 <div class="paragraph">
-<p>This is how the Observation state diagram looks like:</p>
+<p>This is what the Observation state diagram looks like:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -492,7 +492,7 @@ Created ----------&gt; Started ----------&gt; Stopped</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This is how the Observation Scope state diagram looks like:</p>
+<p>This is what the Observation Scope state diagram looks like:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -563,7 +563,7 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
 <h2 id="micrometer-observation-building-blocks"><a class="anchor" href="#micrometer-observation-building-blocks"></a>Building Blocks</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section we will describe a high overview of Micrometer Observation components. You can read more about those in <a href="components.html" class="xref page">this part of the documentation</a>.</p>
+<p>In this section we will describe a high-level overview of Micrometer Observation components. You can read more about those in <a href="components.html" class="xref page">this part of the documentation</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="micrometer-observation-glossary"><a class="anchor" href="#micrometer-observation-glossary"></a>Glossary</h3>
@@ -585,7 +585,7 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
 <p><code>Context</code> (actually <code>Observation.Context</code>) - a mutable map attached to an <code>Observation</code>, passed between handlers (that way you can pass state without doing any thread locals)</p>
 </li>
 <li>
-<p><code>ObservationConvention</code> - mean to separate Observation lifecycle (starting, stopping, opening scopes) from adding metadata (such as observation name, key-value pairs). That way the naming of observations and metadata handling becomes a configuration problem (e.g. adding key-values does not require changing instrumentation code, but changing the convention)</p>
+<p><code>ObservationConvention</code> - a means to separate Observation lifecycle (starting, stopping, opening scopes) from adding metadata (such as observation name, key-value pairs). That way the naming of observations and metadata handling becomes a configuration problem (e.g. adding key-values does not require changing instrumentation code, but changing the convention)</p>
 </li>
 </ul>
 </div>
@@ -665,12 +665,12 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
                           <ul class="versions">
   <li class="version">
     <a href="introduction.html">
-      1.17.1
+      1.17.2
     </a>
   </li>
   <li class="version">
     <a href="../1.16/observation/introduction.html">
-      1.16.7
+      1.16.8
     </a>
   </li>
   <li class="version">
@@ -704,7 +704,7 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
                           <ul class="versions">
   <li class="version">
     <a href="../1.18/observation/introduction.html">
-      1.18.0-M2
+      1.18.0-RC1
     </a>
   </li>
 </ul>                        </div>
@@ -723,12 +723,12 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
   </li>
   <li class="version">
     <a href="../1.17-SNAPSHOT/observation/introduction.html">
-      1.17.2-SNAPSHOT
+      1.17.3-SNAPSHOT
     </a>
   </li>
   <li class="version">
     <a href="../1.16-SNAPSHOT/observation/introduction.html">
-      1.16.8-SNAPSHOT
+      1.16.9-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -813,6 +813,6 @@ Calling <code>observe(() &#8594; &#8230;&#8203;)</code> leads to starting the Ob
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.17.1" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.17.2" data-page-component="micrometer"></script>
   </body>
 </html>

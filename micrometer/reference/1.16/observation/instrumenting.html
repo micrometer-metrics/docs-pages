@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.16.7">
+    <meta name="version" content="1.16.8">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.16.7">
+<div class="nav-container" data-component="micrometer" data-version="1.16.8">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.16.7</span>
+  <span class="version">1.16.8</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -406,7 +406,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.7/docs/modules/ROOT/pages/observation/instrumenting.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.8/docs/modules/ROOT/pages/observation/instrumenting.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -458,7 +458,7 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p> For the latest stable version, please use <a href="../../observation/instrumenting.html">Micrometer 1.17.1</a>!</p>
+          <p> For the latest stable version, please use <a href="../../observation/instrumenting.html">Micrometer 1.17.2</a>!</p>
         </div>
       </td>
     </tr></tbody>
@@ -489,7 +489,7 @@ This section of the documentation is targeted to users who want to add instrumen
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Before you decide to instrument a project yourself, double-check whether that it has not already been instrumented!
+Before you decide to instrument a project yourself, double-check that it has not already been instrumented!
 </td>
 </tr>
 </table>
@@ -650,7 +650,7 @@ Before you decide to instrument a project yourself, double-check whether that it
 </div>
 </li>
 <li>
-<p>Wrap the &lt;6&gt; code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
+<p>Wrap the &lt;7&gt; code to instrument (e.g. processing of an HTTP request) in scope (e.g. through the <code>observe</code> or <code>scoped</code> method)</p>
 </li>
 </ul>
 </div>
@@ -946,7 +946,7 @@ try (Javalin javalin = Javalin.create().before("/hello/{name}", ctx -&gt; {
 </div>
 </li>
 <li>
-<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;6&gt; <code>ObservationConvention</code> with the receiver context</p>
+<p>Create an &lt;4&gt; <code>Observation</code>, optionally using the &lt;5&gt; <code>ObservationConvention</code> with the receiver context</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1193,11 +1193,11 @@ consumerConfigs.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 Consumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(consumerConfigs, new StringDeserializer(),
         new StringDeserializer());
 
-// Consumer scubscribes to the topic
+// Consumer subscribes to the topic
 consumer.subscribe(Collections.singletonList(topic));
 
 // Consumer polls for a message
-consumer.poll(Duration.ofMillis(1000));</code></pre>
+consumer.poll(Duration.ofSeconds(1));</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1238,6 +1238,7 @@ ExecutorService executor = Executors.newCachedThreadPool();
 
 // This snippet shows an example of how to wrap in an observation code that would
 // be executed in a separate thread
+ContextSnapshotFactory contextSnapshotFactory = ContextSnapshotFactory.builder().build();
 
 // Let's assume that we have a parent observation
 Observation parent = Observation.createNotStarted("parent", registry);
@@ -1247,7 +1248,7 @@ Future&lt;Boolean&gt; child = parent.observe(() -&gt; {
     then(registry.getCurrentObservation()).isSameAs(parent);
     // [Thread 1] We're wrapping the executor in a Context Propagating version.
     // &lt;ContextExecutorService&gt; comes from Context Propagation library
-    return ContextExecutorService.wrap(executor).submit(() -&gt; {
+    return ContextExecutorService.wrap(executor, contextSnapshotFactory).submit(() -&gt; {
         // [Thread 2] Current Observation is same as &lt;parent&gt; - context got
         // propagated
         then(registry.getCurrentObservation()).isSameAs(parent);
@@ -1405,6 +1406,7 @@ parent.stop();</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// This snippet shows an example of how to wrap code that is using Reactor
+ContextSnapshotFactory contextSnapshotFactory = ContextSnapshotFactory.builder().build();
 
 // Let's assume that we have a parent observation
 Observation parent = Observation.start("parent", registry);
@@ -1436,7 +1438,7 @@ Integer block = Mono.just(1)
     .flatMap(integer -&gt; Mono.just(integer).map(monoInteger -&gt; monoInteger + 1))
     // Example of retrieving ThreadLocal entries via ReactorContext
     .transformDeferredContextual((integerMono, contextView) -&gt; integerMono.doOnNext(integer -&gt; {
-        try (ContextSnapshot.Scope scope = ContextSnapshot.setAllThreadLocalsFrom(contextView)) {
+        try (ContextSnapshot.Scope scope = contextSnapshotFactory.setThreadLocalsFrom(contextView)) {
             log.info(
                     "We're retrieving thread locals from Reactor Context - there will be Observation in thread local here ["
                             + registry.getCurrentObservation() + "]");
@@ -1505,12 +1507,12 @@ then(block).isEqualTo(2);</code></pre>
                           <ul class="versions">
   <li class="version">
     <a href="../../observation/instrumenting.html">
-      1.17.1
+      1.17.2
     </a>
   </li>
   <li class="version">
     <a href="instrumenting.html">
-      1.16.7
+      1.16.8
     </a>
   </li>
   <li class="version">
@@ -1544,7 +1546,7 @@ then(block).isEqualTo(2);</code></pre>
                           <ul class="versions">
   <li class="version">
     <a href="../../1.18/observation/instrumenting.html">
-      1.18.0-M2
+      1.18.0-RC1
     </a>
   </li>
 </ul>                        </div>
@@ -1563,12 +1565,12 @@ then(block).isEqualTo(2);</code></pre>
   </li>
   <li class="version">
     <a href="../../1.17-SNAPSHOT/observation/instrumenting.html">
-      1.17.2-SNAPSHOT
+      1.17.3-SNAPSHOT
     </a>
   </li>
   <li class="version">
     <a href="../../1.16-SNAPSHOT/observation/instrumenting.html">
-      1.16.8-SNAPSHOT
+      1.16.9-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -1653,6 +1655,6 @@ then(block).isEqualTo(2);</code></pre>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.16.7" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.16.8" data-page-component="micrometer"></script>
   </body>
 </html>

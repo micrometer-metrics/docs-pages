@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.18.0-M2">
+    <meta name="version" content="1.18.0-RC1">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.18.0-M2">
+<div class="nav-container" data-component="micrometer" data-version="1.18.0-RC1">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.18.0-M2</span>
+  <span class="version">1.18.0-RC1</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -403,7 +403,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.18.0-M2/docs/modules/ROOT/pages/reference/java-httpclient.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.18.0-RC1/docs/modules/ROOT/pages/reference/java-httpclient.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -455,7 +455,7 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../reference/java-httpclient.html">Micrometer 1.17.1</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../../reference/java-httpclient.html">Micrometer 1.17.2</a>!</p>
         </div>
       </td>
     </tr></tbody>
@@ -548,6 +548,46 @@ The version is not needed for this dependency since it is defined by the BOM.
 </div>
 </div>
 <div class="paragraph">
+<p>When using an <code>ObservationRegistry</code>, you can customize the tags produced by the instrumentation with an <code>HttpClientObservationConvention</code>.
+Extend <code>DefaultHttpClientObservationConvention</code> and add to its low-cardinality key values to retain the default tags.
+For example, the following convention adds the request host as a low-cardinality <code>clientName</code> tag.
+Only use the request host as a low-cardinality tag when the client calls a bounded set of hosts.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static class ClientNameObservationConvention extends DefaultHttpClientObservationConvention {
+
+    @Override
+    public KeyValues getLowCardinalityKeyValues(HttpClientContext context) {
+        HttpRequest.Builder requestBuilder = context.getCarrier();
+        if (requestBuilder == null) {
+            return super.getLowCardinalityKeyValues(context);
+        }
+        String host = requestBuilder.build().uri().getHost();
+        return super.getLowCardinalityKeyValues(context).and("clientName", host != null ? host : "UNKNOWN");
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pass the custom convention to the instrumentation builder together with the <code>ObservationRegistry</code>.
+The following example creates a registry and registers a <code>DefaultMeterObservationHandler</code> to record metrics.
+If your framework already provides an <code>ObservationRegistry</code> configured to record metrics, you can use that registry instead.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ObservationRegistry observationRegistry = ObservationRegistry.create();
+observationRegistry.observationConfig()
+    .observationHandler(DefaultMeterObservationHandler.builder(meterRegistry).build());
+
+HttpClient observedClient = MicrometerHttpClient.instrumentationBuilder(httpClient, meterRegistry)
+    .observationRegistry(observationRegistry)
+    .customObservationConvention(new ClientNameObservationConvention())
+    .build();</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>Alternatively, if you are not using an <code>ObservationRegistry</code>, you can instrument with only a <code>MeterRegistry</code> as follows:</p>
 </div>
 <div class="listingblock">
@@ -587,12 +627,12 @@ The version is not needed for this dependency since it is defined by the BOM.
                           <ul class="versions">
   <li class="version">
     <a href="../../reference/java-httpclient.html">
-      1.17.1
+      1.17.2
     </a>
   </li>
   <li class="version">
     <a href="../../1.16/reference/java-httpclient.html">
-      1.16.7
+      1.16.8
     </a>
   </li>
   <li class="version">
@@ -626,7 +666,7 @@ The version is not needed for this dependency since it is defined by the BOM.
                           <ul class="versions">
   <li class="version">
     <a href="java-httpclient.html">
-      1.18.0-M2
+      1.18.0-RC1
     </a>
   </li>
 </ul>                        </div>
@@ -645,12 +685,12 @@ The version is not needed for this dependency since it is defined by the BOM.
   </li>
   <li class="version">
     <a href="../../1.17-SNAPSHOT/reference/java-httpclient.html">
-      1.17.2-SNAPSHOT
+      1.17.3-SNAPSHOT
     </a>
   </li>
   <li class="version">
     <a href="../../1.16-SNAPSHOT/reference/java-httpclient.html">
-      1.16.8-SNAPSHOT
+      1.16.9-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -735,6 +775,6 @@ The version is not needed for this dependency since it is defined by the BOM.
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.18.0-M2" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.18.0-RC1" data-page-component="micrometer"></script>
   </body>
 </html>

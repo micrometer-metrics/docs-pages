@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.17.1">
+    <meta name="version" content="1.17.2">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="true">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.17.1">
+<div class="nav-container" data-component="micrometer" data-version="1.17.2">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.17.1</span>
+  <span class="version">1.17.2</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -406,7 +406,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.17.1/docs/modules/ROOT/pages/concepts/high-cardinality-tags-detector.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.17.2/docs/modules/ROOT/pages/concepts/high-cardinality-tags-detector.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -635,7 +635,7 @@ For more information on tag naming best practices, see <a href="naming.html#_tag
 <div class="sect2">
 <h3 id="_scheduled_monitoring"><a class="anchor" href="#_scheduled_monitoring"></a>Scheduled Monitoring</h3>
 <div class="paragraph">
-<p>For continuous monitoring in production, you don&#8217;t need to create a scheduled job that periodically calls the detector. The detector has a built in scheduler, but you don&#8217;t need to manage that one either (by calling <code>start()</code> and <code>close()</code>). Instead you can configure the detector through the <code>MeterRegistry</code> so that the detector is automatically started and managed by the registry for you. See the various configuration options with the registry above.</p>
+<p>For continuous monitoring in production, you don&#8217;t need to create a scheduled job that periodically calls the detector. The detector has a built-in scheduler, but you don&#8217;t need to manage that one either (by calling <code>start()</code> and <code>close()</code>). Instead you can configure the detector through the <code>MeterRegistry</code> so that the detector is automatically started and managed by the registry for you. See the various configuration options with the registry above.</p>
 </div>
 </div>
 <div class="sect2">
@@ -733,7 +733,7 @@ For more information on tag naming best practices, see <a href="naming.html#_tag
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<code>age</code> and <code>status</code> are not necessarily high cardinality data since they are usually fall into a finite set of values (except if input is not validated and <code>age=12345</code> and <code>status=54321</code> are possible to send to the app). The normalization techniques to reduce cardinality are still valid though.
+<code>age</code> and <code>status</code> are not necessarily high cardinality data since they usually fall into a finite set of values (except if input is not validated and <code>age=12345</code> and <code>status=54321</code> are possible to send to the app). The normalization techniques to reduce cardinality are still valid though.
 </td>
 </tr>
 </table>
@@ -881,12 +881,12 @@ In the code above, instead of <code>MeterFilter.deny()</code>, you can implement
                           <ul class="versions">
   <li class="version">
     <a href="high-cardinality-tags-detector.html">
-      1.17.1
+      1.17.2
     </a>
   </li>
   <li class="version">
     <a href="../1.16/concepts/high-cardinality-tags-detector.html">
-      1.16.7
+      1.16.8
     </a>
   </li>
   <li class="version">
@@ -920,7 +920,7 @@ In the code above, instead of <code>MeterFilter.deny()</code>, you can implement
                           <ul class="versions">
   <li class="version">
     <a href="../1.18/concepts/high-cardinality-tags-detector.html">
-      1.18.0-M2
+      1.18.0-RC1
     </a>
   </li>
 </ul>                        </div>
@@ -939,12 +939,12 @@ In the code above, instead of <code>MeterFilter.deny()</code>, you can implement
   </li>
   <li class="version">
     <a href="../1.17-SNAPSHOT/concepts/high-cardinality-tags-detector.html">
-      1.17.2-SNAPSHOT
+      1.17.3-SNAPSHOT
     </a>
   </li>
   <li class="version">
     <a href="../1.16-SNAPSHOT/concepts/high-cardinality-tags-detector.html">
-      1.16.8-SNAPSHOT
+      1.16.9-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -1029,6 +1029,6 @@ In the code above, instead of <code>MeterFilter.deny()</code>, you can implement
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.17.1" data-page-component="micrometer"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.17.2" data-page-component="micrometer"></script>
   </body>
 </html>

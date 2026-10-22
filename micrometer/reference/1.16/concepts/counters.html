@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.16.7">
+    <meta name="version" content="1.16.8">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.16.7">
+<div class="nav-container" data-component="micrometer" data-version="1.16.8">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.16.7</span>
+  <span class="version">1.16.8</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -406,7 +406,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.7/docs/modules/ROOT/pages/concepts/counters.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.8/docs/modules/ROOT/pages/concepts/counters.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -458,7 +458,7 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p> For the latest stable version, please use <a href="../../concepts/counters.html">Micrometer 1.17.1</a>!</p>
+          <p> For the latest stable version, please use <a href="../../concepts/counters.html">Micrometer 1.17.2</a>!</p>
         </div>
       </td>
     </tr></tbody>
@@ -595,83 +595,6 @@ public class ExampleService {
 }</code></pre>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_metertag_on_method_parameters"><a class="anchor" href="#_metertag_on_method_parameters"></a>@MeterTag on Method Parameters</h3>
-<div class="paragraph">
-<p>To support using the <code>@MeterTag</code> annotation on method parameters, you need to configure the <code>@CountedAspect</code> to add the <code>CountedMeterTagAnnotationHandler</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ValueResolver valueResolver = parameter -&gt; "Value from myCustomTagValueResolver [" + parameter + "]";
-
-// Example of a ValueExpressionResolver that uses Spring Expression Language
-ValueExpressionResolver valueExpressionResolver = new SpelValueExpressionResolver();
-
-
-// Setting the handler on the aspect
-countedAspect.setMeterTagAnnotationHandler(
-        new CountedMeterTagAnnotationHandler(aClass -&gt; valueResolver, aClass -&gt; valueExpressionResolver));</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s assume that we have the following interface.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">interface MeterTagClassInterface {
-
-    @Counted
-    void getAnnotationForTagValueResolver(@MeterTag(key = "test", resolver = ValueResolver.class) String test);
-
-    @Counted
-    void getAnnotationForTagValueExpression(
-            @MeterTag(key = "test", expression = "'hello' + ' characters'") String test);
-
-    @Counted
-    void getAnnotationForArgumentToString(@MeterTag("test") Long param);
-
-    @Counted
-    void getMultipleAnnotationsForTagValueExpression(
-            @MeterTag(key = "value1", expression = "'value1: ' + value1") @MeterTag(key = "value2",
-                    expression = "'value2: ' + value2") DataHolder param);
-
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>When its implementations would be called with different arguments (remember that the implementation needs to be annotated with <code>@Counted</code> annotation too), the following counters would be created:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Example for returning &lt;toString()&gt; on the parameter
-service.getAnnotationForArgumentToString(15L);
-
-assertThat(registry.get("method.counted").tag("test", "15").counter().count()).isEqualTo(1);
-
-// Example for calling the provided &lt;ValueResolver&gt; on the parameter
-service.getAnnotationForTagValueResolver("foo");
-
-assertThat(registry.get("method.counted")
-    .tag("test", "Value from myCustomTagValueResolver [foo]")
-    .counter()
-    .count()).isEqualTo(1);
-
-// Example for calling the provided &lt;ValueExpressionResolver&gt;
-service.getAnnotationForTagValueExpression("15L");
-
-assertThat(registry.get("method.counted").tag("test", "hello characters").counter().count()).isEqualTo(1);
-
-// Example for using multiple @MeterTag annotations on the same parameter
-// @MeterTags({ @MeterTag(...), @MeterTag(...) }) can be also used
-service.getMultipleAnnotationsForTagValueExpression(new DataHolder("zxe", "qwe"));
-
-assertThat(registry.get("method.counted")
-    .tag("value1", "value1: zxe")
-    .tag("value2", "value2: qwe")
-    .counter()
-    .count()).isEqualTo(1);</code></pre>
-</div>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -683,6 +606,159 @@ assertThat(registry.get("method.counted")
 </td>
 </tr>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_the_metertag_annotation"><a class="anchor" href="#_the_metertag_annotation"></a>The <code>@MeterTag</code> Annotation</h3>
+<div class="paragraph">
+<p>The <code>@MeterTag</code> annotation can be used on:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Method parameters (to add information about the given parameter)</p>
+</li>
+<li>
+<p>Methods (to add information about the returned value/object of the given method)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To support using the <code>@MeterTag</code> annotation, you need to configure the <code>@CountedAspect</code> to add the <code>CountedMeterTagAnnotationHandler</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ValueResolver valueResolver = parameter -&gt; "Value from myCustomTagValueResolver [" + parameter + "]";
+
+// Example of a custom ValueExpressionResolver
+ValueExpressionResolver valueExpressionResolver = new CustomValueExpressionResolver();
+
+
+// Setting the handler on the aspect
+countedAspect.setMeterTagAnnotationHandler(
+        new CountedMeterTagAnnotationHandler(aClass -&gt; valueResolver, aClass -&gt; valueExpressionResolver));</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>CustomValueExpressionResolver</code> is a sample implementation of <code>ValueExpressionResolver</code> for documentation purposes. Micrometer does not provide this class. An implementation is required to use <code>@MeterTag</code> expressions.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_metertag_on_method_parameters"><a class="anchor" href="#_metertag_on_method_parameters"></a><code>@MeterTag</code> on Method Parameters</h4>
+<div class="paragraph">
+<p>When the <code>@MeterTag</code> annotation is placed on a method parameter, it enables you to add one or more <code>Tag</code> to the <code>Counter</code> created by <code>@Counted</code> using the given method parameter.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume we have an interface with the following methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Counted
+void getAnnotationForArgumentToString(@MeterTag("test") Long param);
+
+@Counted
+void getAnnotationForTagValueResolver(@MeterTag(key = "test", resolver = ValueResolver.class) String test);
+
+@Counted
+void getAnnotationForTagValueExpression(
+        @MeterTag(key = "test", expression = "'hello' + ' characters'") String test);
+
+@Counted
+void getMultipleAnnotationsForTagValueExpression(
+        @MeterTag(key = "value1", expression = "'value1: ' + value1") @MeterTag(key = "value2",
+                expression = "'value2: ' + value2") DataHolder param);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When its implementations would be called with different arguments (remember that the implementation needs to be annotated with <code>@Counted</code> annotation too), the following counters would be created:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Example for returning &lt;toString()&gt; on the parameter
+service.getAnnotationForArgumentToString(15L);
+assertThat(registry.get("method.counted").tag("test", "15").counter().count()).isEqualTo(1);
+
+// Example for calling the provided &lt;ValueResolver&gt; on the parameter
+service.getAnnotationForTagValueResolver("foo");
+assertThat(registry.get("method.counted")
+    .tag("test", "Value from myCustomTagValueResolver [foo]")
+    .counter()
+    .count()).isEqualTo(1);
+
+// Example for calling the provided &lt;ValueExpressionResolver&gt;
+service.getAnnotationForTagValueExpression("15L");
+assertThat(registry.get("method.counted").tag("test", "hello characters").counter().count()).isEqualTo(1);
+
+// Example for using multiple @MeterTag annotations on the same parameter
+// @MeterTags({ @MeterTag(...), @MeterTag(...) }) can be also used
+service.getMultipleAnnotationsForTagValueExpression(new DataHolder("zxe", "qwe"));
+assertThat(registry.get("method.counted")
+    .tag("value1", "value1: zxe")
+    .tag("value2", "value2: qwe")
+    .counter()
+    .count()).isEqualTo(1);</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Please make sure that the attached <code>Tag</code> values are sanitized/normalized so that they are low-cardinality values.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_metertag_on_methods"><a class="anchor" href="#_metertag_on_methods"></a><code>@MeterTag</code> on Methods</h4>
+<div class="paragraph">
+<p>When the <code>@MeterTag</code> annotation is placed on a method, it enables you to add one or more <code>Tag</code> to the <code>Counter</code> created by <code>@Counted</code> using the returned value/object of the given method.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume we have an interface with the following method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Counted
+@MeterTag("returnValue")
+String getAnnotationForReturnValueToString();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When its implementations would be called (remember that the implementation needs to be annotated with <code>@Counted</code> annotation too), the following counter would be created:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Example for returning &lt;toString()&gt; on the returned value/object
+String returnValue = service.getAnnotationForReturnValueToString();
+assertThat(registry.get("method.counted").tag("returnValue", returnValue).counter().count()).isEqualTo(1);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The previous examples (using a resolver, defining an expression, or using multiple annotations) also work when <code>@MeterTag</code> is placed on a method.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Please make sure that the attached <code>Tag</code> values are sanitized/normalized so that they are low-cardinality values.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -789,12 +865,12 @@ Attempting to construct a function-tracking counter with a primitive number or o
                           <ul class="versions">
   <li class="version">
     <a href="../../concepts/counters.html">
-      1.17.1
+      1.17.2
     </a>
   </li>
   <li class="version">
     <a href="counters.html">
-      1.16.7
+      1.16.8
     </a>
   </li>
   <li class="version">
@@ -828,7 +904,7 @@ Attempting to construct a function-tracking counter with a primitive number or o
                           <ul class="versions">
   <li class="version">
     <a href="../../1.18/concepts/counters.html">
-      1.18.0-M2
+      1.18.0-RC1
     </a>
   </li>
 </ul>                        </div>
@@ -847,12 +923,12 @@ Attempting to construct a function-tracking counter with a primitive number or o
   </li>
   <li class="version">
     <a href="../../1.17-SNAPSHOT/concepts/counters.html">
-      1.17.2-SNAPSHOT
+      1.17.3-SNAPSHOT
     </a>
   </li>
   <li class="version">
     <a href="../../1.16-SNAPSHOT/concepts/counters.html">
-      1.16.8-SNAPSHOT
+      1.16.9-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -937,6 +1013,6 @@ Attempting to construct a function-tracking counter with a primitive number or o
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.16.7" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.16.8" data-page-component="micrometer"></script>
   </body>
 </html>

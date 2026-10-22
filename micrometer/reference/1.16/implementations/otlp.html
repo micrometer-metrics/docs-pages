@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.16.7">
+    <meta name="version" content="1.16.8">
     <meta name="component" content="micrometer">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="micrometer" data-version="1.16.7">
+<div class="nav-container" data-component="micrometer" data-version="1.16.8">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer</span>
-  <span class="version">1.16.7</span>
+  <span class="version">1.16.8</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -406,7 +406,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.7/docs/modules/ROOT/pages/implementations/otlp.adoc">
+        <a href="https://github.com/micrometer-metrics/micrometer/blob/v1.16.8/docs/modules/ROOT/pages/implementations/otlp.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -458,7 +458,7 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p> For the latest stable version, please use <a href="../../implementations/otlp.html">Micrometer 1.17.1</a>!</p>
+          <p> For the latest stable version, please use <a href="../../implementations/otlp.html">Micrometer 1.17.2</a>!</p>
         </div>
       </td>
     </tr></tbody>
@@ -579,7 +579,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 <p><code>aggregationTemporality</code> - <a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality" target="_blank" rel="noopener">Aggregation temporality</a> determines how the additive quantities are expressed, in relation to time. The environment variable <code>OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE</code> is supported by the default implementation. The supported values are <code>cumulative</code> or <code>delta</code>. Defaults to <code>cumulative</code>.</p>
 </li>
 <li>
-<p><code>headers</code> - Additional headers to send with exported metrics. This can be used for authorization headers. By default, headers are loaded from the config. If that is not set, they can be taken from the environment variables <code>OTEL_EXPORTER_OTLP_HEADERS</code> and <code>OTEL_EXPORTER_OTLP_METRICS_HEADERS</code>. If a header is set in both the environmental variables, the header in the latter overrides the former.</p>
+<p><code>headers</code> - Additional headers to send with exported metrics. This can be used for authorization headers. By default, headers are loaded from the config. If that is not set, they can be taken from the environment variables <code>OTEL_EXPORTER_OTLP_HEADERS</code> and <code>OTEL_EXPORTER_OTLP_METRICS_HEADERS</code>. If a header is set in both the environment variables, the header in the latter overrides the former.</p>
 </li>
 <li>
 <p><code>step</code> - the interval at which metrics will be published. The environment variable <code>OTEL_METRIC_EXPORT_INTERVAL</code> is supported by the default implementation. If a value is not provided, defaults to 1 minute.</p>
@@ -620,7 +620,7 @@ MeterRegistry registry = new OtlpMeterRegistry(otlpConfig, Clock.SYSTEM);</code>
 </tbody>
 </table>
 <div class="paragraph">
-<p>If this config is empty, resource attributes are loaded from the <code>OTEL_RESOURCE_ATTRIBUTES</code> environmental variable. You can override <code>service.name</code> by setting the <code>OTEL_SERVICE_NAME</code> environmental variable, and this takes precedence over other configs.</p>
+<p>If this config is empty, resource attributes are loaded from the <code>OTEL_RESOURCE_ATTRIBUTES</code> environment variable. You can override <code>service.name</code> by setting the <code>OTEL_SERVICE_NAME</code> environment variable, and this takes precedence over other configs.</p>
 </div>
 </div>
 </div>
@@ -797,7 +797,7 @@ When the implementation is the exponential histogram, additional configuration a
 </ol>
 </div>
 <div class="paragraph">
-<p>Since Exponential Histogram cannot have custom SLO&#8217;s specified, an explicit bucket histogram is used whenever <code>serviceLevelObjectives</code> are configured.</p>
+<p>Since Exponential Histogram cannot have custom SLOs specified, an explicit bucket histogram is used whenever <code>serviceLevelObjectives</code> are configured.</p>
 </div>
 <div class="sect2">
 <h3 id="_configuration_with_spring_boot"><a class="anchor" href="#_configuration_with_spring_boot"></a>5.1. Configuration with Spring Boot</h3>
@@ -861,12 +861,12 @@ When the implementation is the exponential histogram, additional configuration a
                           <ul class="versions">
   <li class="version">
     <a href="../../implementations/otlp.html">
-      1.17.1
+      1.17.2
     </a>
   </li>
   <li class="version">
     <a href="otlp.html">
-      1.16.7
+      1.16.8
     </a>
   </li>
   <li class="version">
@@ -900,7 +900,7 @@ When the implementation is the exponential histogram, additional configuration a
                           <ul class="versions">
   <li class="version">
     <a href="../../1.18/implementations/otlp.html">
-      1.18.0-M2
+      1.18.0-RC1
     </a>
   </li>
 </ul>                        </div>
@@ -919,12 +919,12 @@ When the implementation is the exponential histogram, additional configuration a
   </li>
   <li class="version">
     <a href="../../1.17-SNAPSHOT/implementations/otlp.html">
-      1.17.2-SNAPSHOT
+      1.17.3-SNAPSHOT
     </a>
   </li>
   <li class="version">
     <a href="../../1.16-SNAPSHOT/implementations/otlp.html">
-      1.16.8-SNAPSHOT
+      1.16.9-SNAPSHOT
     </a>
   </li>
   <li class="version">
@@ -1009,6 +1009,6 @@ When the implementation is the exponential histogram, additional configuration a
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.16.7" data-page-component="micrometer"></script>
+<script async id="search-script" src="../../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../../_/css/vendor/search.css" data-page-version="1.16.8" data-page-component="micrometer"></script>
   </body>
 </html>
