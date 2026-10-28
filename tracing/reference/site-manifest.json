@@ -1,6 +1,6 @@
 {
   "$id": "https://schemas.antora.org/site-manifest/1-0-0/draft-01",
-  "generated": "2026-10-23T04:29:52.828Z",
+  "generated": "2026-10-28T12:20:01.934Z",
   "url": "https://docs.micrometer.io/tracing/reference",
   "components": {
     "tracing": {
@@ -26,6 +26,11 @@
               "path": "configuring.adoc",
               "url": "/1.8-SNAPSHOT/configuring.html",
               "title": "Configuring with Micrometer Observation"
+            },
+            {
+              "path": "context-contracts.adoc",
+              "url": "/1.8-SNAPSHOT/context-contracts.html",
+              "title": "Span and Baggage Scopes"
             },
             {
               "path": "glossary.adoc",
