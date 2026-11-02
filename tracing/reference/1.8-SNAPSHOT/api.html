@@ -543,6 +543,50 @@ For Brave, remember to set up the <code>PropagationFactory</code> so that it con
 </div>
 </div>
 <div class="sect2">
+<h3 id="_baggage_tags"><a class="anchor" href="#_baggage_tags"></a>Baggage Tags</h3>
+<div class="paragraph">
+<p>Both the Brave and OpenTelemetry bridges support copying configured baggage values to span tags.
+Configure the desired field names through the <code>tagFields</code> constructor argument of <code>BraveBaggageManager</code> or <code>OtelBaggageManager</code>.
+Names are matched case-insensitively.
+Remote propagation and span tagging are configured separately: configuring a remote field does not by itself configure a span tag.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+With Brave, a tag field must also be registered as a baggage field in the <code>BaggagePropagation</code> factory, as shown in the Brave setup example above.
+If it is not registered, the value cannot be stored and the span is silently not tagged.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When a span is in scope, <code>createBaggageInScope(name, value)</code> applies the value as a tag to that span if the field is configured for tagging.
+Retrieving baggage with <code>getBaggage(&#8230;&#8203;)</code>, reading its value with <code>get()</code>, and activating an existing baggage handle with <code>makeCurrent()</code> do not tag the span.</p>
+</div>
+<div class="paragraph">
+<p>For example, with <code>locale</code> configured as a tag field and a span already in scope:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">try (BaggageInScope baggage = tracer.createBaggageInScope("locale", "fr-FR")) {
+    // The span is tagged with locale=fr-FR, and the baggage is available here.
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Closing the baggage scope restores the previous baggage; it does not restore the span&#8217;s previous tag value.
+If a nested baggage scope changes the same tag, that tag retains the nested value after the scope closes.</p>
+</div>
+<div class="paragraph">
+<p>With OpenTelemetry, configure a <code>BaggageTaggingSpanProcessor</code> on the <code>SdkTracerProvider</code> to tag spans with baggage already present when they start.
+This covers baggage extracted from incoming requests.</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_baggage_with_micrometer_observation_api"><a class="anchor" href="#_baggage_with_micrometer_observation_api"></a>Baggage with Micrometer Observation API</h3>
 <div class="paragraph">
 <p>If you&#8217;re using Micrometer Observation API, there&#8217;s no notion of baggage. If you set up a <code>BaggageManager</code> to have the baggage fields configured, we will assume that when the Observation gets put in scope, whatever low and high cardinality keys are set on the Observation will be put in scope as baggage (assuming that their names match with the configuration on the <code>BaggageManager</code>). Below you can find example of such setup with OpenTelemetry <code>BaggageManager</code>.</p>
