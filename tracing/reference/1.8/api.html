@@ -6,7 +6,7 @@
     <title>Using Micrometer Tracing Directly :: Micrometer Tracing</title>
     <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/api.html">
     <link rel="prev" href="reporters.html">
-    <link rel="next" href="configuring.html">
+    <link rel="next" href="context-contracts.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.8.0-RC1">
+    <meta name="version" content="1.8.0-RC2">
     <meta name="component" content="tracing">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -102,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.8.0-RC1">
+<div class="nav-container" data-component="tracing" data-version="1.8.0-RC2">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.8.0-RC1</span>
+  <span class="version">1.8.0-RC2</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -153,6 +153,9 @@
   </li>
   <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link"  href="api.html">Micrometer Tracing API</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="context-contracts.html">Span and Baggage Scopes</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link"  href="configuring.html">Micrometer Observation Configuration</a>
@@ -205,7 +208,7 @@
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.8.0-RC1/docs/modules/ROOT/pages/api.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.8.0-RC2/docs/modules/ROOT/pages/api.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -540,6 +543,50 @@ For Brave, remember to set up the <code>PropagationFactory</code> so that it con
 </div>
 </div>
 <div class="sect2">
+<h3 id="_baggage_tags"><a class="anchor" href="#_baggage_tags"></a>Baggage Tags</h3>
+<div class="paragraph">
+<p>Both the Brave and OpenTelemetry bridges support copying configured baggage values to span tags.
+Configure the desired field names through the <code>tagFields</code> constructor argument of <code>BraveBaggageManager</code> or <code>OtelBaggageManager</code>.
+Names are matched case-insensitively.
+Remote propagation and span tagging are configured separately: configuring a remote field does not by itself configure a span tag.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+With Brave, a tag field must also be registered as a baggage field in the <code>BaggagePropagation</code> factory, as shown in the Brave setup example above.
+If it is not registered, the value cannot be stored and the span is silently not tagged.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When a span is in scope, <code>createBaggageInScope(name, value)</code> applies the value as a tag to that span if the field is configured for tagging.
+Retrieving baggage with <code>getBaggage(&#8230;&#8203;)</code>, reading its value with <code>get()</code>, and activating an existing baggage handle with <code>makeCurrent()</code> do not tag the span.</p>
+</div>
+<div class="paragraph">
+<p>For example, with <code>locale</code> configured as a tag field and a span already in scope:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">try (BaggageInScope baggage = tracer.createBaggageInScope("locale", "fr-FR")) {
+    // The span is tagged with locale=fr-FR, and the baggage is available here.
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Closing the baggage scope restores the previous baggage; it does not restore the span&#8217;s previous tag value.
+If a nested baggage scope changes the same tag, that tag retains the nested value after the scope closes.</p>
+</div>
+<div class="paragraph">
+<p>With OpenTelemetry, configure a <code>BaggageTaggingSpanProcessor</code> on the <code>SdkTracerProvider</code> to tag spans with baggage already present when they start.
+This covers baggage extracted from incoming requests.</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_baggage_with_micrometer_observation_api"><a class="anchor" href="#_baggage_with_micrometer_observation_api"></a>Baggage with Micrometer Observation API</h3>
 <div class="paragraph">
 <p>If you&#8217;re using Micrometer Observation API, there&#8217;s no notion of baggage. If you set up a <code>BaggageManager</code> to have the baggage fields configured, we will assume that when the Observation gets put in scope, whatever low and high cardinality keys are set on the Observation will be put in scope as baggage (assuming that their names match with the configuration on the <code>BaggageManager</code>). Below you can find example of such setup with OpenTelemetry <code>BaggageManager</code>.</p>
@@ -758,7 +805,7 @@ span.end();</code></pre>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="reporters.html">Supported Reporters</a></span>
-  <span class="next"><a href="configuring.html">Micrometer Observation Configuration</a></span>
+  <span class="next"><a href="context-contracts.html">Span and Baggage Scopes</a></span>
 </nav>
 </article>  </div>
 </main>
@@ -825,7 +872,7 @@ span.end();</code></pre>
                           <ul class="versions">
   <li class="version">
     <a href="api.html">
-      1.8.0-RC1
+      1.8.0-RC2
     </a>
   </li>
 </ul>                        </div>
@@ -934,6 +981,6 @@ span.end();</code></pre>
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.8.0-RC1" data-page-component="tracing"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.8.0-RC2" data-page-component="tracing"></script>
   </body>
 </html>
