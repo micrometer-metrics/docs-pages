@@ -667,6 +667,10 @@ Use <code>overwrite=true</code> when each registration represents a new snapshot
 Use <code>overwrite=false</code> when existing rows should remain unchanged on later registrations with the same tags.
 Rows that are no longer present in the new registration are removed.</p>
 </div>
+<div class="paragraph">
+<p>Keep a reference to the <code>MultiGauge</code> (for example, in a field) for as long as its rows should be reported, even if you register rows only once.
+Rows are not guaranteed to keep reporting values after the <code>MultiGauge</code> has been garbage collected, even if the objects that the rows observe are still referenced.</p>
+</div>
 </div>
 </div>
 <nav class="pagination">
