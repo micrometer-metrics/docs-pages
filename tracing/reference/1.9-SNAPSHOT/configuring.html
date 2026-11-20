@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Span and Baggage Scopes :: Micrometer Tracing</title>
-    <link rel="prev" href="api.html">
-    <link rel="next" href="configuring.html">
+    <title>Configuring with Micrometer Observation :: Micrometer Tracing</title>
+    <link rel="canonical" href="https://docs.micrometer.io/tracing/reference/configuring.html">
+    <link rel="prev" href="context-contracts.html">
+    <link rel="next" href="testing.html">
     <meta name="generator" content="Antora 3.2.0-alpha.2">
     <script>
 !function (theme, navWidth) {
@@ -20,7 +21,7 @@
     <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
 
     <meta name="antora-ui-version" content="008f3e9bb4d53d3937a881333fe4f766c80f859d"> 
-    <meta name="version" content="1.8.0-RC2">
+    <meta name="version" content="1.9.0">
     <meta name="component" content="tracing">
     <meta name="latest-version" content="false">
     <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
@@ -101,14 +102,14 @@
 }(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)') && 'dark'))
 </script>
 <div class="body">
-<div class="nav-container" data-component="tracing" data-version="1.8.0-RC2">
+<div class="nav-container" data-component="tracing" data-version="1.9.0">
   <aside class="nav">
     <div class="panels">
       <div class="nav-panel-menu is-active" data-panel="menu">
         <nav class="nav-menu">
 <div class="context">
   <span class="title">Micrometer Tracing</span>
-  <span class="version">1.8.0-RC2</span>
+  <span class="version">1.9.0-SNAPSHOT</span>
   <button class="browse-version" id="browse-version">
     <svg
       height="24px"
@@ -153,10 +154,10 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link"  href="api.html">Micrometer Tracing API</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link"  href="context-contracts.html">Span and Baggage Scopes</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link"  href="configuring.html">Micrometer Observation Configuration</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -201,13 +202,13 @@
   <div class="content">
     <div
       class="toc"
-      data-title="Span and Baggage Scopes"
+      data-title="Configuring with Micrometer Observation"
       data-levels="2"
     >
       <div class="toc-menu"></div>
     </div>
     <div class="sidebar-links">
-        <a href="https://github.com/micrometer-metrics/tracing/blob/v1.8.0-RC2/docs/modules/ROOT/pages/context-contracts.adoc">
+        <a href="https://github.com/micrometer-metrics/tracing/edit/main/docs/modules/ROOT/pages/configuring.adoc">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -247,7 +248,7 @@
   <nav class="breadcrumbs" aria-label="breadcrumbs">
     <ul>
       <li><a href="index.html">Micrometer Tracing</a></li>
-      <li><a href="context-contracts.html">Span and Baggage Scopes</a></li>
+      <li><a href="configuring.html">Micrometer Observation Configuration</a></li>
     </ul>
   </nav>
 </div><div class="admonitionblock important latest">
@@ -258,120 +259,198 @@
       </td>
       <td class="content">
         <div class="paragraph">
-          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../index.html">Micrometer Tracing 1.7.2</a>!</p>
+          <p>This version is still in development and is not considered stable yet. For the latest stable version, please use <a href="../configuring.html">Micrometer Tracing 1.8.0</a>!</p>
         </div>
       </td>
     </tr></tbody>
   </table>
 </div>
-<h1 id="page-title" class="page">Span and Baggage Scopes</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>A span scope makes a span current, so code can find it through <code>Tracer.currentSpan()</code>.
-A baggage scope temporarily sets a value for a named baggage entry.
-This page describes the scope behavior shared by the Brave and OpenTelemetry bridges.</p>
-</div>
-</div>
-</div>
+<h1 id="page-title" class="page">Configuring with Micrometer Observation</h1>
 <div class="sect1">
-<h2 id="_span_scopes"><a class="anchor" href="#_span_scopes"></a>Span Scopes</h2>
+<h2 id="_handler_configuration"><a class="anchor" href="#_handler_configuration"></a>Handler Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Creating a span does not make it current.
-Use <code>Tracer.withSpan(span)</code> or <code>CurrentTraceContext.newScope(span.context())</code> to put it in scope.
-Closing the scope restores the previously current span.
-Closing a span&#8217;s scope does not end that span or change its trace ID or span ID.
-You can make the same span current again by opening another scope for it.</p>
-</div>
-<div class="paragraph">
-<p>End the span separately when its work finishes, as shown in the <a href="api.html" class="xref page">Tracing API examples</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_baggage_scopes"><a class="anchor" href="#_baggage_scopes"></a>Baggage Scopes</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Baggage carries named values alongside a trace.
-Configure the baggage fields that your application uses, as described in <a href="api.html#_micrometer_tracing_baggage_api" class="xref page">the Baggage API documentation</a>.</p>
-</div>
-<div class="paragraph">
-<p>Use <code>createBaggageInScope(name, value)</code> to make a value available within a scope.
-A nested baggage scope for the same name temporarily overrides the outer value.
-Closing the nested scope restores that outer value.
-Use try-with-resources so that Java closes the scope when the block exits, including when code inside the block throws an exception.</p>
-</div>
-<div class="paragraph">
-<p>Setting one baggage entry leaves the other entries unchanged.
-For example, setting <code>locale=fr-FR</code> within a scope does not change an existing <code>report.format=pdf</code> entry.</p>
-</div>
-<div class="paragraph">
-<p>The following example uses <code>locale</code> to describe work on English and French versions of a report.
-Configure <code>locale</code> as a baggage field first.</p>
+<p>For Micrometer Tracing to work with Micrometer Observation, you need to add a tracing-related <code>ObservationHandler</code>.
+The following example shows how to add and use a single <code>DefaultTracingObservationHandler</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Span span = tracer.nextSpan().name("generate-report").start();
-try {
-    try (Tracer.SpanInScope spanScope = tracer.withSpan(span)) {
-        try (BaggageInScope english = tracer.createBaggageInScope("locale", "en-US")) {
-            // tracer.getBaggage("locale").get() returns "en-US".
-            try (BaggageInScope french = tracer.createBaggageInScope("locale", "fr-FR")) {
-                // tracer.getBaggage("locale").get() returns "fr-FR".
-            }
-            // tracer.getBaggage("locale").get() returns "en-US" again.
-        }
-        // The previous "locale" value is restored.
-    }
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Tracer tracer = Tracer.NOOP; // The real tracer will come from your tracer
+                             // implementation (Brave /
+// OTel)
+Propagator propagator = Propagator.NOOP; // The real propagator will come from
+                                         // your tracer implementation (Brave /
+                                         // OTel)
+MeterRegistry meterRegistry = new SimpleMeterRegistry();
+
+ObservationRegistry registry = ObservationRegistry.create();
+registry.observationConfig()
+    // assuming that micrometer-core is on the classpath
+    .observationHandler(new DefaultMeterObservationHandler(meterRegistry))
+    // we set up a first matching handler that creates spans - it comes from
+    // Micrometer
+    // Tracing. We set up spans for sending and receiving data over the wire
+    // and a default one
+    .observationHandler(new ObservationHandler.FirstMatchingCompositeObservationHandler(
+            new PropagatingSenderTracingObservationHandler&lt;&gt;(tracer, propagator),
+            new PropagatingReceiverTracingObservationHandler&lt;&gt;(tracer, propagator),
+            new DefaultTracingObservationHandler(tracer)));
+
+// Creating and starting a new observation
+// via the `DefaultTracingObservationHandler` that will create a new Span and
+// start it
+Observation observation = Observation.start("my.operation", registry)
+    .contextualName("This name is more readable - we can reuse it for e.g. spans")
+    .lowCardinalityKeyValue("this.tag", "will end up as a meter tag and a span tag")
+    .highCardinalityKeyValue("but.this.tag", "will end up as a span tag only");
+
+// Put the observation in scope
+// This will result in making the previously created Span, the current Span - it's
+// in ThreadLocal
+try (Observation.Scope scope = observation.openScope()) {
+    // Run your code that you want to measure - still the attached Span is the
+    // current one
+    // This means that e.g. logging frameworks could inject to e.g. MDC tracing
+    // information
+    yourCodeToMeasure();
 }
 finally {
-    span.end();
+    // The corresponding Span will no longer be in ThreadLocal due to
+    // try-with-resources block (Observation.Scope is an AutoCloseable)
+    // Stop the Observation
+    // The corresponding Span will be stopped and reported to an external system
+    observation.stop();
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>You can also use a shorter version to perform measurements by using the <code>observe</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ObservationRegistry registry = ObservationRegistry.create();
+
+Observation.createNotStarted("my.operation", registry)
+    .contextualName("This name is more readable - we can reuse it for e.g. spans")
+    .lowCardinalityKeyValue("this.tag", "will end up as a meter tag and a span tag")
+    .highCardinalityKeyValue("but.this.tag", "will end up as a span tag only")
+    .observe(this::yourCodeToMeasure);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will result in the following Micrometer Metrics:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Gathered the following metrics
+    Meter with name &lt;my.operation&gt; and type &lt;TIMER&gt; has the following measurements
+        &lt;[
+            Measurement{statistic='COUNT', value=1.0},
+            Measurement{statistic='TOTAL_TIME', value=1.011949454},
+            Measurement{statistic='MAX', value=1.011949454}
+        ]&gt;
+        and has the following tags &lt;[tag(this.tag=will end up as a meter tag and a span tag)]&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It also results in the following trace view in (for example) Zipkin:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tracing/zipkin.jpg" alt="Trace Info propagation">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ordered_handler_configuration"><a class="anchor" href="#_ordered_handler_configuration"></a>Ordered Handler Configuration</h3>
+<div class="paragraph">
+<p>Micrometer Tracing comes with multiple <code>ObservationHandler</code> implementations.
+To introduce ordering, you can use the <code>ObservationHandler.AllMatchingCompositeObservationHandler</code> to run logic for all <code>ObservationHandler</code> instances that match the given predicate and <code>ObservationHandler</code>. Use <code>FirstMatchingCompositeObservationHandler</code> to run logic only for the first <code>ObservationHandler</code> that matches the predicate.
+The former can group handlers and the latter can be chosen to (for example) run only one matching <code>TracingObservationHandler</code>.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_baggage_retained_by_a_span"><a class="anchor" href="#_baggage_retained_by_a_span"></a>Baggage Retained by a Span</h2>
+<h2 id="_context_propagation_with_micrometer_tracing"><a class="anchor" href="#_context_propagation_with_micrometer_tracing"></a>Context Propagation with Micrometer Tracing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Baggage extracted from an incoming request is retained with the receiving span.
-Whenever you put that span in scope, its retained baggage is available through <code>tracer.getBaggage(&#8230;&#8203;)</code>.
-For example, if the request supplied <code>locale=en-US</code>, closing a baggage scope that temporarily sets <code>locale=fr-FR</code> restores <code>locale=en-US</code>.
-If you close the span&#8217;s scope and later open a new scope for the same span, <code>tracer.getBaggage("locale").get()</code> returns <code>en-US</code> again.</p>
+<p>To make <a href="https://docs.micrometer.io/context-propagation/reference/">Context Propagation</a> work with Micrometer Tracing, you need to manually register the proper <code>ThreadLocalAccessor</code>, as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ContextRegistry.getInstance().registerThreadLocalAccessor(new ObservationAwareSpanThreadLocalAccessor(tracer));
+ContextRegistry.getInstance()
+    .registerThreadLocalAccessor(new ObservationAwareBaggageThreadLocalAccessor(registry, tracer));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ObservationAwareSpanThreadLocalAccessor</code> is required to propagate manually created spans (not the ones that are governed by Observations). The <code>ObservationAwareBaggageThreadLocalAccessor</code> is required to propagate baggage created by the user.</p>
+</div>
+<div class="paragraph">
+<p>With Project Reactor one should set the values of <code>Observation</code>, <code>Span</code> or <code>BaggageToPropagate</code> in the Reactor Context as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// Setup example
+ContextRegistry contextRegistry = ContextRegistry.getInstance();
+
+ObservationAwareSpanThreadLocalAccessor accessor;
+
+ObservationAwareBaggageThreadLocalAccessor observationAwareBaggageThreadLocalAccessor;
+
+
+accessor = new ObservationAwareSpanThreadLocalAccessor(observationRegistry, getTracer());
+observationAwareBaggageThreadLocalAccessor = new ObservationAwareBaggageThreadLocalAccessor(observationRegistry,
+        getTracer());
+contextRegistry.loadThreadLocalAccessors()
+    .registerThreadLocalAccessor(accessor)
+    .registerThreadLocalAccessor(observationAwareBaggageThreadLocalAccessor);
+Hooks.enableAutomaticContextPropagation();
+
+// Usage example
+Hooks.enableAutomaticContextPropagation();
+Observation observation = Observation.start("parent", observationRegistry);
+
+List&lt;String&gt; hello = Mono.just("hello")
+    .subscribeOn(Schedulers.single())
+    .flatMap(s -&gt; {
+        Mono&lt;List&lt;String&gt;&gt; mono = Mono.defer(() -&gt; Mono.just(Arrays.asList(
+            getTracer().getBaggage("tenant").get(),
+            getTracer().getBaggage("tenant2").get())
+        ));
+    return mono.subscribeOn(Schedulers.parallel())
+        .contextWrite(ReactorBaggage.append("tenant", s + ":baggage")); // Appends baggage to existing one (tenant2:baggage2)
+})
+    .contextWrite(Context.of(ObservationThreadLocalAccessor.KEY, observation, // Puts observation to Reactor Context
+            ObservationAwareBaggageThreadLocalAccessor.KEY, new BaggageToPropagate("tenant2", "baggage2") // Puts baggage to Reactor Context
+        ))
+    .block();</code></pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_baggage_associated_with_an_explicit_trace_context"><a class="anchor" href="#_baggage_associated_with_an_explicit_trace_context"></a>Baggage Associated with an Explicit Trace Context</h2>
+<h2 id="_exemplars"><a class="anchor" href="#_exemplars"></a>Exemplars</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>createBaggageInScope(traceContext, name, value)</code> temporarily associates a value with the supplied trace context, including when that span is not current.
-Opening this baggage scope does not make the associated span current.
-Closing it restores the preceding baggage association.</p>
+<p>To add support for <a href="https://grafana.com/docs/grafana/latest/fundamentals/exemplars/">exemplars</a> instead of using the <code>DefaultMeterObservationHandler</code> you should use the <code>TracingAwareMeterObservationHandler</code>, as follows:</p>
 </div>
-<div class="paragraph">
-<p>The association can be read through an explicit-context baggage lookup on another thread while the baggage scope is open.
-This does not transfer the scope to that thread or provide isolation for overlapping baggage updates to the same trace context.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">ObservationRegistry registry = ObservationRegistry.create();
+registry.observationConfig()
+    // Don't register the DefaultMeterObservationHandler...
+    // .observationHandler(new DefaultMeterObservationHandler(meterRegistry))
+    // ...instead register the tracing aware version
+    .observationHandler(new TracingAwareMeterObservationHandler&lt;&gt;(
+            new DefaultMeterObservationHandler(meterRegistry), tracer));</code></pre>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_context_propagation"><a class="anchor" href="#_context_propagation"></a>Context Propagation</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>When continuing work on another thread, use the <a href="api.html" class="xref page">span continuation API</a> or <a href="https://docs.micrometer.io/context-propagation/reference/">Micrometer Context Propagation</a> to make the appropriate span and baggage current for that work.</p>
-</div>
-<div class="paragraph">
-<p>You must close each scope you open on the same thread that opened it.
-Close nested scopes in reverse order, as try-with-resources does in the example above.</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="api.html">Micrometer Tracing API</a></span>
-  <span class="next"><a href="configuring.html">Micrometer Observation Configuration</a></span>
+  <span class="prev"><a href="context-contracts.html">Span and Baggage Scopes</a></span>
+  <span class="next"><a href="testing.html">Testing</a></span>
 </nav>
 </article>  </div>
 </main>
@@ -398,47 +477,38 @@ Close nested scopes in reverse order, as try-with-resources does in the example 
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../index.html">
-      1.7.2
+    <a href="../configuring.html">
+      1.8.0
     </a>
   </li>
   <li class="version">
-    <a href="../1.6/index.html">
-      1.6.8
+    <a href="../1.7/configuring.html">
+      1.7.3
     </a>
   </li>
   <li class="version">
-    <a href="../1.5/index.html">
+    <a href="../1.6/configuring.html">
+      1.6.9
+    </a>
+  </li>
+  <li class="version">
+    <a href="../1.5/configuring.html">
       1.5.12
     </a>
   </li>
   <li class="version">
-    <a href="../1.4/index.html">
+    <a href="../1.4/configuring.html">
       1.4.13
     </a>
   </li>
   <li class="version">
-    <a href="../1.3/index.html">
+    <a href="../1.3/configuring.html">
       1.3.13
     </a>
   </li>
   <li class="version">
-    <a href="../1.2/index.html">
+    <a href="../1.2/configuring.html">
       1.2.12
-    </a>
-  </li>
-</ul>                        </div>
-                        <div class="version-item">
-                          <div>
-                            <button class="version-toggle" type="button">
-                              <span></span>
-                              Preview
-                            </button>
-                          </div>
-                          <ul class="versions">
-  <li class="version">
-    <a href="context-contracts.html">
-      1.8.0-RC2
     </a>
   </li>
 </ul>                        </div>
@@ -451,37 +521,42 @@ Close nested scopes in reverse order, as try-with-resources does in the example 
                           </div>
                           <ul class="versions">
   <li class="version">
-    <a href="../1.8-SNAPSHOT/context-contracts.html">
-      1.8.0-SNAPSHOT
+    <a href="configuring.html">
+      1.9.0-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../1.7-SNAPSHOT/index.html">
-      1.7.3-SNAPSHOT
+    <a href="../1.8-SNAPSHOT/configuring.html">
+      1.8.1-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../1.6-SNAPSHOT/index.html">
-      1.6.9-SNAPSHOT
+    <a href="../1.7-SNAPSHOT/configuring.html">
+      1.7.4-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../1.5-SNAPSHOT/index.html">
+    <a href="../1.6-SNAPSHOT/configuring.html">
+      1.6.10-SNAPSHOT
+    </a>
+  </li>
+  <li class="version">
+    <a href="../1.5-SNAPSHOT/configuring.html">
       1.5.13-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../1.4-SNAPSHOT/index.html">
+    <a href="../1.4-SNAPSHOT/configuring.html">
       1.4.14-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../1.3-SNAPSHOT/index.html">
+    <a href="../1.3-SNAPSHOT/configuring.html">
       1.3.14-SNAPSHOT
     </a>
   </li>
   <li class="version">
-    <a href="../1.2-SNAPSHOT/index.html">
+    <a href="../1.2-SNAPSHOT/configuring.html">
       1.2.13-SNAPSHOT
     </a>
   </li>
@@ -547,6 +622,6 @@ Close nested scopes in reverse order, as try-with-resources does in the example 
 <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.17.0/dist/algoliasearch-lite.umd.js" integrity="sha256-Lf9DrpGmcRip6OQzbcL6lnvNmoZNSKpyQX5pMlwatWE=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.54.1/dist/instantsearch.production.min.js" integrity="sha256-xYsZPDeNjYNTBWLvqD2Lxe98hOxcDgOHyMPfz4tVAbk=" crossorigin="anonymous"></script>
-<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.8.0-RC2" data-page-component="tracing"></script>
+<script async id="search-script" src="../_/js/vendor/search.js" data-app-id="R3TXPRVDPR" data-api-key="cbcaa86034c1961b2c0c73bd0c274862" data-index-name="micrometer" data-stylesheet="../_/css/vendor/search.css" data-page-version="1.9.0" data-page-component="tracing"></script>
   </body>
 </html>
